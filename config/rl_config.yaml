@@ -1,0 +1,4 @@
+algorithm: iql
+checkpoint_path: models/checkpoints/kolA/policy.pt
+batch_size: 64
+learning_rate: 0.0003

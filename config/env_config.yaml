@@ -1,0 +1,5 @@
+feature_columns:
+  - returns
+  - volatility
+  - turnover
+reward_metric: daily_pnl
