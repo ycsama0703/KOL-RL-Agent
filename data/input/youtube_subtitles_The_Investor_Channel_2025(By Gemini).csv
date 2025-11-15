@@ -1,0 +1,938 @@
+video_id,channel_name,publishedAt,title,company,confidence,sentiment
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,NVIDIA,1.0,0.8
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Tesla,1.0,0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Meta,1.0,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Amazon,1.0,0.5
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.2
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Anduril,0.8,0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Oculus,0.8,-0.5
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Google,1.0,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Equity Empire,0.7,0.2
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,GameStop,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Dollar General,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,CyberArk,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Palantir,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Apple,1.0,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Epic Games,0.9,0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Spotify,1.0,0.2
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Netflix,1.0,0.9
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Talkspace,1.0,0.5
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Amazon Pharmacy,0.9,0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,CVS,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,The New York Times,1.0,0.5
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Anthropic,0.9,0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Walmart,1.0,0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,JPMorgan Chase,1.0,0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Visa,1.0,0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Eli Lilly,1.0,0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Broadcom,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,TSMC,1.0,0.2
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,CoreWeave,0.8,0.2
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,AMD,1.0,0.6
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Huawei,1.0,-0.3
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Deepseek,0.8,-0.5
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Grok,0.9,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Salesforce,1.0,-0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Barclays,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,ServiceNow,1.0,0.0
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,xAI,0.9,0.4
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Telegram,0.9,0.1
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Neuralink,0.9,0.6
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Uber,1.0,-0.9
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Lyft,1.0,-0.9
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Waymo,0.9,0.7
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,BlackBerry,1.0,-0.8
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Blockbuster,1.0,-0.8
+P-Cl93OtPNs,The Investor Channel,2025-05-30T23:12:52Z,NVIDIA Earnings! Tesla Robotaxi Launch 🚀 | FAANG STOCK RECAP SHOW,Sears,1.0,-0.8
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,APPLE,1.0,-0.7
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.6
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Oracle,1.0,0.8
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.9
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Meta,1.0,0.1
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Amazon,1.0,0.2
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.1
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Google,1.0,0.5
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Epic Games,0.9,0.8
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Samsung,1.0,-0.5
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,AT&T,1.0,-0.3
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,T-Mobile,1.0,-0.3
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Qualcomm,1.0,0.6
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Intel,1.0,-0.2
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,AMD,1.0,-0.2
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Costco,1.0,0.3
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Warby Parker,0.9,0.6
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Huawei,0.9,0.5
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,BYD,0.9,0.7
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.1
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,Netflix,1.0,0.4
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,IO,0.7,0.8
+FXQwVHHbuwo,The Investor Channel,2025-05-24T01:22:12Z,Tim Cook-ing APPLE | Nvidia Earnings Next Week! | FAANG STOCK RECAP SHOW,SoftBank,1.0,0.3
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Apple,1.0,-0.3
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.9
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Meta,1.0,0.2
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Foxconn,0.9,0.6
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Epic Games,0.9,0.7
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.6
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,UPS,0.9,0.3
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,FedEx,0.9,0.3
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,AWS,0.9,0.9
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Netflix,1.0,0.4
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Humane,0.8,0.6
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Google,1.0,0.6
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,YouTube,0.9,0.8
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Waymo,0.9,-0.5
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Tesla,1.0,0.7
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.1
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.6
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Chipotle,0.9,0.0
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,McDonald's,0.9,0.0
+3oiLDWzNyT0,The Investor Channel,2025-05-16T22:05:14Z,How Much HIGHER For FAANG?? New Highs Soon? | FAANG STOCK RECAP SHOW,Taiwan Semi,0.9,0.7
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Google,1.0,-0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.9
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Apple,1.0,-0.3
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,AMD,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.4
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,0.4
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Epic Games,0.9,0.6
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Netflix,1.0,0.7
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Spotify,1.0,0.6
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,ARM,0.9,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Intel,1.0,-0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Broadcom,1.0,0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Perplexity,0.8,0.7
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Anthropic,0.8,0.7
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.6
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.7
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Oracle,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Alibaba,1.0,0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Baidu,0.8,0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Microsoft,1.0,-0.4
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Boeing,1.0,-0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Nike,1.0,-0.5
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Uber,1.0,-0.8
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Expedia,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Southwest Airlines,0.9,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,American Airlines,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Delta,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Carnival,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,X,1.0,0.0
+SezBpiM2PSI,The Investor Channel,2025-05-10T17:43:24Z,Google Stock In TROUBLE? Nvidia All-Time Highs? | FAANG STOCK RECAP SHOW,Mozilla,0.9,0.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Meta,1.0,0.7
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Apple,1.0,-0.9
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.8
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.9
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Google,1.0,-0.4
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.7
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,OpenAI,1.0,-0.2
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,XAI,0.9,0.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Equity Empire,0.9,1.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Spotify,1.0,0.6
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Epic Games,0.9,0.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.7
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Super Micro,0.9,-0.9
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Nike,1.0,0.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Rolex,1.0,0.0
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Bud Light,0.9,0.8
+LruSSVpLvvk,The Investor Channel,2025-05-03T00:20:02Z,Can FAANG Stocks Keep 🚀 GOING HIGHER?? | FAANG STOCK RECAP SHOW,Waymo,0.9,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Apple,1.0,-0.1
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Google,1.0,-0.5
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,SoFi,0.9,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Intel,0.9,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,ASML,0.9,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Taiwan Semi,0.9,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Equity Empire,0.8,0.5
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Berkshire Hathaway,1.0,0.0
+kV3Bqb3NBLI,The Investor Channel,2025-05-01T23:21:56Z,Is APPLE Stock DOOMED? | Apple Q2 Earnings Analysis,Meta,1.0,0.0
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Amazon,1.0,0.7
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Google,1.0,0.4
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Microsoft,1.0,0.6
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Equity Empire,0.8,0.5
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Teeu,0.7,-0.3
+glbCnO-mGtI,The Investor Channel,2025-05-01T22:35:34Z,AMAZON (AMZN) Q1 Earnings Analysis | Buy Amazon Stock Now?,Anthropic,0.9,0.4
+eb43ii92UU4,The Investor Channel,2025-04-30T22:56:38Z,Microsoft (MSFT) Going BACK TO $460 SOON!! | MSFT Q3 Earnings Analysis,Microsoft,1.0,0.9
+eb43ii92UU4,The Investor Channel,2025-04-30T22:56:38Z,Microsoft (MSFT) Going BACK TO $460 SOON!! | MSFT Q3 Earnings Analysis,Equity Empire,0.7,0.0
+eb43ii92UU4,The Investor Channel,2025-04-30T22:56:38Z,Microsoft (MSFT) Going BACK TO $460 SOON!! | MSFT Q3 Earnings Analysis,Google,1.0,0.0
+eb43ii92UU4,The Investor Channel,2025-04-30T22:56:38Z,Microsoft (MSFT) Going BACK TO $460 SOON!! | MSFT Q3 Earnings Analysis,Amazon,1.0,0.0
+eb43ii92UU4,The Investor Channel,2025-04-30T22:56:38Z,Microsoft (MSFT) Going BACK TO $460 SOON!! | MSFT Q3 Earnings Analysis,Meta,1.0,0.0
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Meta Platforms,1.0,0.9
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Apple,0.9,0.1
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Temu,0.8,0.0
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Nvidia,1.0,0.9
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Broadcom,1.0,0.9
+f1fKHTTbCRc,The Investor Channel,2025-04-30T21:09:07Z,Meta Q1 Earnings Analysis | Buy Data Center Stocks On The News? 🔥,Equity Empire,0.9,0.7
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Google,1.0,0.7
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Tesla,1.0,0.3
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Meta,1.0,0.2
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.6
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Apple,1.0,0.4
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Amazon,1.0,0.3
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.6
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Equity Empire,0.8,1.0
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Starlink,0.9,-0.3
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,SpaceX,0.9,0.5
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Blue Origin,0.8,0.0
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Netflix,1.0,0.9
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,SK Hynix,0.9,0.9
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Lamb Research,0.9,0.0
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Intel,1.0,-0.1
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,IBM,1.0,-0.2
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Chipotle,1.0,-0.4
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Uber,0.9,0.3
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Open AI,0.9,0.9
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Samsung,0.9,0.0
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,AMD,1.0,0.0
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Proctor and Gamble,1.0,-0.3
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Costco,1.0,0.4
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Walmart,1.0,0.4
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,Target,1.0,0.4
+RKRgD2H7zqI,The Investor Channel,2025-04-25T23:03:39Z,FAANG Stocks 🚀 SOARING AGAIN!!! | FAANG STOCK RECAP SHOW,SoftBank,0.9,0.1
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Google,1.0,0.9
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,IBM,1.0,-0.2
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Nvidia,1.0,0.0
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Equity Empire,0.9,0.8
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Open AI,0.9,0.0
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Grock,0.9,0.0
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Anthropic,0.9,0.0
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Microsoft,1.0,0.3
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Amazon,1.0,0.3
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Meta,1.0,0.2
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Whimo,0.8,0.4
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,YouTube,0.9,0.5
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Android,0.9,0.3
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Google TV,0.9,0.3
+x9Mo_AxktAU,The Investor Channel,2025-04-24T21:34:19Z,Google Stock Back To $200 SOON? | Google Q1 Earnings Analysis,Google Play,0.8,0.1
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Tesla,1.0,0.8
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Wall Street,0.6,-0.3
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Doge,0.4,0.0
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Whimo,0.9,-0.4
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Ford,0.9,-0.6
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Mercedes,0.9,-0.6
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,GM,0.9,-0.6
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Palunteer,0.9,-0.2
+GZ7yVRHhh9w,The Investor Channel,2025-04-23T00:34:50Z,👋 BYE BYE Tesla HATERS!! TSLA Stock To $750 Soon??,Equity Empire,0.7,0.7
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,NVIDIA,1.0,-0.8
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.2
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Google,1.0,-0.6
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,-0.4
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Apple,1.0,-0.1
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Equity Empire,0.8,0.7
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Wells Fargo,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,JP Morgan,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Goldman Sachs,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Bank of America,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,AAX,0.6,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,ASML,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,TSM,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Johnson and Johnson,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,WhatsApp,0.9,-0.4
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Instagram,0.9,-0.4
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,TikTok,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,YouTube,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,X,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,OpenAI,1.0,0.6
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,AMD,1.0,-0.7
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Teimu,0.9,-0.5
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Walmart,1.0,-0.1
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Amazon,1.0,-0.3
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Netflix,1.0,1.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Microsoft,1.0,-0.3
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Windsurf,0.9,0.5
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Chevy,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Ford,1.0,0.0
+tEmA258ybFM,The Investor Channel,2025-04-18T21:44:30Z,FAANG Stocks 💰 EARNINGS WEEK | NVIDIA H20 Ban | FAANG STOCK RECAP SHOW,Dodge,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Netflix,1.0,1.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Equity Empire,0.9,0.5
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Wells Fargo,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,JP Morgan,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Goldman Sachs,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,ASML,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Johnson and Johnson,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,TSM,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,United Health,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,YouTube,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Disney Plus,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Prime Video,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Apple TV,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Google,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Meta,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Facebook,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Instagram,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Pepsi,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Coca-Cola,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Ford,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,General Motors,0.9,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,CNBC,1.0,0.0
+ZXxX-ZjTAxE,The Investor Channel,2025-04-17T21:34:14Z,NETFLIX (NFLX) Q1 Earnings | Recession PROOF?,Bloomberg,1.0,0.0
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,JP Morgan,1.0,0.0
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Wells Fargo,1.0,0.0
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Marketwise,0.8,0.7
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Brownstone Research,0.8,0.7
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Google,1.0,0.7
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Apple,1.0,0.3
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.4
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Jo-Ann's,0.9,-0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Big Lots,0.9,-0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Party City,0.9,-0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Louis Vuitton,0.9,0.1
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Rolex,0.7,0.1
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Anker,0.8,-0.5
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Uber,1.0,-0.3
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Tesla,1.0,0.6
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Anthropic,0.9,0.6
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,TikTok,0.9,0.2
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,YouTube,1.0,0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Instagram,1.0,0.8
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Netflix,1.0,0.9
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.9
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,AMD,1.0,0.6
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,semi analysis,0.7,0.3
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Broadcom,1.0,0.2
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Intel,1.0,0.0
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Nintendo,1.0,-0.5
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Leptin AI,0.8,0.5
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Samsung,1.0,0.2
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Reddit,0.9,0.2
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.5
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.6
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,SoftBank,1.0,0.3
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Oracle,1.0,0.3
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,xAI,0.8,0.6
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Salesforce,1.0,0.4
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Service Now,1.0,0.4
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,DeepSeek AI,0.7,0.0
+6YbeD5lBmPk,The Investor Channel,2025-04-11T21:58:18Z,FAANG Stocks 🚀 ROCKET HIGHER | Tariff Risk Over? | FAANG STOCK RECAP SHOW,Waymo,0.9,0.6
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Meta,0.9,-0.4
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,TikTok,0.9,0.2
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Amazon,0.9,0.7
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Oracle,0.9,0.1
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,OAF,0.3,0.0
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,OpenAI,0.9,0.9
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,DeepSeek,0.7,0.5
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Grock,0.7,0.2
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Anthropic,0.8,0.7
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,WhatsApp,0.9,-0.7
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Instagram,0.9,-0.7
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,UFC,0.9,0.5
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Apple,0.9,-0.8
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Foxconn,0.9,0.2
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Nvidia,0.9,-0.8
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,HSBC,0.9,0.0
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,AMD,0.9,0.3
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Broadcom,0.9,-0.2
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Intel,0.9,-0.1
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Nintendo,0.9,-0.6
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Xbox,0.9,0.0
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,PlayStation,0.9,0.0
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Runway,0.8,0.7
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Google,0.9,-0.5
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Coreweave,0.9,0.8
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,YouTube,0.9,0.9
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Roblox,0.9,0.5
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Spotify,0.9,0.5
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Microsoft,0.9,0.2
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Tesla,0.9,-0.6
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,JP Morgan,0.9,0.0
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,Ford,0.9,-0.3
+gA9gqoTFT3U,The Investor Channel,2025-04-04T23:36:28Z,Trump's Tariffs TANK FAANG Stocks | What Now? | FAANG STOCK RECAP SHOW,GM,0.9,-0.3
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Open AI,0.95,0.8
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Apple,1.0,-0.8
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.7
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,0.0
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Ferocia AI,0.8,0.7
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Deepseek,0.7,0.8
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Walmart,0.9,0.0
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.0
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Qualcomm,1.0,0.8
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Google,1.0,-0.3
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.6
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Netflix,1.0,-0.2
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Coreweave,0.9,-0.8
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,AMD,1.0,0.1
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Broadcom,1.0,0.1
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.4
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Rivian,0.9,0.5
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Lucid,0.9,0.5
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Ant Group,0.8,0.6
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Intel,1.0,0.1
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,SoftBank,0.9,0.7
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Oracle,0.9,0.2
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,ASML,0.9,0.0
+RjSum3OUNqw,The Investor Channel,2025-03-28T22:48:36Z,FAANG Stocks MELT DOWN | What Now? | FAANG STOCK RECAP SHOW,Leptin AI,0.7,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Waymo,0.9,0.8
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Nvidia,0.9,0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Tesla,0.9,0.1
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,TikTok,0.9,-0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Amazon,0.9,0.6
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Apple,0.9,-0.2
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Meta Platforms,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Oracle,0.9,0.8
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,ByteDance,0.9,-0.8
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Microsoft,0.9,0.3
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Netflix,0.9,0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,YouTube,0.9,0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Disney,0.9,-0.9
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Roku,0.9,-0.2
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Nike,0.9,-0.5
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Starbucks,0.9,-0.5
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Anthropic,0.8,0.6
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Google,0.9,0.5
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Chipotle,0.8,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Kia,0.8,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Zuks,0.8,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Taiwan Semiconductor,0.9,0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,IonQ,0.8,-0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Rigetti,0.8,-0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Qubit,0.8,-0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Marketwise,0.6,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Coreweave,0.8,0.2
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,MediaTek,0.9,0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Broadcom,0.9,-0.6
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Intel,0.9,-0.5
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,AMD,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Salesforce,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Adobe,0.9,-0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Figma,0.8,0.7
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Palo Alto Networks,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,CrowdStrike,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Zscaler,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Lyft,0.9,-0.6
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Uber,0.9,0.0
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,HBO Max,0.8,-0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Paramount,0.8,-0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Peacock,0.8,-0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Tubi,0.8,-0.4
+3e8N4gHdpWg,The Investor Channel,2025-03-21T23:54:56Z,Waymo Robots & Robotaxis | Nvidia GTC | FAANG STOCK RECAP SHOW,Pluto,0.8,-0.4
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Tesla,1.0,0.2
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Nvidia,1.0,0.9
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Apple,1.0,-0.8
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Google,1.0,0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,0.2
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Amazon,1.0,-0.6
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Netflix,1.0,0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Intel,1.0,0.6
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Taiwan Semiconductor,1.0,0.9
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Broadcom,1.0,0.6
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,X,1.0,0.0
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Citi,1.0,0.0
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Qualcomm,1.0,0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Walmart,1.0,-0.5
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Costco,1.0,-0.5
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Target,1.0,-0.5
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Anthropic,1.0,0.8
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,AMD,1.0,0.0
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,OpenAI,1.0,0.1
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,CoreWeave,0.9,-0.2
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Snowflake,1.0,0.5
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Databricks,0.9,0.0
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Ad Hoc,0.7,0.1
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,DeepMind,1.0,0.5
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Microsoft,1.0,-0.2
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,CrowdStrike,1.0,0.0
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Palo Alto Networks,1.0,0.9
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,TikTok,1.0,-0.9
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,ByteDance,1.0,-0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Oracle,1.0,0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Ford,1.0,-0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,GM,1.0,-0.7
+rUm6ZNT0jEE,The Investor Channel,2025-03-15T01:09:37Z,Trump PUMPS Tesla | Nvidia GTC Bounce | FAANG STOCK RECAP SHOW,Waymo,1.0,0.9
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Meta Platforms,1.0,-0.2
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Apple,1.0,0.1
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Amazon,1.0,0.4
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Netflix,1.0,-0.3
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Google,1.0,-0.5
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Chipotle,0.6,0.0
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,McDonald's,0.6,0.0
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Broadcom,0.9,0.1
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Qualcomm,0.9,0.0
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Nvidia,1.0,-0.1
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Salesforce,0.9,0.2
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,ServiceNow,0.9,0.4
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Palantir,0.9,0.6
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Anthropic,0.8,0.5
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,xAI,0.8,0.5
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,OpenAI,0.8,0.2
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Oracle,0.9,0.3
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Intel,1.0,0.4
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,TSM,1.0,0.3
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,CoreWeave,0.8,0.2
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Uber,0.9,0.0
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Microsoft,1.0,0.5
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Tesla,1.0,-0.6
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Ford,0.9,0.0
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Nio,0.9,0.4
+y4fA-Io6T0A,The Investor Channel,2025-03-07T22:47:45Z,Trump CRASHES FAANG Stocks - What Now? | FAANG STOCK RECAP SHOW,Xpeng,0.9,0.4
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Broadcom,1.0,1.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Nvidia,1.0,-0.2
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,AMD,1.0,-0.1
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Taiwan Semiconductor,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Google,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Amazon,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Microsoft,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Oracle,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Meta,1.0,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,VMware,1.0,0.8
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,AT&T,1.0,-0.7
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,IBM,1.0,-0.7
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Fidelity,0.9,0.0
+fWS-LA-9gZ8,The Investor Channel,2025-03-07T00:39:34Z,Let Me Show Why BROADCOM (AVGO) Stock Will Triple By 2027,Schwab,0.9,0.0
+8o0ZAxWXiz0,The Investor Channel,2025-03-04T20:38:25Z,2025 = Year of the Process!,Berkshire Hathaway,0.7,0.9
+8o0ZAxWXiz0,The Investor Channel,2025-03-04T20:38:25Z,2025 = Year of the Process!,Pershing Square Capital Management,0.7,0.9
+8o0ZAxWXiz0,The Investor Channel,2025-03-04T20:38:25Z,2025 = Year of the Process!,Soros Fund Management,0.6,0.7
+8o0ZAxWXiz0,The Investor Channel,2025-03-04T20:38:25Z,2025 = Year of the Process!,Icahn Enterprises,0.6,0.7
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Nvidia,0.95,-0.2
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Meta,0.95,0.3
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Equity Empire,0.6,0.8
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Apollo,0.9,0.0
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Microsoft,0.95,0.4
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Google,0.95,0.5
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Amazon,0.95,0.6
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Deep Seek,0.7,0.7
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Grok,0.75,0.8
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,OpenAI,0.9,-0.7
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Apple,0.95,0.3
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Taiwan Semiconductor,0.9,0.7
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Netflix,0.95,0.0
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Corweave,0.85,0.6
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Nebulus,0.75,0.5
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Figure,0.85,0.8
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Tesla,0.95,-0.4
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Salesforce,0.9,0.6
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,TD Cowen,0.6,0.0
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Uber,0.9,-0.5
+ilqte36NThc,The Investor Channel,2025-02-28T23:58:07Z,I Bought 4 FAANG Stocks and It's Just The Beginning! | FAANG STOCK RECAP SHOW,Lyft,0.9,-0.6
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Tesla,0.95,0.9
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Uber,0.95,-0.9
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Lyft,0.95,-0.9
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Waymo,0.9,0.8
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Google,0.95,0.3
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Blackberry,0.9,-0.8
+t3RCZKfhKzY,The Investor Channel,2025-02-28T01:04:19Z,👀 Free Tesla Robotaxis?,Blockbuster,0.9,-0.8
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,NVIDIA,1.0,0.9
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,Intel,1.0,-0.2
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,AMD,1.0,-0.2
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,Amazon,1.0,0.7
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,Google,1.0,0.7
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,Broadcom,1.0,0.8
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,Microsoft,1.0,0.7
+_3W2bOGOuSc,The Investor Channel,2025-02-27T03:08:35Z,Is NVIDIA Still A Good Buy? | NVDA Q4 Earnings Analysis,TSM,1.0,-0.1
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Hims & Hers,0.95,0.2
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Nike,0.8,0.0
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),23andMe,0.8,-0.7
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Teladoc Health,0.8,0.5
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Apple,0.9,0.3
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Amazon,0.9,0.3
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Meta,0.9,0.3
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Google,0.9,0.3
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Palantir,0.8,0.0
+0o5bSdLRk0k,The Investor Channel,2025-02-24T23:27:28Z,The UGLY Truth About HIMS Stock (The Shift Is Coming),Netflix,0.9,0.3
+CwZLphjdeqk,The Investor Channel,2025-02-22T19:15:05Z,💰I give you $10K but with a catch …,Mr Beast,0.7,0.9
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Nvidia,1.0,0.9
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Apple,1.0,0.3
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Meta Platforms,1.0,0.3
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Qualcomm,1.0,-0.7
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Arm Holdings,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Citi,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Tesla,1.0,-0.2
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Amazon,1.0,0.4
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,OpenAI,0.9,0.3
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Google,1.0,0.2
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Microsoft,1.0,0.6
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,SoftBank,0.9,0.5
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Taiwan Semiconductor,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Super Micro Computer,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,YouTube,0.9,0.6
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Activision,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Xbox,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Take-Two Interactive,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Electronic Arts,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Nissan,1.0,-0.9
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Honda,0.9,-0.1
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Uber,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Netflix,1.0,0.8
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,WWE,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,CBS,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,FOX,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,ESPN,1.0,-0.8
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Major League Baseball,0.9,-0.3
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,NBA,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,NFL,0.9,0.7
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Roku,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Adidas,0.9,0.4
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,PayPal,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Walmart,1.0,0.3
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,MGM Studios,0.9,0.5
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,xAI,0.9,0.9
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Deep Seek,0.8,0.5
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Delta Airlines,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,OpenTable,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Hertz,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Anthropic,0.8,-0.2
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Thinking Machine Lab,0.7,0.4
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,STMicroelectronics,1.0,0.5
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Zoom,0.8,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,IonQ,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Rigetti Computing,0.9,0.0
+ep5g-IJwkbg,The Investor Channel,2025-02-22T00:59:54Z,Nvidia Earnings | Apple SE | Buy The Pullback? | FAANG STOCK SHOW,Disney,1.0,-0.2
+kIO1T1Lgl_o,The Investor Channel,2025-02-21T15:01:15Z,How Do You Know When To Sell A Stock?,Microsoft,0.95,0.8
+kIO1T1Lgl_o,The Investor Channel,2025-02-21T15:01:15Z,How Do You Know When To Sell A Stock?,Google,0.95,0.8
+kIO1T1Lgl_o,The Investor Channel,2025-02-21T15:01:15Z,How Do You Know When To Sell A Stock?,Apple,0.95,0.8
+kIO1T1Lgl_o,The Investor Channel,2025-02-21T15:01:15Z,How Do You Know When To Sell A Stock?,Amazon,0.95,0.8
+kIO1T1Lgl_o,The Investor Channel,2025-02-21T15:01:15Z,How Do You Know When To Sell A Stock?,S&P 500 Index Fund,0.9,0.8
+_Qo0FCwm2CY,The Investor Channel,2025-02-20T19:26:02Z,🚨 Palantir Stock Crash! What do the technical charts say PLTR stock is going next?,Palantir,1.0,-0.9
+_Qo0FCwm2CY,The Investor Channel,2025-02-20T19:26:02Z,🚨 Palantir Stock Crash! What do the technical charts say PLTR stock is going next?,Wall Street,0.7,-0.5
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Meta Platforms,1.0,0.7
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Nvidia,1.0,0.8
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Tesla,1.0,0.2
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Open AI,0.9,-0.2
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,ARM,1.0,0.3
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Amper,0.7,0.6
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Apple,1.0,0.1
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Foxconn,0.9,0.7
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Alibaba,1.0,0.6
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Baidu,1.0,0.6
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Amazon,1.0,0.2
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Elf,0.8,-0.6
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Ulta Beauty,0.9,-0.5
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Netflix,1.0,0.9
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,HP,1.0,0.6
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Super Micro,0.9,-0.2
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Dell,1.0,0.7
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,X AI,0.9,0.1
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,SoundHound AI,0.9,-0.9
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Serve Robotics,0.8,-0.9
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Nano X,0.8,-0.9
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Nebu,0.8,0.0
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Google,1.0,0.2
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,The Trade Desk,0.9,-0.9
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Anthropic,0.8,0.7
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Microsoft,1.0,0.1
+nU9e3rhyYPc,The Investor Channel,2025-02-14T23:24:20Z,Robots Are The Next BIG PUMP For FAANG | FAANG STOCK SHOW,Nike,1.0,0.6
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Google,1.0,-0.4
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Amazon,1.0,-0.3
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,NVIDIA,1.0,0.9
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Meta Platforms,1.0,0.8
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,TikTok,0.9,-0.6
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Oracle,1.0,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Microsoft,1.0,0.3
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Apple,1.0,-0.2
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,IBM,0.9,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Intel,1.0,-0.5
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Costco,1.0,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Delta Airlines,1.0,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,SoftBank,1.0,0.6
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Tesla,1.0,-0.8
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Ford,1.0,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,GM,1.0,0.0
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Netflix,1.0,0.8
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Super Micro Computer,1.0,0.2
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Dell,1.0,0.5
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,HP,1.0,0.5
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,Broadcom,1.0,0.7
+toFV-kmwsf0,The Investor Channel,2025-02-08T01:27:26Z,Google & Amazon Fall | NVIDIA Shares SOAR | FAANG STOCK SHOW,OpenAI,0.9,0.9
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Amazon,0.95,0.8
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Google,0.9,0.0
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Microsoft,0.9,0.2
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Oracle,0.9,0.0
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Whole Foods,0.85,0.5
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),Procter & Gamble,0.9,0.0
+yC9c0lZj77w,The Investor Channel,2025-02-06T23:00:46Z,Should You BUY The DIP In Amazon Stock Now? (What I did),MGM,0.85,0.5
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Uber,0.95,-0.9
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Blackberry,0.9,-0.8
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Blockbuster,0.9,-0.8
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Netflix,0.9,0.7
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Nokia,0.85,-0.7
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),eBay,0.9,0.0
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),YouTube,0.85,0.0
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Google,0.95,0.9
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Tesla,0.95,0.9
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Amazon,0.9,0.0
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Facebook,0.85,-0.3
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Snapchat,0.8,0.4
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),TikTok,0.8,0.4
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Waymo,0.9,0.6
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Apple,0.9,0.7
+YUNoaXRIvwU,The Investor Channel,2025-02-05T17:52:48Z,Robotaxis Will DESTROY Uber Stock (Here's Why),Intel,0.9,-0.5
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Google,1.0,0.4
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Meta,0.9,0.7
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Microsoft,0.9,0.3
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Nvidia,0.9,0.8
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,TSM,0.9,0.8
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,ASML,0.9,0.8
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Broadcom,0.9,0.9
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Apple,0.9,0.0
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,YouTube,0.8,0.7
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Google Cloud,0.8,0.3
+z0Bm0nDtgKo,The Investor Channel,2025-02-05T00:22:02Z,Analyzing Google's Major Selloff: A Potential Buying Opportunity?,Waymo,0.8,0.7
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,AMD,1.0,-0.6
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Nvidia,1.0,0.9
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Intel,1.0,-0.7
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Google,0.9,0.0
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Microsoft,0.9,0.0
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Amazon,0.9,0.0
+YainaNr8tPw,The Investor Channel,2025-02-04T22:39:15Z,Will AMD Stock CRASH If It Breaks Support Levels?,Broadcom,1.0,0.7
+lA5BrQdVEQY,The Investor Channel,2025-02-01T19:53:03Z,Why Smart Money Follows Musk (And You're Getting Left Behind),Tesla,1.0,0.3
+lA5BrQdVEQY,The Investor Channel,2025-02-01T19:53:03Z,Why Smart Money Follows Musk (And You're Getting Left Behind),Ford,1.0,0.0
+lA5BrQdVEQY,The Investor Channel,2025-02-01T19:53:03Z,Why Smart Money Follows Musk (And You're Getting Left Behind),Fidelity,1.0,0.0
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,DeepSeek,0.8,-0.9
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Apple,1.0,-0.2
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Microsoft,1.0,0.6
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Tesla,1.0,0.1
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Meta Platforms,1.0,0.8
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Amazon,1.0,0.5
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Google,1.0,0.6
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Equity Empire,0.7,0.7
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,TikTok,0.9,-0.4
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,T-Mobile,1.0,0.2
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,SpaceX,0.9,0.7
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Globalstar,0.7,-0.2
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,X,0.9,0.6
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Netflix,1.0,0.7
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Disney,1.0,0.4
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Nvidia,1.0,0.5
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,OpenAI,0.9,0.6
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,xAI,0.8,0.1
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Figure,0.8,0.8
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,BMW,1.0,0.1
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Fidelity,0.9,0.0
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Alibaba,1.0,0.0
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Temu,0.9,0.0
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Oracle,1.0,0.1
+P3PyYK1o7yw,The Investor Channel,2025-02-01T02:30:00Z,DeepSeek Nonsense | Apple MSFT Tesla META EARNINGS!!!!! | FAANG STOCK SHOW,Walmart,1.0,0.1
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Apple,1.0,-0.2
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Boeing,0.9,-0.7
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Nike,0.9,-0.7
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Intel,0.9,-0.7
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Microsoft,1.0,0.3
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Meta,1.0,0.3
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,Amazon,1.0,0.3
+AlCzv5zsmxo,The Investor Channel,2025-01-30T23:48:50Z,Apple Q1 Earnings Analysis ... Fire Tim Cook?,TikTok,0.9,0.0
+b44jhGVHnIQ,The Investor Channel,2025-01-30T22:29:31Z,Why Airlines SECRETLY Help Visa? (WHAT'S REALLY GOING ON?),Visa,1.0,0.9
+b44jhGVHnIQ,The Investor Channel,2025-01-30T22:29:31Z,Why Airlines SECRETLY Help Visa? (WHAT'S REALLY GOING ON?),MasterCard,0.9,0.7
+b44jhGVHnIQ,The Investor Channel,2025-01-30T22:29:31Z,Why Airlines SECRETLY Help Visa? (WHAT'S REALLY GOING ON?),Delta Airlines,0.9,0.8
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Tesla,1.0,0.2
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Ford,1.0,-0.8
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Palantir,1.0,0.3
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Sofi,1.0,0.3
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,JP Morgan,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,AT&T,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Waymo,0.9,0.6
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Uber,1.0,-1.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Lyft,1.0,-1.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Airbnb,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Walmart,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,Amazon,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,UPS,1.0,0.0
+p9ARdxW280Y,The Investor Channel,2025-01-30T04:05:03Z,Will Tesla's 2025 Bet on FSD & Optimus Finally Pay Off?,FedEx,1.0,0.0
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Microsoft,1.0,0.6
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,NVIDIA,1.0,-0.4
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Tik Tok,0.9,0.7
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Activision Blizzard,1.0,0.0
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Meta,1.0,0.5
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Amazon,1.0,0.5
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Google,1.0,0.5
+sbO12UPclhw,The Investor Channel,2025-01-30T01:15:06Z,Microsoft's WARNING Signals NVIDIA Demand Shift,Tesla,1.0,0.0
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Meta Platforms,1.0,0.9
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Microsoft,1.0,0.7
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Amazon,1.0,0.8
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,ASML,0.9,0.8
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Snapchat,0.8,0.0
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Pinterest,0.8,0.0
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,TikTok,0.8,0.0
+jx629-rrP2w,The Investor Channel,2025-01-30T00:08:36Z,Meta's Data Center Spend Proves Semis Aren't Dead - Here's Why,Tesla,0.9,0.6
+Xv5nBumG2sw,The Investor Channel,2025-01-29T17:51:59Z,5 Key Reasons ASML Stock Is A MUST BUY After Q4 Earnings,ASML,1.0,1.0
+Xv5nBumG2sw,The Investor Channel,2025-01-29T17:51:59Z,5 Key Reasons ASML Stock Is A MUST BUY After Q4 Earnings,Nike,0.95,-0.7
+Xv5nBumG2sw,The Investor Channel,2025-01-29T17:51:59Z,5 Key Reasons ASML Stock Is A MUST BUY After Q4 Earnings,Taiwan Semiconductor,0.95,0.7
+Xv5nBumG2sw,The Investor Channel,2025-01-29T17:51:59Z,5 Key Reasons ASML Stock Is A MUST BUY After Q4 Earnings,Nvidia,0.95,0.7
+Xv5nBumG2sw,The Investor Channel,2025-01-29T17:51:59Z,5 Key Reasons ASML Stock Is A MUST BUY After Q4 Earnings,Broadcom,0.95,0.7
+Nsm_YbMOREM,The Investor Channel,2025-01-28T17:41:09Z,URGENT: Do Not Invest In SoFi Yet (XMoney Changes Everything),SoFi,0.9,-0.9
+Nsm_YbMOREM,The Investor Channel,2025-01-28T17:41:09Z,URGENT: Do Not Invest In SoFi Yet (XMoney Changes Everything),X,0.9,0.8
+Nsm_YbMOREM,The Investor Channel,2025-01-28T17:41:09Z,URGENT: Do Not Invest In SoFi Yet (XMoney Changes Everything),PayPal,0.9,-0.8
+Nsm_YbMOREM,The Investor Channel,2025-01-28T17:41:09Z,URGENT: Do Not Invest In SoFi Yet (XMoney Changes Everything),Visa,0.9,0.1
+nzKTwkYc4No,The Investor Channel,2025-01-27T17:51:23Z,The UGLY Truth About SoFi Stock They Don't Want You To See...,SoFi,1.0,-0.7
+nzKTwkYc4No,The Investor Channel,2025-01-27T17:51:23Z,The UGLY Truth About SoFi Stock They Don't Want You To See...,J.P. Morgan,1.0,0.7
+nzKTwkYc4No,The Investor Channel,2025-01-27T17:51:23Z,The UGLY Truth About SoFi Stock They Don't Want You To See...,Wells Fargo,1.0,-0.5
+nzKTwkYc4No,The Investor Channel,2025-01-27T17:51:23Z,The UGLY Truth About SoFi Stock They Don't Want You To See...,Bank of America,1.0,-0.6
+nzKTwkYc4No,The Investor Channel,2025-01-27T17:51:23Z,The UGLY Truth About SoFi Stock They Don't Want You To See...,Palantir,0.8,0.4
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Microsoft,1.0,0.8
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Meta,1.0,0.7
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Tesla,1.0,0.2
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Apple,1.0,-0.3
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Oakley,0.6,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Luxottica,0.7,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Adobe,0.9,-0.7
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Canva,0.7,0.1
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,CapCut,0.6,-0.5
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,TikTok,0.8,-0.6
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,ByteDance,0.8,0.2
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Amazon,1.0,-0.2
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Netflix,1.0,0.9
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Nvidia,1.0,0.9
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,UBS,0.8,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Oracle,1.0,0.9
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Anthropic,0.7,-0.1
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,SoftBank,0.8,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,OpenAI,0.9,0.7
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Google,1.0,-0.4
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Perplexity,0.6,0.2
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Instacart,0.6,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,OpenTable,0.6,0.0
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Xpeng,0.7,-0.8
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Li Auto,0.7,-0.8
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Zeekr,0.7,-0.8
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Nio,0.7,-0.8
+06V7SVt3GjI,The Investor Channel,2025-01-25T01:45:34Z,AI Stocks BLAST OFF | Earnings NEXT WEEK!!! | FAANG STOCK SHOW,Louis Vuitton,0.5,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Netflix,1.0,0.9
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,NFL,0.9,0.1
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Amazon,0.9,0.3
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,AT&T,0.9,0.3
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Verizon,0.9,0.3
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Google,0.9,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Meta,0.9,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Pepsi,0.8,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Budweiser,0.8,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,UFC,0.9,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,WWE,0.9,0.1
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Disney,0.9,0.0
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,fuboTV,0.8,0.4
+8gBZgigQuJw,The Investor Channel,2025-01-21T23:07:29Z,Netflix's Next HUGE Move Will Come In APRIL | Q4 Earnings Analysis,Roku,0.9,0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,TikTok,1.0,-0.7
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,TSMC,1.0,0.9
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,NVIDIA,1.0,1.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Intel,1.0,0.7
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Meta Platforms,1.0,0.6
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Apple,1.0,-0.6
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Google,1.0,0.3
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Barclays,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Synchrony Financial,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Goldman Sachs,1.0,-0.8
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Capital One,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Chase,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Huawei,1.0,0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Vivo,1.0,0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Honor,1.0,0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Oppo,1.0,0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Arm Holdings,1.0,0.7
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,AMD,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Amazon,1.0,0.8
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Teledoc Health,1.0,-0.9
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,One Medal,0.8,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Blue Origin,1.0,0.6
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,SpaceX,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Netflix,1.0,0.7
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Microsoft,1.0,0.8
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Accenture,1.0,0.9
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Tesla,1.0,0.8
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Morgan Stanley,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,SEC,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,X,1.0,-0.5
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Associated Press,1.0,0.0
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,ChatGPT,1.0,0.6
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Claude,1.0,0.6
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Grock,1.0,0.7
+Xi9WAWFTUhs,The Investor Channel,2025-01-18T00:30:16Z,TikTok Ban! | TSMC Signals BUY NVIDIA | Trump's 1st Week | FAANG STOCK SHOW,Qualcomm,1.0,0.1
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),Taiwan Semiconductor Manufacturing Company,1.0,0.9
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),NVIDIA,1.0,0.95
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),Broadcom,1.0,0.7
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),Intel,1.0,-0.7
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),AMD,1.0,0.0
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),Apple,1.0,0.0
+sj4DKRcPC2Y,The Investor Channel,2025-01-16T17:58:52Z,URGENT: What TSMC Just Revealed About NVIDIA (Broadcom Too),Micron,1.0,-0.6
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Wells Fargo,1.0,0.8
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Tesla,1.0,0.5
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Palantir,1.0,0.5
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Nvidia,1.0,0.5
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,JP Morgan,1.0,0.1
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Delta Airlines,1.0,0.6
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Sofi,0.9,0.4
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Goldman Sachs,1.0,0.4
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Schwab,1.0,0.4
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,BlackRock,1.0,0.4
+FRL0ad67DDY,The Investor Channel,2025-01-16T01:53:44Z,Wells Fargo (WFC) Q4 Earnings | Better Than Tech!,Netflix,1.0,0.5
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,JP Morgan Chase,1.0,0.6
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,Apple,0.9,-0.2
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,Amazon,0.9,-0.2
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,Microsoft,0.9,-0.2
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,Google,0.9,-0.2
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,Goldman Sachs,0.9,0.0
+KoFVmqAU8ZY,The Investor Channel,2025-01-15T19:55:59Z,JP Morgan Chase (JPM) Q4 Earnings Analysis | Jamie Dimon OUT? | Special Dividend?,blue chip stock investor,0.6,0.5
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Delta Airlines,1.0,0.9
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Lyft,0.9,-0.1
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Uber,0.9,0.5
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,DraftKings,0.9,0.6
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,YouTube,0.9,0.5
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,CrowdStrike,0.9,-0.7
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Google,0.9,0.0
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Spirit,0.9,0.0
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Southwest,0.9,0.0
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Airbus,0.9,0.4
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Boeing,0.9,-0.6
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Netflix,0.9,0.0
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Apple,0.9,0.0
+wRmpd1vLXrc,The Investor Channel,2025-01-12T19:56:13Z,Why I'm SUPER BULLISH On Value Stocks Like This One In 2025,Nvidia,0.9,0.0
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,TikTok,0.9,-0.8
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Nvidia,1.0,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Meta,1.0,0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Google,1.0,0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,CBS News,0.8,0.0
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Apple,1.0,-0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,eBay,0.9,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Samsung,0.9,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Foxconn,0.9,-0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Amazon,1.0,0.3
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Anthropic,0.9,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Honda,0.9,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Costco,0.9,0.8
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Hyundai,0.8,0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Netflix,1.0,-0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,UFC,0.9,0.3
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,ESPN,0.9,0.0
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,WWE,0.9,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,TKO Holdings Group,1.0,0.8
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Aurora,0.8,-0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,AR robotics,0.8,-0.1
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,ion viz,0.8,-0.3
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Robinhood,0.8,0.0
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,xAI,0.9,0.4
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,ChatGPT,0.8,-0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Delta Airlines,0.8,0.0
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Microsoft,1.0,0.2
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Salesforce,1.0,0.4
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Tesla,1.0,0.3
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,Figure,0.9,0.4
+BRFOIgoRoeM,The Investor Channel,2025-01-12T01:31:31Z,TikTok Ban Coming! | Nvidia Stock DROPS At CES | AI Replacing Coders | FAANG STOCK SHOW,X,0.9,0.0
+WJnLKvHPyUk,The Investor Channel,2025-01-09T17:00:42Z,Blink Charging COO & CEO Elect Michael Battaglia Interview,Blink Charging,1.0,0.9
+WJnLKvHPyUk,The Investor Channel,2025-01-09T17:00:42Z,Blink Charging COO & CEO Elect Michael Battaglia Interview,Tesla,1.0,0.2
+WJnLKvHPyUk,The Investor Channel,2025-01-09T17:00:42Z,Blink Charging COO & CEO Elect Michael Battaglia Interview,United States Postal Service,0.9,0.0
+WJnLKvHPyUk,The Investor Channel,2025-01-09T17:00:42Z,Blink Charging COO & CEO Elect Michael Battaglia Interview,amazon.com,1.0,0.0
+WJnLKvHPyUk,The Investor Channel,2025-01-09T17:00:42Z,Blink Charging COO & CEO Elect Michael Battaglia Interview,Waymo,0.7,0.0
+Ru_AHutNlv4,The Investor Channel,2025-01-04T18:12:56Z,💰 3 Reasons I Bought Intel Stock,Intel,1.0,1.0
+Ru_AHutNlv4,The Investor Channel,2025-01-04T18:12:56Z,💰 3 Reasons I Bought Intel Stock,Altera,0.9,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Microsoft,1.0,0.8
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,TikTok,0.9,-0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Amazon,1.0,0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Google,1.0,-0.2
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Meta,1.0,0.8
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Apple,1.0,-0.9
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Lyft,0.9,0.8
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Uber,0.9,-0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Netflix,1.0,-0.1
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Nvidia,1.0,0.9
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Run.AI,0.8,0.5
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Cerebras AI,0.9,0.8
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,AWS,0.9,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,OpenAI,0.8,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Anthropic,0.7,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Grok,0.7,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Tesla,1.0,-0.4
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,UBS,0.9,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,JD.com,0.9,0.0
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Broadcom,1.0,0.8
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,AMD,1.0,0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Intel,1.0,0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Taiwan Semi,1.0,0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,ASML,1.0,0.7
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Nike,1.0,-0.5
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Starbucks,1.0,-0.5
+_XxCzacLTjM,The Investor Channel,2025-01-03T22:08:34Z,Microsoft's $80B Data Center Push + TikTok Ban News 2025 | FAANG STOCK RECAP,Oracle,1.0,0.6
