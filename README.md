@@ -103,6 +103,10 @@ pip install torch transformers sentence-transformers numpy pandas scikit-learn d
 5. **推理模块（`src/inference/agent.py`）**  
    统一对外接口 `predict(kol_text, market_state)`，输出目标仓位。
 
+6. **行情获取（`src/market/yfinance_client.py` & `scripts/augment_with_market_data.py`）**  
+   - `src/market/yfinance_client.py` 基于 `yfinance` 下载指定股票区间的 OHLCV，再生成 `returns / volatility / turnover` 等特征，可直接按照 `(date, ticker)` 查表补齐 `market_state`。  
+   - `scripts/augment_with_market_data.py` 会读取 `data/processed/cleaned/<KOL>/<split>.csv` 与对应的 ModernBERT `.pt`，通过 `data/input/top_500_companies_list.xlsx` 映射公司→Ticker，并抓取最近 5 个交易日收盘价，生成包含 `embedding_*` 与 `close_t-*` 列的增强版 CSV（输出至 `data/processed/enriched/...`）。
+
 
 ============================================================
 回测框架如何接入（核心）

@@ -9,3 +9,4 @@ pandas
 scikit-learn
 d3rlpy
 tqdm
+yfinance
