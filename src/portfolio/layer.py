@@ -1,70 +1,41 @@
-"""Portfolio layer that maintains cumulative positions per KOL."""
+"""Portfolio layer to convert raw scores into dollar allocations."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict
+from dataclasses import dataclass
+from typing import Dict, List
+
+import numpy as np
 
 
 @dataclass
-class PortfolioState:
-    """Tracks the current portfolio allocation for a single KOL."""
-
+class PortfolioConfig:
     capital: float = 10_000.0
-    positions: Dict[str, float] = field(default_factory=dict)  # weight per ticker (sums to 1)
-
-    def as_dollars(self) -> Dict[str, float]:
-        """Return allocations expressed in dollars."""
-        return {symbol: weight * self.capital for symbol, weight in self.positions.items()}
+    epsilon: float = 1e-6
 
 
 class PortfolioLayer:
-    """Accumulates dynamic stock pools and converts raw scores to weights."""
+    """Normalizes raw scores into portfolio weights and allocations."""
 
-    def __init__(
-        self,
-        initial_capital: float = 10_000.0,
-        use_signed_weights: bool = False,
-        carry_unmentioned: bool = True,
-        min_abs_score: float = 1e-8,
-    ) -> None:
-        self.initial_capital = initial_capital
-        self.use_signed_weights = use_signed_weights
-        self.carry_unmentioned = carry_unmentioned
-        self.min_abs_score = min_abs_score
+    def __init__(self, config: PortfolioConfig | None = None) -> None:
+        self.config = config or PortfolioConfig()
 
-    def allocate(self, raw_scores: Dict[str, float], state: PortfolioState | None = None) -> PortfolioState:
-        """Merge cumulative stock pool with latest raw scores and return new positions."""
-        current_state = state or PortfolioState(capital=self.initial_capital)
-        combined_scores: Dict[str, float] = {}
-
-        if self.carry_unmentioned:
-            for symbol, weight in current_state.positions.items():
-                if symbol not in raw_scores:
-                    # Treat previous weights as pseudo scores so they keep their share unless overwritten.
-                    combined_scores[symbol] = weight
-
-        for symbol, score in raw_scores.items():
-            combined_scores[symbol] = score
-
-        weights = self._scores_to_weights(combined_scores)
-        return PortfolioState(capital=current_state.capital, positions=weights)
-
-    def _scores_to_weights(self, scores: Dict[str, float]) -> Dict[str, float]:
-        filtered = {symbol: score for symbol, score in scores.items() if abs(score) >= self.min_abs_score}
-        if not filtered:
+    def allocate(self, raw_scores: Dict[str, float]) -> Dict[str, Dict[str, float]]:
+        if not raw_scores:
             return {}
-        if self.use_signed_weights:
-            total = sum(abs(score) for score in filtered.values())
-            if total == 0.0:
-                return {}
-            return {symbol: score / total for symbol, score in filtered.items()}
 
-        total = sum(abs(score) for score in filtered.values())
-        if total == 0.0:
-            return {}
-        weights = {
-            symbol: abs(score) / total
-            for symbol, score in filtered.items()
-        }
-        return {symbol: weight for symbol, weight in weights.items() if weight > 0.0}
+        tickers: List[str] = list(raw_scores.keys())
+        scores = np.array([raw_scores[ticker] for ticker in tickers], dtype=np.float64)
+        abs_sum = np.sum(np.abs(scores))
+
+        if abs_sum < self.config.epsilon:
+            # fallback: equal weight long-only distribution
+            weights = np.ones_like(scores) / len(scores)
+        else:
+            weights = scores / abs_sum
+
+        allocations = weights * self.config.capital
+        result: Dict[str, Dict[str, float]] = {}
+        for ticker, weight, allocation in zip(tickers, weights.tolist(), allocations.tolist()):
+            result[ticker] = {"weight": float(weight), "allocation": float(allocation)}
+        return result

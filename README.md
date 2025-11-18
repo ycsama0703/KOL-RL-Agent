@@ -71,6 +71,11 @@ scripts/
   split_by_video_time.py
   clean_dataset.py
   generate_embeddings.py
+  generate_reward.py
+  add_baseline_action.py
+  build_ticker_embedding.py
+  build_replay_buffer.py
+  run_replay_pipeline.py
 train.py
 infer.py
 README.md
@@ -91,11 +96,42 @@ pip install torch transformers sentence-transformers numpy pandas scikit-learn d
 1. **文本预处理（`src/preprocessing/`）**  
    清洗、句子切块、市场对齐、情绪/强度/主题特征抽取；`build_dataset.py` 负责统一格式化输入。
 
-2. **文本嵌入（`src/embedding/encoder.py` + `scripts/generate_embeddings.py`）**  
-   使用 ModernBERT（或 SBERT/FinBERT）生成高维语义向量，可按 KOL/时间切片生成批量 embedding。
+2. **文本嵌入与 Reward（`scripts/generate_embeddings.py` / `scripts/generate_reward.py`）**  
+   使用 ModernBERT 生成语义向量，并基于 yfinance 自动计算 next-day return 作为 reward，得到含 `reward_1d/next_date/done` 的 CSV。
 
-3. **状态构建（`src/state/state_builder.py`）**  
-   将市场特征 + KOL embedding + 历史仓位拼接为 RL 状态。
+3. **状态构建 & Portfolio（`src/state/state_builder.py` + `src/state/ticker_embedding.py` + `src/portfolio/layer.py` + `scripts/build_ticker_embedding.py`）**  
+   将 ModernBERT 文本 embedding、公司 learned embedding（`ticker_vocab.json` + `ticker_embedding.pt`）、市场特征拼接成 state，并由 portfolio layer 将 Actor raw_score 归一化为 10000 美元资金分配。
+
+4. **Replay Buffer 构建（`scripts/build_replay_buffer.py` 或 `scripts/run_replay_pipeline.py`）**  
+   结合 reward CSV、baseline 动作、ticker embedding，将数据写入 `data/replay_buffer/<KOL>/<split>.pt`，可通过单条命令 `python scripts/run_replay_pipeline.py` 自动完成 baseline → ticker vocab → buffer 的构建流程。
+
+
+============================================================
+数据构造 Pipeline（阶段说明）
+============================================================
+
+1. **原始语料 → 统一格式**  
+   - `scripts/build_dataset.py --input data/input --output data/processed/total/kol_text_with_sentiment.csv`
+   - 聚合所有 TikTok/YouTube CSV，生成统一字段（text、company、sentiment、confidence 等）。
+
+2. **按 KOL/时间切分**  
+   - `scripts/split_top_channels.py`（可选，挑选重点 KOL）  
+   - `scripts/split_by_video_time.py --input data/processed/<KOL>.csv --output data/processed/splits/<KOL>/`
+   - 按 `video_id` 时间顺序划分 train/val/test。
+
+3. **清洗与 ModernBERT Embedding**  
+   - `scripts/clean_dataset.py --input data/processed/splits --output data/processed/cleaned`
+   - `scripts/generate_embeddings.py --input data/processed/cleaned --output data/processed/embeddings --model answerdotai/modernbert-base`
+
+4. **Reward 构建**  
+   - `scripts/generate_reward.py --input data/processed/enriched --output data/processed/reward`
+   - 参数：默认使用 yfinance 下载 `next_day` 收盘价，生成 `reward_1d/next_date/done`。
+
+5. **Baseline 动作 + Ticker Embedding + Replay Buffer**  
+   - 执行 `python scripts/run_replay_pipeline.py`（等价于依次运行 `add_baseline_action.py → build_ticker_embedding.py → build_replay_buffer.py`）  
+   - 输出：`models/embedding/ticker_vocab.json`、`models/embedding/ticker_embedding.pt`、`data/replay_buffer/<KOL>/<split>.pt`。
+
+完成以上步骤后，Replay Buffer 即可供 `train.py`（BC + IQL/CQL + Portfolio Layer）直接使用。
 
 4. **离线强化学习（`src/rl/`）**  
    IQL/CQL + LSTM Actor-Critic；流程涵盖 replay buffer、行为克隆预训练、RL 训练、checkpoint。
@@ -129,17 +165,19 @@ portfolio.adjust_to(action["target_position"])
 
 运行：
 ```
-python train.py --config config/rl_config.yaml
+python train.py \
+  --kol Everything_Money \
+  --replay-dir data/replay_buffer \
+  --ticker-vocab models/embedding/ticker_vocab.json \
+  --ticker-embedding models/embedding/ticker_embedding.pt
 ```
 
-流程：
-1. 加载 `data/processed/cleaned`（或包含 embeddings 的数据集）及对应行情特征  
-2. 文本 → ModernBERT embedding  
-3. 构建 RL 状态  
-4. 生成 replay buffer  
-5. 行为克隆预训练  
-6. IQL/CQL 强化学习  
-7. 保存策略模型（`models/checkpoints/<KOL>/policy.pt`）
+流程（BC → IQL）：
+1. 加载 `data/replay_buffer/<KOL>/train.pt/val.pt` 并构建 `state = [ModernBERT embedding || ticker embedding || sentiment || confidence]`。  
+2. 行为克隆（BC）阶段：`epochs=10`，`batch_size=256`，`lr=3e-4`，使用 baseline 动作 `tanh(2 * sentiment * confidence)` 进行 MSE 监督。  
+3. IQL 阶段：`steps=200k`，`batch_size=256`，`actor/critic/value lr=3e-4`，`expectile=0.7`，`temperature_beta=3.0`。Actor/critic/value 均为 MLP（512-512-256），Actor 输出经 `tanh` 映射为 raw_score。  
+4. 训练结束后在验证集上使用 `PortfolioLayer`（支持多空、资金 10000 美元、`weight_i = raw_i / Σ|raw|`）进行收益回放，输出 cumulative return / Sharpe / max drawdown。  
+5. 保存策略到 `models/checkpoints/<KOL>/policy.pt`，并同时保存 actor/critic/value 的独立权重。
 
 
 ============================================================
