@@ -133,6 +133,12 @@ pip install torch transformers sentence-transformers numpy pandas scikit-learn d
 
 完成以上步骤后，Replay Buffer 即可供 `train.py`（BC + IQL/CQL + Portfolio Layer）直接使用。
 
+常见输出位置总结：
+- 文本 embedding：`data/processed/embeddings/<KOL>/<split>.pt`
+- reward 数据（含 baseline_raw_score）：`data/processed/reward/<KOL>/<split>.csv`
+- ticker 词表/embedding：`models/embedding/ticker_vocab.json`、`models/embedding/ticker_embedding.pt`
+- Replay Buffer：`data/replay_buffer/<KOL>/<split>.pt`
+
 4. **离线强化学习（`src/rl/`）**  
    IQL/CQL + LSTM Actor-Critic；流程涵盖 replay buffer、行为克隆预训练、RL 训练、checkpoint。
 
@@ -178,6 +184,15 @@ python train.py \
 3. IQL 阶段：`steps=200k`，`batch_size=256`，`actor/critic/value lr=3e-4`，`expectile=0.7`，`temperature_beta=3.0`。Actor/critic/value 均为 MLP（512-512-256），Actor 输出经 `tanh` 映射为 raw_score。  
 4. 训练结束后在验证集上使用 `PortfolioLayer`（支持多空、资金 10000 美元、`weight_i = raw_i / Σ|raw|`）进行收益回放，输出 cumulative return / Sharpe / max drawdown。  
 5. 保存策略到 `models/checkpoints/<KOL>/policy.pt`，并同时保存 actor/critic/value 的独立权重。
+
+计算资源建议：
+- GPU：单卡 8~12GB 即可（state 维度约 802，batch 256，显存占用 < 1GB），GPU 可在数小时内跑完 200k step；若只用 CPU 训练则耗时更长。
+- CPU/RAM：8+ 核 CPU、16GB+ RAM 较合适；训练过程中主要计算集中在 MLP 前向/反向。
+
+运行训练前请确认：
+1. 已执行数据 pipeline，生成 `data/replay_buffer/<KOL>/train|val|test.pt`。
+2. `models/embedding/ticker_vocab.json` 与 `ticker_embedding.pt` 存在（由 `build_ticker_embedding.py` 生成）。
+3. 需要针对其他 KOL 训练时，将 `--kol` 换成相应文件夹名称并重复运行即可。
 
 
 ============================================================
