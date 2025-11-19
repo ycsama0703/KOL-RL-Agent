@@ -26,13 +26,15 @@ class PortfolioLayer:
 
         tickers: List[str] = list(raw_scores.keys())
         scores = np.array([raw_scores[ticker] for ticker in tickers], dtype=np.float64)
-        abs_sum = np.sum(np.abs(scores))
+        # Long-only: ignore负分数，只按正分数归一化；若全非正，则等权多头。
+        scores = np.maximum(scores, 0.0)
+        pos_sum = float(np.sum(scores))
 
-        if abs_sum < self.config.epsilon:
+        if pos_sum < self.config.epsilon:
             # fallback: equal weight long-only distribution
-            weights = np.ones_like(scores) / len(scores)
+            weights = np.ones_like(scores, dtype=np.float64) / len(scores)
         else:
-            weights = scores / abs_sum
+            weights = scores / pos_sum
 
         allocations = weights * self.config.capital
         result: Dict[str, Dict[str, float]] = {}

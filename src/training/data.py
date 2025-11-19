@@ -14,7 +14,9 @@ class ReplayDataset(Dataset):
         data = torch.load(buffer_path)
         self.states = data["states"].float()
         self.actions = data["actions"].float()
-        self.rewards = data["rewards"].float()
+        # 如果存在组合层 reward（portfolio_rewards），优先使用；否则退回单票 reward_1d
+        rewards_tensor = data.get("portfolio_rewards", data["rewards"])
+        self.rewards = rewards_tensor.float()
         self.next_states = data["next_states"].float()
         self.dones = data["dones"].bool()
 

@@ -1,0 +1,28 @@
+2025-11-20 00:43:01,476 - __main__ - INFO - Starting training run Everything_Money_20251120_004301
+2025-11-20 00:43:01,477 - __main__ - INFO - Logging to outputs\Everything_Money_20251120_004301\logs\training.log
+2025-11-20 00:43:01,477 - __main__ - INFO - Checkpoints will be saved under outputs\Everything_Money_20251120_004301\checkpoints
+2025-11-20 00:43:01,482 - __main__ - INFO - Loaded replay buffer for Everything_Money with 552 samples, state_dim=803
+2025-11-20 00:43:02,554 - __main__ - INFO - BC Epoch 1/10 - loss=0.489328
+2025-11-20 00:43:02,563 - __main__ - INFO - BC Epoch 2/10 - loss=0.431816
+2025-11-20 00:43:02,572 - __main__ - INFO - BC Epoch 3/10 - loss=0.394338
+2025-11-20 00:43:02,581 - __main__ - INFO - BC Epoch 4/10 - loss=0.357630
+2025-11-20 00:43:02,590 - __main__ - INFO - BC Epoch 5/10 - loss=0.346908
+2025-11-20 00:43:02,599 - __main__ - INFO - BC Epoch 6/10 - loss=0.324033
+2025-11-20 00:43:02,608 - __main__ - INFO - BC Epoch 7/10 - loss=0.323999
+2025-11-20 00:43:02,617 - __main__ - INFO - BC Epoch 8/10 - loss=0.306558
+2025-11-20 00:43:02,626 - __main__ - INFO - BC Epoch 9/10 - loss=0.288269
+2025-11-20 00:43:02,634 - __main__ - INFO - BC Epoch 10/10 - loss=0.276548
+2025-11-20 00:43:02,634 - __main__ - INFO - Behavior cloning finished. Avg loss=0.353943
+2025-11-20 00:43:07,653 - __main__ - INFO - IQL step 1000/200000 - critic=0.000521 value=0.000000 actor=0.000084
+2025-11-20 00:43:12,820 - __main__ - INFO - IQL step 2000/200000 - critic=0.000514 value=0.000000 actor=0.000183
+2025-11-20 00:43:17,877 - __main__ - INFO - IQL step 3000/200000 - critic=0.000517 value=0.000000 actor=0.000039
+2025-11-20 00:43:22,967 - __main__ - INFO - IQL step 4000/200000 - critic=0.000512 value=0.000000 actor=0.000143
+2025-11-20 00:43:28,328 - __main__ - INFO - IQL step 5000/200000 - critic=0.000512 value=0.000000 actor=0.000019
+2025-11-20 00:43:33,332 - __main__ - INFO - IQL step 6000/200000 - critic=0.000514 value=0.000000 actor=0.000014
+2025-11-20 00:43:38,020 - __main__ - INFO - IQL step 7000/200000 - critic=0.000513 value=0.000000 actor=0.000002
+2025-11-20 00:43:42,924 - __main__ - INFO - IQL step 8000/200000 - critic=0.000512 value=0.000000 actor=0.000002
+2025-11-20 00:43:47,953 - __main__ - INFO - IQL step 9000/200000 - critic=0.000512 value=0.000000 actor=0.000000
+2025-11-20 00:43:53,089 - __main__ - INFO - IQL step 10000/200000 - critic=0.000513 value=0.000000 actor=0.000052
+2025-11-20 00:43:58,519 - __main__ - INFO - IQL step 11000/200000 - critic=0.000512 value=0.000000 actor=0.000052
+2025-11-20 00:44:04,118 - __main__ - INFO - IQL step 12000/200000 - critic=0.000513 value=0.000000 actor=0.000010
+2025-11-20 00:44:09,453 - __main__ - INFO - IQL step 13000/200000 - critic=0.000512 value=0.000000 actor=0.000000

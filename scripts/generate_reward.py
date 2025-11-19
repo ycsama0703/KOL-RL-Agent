@@ -75,38 +75,54 @@ def fetch_prices(
     return prices
 
 
-def find_reward(
+def find_span_reward(
     signal_time: pd.Timestamp,
+    next_signal_time: Optional[pd.Timestamp],
     prices: pd.Series,
 ) -> Tuple[float, Optional[pd.Timestamp], bool]:
-    """Return (reward_1d, next_date, done)."""
+    """Return (reward_span, end_trading_date, done) for窗口=当前视频→下一次视频.
+
+    - 若 next_signal_time 为 None，视为 episode 终点，reward=0，done=True；
+    - 否则：
+      - start_price: 信号日当天（或之后最近一个有价格的交易日）的收盘价；
+      - end_price:   下一次视频日期当天（或之后最近一个有价格的交易日）的收盘价；
+      - reward_span = end_price / start_price - 1。
+    """
     if prices.empty:
         return 0.0, None, True
+    if next_signal_time is None:
+        # 最后一条视频，没有“下一个视频”，episode 结束。
+        return 0.0, None, True
+
     signal_time = signal_time.floor("D")
-    idx = prices.index.searchsorted(signal_time, side="left")
-    if idx >= len(prices):
+    next_signal_time = next_signal_time.floor("D")
+
+    # 找起点收盘价
+    idx_start = prices.index.searchsorted(signal_time, side="left")
+    if idx_start >= len(prices):
         return 0.0, None, True
-
-    close_idx = idx
-    while close_idx < len(prices) and pd.isna(prices.iloc[close_idx]):
-        close_idx += 1
-    if close_idx >= len(prices):
+    while idx_start < len(prices) and pd.isna(prices.iloc[idx_start]):
+        idx_start += 1
+    if idx_start >= len(prices):
         return 0.0, None, True
-    close_t = prices.iloc[close_idx]
+    start_price = prices.iloc[idx_start]
 
-    next_idx = close_idx + 1
-    while next_idx < len(prices) and pd.isna(prices.iloc[next_idx]):
-        next_idx += 1
-    if next_idx >= len(prices):
+    # 找终点收盘价（对应下一次视频日期）
+    idx_end = prices.index.searchsorted(next_signal_time, side="left")
+    if idx_end >= len(prices):
         return 0.0, None, True
+    while idx_end < len(prices) and pd.isna(prices.iloc[idx_end]):
+        idx_end += 1
+    if idx_end >= len(prices):
+        return 0.0, None, True
+    end_price = prices.iloc[idx_end]
+    end_date = prices.index[idx_end]
 
-    next_close = prices.iloc[next_idx]
-    next_date = prices.index[next_idx]
-    if pd.isna(next_close) or pd.isna(close_t) or close_t == 0:
-        return 0.0, next_date, False
+    if pd.isna(start_price) or pd.isna(end_price) or start_price == 0:
+        return 0.0, end_date, False
 
-    reward = float(next_close / close_t - 1.0)
-    return reward, next_date, False
+    reward = float(end_price / start_price - 1.0)
+    return reward, end_date, False
 
 
 def process_file(
@@ -120,8 +136,13 @@ def process_file(
         print(f"[WARN] {csv_path} missing ticker or published_at; skipping.")
         return
 
-    df["published_at"] = pd.to_datetime(df["published_at"])
+    # 统一将时间戳转为无时区（tz-naive），避免与 yfinance 数据索引不兼容
+    df["published_at"] = pd.to_datetime(df["published_at"]).apply(normalize_timestamp)
     df["ticker"] = df["ticker"].astype(str)
+    # 按自然日对齐事件日期，用于定义“下一次视频”的窗口（同样为 tz-naive）
+    df["event_date"] = df["published_at"].dt.floor("D")
+    unique_dates = sorted(df["event_date"].unique())
+    next_date_map = {d: unique_dates[i + 1] for i, d in enumerate(unique_dates[:-1])}
 
     reward_col = []
     next_dates = []
@@ -129,13 +150,17 @@ def process_file(
 
     for row in df.itertuples(index=False):
         ticker = row.ticker
-        signal_time = normalize_timestamp(row.published_at)
+        # 此时 published_at / event_date 均为 tz-naive
+        signal_time = row.published_at
+        event_date = row.event_date
+        next_event_date = next_date_map.get(event_date)
         prices = fetch_prices(ticker, period=period, cache=global_price_cache)
-        reward, next_date, done = find_reward(signal_time, prices)
+        reward, end_trading_date, done = find_span_reward(signal_time, next_event_date, prices)
         reward_col.append(reward)
-        next_dates.append(next_date.isoformat() if isinstance(next_date, pd.Timestamp) else None)
+        next_dates.append(end_trading_date.isoformat() if isinstance(end_trading_date, pd.Timestamp) else None)
         done_flags.append(bool(done))
 
+    # 名称仍沿用 reward_1d，但语义已变为“当前视频→下一次视频”的窗口收益。
     df["reward_1d"] = reward_col
     df["next_date"] = next_dates
     df["done"] = done_flags

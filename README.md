@@ -19,6 +19,88 @@
 
 
 ============================================================
+0. Quick Start（最短路径）
+============================================================
+
+1）**生成 cleaned 数据（按 KOL / 时间切分）**
+
+```bash
+# 原始 CSV → 统一格式
+python scripts/build_dataset.py --input data/input --output data/processed/total/kol_text_with_sentiment.csv
+
+# 按 video_id 时间划分 train/val/test
+python scripts/split_by_video_time.py --input data/processed/total/kol_text_with_sentiment.csv --output data/processed/splits
+
+# 文本清洗，生成 cleaned 数据
+python scripts/clean_dataset.py --input data/processed/splits --output data/processed/cleaned
+```
+
+2）**embedding + reward + baseline + buffer**
+
+```bash
+# ModernBERT 文本 embedding
+python scripts/generate_embeddings.py \
+  --model answerdotai/modernbert-base \
+  --input data/processed/cleaned \
+  --output data/processed/embeddings \
+  --batch-size 32 --normalize
+
+# 行情特征 + reward（如已跑过可跳过）
+python scripts/augment_with_market_data.py --input data/processed/cleaned --output data/processed/enriched ...
+python scripts/generate_reward.py --input data/processed/enriched --output data/processed/reward
+
+# baseline + ticker embedding + replay buffer（含 last_position）
+python scripts/run_replay_pipeline.py \
+  --reward-dir data/processed/reward \
+  --vocab-path models/embedding/ticker_vocab.json \
+  --embedding-path models/embedding/ticker_embedding.pt \
+  --replay-dir data/replay_buffer
+```
+
+3）**训练（BC → IQL）**
+
+```bash
+python train.py \
+  --kol Everything_Money \
+  --replay-dir data/replay_buffer \
+  --ticker-vocab models/embedding/ticker_vocab.json \
+  --ticker-embedding models/embedding/ticker_embedding.pt \
+  --output-dir outputs
+```
+
+4）**测试 + 指标**
+
+```bash
+# 在 test.pt 上回放策略，输出整体指标 + 逐 ticker 持仓轨迹（可选）
+python scripts/evaluate_run.py \
+  --checkpoint outputs/Everything_Money_<时间戳>/checkpoints/policy.pt \
+  --buffer data/replay_buffer/Everything_Money/test.pt \
+  --output outputs/Everything_Money_<时间戳>/metrics_test.json \
+  --positions-output outputs/Everything_Money_<时间戳>/positions_test.csv \
+  --action-threshold 0.02
+```
+
+5）**按视频查看决策细节 + 画净值曲线（可选）**
+
+```bash
+# 逐视频决策明细（带原文）
+python scripts/export_signal_decisions.py \
+  --checkpoint outputs/Everything_Money_<时间戳>/checkpoints/policy.pt \
+  --reward-csv data/processed/reward/Everything_Money/test.csv \
+  --vocab-path models/embedding/ticker_vocab.json \
+  --embedding-path models/embedding/ticker_embedding.pt \
+  --output outputs/Everything_Money_<时间戳>/signal_decisions_test.csv
+
+# 净值曲线 + 市场基准（例如 SPY）
+python scripts/plot_equity_curve.py \
+  --signal-decisions outputs/Everything_Money_<时间戳>/signal_decisions_test.csv \
+  --output-figure outputs/Everything_Money_<时间戳>/equity_test_with_spy.png \
+  --benchmark-ticker SPY \
+  --benchmark-label "SPY (market)"
+```
+
+
+============================================================
 1. 目录结构 & 依赖
 ============================================================
 

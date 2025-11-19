@@ -56,7 +56,14 @@ def run_policy(
     device: torch.device,
     action_threshold: float = 0.01,
 ) -> Tuple[Dict[str, float], pd.DataFrame]:
-    """Replay a policy on a buffer and record metrics plus per-signal positions."""
+    """Replay a policy on a buffer and record metrics plus per-date positions.
+
+    逻辑假设：
+    - 持仓是“基金经理式”的连续过程：上一日持仓在下一日延续，
+      当日有新信号的 ticker 覆盖对应仓位，其余 ticker 延续昨仓；
+    - long-only：权重始终 ≥0，且每天归一化后总和约为 1；
+    - 收益只在有 reward 记录的 ticker 上累计，其余当日视为 0 收益。
+    """
 
     states = buffer["states"]
     rewards = buffer["rewards"].numpy()
@@ -79,33 +86,69 @@ def run_policy(
     prev_weights: Dict[str, float] = {}
 
     for date, group in df.groupby("date"):
+        # 当日有新信号的 ticker 及其 raw_score
         raw_dict = {row["ticker"]: row["raw_score"] for _, row in group.iterrows()}
-        weights = portfolio.allocate(raw_dict)
+        subset_alloc = portfolio.allocate(raw_dict)
+        subset_weights = {t: float(info["weight"]) for t, info in subset_alloc.items()}
+
+        # 基于昨仓复制一份权重，再用当日信号覆盖对应 ticker
+        new_weights: Dict[str, float] = dict(prev_weights)
+        for ticker, w in subset_weights.items():
+            new_weights[ticker] = max(w, 0.0)
+
+        # long-only 归一化：总权重 ≥ 0 且近似为 1
+        total_weight = sum(max(w, 0.0) for w in new_weights.values())
+        if total_weight < portfolio.config.epsilon:
+            # 如果仍然没有有效权重，则在当日有信号的 ticker 间等权分配
+            if subset_weights:
+                equal_w = 1.0 / len(subset_weights)
+                new_weights = {t: equal_w for t in subset_weights}
+                total_weight = 1.0
+            else:
+                new_weights = {}
+                total_weight = 0.0
+        else:
+            for ticker in list(new_weights.keys()):
+                w = max(new_weights[ticker], 0.0)
+                new_weights[ticker] = w / total_weight
+
+        # 当日有 reward 记录的 ticker→reward 映射
+        rewards_today: Dict[str, float] = {
+            row["ticker"]: float(row["reward"]) for _, row in group.iterrows()
+        }
+
+        # 记录所有当前持仓的变动（包括当日无新信号但延续持仓的 ticker）
         day_return = 0.0
-        for _, row in group.iterrows():
-            ticker = row["ticker"]
-            reward = row["reward"]
-            weight_info = weights.get(ticker, {"weight": 0.0, "allocation": 0.0})
-            weight = float(weight_info["weight"])
-            allocation = float(weight_info["allocation"])
+        tickers_today = sorted(set(new_weights.keys()) | set(prev_weights.keys()))
+        for ticker in tickers_today:
             prev_weight = float(prev_weights.get(ticker, 0.0))
+            weight = float(new_weights.get(ticker, 0.0))
             delta = weight - prev_weight
+            allocation = weight * portfolio.config.capital
+            allocation_delta = delta * portfolio.config.capital
+            reward = float(rewards_today.get(ticker, 0.0))
+            raw_score = float(
+                raw_dict.get(ticker, 0.0)
+            )  # 当日若无新信号，则 raw_score 视作 0
+
             action = _classify_action(prev_weight, weight, delta, action_threshold)
             position_rows.append(
                 {
                     "date": date,
                     "ticker": ticker,
                     "reward": reward,
-                    "raw_score": row["raw_score"],
+                    "raw_score": raw_score,
                     "prev_weight": prev_weight,
                     "weight": weight,
                     "weight_delta": delta,
                     "allocation": allocation,
+                    "allocation_delta": allocation_delta,
                     "action": action,
                 }
             )
-            prev_weights[ticker] = weight
             day_return += weight * reward
+
+        prev_weights = new_weights
         daily_returns.append(day_return)
 
     if not daily_returns:
