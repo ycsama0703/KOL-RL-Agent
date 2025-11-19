@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
+from src.pipeline.replay_utils import annotate_positions, build_states, load_ticker_embedder
 from src.state.ticker_embedding import TickerEmbedding
 
 
@@ -44,25 +45,12 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_ticker_embedder(weights_path: Path, vocab_path: Path) -> TickerEmbedding:
-    return TickerEmbedding.load(weights_path, vocab_path, embedding_dim=32)
-
-
 def collect_reward_files(reward_dir: Path) -> Dict[str, List[Path]]:
     files: Dict[str, List[Path]] = {}
     for csv in reward_dir.rglob("*.csv"):
         kol = csv.parent.name
         files.setdefault(kol, []).append(csv)
     return files
-
-
-def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarray:
-    embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
-    text_emb = df[embedding_cols].values.astype(np.float32)
-    ticker_vectors = np.stack([ticker_embedder.encode_single(ticker) for ticker in df["ticker"].astype(str)], dtype=np.float32)
-    extra_features = df[["sentiment", "confidence"]].fillna(0.0).values.astype(np.float32)
-    states = np.concatenate([text_emb, ticker_vectors, extra_features], axis=1)
-    return states
 
 
 def compute_next_indices(df: pd.DataFrame) -> np.ndarray:
@@ -77,7 +65,7 @@ def compute_next_indices(df: pd.DataFrame) -> np.ndarray:
 
 def build_buffer(
     df: pd.DataFrame,
-    ticker_embedder: TickerEmbedding,
+    ticker_embedder,
 ) -> Dict[str, torch.Tensor | List[str]]:
     df = df.sort_values(["ticker", "published_at"]).reset_index(drop=True)
     states = build_states(df, ticker_embedder)
@@ -114,6 +102,7 @@ def process_file(csv_path: Path, output_path: Path, ticker_embedder: TickerEmbed
         print(f"[WARN] {csv_path} missing columns: {missing}; skipping")
         return
 
+    df = annotate_positions(df)
     buffer = build_buffer(df, ticker_embedder)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(buffer, output_path)

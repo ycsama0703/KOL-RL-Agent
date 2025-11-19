@@ -1,0 +1,117 @@
+"""Helper functions for evaluating trained agents and logging positions."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Dict, Tuple
+
+import numpy as np
+import pandas as pd
+import torch
+
+from src.portfolio.layer import PortfolioLayer
+from src.training.models import ActorNetwork
+from train import compute_metrics
+
+
+def load_actor(checkpoint_path: Path, state_dim: int, device: torch.device) -> ActorNetwork:
+    """Load an actor network from a checkpoint or raw state dict."""
+
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    state_dict = checkpoint.get("actor_state_dict", checkpoint)
+    actor = ActorNetwork(state_dim).to(device)
+    actor.load_state_dict(state_dict)
+    actor.eval()
+    return actor
+
+
+def _predict_raw_scores(actor: ActorNetwork, states: torch.Tensor, device: torch.device, batch_size: int = 1024) -> np.ndarray:
+    preds: list[torch.Tensor] = []
+    with torch.no_grad():
+        for start in range(0, states.size(0), batch_size):
+            batch = states[start : start + batch_size].to(device)
+            preds.append(actor(batch).squeeze(-1).cpu())
+    return torch.cat(preds).numpy()
+
+
+def _classify_action(prev_weight: float, new_weight: float, delta: float, threshold: float) -> str:
+    abs_prev = abs(prev_weight)
+    abs_new = abs(new_weight)
+    if abs_new < threshold and abs_prev < threshold:
+        return "HOLD"
+    if abs_new < threshold <= abs_prev:
+        return "CLOSE"
+    if abs_prev < threshold <= abs_new:
+        return "OPEN"
+    if delta > threshold:
+        return "INCREASE"
+    if delta < -threshold:
+        return "DECREASE"
+    return "HOLD"
+
+
+def run_policy(
+    actor: ActorNetwork,
+    buffer: Dict[str, Any],
+    device: torch.device,
+    action_threshold: float = 0.01,
+) -> Tuple[Dict[str, float], pd.DataFrame]:
+    """Replay a policy on a buffer and record metrics plus per-signal positions."""
+
+    states = buffer["states"]
+    rewards = buffer["rewards"].numpy()
+    dates = buffer["meta"]["published_at"]
+    tickers = buffer["meta"]["ticker"]
+
+    raw_scores = _predict_raw_scores(actor, states, device)
+    df = pd.DataFrame(
+        {
+            "date": dates,
+            "ticker": tickers,
+            "reward": rewards,
+            "raw_score": raw_scores,
+        }
+    )
+
+    portfolio = PortfolioLayer()
+    daily_returns: list[float] = []
+    position_rows: list[dict] = []
+    prev_weights: Dict[str, float] = {}
+
+    for date, group in df.groupby("date"):
+        raw_dict = {row["ticker"]: row["raw_score"] for _, row in group.iterrows()}
+        weights = portfolio.allocate(raw_dict)
+        day_return = 0.0
+        for _, row in group.iterrows():
+            ticker = row["ticker"]
+            reward = row["reward"]
+            weight_info = weights.get(ticker, {"weight": 0.0, "allocation": 0.0})
+            weight = float(weight_info["weight"])
+            allocation = float(weight_info["allocation"])
+            prev_weight = float(prev_weights.get(ticker, 0.0))
+            delta = weight - prev_weight
+            action = _classify_action(prev_weight, weight, delta, action_threshold)
+            position_rows.append(
+                {
+                    "date": date,
+                    "ticker": ticker,
+                    "reward": reward,
+                    "raw_score": row["raw_score"],
+                    "prev_weight": prev_weight,
+                    "weight": weight,
+                    "weight_delta": delta,
+                    "allocation": allocation,
+                    "action": action,
+                }
+            )
+            prev_weights[ticker] = weight
+            day_return += weight * reward
+        daily_returns.append(day_return)
+
+    if not daily_returns:
+        metrics = {"cumulative_return": 0.0, "sharpe": 0.0, "max_drawdown": 0.0}
+    else:
+        metrics = compute_metrics(np.array(daily_returns))
+
+    positions_df = pd.DataFrame(position_rows)
+    return metrics, positions_df

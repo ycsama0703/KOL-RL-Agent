@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import argparse
 import math
-from dataclasses import dataclass
+import json
+import logging
+from dataclasses import asdict, dataclass
 from itertools import cycle
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Tuple
 
@@ -34,6 +37,7 @@ class TrainingConfig:
     ticker_vocab: str = "models/embedding/ticker_vocab.json"
     ticker_embedding: str = "models/embedding/ticker_embedding.pt"
     checkpoints_dir: str = "models/checkpoints"
+    output_dir: str = "outputs"
     bc_epochs: int = 10
     bc_batch_size: int = 256
     bc_lr: float = 3e-4
@@ -55,6 +59,7 @@ def parse_args() -> TrainingConfig:
     parser.add_argument("--ticker-vocab", default="models/embedding/ticker_vocab.json", help="Ticker vocab path.")
     parser.add_argument("--ticker-embedding", default="models/embedding/ticker_embedding.pt", help="Ticker embedding weights.")
     parser.add_argument("--checkpoints-dir", default="models/checkpoints", help="Directory to store checkpoints.")
+    parser.add_argument("--output-dir", default="outputs", help="Root directory to store training outputs.")
     parser.add_argument("--bc-epochs", type=int, default=10)
     parser.add_argument("--bc-batch-size", type=int, default=256)
     parser.add_argument("--bc-lr", type=float, default=3e-4)
@@ -73,6 +78,7 @@ def parse_args() -> TrainingConfig:
         ticker_vocab=args.ticker_vocab,
         ticker_embedding=args.ticker_embedding,
         checkpoints_dir=args.checkpoints_dir,
+        output_dir=args.output_dir,
         bc_epochs=args.bc_epochs,
         bc_batch_size=args.bc_batch_size,
         bc_lr=args.bc_lr,
@@ -263,6 +269,23 @@ def main() -> None:
     train_path = Path(config.replay_dir) / config.kol / "train.pt"
     val_path = Path(config.replay_dir) / config.kol / "val.pt"
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_name = f"{config.kol}_{timestamp}"
+    run_dir = Path(config.output_dir) / run_name
+    log_dir = run_dir / "logs"
+    checkpoint_dir = run_dir / Path(config.checkpoints_dir).name
+    run_dir.mkdir(parents=True, exist_ok=True)
+    log_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    log_path = log_dir / "training.log"
+    file_handler = logging.FileHandler(log_path)
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    file_handler.setFormatter(formatter)
+    LOGGER.addHandler(file_handler)
+    LOGGER.info("Starting training run %s", run_name)
+    LOGGER.info("Logging to %s", log_path)
+    LOGGER.info("Checkpoints will be saved under %s", checkpoint_dir)
+
     if not train_path.exists():
         raise FileNotFoundError(f"Replay buffer not found: {train_path}")
 
@@ -307,8 +330,21 @@ def main() -> None:
     else:
         LOGGER.warning("Validation buffer %s not found; skipping evaluation.", val_path)
 
-    checkpoint_dir = Path(config.checkpoints_dir) / config.kol
     save_checkpoints(actor, critic, value_net, checkpoint_dir)
+
+    summary = {
+        "run_name": run_name,
+        "timestamp": timestamp,
+        "kol": config.kol,
+        "train_samples": len(train_dataset),
+        "bc_loss": bc_loss,
+        "metrics": metrics,
+        "config": asdict(config),
+    }
+    summary_path = run_dir / "run_summary.json"
+    with summary_path.open("w", encoding="utf-8") as fp:
+        json.dump(summary, fp, indent=2)
+    LOGGER.info("Saved run summary to %s", summary_path)
 
 
 if __name__ == "__main__":

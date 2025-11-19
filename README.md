@@ -1,230 +1,352 @@
-# KOL-RL-Agent 模块文档（KOL 语料 → 交易策略智能体）
+# KOL-RL-Agent（KOL 文本 → 交易策略智能体）
 
-本模块负责将 KOL 文本语料转换为回测/实盘可执行的交易动作（目标仓位）。当前仓库已经完成数据管线搭建（收集 → 统一格式 → 切分 → 清洗）以及 ModernBERT embedding 生成脚本，为后续 RL 训练做好准备。
+本仓库实现了从 **KOL 文本语料 + 行情特征** 到 **多空组合决策** 的完整离线 RL Pipeline：
 
-外部只需传入：
-- `kol_text`: 当日 KOL 文本
-- `market_state`: 当日行情特征（你定义的 features）
+- **线上输入**  
+  - `kol_text`：当日 KOL 文本（或视频文案）  
+  - `market_state`：当日行情特征（如 returns / volatility / turnover 等）  
+- **线上输出**  
+  - `target_position`：目标仓位（-1 ~ 1，多空）  
+  - `confidence`：置信度（可选）  
+  - `timestamp`：决策时间戳  
 
-智能体将输出：
-- `target_position`（-1~1）
-- `confidence`（可选）
-- `timestamp`
+当前完成的“第一阶段”打通了：
 
+> 原始语料 → 清洗/切分 → ModernBERT embedding → Reward 构建 → Baseline + Ticker Embedding →  
+> Replay Buffer（含连续持仓）→ BC + IQL 训练 → 测试集回放 → 决策明细导出 → 净值曲线可视化。
 
-============================================================
-当前进展
-============================================================
-
-1. **数据沉淀**  
-   - `data/input/`：原始 CSV（TikTok、YouTube 等）+ `top_500_companies_list.xlsx`。  
-   - `src/preprocessing/build_dataset.py`：聚合所有 CSV，生成统一格式 `data/processed/total/kol_text_with_sentiment.csv`（>100MB，已写入 `.gitignore`）。  
-   - 选择 KOL：Everything Money、Invest with Henry、MarketBeat（样本行数与视频数量均居前）。
-
-2. **切分与清洗**  
-   - `scripts/split_by_video_time.py`：按 `video_id` 时间顺序划分 train/val/test，输出在 `data/processed/splits/<KOL>/train|val|test.csv`。  
-   - `scripts/clean_dataset.py`：对分集数据进行文本清洗、公司名归一化、去噪/去重，生成 `data/processed/cleaned/<KOL>/<split>.csv`（当前训练入口数据）。
-
-3. **Embedding 准备**  
-   - `scripts/generate_embeddings.py`：基于 `answerdotai/modernbert-base` 批量生成文本 embedding，并将结果以 `.pt` 写入 `data/processed/embeddings/...`。运行示例：
-     ```bash
-     python scripts/generate_embeddings.py \
-       --model answerdotai/modernbert-base \
-       --input data/processed/cleaned \
-       --output data/processed/embeddings \
-       --batch-size 32 --normalize
-     ```
-     需要外网下载模型，当前环境未执行；脚本可在本地或服务器上直接运行。
-
-4. **核心代码结构**  
-   - `src/preprocessing` 已包含文本清洗/切块/特征提取。  
-   - `src/embedding/encoder.py` 将逐步接入 ModernBERT。  
-   - `src/state` / `src/rl` / `src/inference` / `train.py` / `infer.py` 构成策略训练与推理框架。
+下文按 **目录结构** → **Pipeline 阶段** → **训练/评估** → **推理对接** 说明。
 
 
 ============================================================
-目录结构（当前）
+1. 目录结构 & 依赖
 ============================================================
 
-```
+```text
 data/
-  input/                       # 原始语料（TikTok/YouTube/公司列表等）
+  input/                          # 原始语料（TikTok/YouTube/公司列表等）
   processed/
-    total/                     # build_dataset.py 输出的全集（已忽略大文件）
-    top_channels/              # 高频 KOL 拆分结果
-    splits/<KOL>/<split>.csv   # train/val/test（按视频时间划分）
-    cleaned/<KOL>/<split>.csv  # 清洗后的训练输入
-    embeddings/                # generate_embeddings.py 生成的 .pt（待运行）
+    total/                        # build_dataset.py 输出全集（大文件，已忽略）
+    top_channels/                 # 高频 KOL 拆分结果
+    splits/<KOL>/<split>.csv      # train/val/test（按视频时间划分）
+    cleaned/<KOL>/<split>.csv     # 清洗后的训练输入
+    embeddings/                   # ModernBERT 文本 embedding
+    reward/<KOL>/<split>.csv      # 含 reward_1d / baseline_raw_score 的表
+data/replay_buffer/<KOL>/<split>.pt  # Offline RL 用的 replay buffer
+
 models/
-  embedding/ policy/ checkpoints/（占位）
+  embedding/
+    ticker_vocab.json             # 股票词表
+    ticker_embedding.pt           # 股票 embedding 权重
+
+outputs/
+  <KOL>_<时间戳>/
+    logs/training.log             # 本次训练日志
+    checkpoints/                  # actor.pt / critic.pt / value.pt / policy.pt
+    run_summary.json              # 配置 + 关键指标
+    metrics_test.json             # 测试集整体指标（可选）
+    positions_test.csv            # 测试集逐 ticker 持仓轨迹（可选）
+    signal_decisions_test.csv     # 测试集逐视频决策明细（可选）
+    equity_test*.png              # 净值曲线图（可选）
+
 src/
-  preprocessing/               # text_cleaner、chunker、build_dataset 等
-  embedding/                   # encoder（待接入 ModernBERT）
-  state/                       # 状态构建
-  rl/                          # buffer/actor_critic/iql/cql/trainer
-  inference/                   # agent/predict API
-  utils/                       # logger 等
-config/
-  embedding_config.yaml  rl_config.yaml  env_config.yaml
+  preprocessing/                  # 文本清洗/切块/构建 dataset
+  embedding/                      # 文本 encoder（ModernBERT 接入点）
+  state/                          # 状态构建（含 ticker embedding）
+  portfolio/                      # PortfolioLayer（raw_score → 权重/资金分配）
+  rl/                             # BC + IQL/CQL 等 RL 模块
+  training/                       # ReplayDataset, Actor/Critic/Value 网络等
+  inference/                      # RLKolAgent 推理接口
+  evaluation/                     # 策略回放 / 持仓分析工具
+  pipeline/                       # replay buffer 构建等共享工具
+  utils/                          # logger 等
+
 scripts/
-  split_top_channels.py
-  split_by_video_time.py
-  clean_dataset.py
-  generate_embeddings.py
-  generate_reward.py
-  add_baseline_action.py
-  build_ticker_embedding.py
-  build_replay_buffer.py
-  run_replay_pipeline.py
-train.py
-infer.py
-README.md
+  build_dataset.py                # 原始 CSV → 统一格式
+  split_top_channels.py           # 挑选高频 KOL
+  split_by_video_time.py          # 按 video_id 时间划分 train/val/test
+  clean_dataset.py                # 文本清洗/归一化
+  generate_embeddings.py          # ModernBERT 文本 embedding
+  augment_with_market_data.py     # 行情特征补齐
+  generate_reward.py              # 基于 yfinance 构建 reward_1d
+  add_baseline_action.py          # 基线动作 baseline_raw_score
+  build_ticker_embedding.py       # ticker_vocab + ticker_embedding
+  build_replay_buffer.py          # 构造 replay buffer（含 last_position）
+  run_replay_pipeline.py          # 一键运行 baseline → vocab → buffer
+  evaluate_run.py                 # 在某个 split 上回放策略
+  compare_decisions.py            # 训练前后策略对比
+  export_signal_decisions.py      # 逐视频决策明细导出
+  plot_equity_curve.py            # 净值曲线 + 市场基准可视化
+
+train.py                          # BC + IQL 训练入口
+infer.py                          # CLI 推理 demo
+```
+
+**依赖安装（最小）**：
+
+```bash
+pip install torch transformers sentence-transformers numpy pandas scikit-learn d3rlpy tqdm yfinance
+# 如需画图：
+pip install matplotlib
 ```
 
 
 ============================================================
-依赖安装
+2. 阶段一：数据构造 Pipeline（从 CSV 到 Replay Buffer）
 ============================================================
 
-pip install torch transformers sentence-transformers numpy pandas scikit-learn d3rlpy tqdm
+> 目标：得到 `data/replay_buffer/<KOL>/train|val|test.pt`，每个样本包含  
+> `state, action, reward, next_state, done, meta`，且 `state` 中显式包含上一期持仓 `last_position`。
 
+### 2.1 原始语料 → 统一格式
 
-============================================================
-模块功能概述（回顾）
-============================================================
+1. **聚合多源 CSV**（如需要）  
+   ```bash
+   python scripts/build_dataset.py \
+     --input data/input \
+     --output data/processed/total/kol_text_with_sentiment.csv
+   ```
+   聚合 TikTok / YouTube 等多源 CSV，统一字段（`text/company/sentiment/confidence/...`）。
 
-1. **文本预处理（`src/preprocessing/`）**  
-   清洗、句子切块、市场对齐、情绪/强度/主题特征抽取；`build_dataset.py` 负责统一格式化输入。
+2. **按 KOL / 时间切分 train/val/test**  
+   ```bash
+   # 挑选重点 KOL（可选）
+   python scripts/split_top_channels.py ...
 
-2. **文本嵌入与 Reward（`scripts/generate_embeddings.py` / `scripts/generate_reward.py`）**  
-   使用 ModernBERT 生成语义向量，并基于 yfinance 自动计算 next-day return 作为 reward，得到含 `reward_1d/next_date/done` 的 CSV。
+   # 按 video_id 时间顺序划分 train/val/test
+   python scripts/split_by_video_time.py \
+     --input data/processed/total/kol_text_with_sentiment.csv \
+     --output data/processed/splits/<KOL>/
+   ```
 
-3. **状态构建 & Portfolio（`src/state/state_builder.py` + `src/state/ticker_embedding.py` + `src/portfolio/layer.py` + `scripts/build_ticker_embedding.py`）**  
-   将 ModernBERT 文本 embedding、公司 learned embedding（`ticker_vocab.json` + `ticker_embedding.pt`）、市场特征拼接成 state，并由 portfolio layer 将 Actor raw_score 归一化为 10000 美元资金分配。
+3. **清洗文本**  
+   ```bash
+   python scripts/clean_dataset.py \
+     --input data/processed/splits \
+     --output data/processed/cleaned
+   ```
 
-4. **Replay Buffer 构建（`scripts/build_replay_buffer.py` 或 `scripts/run_replay_pipeline.py`）**  
-   结合 reward CSV、baseline 动作、ticker embedding，将数据写入 `data/replay_buffer/<KOL>/<split>.pt`，可通过单条命令 `python scripts/run_replay_pipeline.py` 自动完成 baseline → ticker vocab → buffer 的构建流程。
+### 2.2 文本 Embedding + 行情特征 + Reward
 
+4. **ModernBERT 文本 embedding**  
+   ```bash
+   python scripts/generate_embeddings.py \
+     --model answerdotai/modernbert-base \
+     --input data/processed/cleaned \
+     --output data/processed/embeddings \
+     --batch-size 32 --normalize
+   ```
 
-============================================================
-数据构造 Pipeline（阶段说明）
-============================================================
+5. **行情特征补齐**（可选但推荐）  
+   ```bash
+   python scripts/augment_with_market_data.py \
+     --input data/processed/cleaned \
+     --output data/processed/enriched \
+     --company-list data/input/top_500_companies_list.xlsx
+   ```
 
-1. **原始语料 → 统一格式**  
-   - `scripts/build_dataset.py --input data/input --output data/processed/total/kol_text_with_sentiment.csv`
-   - 聚合所有 TikTok/YouTube CSV，生成统一字段（text、company、sentiment、confidence 等）。
+6. **Reward 构建（next-day return）**  
+   ```bash
+   python scripts/generate_reward.py \
+     --input data/processed/enriched \
+     --output data/processed/reward
+   ```
+   输出 `data/processed/reward/<KOL>/<split>.csv`，主要列包括：  
+   `ticker, published_at, text, sentiment, confidence, reward_1d, done, embedding_* ...`。
 
-2. **按 KOL/时间切分**  
-   - `scripts/split_top_channels.py`（可选，挑选重点 KOL）  
-   - `scripts/split_by_video_time.py --input data/processed/<KOL>.csv --output data/processed/splits/<KOL>/`
-   - 按 `video_id` 时间顺序划分 train/val/test。
+### 2.3 Baseline + Ticker Embedding + Replay Buffer
 
-3. **清洗与 ModernBERT Embedding**  
-   - `scripts/clean_dataset.py --input data/processed/splits --output data/processed/cleaned`
-   - `scripts/generate_embeddings.py --input data/processed/cleaned --output data/processed/embeddings --model answerdotai/modernbert-base`
+7. **一键构建 Replay Buffer（推荐）**
 
-4. **Reward 构建**  
-   - `scripts/generate_reward.py --input data/processed/enriched --output data/processed/reward`
-   - 参数：默认使用 yfinance 下载 `next_day` 收盘价，生成 `reward_1d/next_date/done`。
-
-5. **Baseline 动作 + Ticker Embedding + Replay Buffer**  
-   - 执行 `python scripts/run_replay_pipeline.py`（等价于依次运行 `add_baseline_action.py → build_ticker_embedding.py → build_replay_buffer.py`）  
-   - 输出：`models/embedding/ticker_vocab.json`、`models/embedding/ticker_embedding.pt`、`data/replay_buffer/<KOL>/<split>.pt`。
-
-完成以上步骤后，Replay Buffer 即可供 `train.py`（BC + IQL/CQL + Portfolio Layer）直接使用。
-
-常见输出位置总结：
-- 文本 embedding：`data/processed/embeddings/<KOL>/<split>.pt`
-- reward 数据（含 baseline_raw_score）：`data/processed/reward/<KOL>/<split>.csv`
-- ticker 词表/embedding：`models/embedding/ticker_vocab.json`、`models/embedding/ticker_embedding.pt`
-- Replay Buffer：`data/replay_buffer/<KOL>/<split>.pt`
-
-4. **离线强化学习（`src/rl/`）**  
-   IQL/CQL + LSTM Actor-Critic；流程涵盖 replay buffer、行为克隆预训练、RL 训练、checkpoint。
-
-5. **推理模块（`src/inference/agent.py`）**  
-   统一对外接口 `predict(kol_text, market_state)`，输出目标仓位。
-
-6. **行情获取（`src/market/yfinance_client.py` & `scripts/augment_with_market_data.py`）**  
-   - `src/market/yfinance_client.py` 基于 `yfinance` 下载指定股票区间的 OHLCV，再生成 `returns / volatility / turnover` 等特征，可直接按照 `(date, ticker)` 查表补齐 `market_state`。  
-   - `scripts/augment_with_market_data.py` 会读取 `data/processed/cleaned/<KOL>/<split>.csv` 与对应的 ModernBERT `.pt`，通过 `data/input/top_500_companies_list.xlsx` 映射公司→Ticker，并抓取最近 5 个交易日收盘价，生成包含 `embedding_*` 与 `close_t-*` 列的增强版 CSV（输出至 `data/processed/enriched/...`）。
-
-
-============================================================
-回测框架如何接入（核心）
-============================================================
-
-外部系统只调用以下接口：
-
-agent = RLKolAgent(model_path="models/checkpoints/kolA/")
-action = agent.predict(kol_text, market_state)
-
-然后回测框架执行：
-portfolio.adjust_to(action["target_position"])
-
-你这边不负责调仓、手续费、回测逻辑。
-
-
-============================================================
-训练入口（train.py）
-============================================================
-
-运行：
+```bash
+python scripts/run_replay_pipeline.py \
+  --reward-dir data/processed/reward \
+  --vocab-path models/embedding/ticker_vocab.json \
+  --embedding-path models/embedding/ticker_embedding.pt \
+  --replay-dir data/replay_buffer
 ```
+
+等价于依次运行：
+
+1）`add_baseline_action.py`：在 reward CSV 上加 **基线 raw_score**
+
+```text
+baseline_raw_score = tanh(2 * sentiment * confidence)
+```
+
+2）`build_ticker_embedding.py`：从 reward CSV 中收集所有 `ticker`，构建：
+
+- `models/embedding/ticker_vocab.json`  
+- `models/embedding/ticker_embedding.pt`（随机初始化，后续可训练）
+
+3）`build_replay_buffer.py`：核心逻辑提取到 `src/pipeline/replay_utils.py`：
+
+- `annotate_positions(df)`：  
+  - 对每个交易日，用 `PortfolioLayer` 在 baseline_raw_score 上回放一遍；  
+  - 得到 baseline 当日组合权重 `baseline_weight`，以及上一期权重 `last_position`。  
+- `build_states(df, ticker_embedder)`：  
+  - 构造 `state = [ModernBERT embedding || ticker embedding || sentiment || confidence || last_position]`。  
+- 按 ticker 时间序列构造 `next_states` 和 `dones`，最终写出：  
+  `data/replay_buffer/<KOL>/train|val|test.pt`。
+
+> **提示**：如果你之前已经有旧版 `data/replay_buffer`，需要重新跑一遍  
+> `python scripts/run_replay_pipeline.py`，才能得到包含 `last_position` 的新版 buffer。
+
+
+============================================================
+3. 阶段二：离线强化学习训练（BC → IQL）
+============================================================
+
+训练入口：`train.py`。
+
+```bash
 python train.py \
   --kol Everything_Money \
   --replay-dir data/replay_buffer \
   --ticker-vocab models/embedding/ticker_vocab.json \
-  --ticker-embedding models/embedding/ticker_embedding.pt
+  --ticker-embedding models/embedding/ticker_embedding.pt \
+  --output-dir outputs
 ```
 
-流程（BC → IQL）：
-1. 加载 `data/replay_buffer/<KOL>/train.pt/val.pt` 并构建 `state = [ModernBERT embedding || ticker embedding || sentiment || confidence]`。  
-2. 行为克隆（BC）阶段：`epochs=10`，`batch_size=256`，`lr=3e-4`，使用 baseline 动作 `tanh(2 * sentiment * confidence)` 进行 MSE 监督。  
-3. IQL 阶段：`steps=200k`，`batch_size=256`，`actor/critic/value lr=3e-4`，`expectile=0.7`，`temperature_beta=3.0`。Actor/critic/value 均为 MLP（512-512-256），Actor 输出经 `tanh` 映射为 raw_score。  
-4. 训练结束后在验证集上使用 `PortfolioLayer`（支持多空、资金 10000 美元、`weight_i = raw_i / Σ|raw|`）进行收益回放，输出 cumulative return / Sharpe / max drawdown。  
-5. 保存策略到 `models/checkpoints/<KOL>/policy.pt`，并同时保存 actor/critic/value 的独立权重。
+### 3.1 训练流程概要
 
-计算资源建议：
-- GPU：单卡 8~12GB 即可（state 维度约 802，batch 256，显存占用 < 1GB），GPU 可在数小时内跑完 200k step；若只用 CPU 训练则耗时更长。
-- CPU/RAM：8+ 核 CPU、16GB+ RAM 较合适；训练过程中主要计算集中在 MLP 前向/反向。
+1. **加载 replay buffer**  
+   - 从 `data/replay_buffer/<KOL>/train.pt` / `val.pt` 读取数据，`state_dim` 自动根据 buffer 推断；  
+   - `state` 已含 `last_position`，代表上一期 baseline 仓位。
 
-运行训练前请确认：
-1. 已执行数据 pipeline，生成 `data/replay_buffer/<KOL>/train|val|test.pt`。
-2. `models/embedding/ticker_vocab.json` 与 `ticker_embedding.pt` 存在（由 `build_ticker_embedding.py` 生成）。
-3. 需要针对其他 KOL 训练时，将 `--kol` 换成相应文件夹名称并重复运行即可。
+2. **行为克隆（BC）阶段**  
+   - 网络：`ActorNetwork(state_dim)` 输出 `raw_score ∈ [-1, 1]`；  
+   - 目标：给定 `state`，用 MSE 拟合 `baseline_raw_score`，模仿基线策略；  
+   - 默认：`epochs=10`，`batch_size=256`，`lr=3e-4`。
 
+3. **IQL 阶段**  
+   - 使用 (state, action, reward, next_state, done) 做离线 RL；  
+   - `CriticNetwork` 学 Q(s,a)，`ValueNetwork` 学 V(s)（expectile 回归）；  
+   - Actor 在 Advantage 加权下更新，从行为策略偏向高优势动作；  
+   - 默认：`steps=200k`，`batch_size=256`，`actor/critic/value lr=3e-4`，`expectile=0.7`，`temperature_beta=3.0`。
 
-============================================================
-推理入口（infer.py）
-============================================================
+4. **验证集评估**  
+   - 如存在 `val.pt`：在验证集上回放 Actor：  
+     - 每日用 `PortfolioLayer` 将 `raw_score` 归一化为多空组合（资金 10000 美元，`weight_i = raw_i / Σ|raw|`）；  
+     - 累积得到 `cumulative_return / sharpe / max_drawdown`。
 
-运行：
-python infer.py --text "今天新能源可能大涨" --market market.json
+5. **训练输出目录**  
+   - 每次运行自动创建 `outputs/<KOL>_<时间戳>/`：  
+     - `logs/training.log`：训练日志；  
+     - `checkpoints/actor.pt, critic.pt, value.pt, policy.pt`；  
+     - `run_summary.json`：训练配置 + BC loss + 验证集指标（若有）。  
+   - 可通过 `--output-dir` 调整根目录。
 
-输出：
-target_position 与 confidence 值。
-
-
-============================================================
-需要交付给网站/回测团队的内容
-============================================================
-
-1. 模型 checkpoint
-   models/checkpoints/<KOL_NAME>/policy.pt
-
-2. 推理接口文件
-   src/inference/agent.py
-
-3. 输入字段说明
-   - kol_text：KOL 当日文本
-   - market_state：行情特征（returns、volatility 等）
-
-4. 测试示例 demo
+> 计算资源建议：单卡 8~12GB GPU 足够（batch 256、state 维度 ~800），CPU 8 核+、内存 16GB+ 较为舒适。
 
 
 ============================================================
-一句话总结
+4. 阶段三：测试集回放 / 决策分析 / 可视化
 ============================================================
 
-本模块是一个 “输入 KOL 文本 → 输出交易动作” 的 RL 智能体，外部回测系统只需调用 predict() 即可使用策略。
+本阶段主要基于 `src/evaluation/analyzer.py` 与若干脚本。
+
+### 4.1 在 test.pt 上回放策略（指标 + 持仓轨迹）
+
+```bash
+python scripts/evaluate_run.py \
+  --checkpoint outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
+  --buffer data/replay_buffer/<KOL>/test.pt \
+  --output outputs/<KOL>_<时间戳>/metrics_test.json \
+  --positions-output outputs/<KOL>_<时间戳>/positions_test.csv \
+  --action-threshold 0.02
+```
+
+- `metrics_test.json`：`cumulative_return / sharpe / max_drawdown`；  
+- `positions_test.csv`：逐样本（ticker 粒度）记录：  
+  `raw_score, prev_weight, weight, weight_delta, allocation, action`（OPEN / CLOSE / INCREASE / DECREASE / HOLD），用于检查某只股票在整个测试期的持仓和调仓路径。
+
+### 4.2 对比训练前后策略（同一测试集）
+
+```bash
+python scripts/compare_decisions.py \
+  --trained outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
+  --buffer data/replay_buffer/<KOL>/test.pt \
+  --output outputs/<KOL>_<时间戳>/decision_diff.csv \
+  --metrics-output outputs/<KOL>_<时间戳>/metrics_compare.json \
+  --action-threshold 0.02
+```
+
+- `decision_diff.csv`：合并“训练后策略 vs 基线/随机策略”的仓位和动作差异，包含：  
+  `weight_trained / weight_baseline / action_trained / action_baseline / relative_action (MORE_LONG / MORE_SHORT / SIMILAR)`。
+
+### 4.3 按视频粒度导出决策明细（含原文）
+
+希望“一行 = 一个视频/一次发文”，并带原文、所有股票动作、组合构成和净值路径：
+
+```bash
+python scripts/export_signal_decisions.py \
+  --checkpoint outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
+  --reward-csv data/processed/reward/<KOL>/test.csv \
+  --vocab-path models/embedding/ticker_vocab.json \
+  --embedding-path models/embedding/ticker_embedding.pt \
+  --output outputs/<KOL>_<时间戳>/signal_decisions_test.csv
+```
+
+`signal_decisions_test.csv` 每行对应一个 `video_id`，包含：
+
+- `date, video_id, text`：发文日期 / 视频 ID / 原文文本；  
+- `tickers`：视频涉及的所有股票；  
+- `baseline_actions, trained_actions`：形如 `AAPL:INCREASE;MSFT:HOLD`；  
+- `portfolio_before_/after_baseline`：baseline 在该日调仓前/后的整体组合构成；  
+- `portfolio_before_/after_trained`：训练后策略在该日调仓前/后组合构成；  
+- `equity_baseline / equity_trained`：从测试起点到当前日期的净值；  
+- `cum_return_baseline / cum_return_trained`：对应累计收益率。
+
+### 4.4 净值曲线可视化 + 市场基准
+
+```bash
+python scripts/plot_equity_curve.py \
+  --signal-decisions outputs/<KOL>_<时间戳>/signal_decisions_test.csv \
+  --output-figure outputs/<KOL>_<时间戳>/equity_test_with_spy.png \
+  --benchmark-ticker SPY \
+  --benchmark-label "SPY (market)"
+```
+
+- 画出 baseline / trained 两条净值曲线；  
+- 可选指定 `--benchmark-ticker`（如 `SPY` 或 `^GSPC`）叠加市场基准净值曲线，方便对比策略 vs 整体市场。
+
+
+============================================================
+5. 推理接口与对接建议
+============================================================
+
+线上/回测系统只需依赖两类产物：
+
+1. **模型 checkpoint**
+   - 从 `outputs/<KOL>_<时间戳>/checkpoints/` 中选择一个 `policy.pt`：
+     ```text
+     outputs/<KOL>_<时间戳>/checkpoints/policy.pt
+     ```
+   - 该文件封装了 Actor 的权重，可直接用于推理。
+
+2. **推理接口**
+   - `src/inference/agent.py` 中的 `RLKolAgent`：
+     ```python
+     from src.inference.agent import RLKolAgent
+
+     agent = RLKolAgent(model_path="outputs/<KOL>_<时间戳>/checkpoints/policy.pt")
+     out = agent.predict(kol_text, market_state)
+     # out["target_position"], out["confidence"], out["timestamp"]
+     ```
+   - 回测/实盘侧只需根据 `target_position` 调整组合：
+     ```python
+     portfolio.adjust_to(out["target_position"])
+     ```
+
+> 回测逻辑（手续费、滑点、再平衡规则、风险约束等）由你们的回测/交易系统实现，本模块只负责给出“下一步仓位建议”。
+
+
+============================================================
+6. 小结
+============================================================
+
+- 本仓库提供了一个从 **KOL 文本 → Reward → Replay Buffer（含连续持仓）→ BC + IQL 训练 → 测试回放 → 决策分析/可视化** 的完整第一阶段 Pipeline；  
+- 关键“数据生成和拼接”逻辑（baseline 持仓恢复、state 构造）集中在 `src/pipeline/replay_utils.py`，保证训练和分析使用同一套规则；  
+- 评估与可视化通过 `src/evaluation` 与若干 `scripts/*` 封装成独立模块，便于按 KOL、按时间段快速复现实验或产出图表；  
+- 第二阶段（更复杂的环境/成本建模、在线或半在线训练）可以在现有 `train.py` + `src/evaluation` 的基础上继续扩展。***
