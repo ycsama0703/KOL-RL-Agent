@@ -33,12 +33,12 @@ def annotate_positions(df: pd.DataFrame) -> pd.DataFrame:
     grouped = df.groupby("published_at", sort=True)
     for _, group in grouped:
         raw_dict = {row["ticker"]: row["baseline_raw_score"] for _, row in group.iterrows()}
-        weights = portfolio.allocate(raw_dict)
+        weights = portfolio.allocate(raw_dict, prev_weights=prev_weights)
         for idx, row in group.iterrows():
             ticker = row["ticker"]
             last_positions[idx] = prev_weights.get(ticker, 0.0)
             baseline_weights[idx] = float(weights.get(ticker, {"weight": 0.0})["weight"])
-            prev_weights[ticker] = baseline_weights[idx]
+        prev_weights = {ticker: info["weight"] for ticker, info in weights.items()}
 
     df["last_position"] = last_positions
     df["baseline_weight"] = baseline_weights

@@ -86,31 +86,9 @@ def run_policy(
     prev_weights: Dict[str, float] = {}
 
     for date, group in df.groupby("date"):
-        # 当日有新信号的 ticker 及其 raw_score
         raw_dict = {row["ticker"]: row["raw_score"] for _, row in group.iterrows()}
-        subset_alloc = portfolio.allocate(raw_dict)
-        subset_weights = {t: float(info["weight"]) for t, info in subset_alloc.items()}
-
-        # 基于昨仓复制一份权重，再用当日信号覆盖对应 ticker
-        new_weights: Dict[str, float] = dict(prev_weights)
-        for ticker, w in subset_weights.items():
-            new_weights[ticker] = max(w, 0.0)
-
-        # long-only 归一化：总权重 ≥ 0 且近似为 1
-        total_weight = sum(max(w, 0.0) for w in new_weights.values())
-        if total_weight < portfolio.config.epsilon:
-            # 如果仍然没有有效权重，则在当日有信号的 ticker 间等权分配
-            if subset_weights:
-                equal_w = 1.0 / len(subset_weights)
-                new_weights = {t: equal_w for t in subset_weights}
-                total_weight = 1.0
-            else:
-                new_weights = {}
-                total_weight = 0.0
-        else:
-            for ticker in list(new_weights.keys()):
-                w = max(new_weights[ticker], 0.0)
-                new_weights[ticker] = w / total_weight
+        allocation = portfolio.allocate(raw_dict, prev_weights=prev_weights)
+        new_weights = {ticker: info["weight"] for ticker, info in allocation.items()}
 
         # 当日有 reward 记录的 ticker→reward 映射
         rewards_today: Dict[str, float] = {

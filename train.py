@@ -49,6 +49,7 @@ class TrainingConfig:
     gamma: float = 0.99
     expectile: float = 0.7
     temperature_beta: float = 3.0
+    fidelity_lambda: float = 0.1
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
 
@@ -71,6 +72,7 @@ def parse_args() -> TrainingConfig:
     parser.add_argument("--gamma", type=float, default=0.99)
     parser.add_argument("--expectile", type=float, default=0.7)
     parser.add_argument("--temperature-beta", type=float, default=3.0)
+    parser.add_argument("--fidelity-lambda", type=float, default=0.1, help="Weight for fidelity reward shaping.")
     args = parser.parse_args()
     return TrainingConfig(
         kol=args.kol,
@@ -90,6 +92,7 @@ def parse_args() -> TrainingConfig:
         gamma=args.gamma,
         expectile=args.expectile,
         temperature_beta=args.temperature_beta,
+        fidelity_lambda=args.fidelity_lambda,
     )
 
 
@@ -152,9 +155,13 @@ def iql_training(
         next_states = batch["next_state"].to(device)
         dones = batch["done"].to(device).float()
 
+        predicted_actions = actor(states)
+        fidelity_penalty = (predicted_actions.detach() - actions).pow(2).squeeze(-1)
+        reward_aug = rewards - config.fidelity_lambda * fidelity_penalty
+
         with torch.no_grad():
             next_values = value_net(next_states)
-            target_q = rewards + config.gamma * (1 - dones) * next_values
+            target_q = reward_aug + config.gamma * (1 - dones) * next_values
 
         critic_pred = critic(states, actions)
         critic_loss = mse_loss(critic_pred, target_q)
@@ -170,7 +177,6 @@ def iql_training(
         value_loss.backward()
         value_opt.step()
 
-        predicted_actions = actor(states)
         q_pi = critic(states, predicted_actions)
         with torch.no_grad():
             v = value_net(states)

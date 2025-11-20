@@ -264,8 +264,8 @@ baseline_raw_score = tanh(2 * sentiment * confidence)
 3）`build_replay_buffer.py`：核心逻辑提取到 `src/pipeline/replay_utils.py`：
 
 - `annotate_positions(df)`：  
-  - 对每个交易日，用 `PortfolioLayer` 在 baseline_raw_score 上回放一遍；  
-  - 得到 baseline 当日组合权重 `baseline_weight`，以及上一期权重 `last_position`。  
+  - 对每个交易日，用 `PortfolioLayer` 在 baseline_raw_score 上回放一遍，且**保留上一日仓位**；  
+  - 得到连续持仓 `baseline_weight` 以及上一期权重 `last_position`。  
 - `build_states(df, ticker_embedder)`：  
   - 构造 `state = [ModernBERT embedding || ticker embedding || sentiment || confidence || last_position]`。  
 - 按 ticker 时间序列构造 `next_states` 和 `dones`，最终写出：  
@@ -309,8 +309,11 @@ python train.py \
 
 4. **验证集评估**  
    - 如存在 `val.pt`：在验证集上回放 Actor：  
-     - 每日用 `PortfolioLayer` 将 `raw_score` 归一化为多空组合（资金 10000 美元，`weight_i = raw_i / Σ|raw|`）；  
+     - 每日用 `PortfolioLayer` 在**上一日持仓基础上**按 `raw_score` 调整组合（资金 10000 美元）；  
      - 累积得到 `cumulative_return / sharpe / max_drawdown`。
+   - 若希望同时优化“还原度”，可以通过 `--fidelity-lambda`（默认 0.1）引入额外奖励项：  
+     - IQL 过程中会用 `reward_aug = reward_1d - λ * (actor(state) - baseline_action)^2`，  
+     - λ 越大，策略越倾向保持与 KOL（baseline）一致；λ=0 则仅以收益为目标。
 
 5. **训练输出目录**  
    - 每次运行自动创建 `outputs/<KOL>_<时间戳>/`：  

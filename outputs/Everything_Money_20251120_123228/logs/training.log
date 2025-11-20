@@ -1,0 +1,15 @@
+2025-11-20 12:32:28,845 - __main__ - INFO - Starting training run Everything_Money_20251120_123228
+2025-11-20 12:32:28,845 - __main__ - INFO - Logging to outputs/Everything_Money_20251120_123228/logs/training.log
+2025-11-20 12:32:28,845 - __main__ - INFO - Checkpoints will be saved under outputs/Everything_Money_20251120_123228/checkpoints
+2025-11-20 12:32:28,851 - __main__ - INFO - Loaded replay buffer for Everything_Money with 552 samples, state_dim=803
+2025-11-20 12:32:29,421 - __main__ - INFO - BC Epoch 1/10 - loss=0.495591
+2025-11-20 12:32:29,429 - __main__ - INFO - BC Epoch 2/10 - loss=0.454826
+2025-11-20 12:32:29,437 - __main__ - INFO - BC Epoch 3/10 - loss=0.395739
+2025-11-20 12:32:29,444 - __main__ - INFO - BC Epoch 4/10 - loss=0.364591
+2025-11-20 12:32:29,452 - __main__ - INFO - BC Epoch 5/10 - loss=0.334459
+2025-11-20 12:32:29,460 - __main__ - INFO - BC Epoch 6/10 - loss=0.318084
+2025-11-20 12:32:29,467 - __main__ - INFO - BC Epoch 7/10 - loss=0.321360
+2025-11-20 12:32:29,475 - __main__ - INFO - BC Epoch 8/10 - loss=0.310283
+2025-11-20 12:32:29,483 - __main__ - INFO - BC Epoch 9/10 - loss=0.300041
+2025-11-20 12:32:29,490 - __main__ - INFO - BC Epoch 10/10 - loss=0.280227
+2025-11-20 12:32:29,490 - __main__ - INFO - Behavior cloning finished. Avg loss=0.357520

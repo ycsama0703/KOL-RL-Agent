@@ -140,12 +140,11 @@ def main() -> None:
     for date, group in df.groupby("published_at", sort=True):
         # baseline 组合
         raw_base = {row["ticker"]: row["baseline_raw_score"] for _, row in group.iterrows()}
-        weights_base_full = portfolio.allocate(raw_base)
+        weights_base_full = portfolio.allocate(raw_base, prev_weights=prev_weights_baseline)
         weights_base = {t: info["weight"] for t, info in weights_base_full.items()}
 
-        # 训练后组合
         raw_train = {row["ticker"]: row["raw_trained"] for _, row in group.iterrows()}
-        weights_train_full = portfolio.allocate(raw_train)
+        weights_train_full = portfolio.allocate(raw_train, prev_weights=prev_weights_trained)
         weights_train = {t: info["weight"] for t, info in weights_train_full.items()}
 
         # 当日收益 & 净值更新
