@@ -16,7 +16,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from src.pipeline.replay_utils import annotate_positions, build_states, compute_portfolio_rewards, load_ticker_embedder
+from src.pipeline.replay_utils import (
+    annotate_positions,
+    build_states,
+    compute_portfolio_rewards,
+    load_ticker_embedder,
+)
 from src.state.ticker_embedding import TickerEmbedding
 
 
@@ -81,16 +86,19 @@ def build_buffer(
 
     buffer = {
         "states": torch.from_numpy(states),
-        "actions": torch.from_numpy(df["baseline_raw_score"].fillna(0.0).values.astype(np.float32)).unsqueeze(-1),
         # 单票 reward_1d 仍然保留，用于评估/回放；组合级 reward 存在 portfolio_rewards 中供训练使用。
         "rewards": torch.from_numpy(df["reward_1d"].fillna(0.0).values.astype(np.float32)),
         "portfolio_rewards": torch.from_numpy(df["portfolio_reward"].fillna(0.0).values.astype(np.float32)),
+        # 动作（基线签名权重，行为策略）
+        "actions": torch.from_numpy(df["baseline_weight"].fillna(0.0).values.astype(np.float32)).unsqueeze(-1),
         "next_states": torch.from_numpy(next_states),
         "dones": torch.from_numpy(dones.astype(np.bool_)),
         "meta": {
             "ticker": df["ticker"].astype(str).tolist(),
             "video_id": df["video_id"].astype(str).tolist(),
             "published_at": df["published_at"].astype(str).tolist(),
+            # 保留原始基线打分，便于分析（可选字段）
+            "baseline_raw_score": df["baseline_raw_score"].astype(float).tolist(),
         },
     }
     return buffer
@@ -105,7 +113,7 @@ def process_file(csv_path: Path, output_path: Path, ticker_embedder: TickerEmbed
         return
 
     df = annotate_positions(df)
-    # 组合层 reward = baseline 组合日收益 - 换手成本（弱化版）
+    # 组合层 reward：多空权重 * 单票收益（无额外成本）
     df["portfolio_reward"] = compute_portfolio_rewards(df).astype(np.float32)
     buffer = build_buffer(df, ticker_embedder)
     output_path.parent.mkdir(parents=True, exist_ok=True)

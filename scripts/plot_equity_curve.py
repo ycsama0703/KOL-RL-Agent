@@ -44,6 +44,11 @@ def parse_args() -> argparse.Namespace:
         "--benchmark-label",
         help="Label for the benchmark curve (default: same as ticker).",
     )
+    parser.add_argument(
+        "--title",
+        default="Baseline vs Trained Equity (Test Period)",
+        help="Figure title.",
+    )
     return parser.parse_args()
 
 
@@ -102,7 +107,7 @@ def main() -> None:
         ax.plot(daily["date"], benchmark_series, label=benchmark_label, linewidth=1.5, linestyle="--")
     ax.set_xlabel("Date")
     ax.set_ylabel("Equity")
-    ax.set_title("Baseline vs Trained Equity (Test Period)")
+    ax.set_title(args.title)
     ax.legend()
     ax.grid(True, alpha=0.3)
     fig.autofmt_xdate()

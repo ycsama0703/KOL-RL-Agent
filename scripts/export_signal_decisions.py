@@ -124,10 +124,12 @@ def main() -> None:
     states = torch.from_numpy(states_np)
     state_dim = states_np.shape[1]
     actor = load_actor(checkpoint_path, state_dim, device)
-    raw_trained = predict_raw_scores(actor, states, device)
+    raw_delta = predict_raw_scores(actor, states, device)
 
     df = df.sort_values("published_at").reset_index(drop=True)
-    df["raw_trained"] = raw_trained
+    # 基线签名权重（含情感符号），训练输出为残差 delta
+    df["baseline_signed"] = df["baseline_weight"]
+    df["raw_trained"] = df["baseline_signed"] + raw_delta
 
     portfolio = PortfolioLayer()
     prev_weights_baseline: Dict[str, float] = {}
@@ -138,8 +140,11 @@ def main() -> None:
     records: List[Dict[str, object]] = []
 
     for date, group in df.groupby("published_at", sort=True):
-        # baseline 组合
-        raw_base = {row["ticker"]: row["baseline_raw_score"] for _, row in group.iterrows()}
+        # baseline 组合：情感为正→多头，负→空头
+        raw_base = {
+            row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
+            for _, row in group.iterrows()
+        }
         weights_base_full = portfolio.allocate(raw_base, prev_weights=prev_weights_baseline)
         weights_base = {t: info["weight"] for t, info in weights_base_full.items()}
 

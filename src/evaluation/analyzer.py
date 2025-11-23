@@ -59,18 +59,19 @@ def run_policy(
     """Replay a policy on a buffer and record metrics plus per-date positions.
 
     逻辑假设：
-    - 持仓是“基金经理式”的连续过程：上一日持仓在下一日延续，
-      当日有新信号的 ticker 覆盖对应仓位，其余 ticker 延续昨仓；
-    - long-only：权重始终 ≥0，且每天归一化后总和约为 1；
+    - 持仓连续：上一日持仓在下一日延续（可选轻微衰减），当日有新信号的 ticker 才被覆盖调整；
+    - 允许多空：权重可正可负，按绝对值归一；未提到的 ticker 不视为负面，直接沿用昨仓；
     - 收益只在有 reward 记录的 ticker 上累计，其余当日视为 0 收益。
     """
 
     states = buffer["states"]
     rewards = buffer["rewards"].numpy()
+    baseline_actions = buffer["actions"].numpy()  # 基线签名权重
     dates = buffer["meta"]["published_at"]
     tickers = buffer["meta"]["ticker"]
 
-    raw_scores = _predict_raw_scores(actor, states, device)
+    delta = _predict_raw_scores(actor, states, device)
+    raw_scores = baseline_actions.squeeze(-1) + delta  # 基线 + 残差
     df = pd.DataFrame(
         {
             "date": dates,

@@ -1,0 +1,33 @@
+{
+  "run_name": "Everything_Money_20251121_193401",
+  "timestamp": "20251121_193401",
+  "kol": "Everything_Money",
+  "train_samples": 552,
+  "bc_loss": 0.00024302285896737885,
+  "metrics": {
+    "cumulative_return": 0.18787622017497574,
+    "sharpe": 2.8411685484905966,
+    "max_drawdown": 0.06865805163431704
+  },
+  "config": {
+    "kol": "Everything_Money",
+    "replay_dir": "data/replay_buffer",
+    "ticker_vocab": "models/embedding/ticker_vocab.json",
+    "ticker_embedding": "models/embedding/ticker_embedding.pt",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/Everything_Money_fid0.1",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.1,
+    "device": "cuda"
+  }
+}

@@ -35,7 +35,7 @@ class MLP(nn.Module):
 
 
 class ActorNetwork(nn.Module):
-    """Deterministic actor producing raw scores in [-1, 1]."""
+    """Deterministic actor producing signed scores in [-1, 1] (long/short)."""
 
     def __init__(self, state_dim: int) -> None:
         super().__init__()
@@ -43,6 +43,7 @@ class ActorNetwork(nn.Module):
             input_dim=state_dim,
             hidden_dims=(512, 512, 256),
             output_dim=1,
+            # 允许长/空：输出范围 [-1, 1]
             output_activation=nn.Tanh(),
         )
 

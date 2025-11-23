@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 from typing import Dict, List
 
 import numpy as np
@@ -12,6 +13,9 @@ import numpy as np
 class PortfolioConfig:
     capital: float = 10_000.0
     epsilon: float = 1e-6
+    max_long: float = 0.2  # 单票最大多头权重（正权重上限，<=0 表示不设上限）
+    max_short: float = 0.2  # 单票最大空头权重（绝对值上限，<=0 表示不设上限）
+    hold_decay: float = 1.0  # 未被当日信号提到的旧仓位的衰减系数（1.0 表示完全保持）
 
 
 class PortfolioLayer:
@@ -19,6 +23,16 @@ class PortfolioLayer:
 
     def __init__(self, config: PortfolioConfig | None = None) -> None:
         self.config = config or PortfolioConfig()
+        # 允许通过环境变量覆盖单票上限，便于快速 sweep
+        env_max = os.getenv("PORTFOLIO_MAX_WEIGHT")
+        if env_max:
+            try:
+                val = float(env_max)
+                if val > 0:
+                    self.config.max_long = val
+                    self.config.max_short = val
+            except ValueError:
+                pass
 
     def allocate(
         self,
@@ -27,13 +41,14 @@ class PortfolioLayer:
     ) -> Dict[str, Dict[str, float]]:
         """Allocate capital by combining前一日仓位 (prev_weights) 与当日信号 raw_scores."""
 
+        # 允许正负持仓：prev_weights/raw_scores 都按原符号保留
         prev_weights = {
-            ticker: max(float(weight), 0.0)
+            ticker: float(weight)
             for ticker, weight in (prev_weights or {}).items()
             if weight is not None
         }
         subset_scores = {
-            ticker: max(float(score), 0.0)
+            ticker: float(score)
             for ticker, score in raw_scores.items()
             if score is not None
         }
@@ -42,45 +57,38 @@ class PortfolioLayer:
         if not prev_weights and not subset_scores:
             return {}
 
+        # 未被当日信号提到的旧仓位：按 hold_decay 保留
         keep_weights = {
-            ticker: weight for ticker, weight in prev_weights.items() if ticker not in subset_scores
+            ticker: weight * self.config.hold_decay
+            for ticker, weight in prev_weights.items()
+            if ticker not in subset_scores
         }
-        keep_sum = sum(keep_weights.values())
-        keep_sum = max(keep_sum, 0.0)
 
-        result_weights.update(keep_weights)
-        remaining = max(1.0 - keep_sum, 0.0)
+        # 汇总今日候选权重（可正可负）
+        candidate = {**keep_weights, **subset_scores}
+        total_abs = sum(abs(w) for w in candidate.values())
+        if total_abs < self.config.epsilon:
+            return {}
 
-        if subset_scores:
-            subset_sum = sum(subset_scores.values())
-            if subset_sum < self.config.epsilon:
-                if remaining > self.config.epsilon:
-                    equal = remaining / len(subset_scores)
-                    for ticker in subset_scores:
-                        result_weights[ticker] = equal
-                elif not result_weights:
-                    equal = 1.0 / len(subset_scores)
-                    for ticker in subset_scores:
-                        result_weights[ticker] = equal
+        # 先按绝对值归一化
+        result_weights = {t: w / total_abs for t, w in candidate.items()}
+
+        # 长/空上限截断后再按绝对值归一化
+        if result_weights:
+            for ticker in list(result_weights.keys()):
+                w = result_weights[ticker]
+                if w > 0 and self.config.max_long > 0:
+                    w = min(w, self.config.max_long)
+                if w < 0 and self.config.max_short > 0:
+                    w = max(w, -self.config.max_short)
+                result_weights[ticker] = w
+
+            capped_abs = sum(abs(w) for w in result_weights.values())
+            if capped_abs > self.config.epsilon:
+                for ticker in list(result_weights.keys()):
+                    result_weights[ticker] = result_weights[ticker] / capped_abs
             else:
-                if remaining < self.config.epsilon:
-                    factor = 1.0 / subset_sum
-                    for ticker, score in subset_scores.items():
-                        result_weights[ticker] = score * factor
-                else:
-                    factor = remaining / subset_sum
-                    for ticker, score in subset_scores.items():
-                        result_weights[ticker] = score * factor
-        elif keep_sum > self.config.epsilon:
-            for ticker in list(result_weights.keys()):
-                result_weights[ticker] = result_weights[ticker] / keep_sum
-
-        total = sum(result_weights.values())
-        if total > self.config.epsilon:
-            for ticker in list(result_weights.keys()):
-                result_weights[ticker] = result_weights[ticker] / total
-        else:
-            result_weights = {}
+                return {}
 
         allocations = {ticker: weight * self.config.capital for ticker, weight in result_weights.items()}
         return {
