@@ -37,28 +37,70 @@ def parse_args() -> argparse.Namespace:
 
 
 def annotate_positions(df: pd.DataFrame, max_weight: float, hold_decay: float) -> pd.DataFrame:
-    """Compute last_position and baseline_weight (signed) under custom portfolio settings."""
+    """Compute last_position, baseline_weight, silence_days; add carry rows for unmentioned tickers."""
     df = df.sort_values("published_at").reset_index(drop=True)
     portfolio = PortfolioLayer(PortfolioConfig(max_long=max_weight, max_short=max_weight, hold_decay=hold_decay))
-    prev_weights: Dict[str, float] = {}
-    last_positions = np.zeros(len(df), dtype=np.float32)
-    baseline_weights = np.zeros(len(df), dtype=np.float32)
 
-    for _, group in df.groupby("published_at", sort=True):
+    embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
+    base_defaults = {col: 0 for col in df.columns}
+    if "text" in base_defaults:
+        base_defaults["text"] = ""
+    if "video_id" in base_defaults:
+        base_defaults["video_id"] = ""
+    if "company" in base_defaults:
+        base_defaults["company"] = ""
+
+    prev_weights: Dict[str, float] = {}
+    last_dates: Dict[str, pd.Timestamp] = {}
+    rows: list[dict] = []
+
+    for date, group in df.groupby("published_at", sort=True):
         raw_dict = {
             row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
             for _, row in group.iterrows()
         }
         weights = portfolio.allocate(raw_dict, prev_weights=prev_weights)
-        for idx, row in group.iterrows():
+
+        # signal rows
+        for _, row in group.iterrows():
             ticker = row["ticker"]
-            last_positions[idx] = prev_weights.get(ticker, 0.0)
-            baseline_weights[idx] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+            cur_date = row["published_at"]
+            prev_date = last_dates.get(ticker)
+            silence = float((cur_date - prev_date).days) if prev_date is not None else 0.0
+            last_dates[ticker] = cur_date
+            enriched = row.to_dict()
+            enriched["last_position"] = prev_weights.get(ticker, 0.0)
+            enriched["baseline_weight"] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+            enriched["silence_days"] = silence
+            enriched["has_signal"] = 1
+            rows.append(enriched)
+
+        # carry rows
+        carry = [t for t in prev_weights.keys() if t not in raw_dict]
+        for ticker in carry:
+            cur_date = date
+            prev_date = last_dates.get(ticker, cur_date)
+            silence = float((cur_date - prev_date).days)
+            last_dates[ticker] = cur_date
+            enriched = base_defaults.copy()
+            enriched["ticker"] = ticker
+            enriched["published_at"] = cur_date
+            enriched["sentiment"] = 0.0
+            enriched["confidence"] = 0.0
+            enriched["baseline_raw_score"] = 0.0
+            enriched["reward_1d"] = 0.0
+            enriched["done"] = False
+            for col in embedding_cols:
+                enriched[col] = 0.0
+            enriched["last_position"] = prev_weights.get(ticker, 0.0)
+            enriched["baseline_weight"] = 0.0
+            enriched["silence_days"] = silence
+            enriched["has_signal"] = 0
+            rows.append(enriched)
+
         prev_weights = {t: v["weight"] for t, v in weights.items()}
 
-    df["last_position"] = last_positions
-    df["baseline_weight"] = baseline_weights
-    return df
+    return pd.DataFrame(rows)
 
 
 def collect_reward_files(reward_dir: Path) -> Dict[str, List[Path]]:

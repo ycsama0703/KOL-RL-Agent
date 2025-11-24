@@ -35,20 +35,20 @@ class MLP(nn.Module):
 
 
 class ActorNetwork(nn.Module):
-    """Deterministic actor producing signed scores in [-1, 1] (long/short)."""
+    """Deterministic actor with two heads: signal scaling and no-signal decay."""
 
     def __init__(self, state_dim: int) -> None:
         super().__init__()
-        self.net = MLP(
-            input_dim=state_dim,
-            hidden_dims=(512, 512, 256),
-            output_dim=1,
-            # 允许长/空：输出范围 [-1, 1]
-            output_activation=nn.Tanh(),
-        )
+        self.backbone = MLP(input_dim=state_dim, hidden_dims=(512, 512, 256), output_dim=256, output_activation=nn.ReLU())
+        self.head_signal = nn.Sequential(nn.Linear(256, 1), nn.Tanh())    # for has_signal: same-direction scaling
+        self.head_decay = nn.Sequential(nn.Linear(256, 1), nn.Tanh())     # for no-signal: decay factor
 
-    def forward(self, state: torch.Tensor) -> torch.Tensor:
-        return self.net(state)
+    def forward(self, state: torch.Tensor) -> Dict[str, torch.Tensor]:
+        h = self.backbone(state)
+        return {
+            "delta_signal": self.head_signal(h),  # [-1,1]
+            "delta_decay": self.head_decay(h),    # [-1,1]
+        }
 
 
 class CriticNetwork(nn.Module):

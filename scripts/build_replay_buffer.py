@@ -1,4 +1,4 @@
-"""Construct replay buffers from reward CSVs and embeddings."""
+"""Construct replay buffers from reward CSVs and embeddings (with silence_days feature)."""
 
 from __future__ import annotations
 
@@ -16,12 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from src.pipeline.replay_utils import (
-    annotate_positions,
-    build_states,
-    compute_portfolio_rewards,
-    load_ticker_embedder,
-)
+from src.pipeline.replay_utils import annotate_positions, build_states, compute_portfolio_rewards, load_ticker_embedder
 from src.state.ticker_embedding import TickerEmbedding
 
 
@@ -97,7 +92,6 @@ def build_buffer(
             "ticker": df["ticker"].astype(str).tolist(),
             "video_id": df["video_id"].astype(str).tolist(),
             "published_at": df["published_at"].astype(str).tolist(),
-            # 保留原始基线打分，便于分析（可选字段）
             "baseline_raw_score": df["baseline_raw_score"].astype(float).tolist(),
         },
     }

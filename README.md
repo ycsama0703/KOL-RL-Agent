@@ -101,6 +101,31 @@ python scripts/plot_equity_curve.py \
 
 
 ============================================================
+0+. 一键数据 Pipeline（cleaned → replay buffer）
+============================================================
+从 `data/processed/cleaned/<KOL>/<split>.csv` 一键生成可训练的 replay buffer（含基线、ticker 词表/向量），覆盖所有 KOL 子目录：
+
+```bash
+python scripts/run_full_pipeline.py \
+  --model answerdotai/modernbert-base \            # HF 模型名或本地路径；生成文本 embedding，需显卡更快
+  --cleaned data/processed/cleaned \               # 起点：cleaned CSV 根目录
+  --embeddings data/processed/embeddings \         # 输出：文本 embedding
+  --enriched data/processed/enriched \             # 输出：enriched（含行情窗口）
+  --reward data/processed/reward \                 # 输出：reward CSV
+  --replay data/replay_buffer \                    # 输出：replay buffers（终点，可直接训练）
+  --vocab models/embedding/ticker_vocab.json \     # ticker 词表
+  --ticker-emb models/embedding/ticker_embedding.pt \ # ticker 向量
+  --price-days 5 \
+  --batch-size 32 \
+  --device cuda            # 可选；仅 embedding 步骤用显卡加速，其余步骤 CPU 即可
+```
+
+起点：`data/processed/cleaned/<KOL>/<split>.csv`  
+终点：`data/replay_buffer/<KOL>/{train,val,test}.pt`，可直接用于 `train.py`/`evaluate_run.py`。  
+说明：管道步骤依次为 embedding → enrich（行情补全） → reward → 基线/词表 → replay buffer；除 embedding 外，其他步骤不依赖 GPU。
+
+
+============================================================
 1. 目录结构 & 依赖
 ============================================================
 

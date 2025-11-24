@@ -30,6 +30,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output", required=True)
     p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--residual-scale", type=float, default=0.2)
+    p.add_argument("--decay-scale", type=float, default=0.5)
     p.add_argument("--max-weight", type=float, default=0.2)
     p.add_argument("--hold-decay", type=float, default=1.0)
     p.add_argument("--action-threshold", type=float, default=0.01)
@@ -78,12 +79,14 @@ def main():
     if missing:
         raise ValueError(f"Reward CSV missing columns: {missing}")
 
-    # 重建 last_position 和 baseline_weight 以满足 build_states 所需
+    # 重建 last_position / baseline_weight / silence_days 以满足 build_states
     portfolio = PortfolioLayer(PortfolioConfig(max_long=args.max_weight, max_short=args.max_weight, hold_decay=args.hold_decay))
     df = df.sort_values("published_at").reset_index(drop=True)
     prev_weights: Dict[str, float] = {}
     last_positions = []
     baseline_weights = []
+    silence_days = []
+    last_dates: Dict[str, object] = {}
     for date, group in df.groupby("published_at", sort=True):
         raw_base = {
             row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
@@ -94,25 +97,38 @@ def main():
             t = row["ticker"]
             last_positions.append(prev_weights.get(t, 0.0))
             baseline_weights.append(weights.get(t, {"weight": 0.0})["weight"])
+            prev_date = last_dates.get(t)
+            cur_date = row["published_at"]
+            silence_days.append(float((cur_date - prev_date).days) if prev_date is not None else 0.0)
+            last_dates[t] = cur_date
         prev_weights = {t: v["weight"] for t, v in weights.items()}
     df["last_position"] = last_positions
     df["baseline_weight"] = baseline_weights
+    df["silence_days"] = silence_days
 
     ticker_embedder = load_ticker_embedder(Path(args.embedding_path), Path(args.vocab_path))
     states_np = build_states(df, ticker_embedder)
     states = torch.from_numpy(states_np)
     actor = load_actor(ckpt, states_np.shape[1], device)
+    delta_sig_all = []
+    delta_dec_all = []
     with torch.no_grad():
-        delta = []
         for start in range(0, states.size(0), 1024):
             batch = states[start : start + 1024].to(device)
-            delta.append(actor(batch).squeeze(-1).cpu())
-    delta = torch.cat(delta).numpy()
+            out = actor(batch)
+            delta_sig_all.append(out["delta_signal"].squeeze(-1).cpu())
+            delta_dec_all.append(out["delta_decay"].squeeze(-1).cpu())
+    delta_sig = torch.cat(delta_sig_all).numpy()
+    delta_dec = torch.cat(delta_dec_all).numpy()
 
     df = df.sort_values("published_at").reset_index(drop=True)
-    # 基线签名打分（未归一化），残差在此基础上做同向缩放
     df["baseline_signed"] = df["baseline_raw_score"] * np.sign(df["sentiment"].fillna(0.0))
-    df["raw_trained"] = df["baseline_signed"] * (1 + args.residual_scale * delta)
+    has_signal = (df["baseline_signed"].abs() > 1e-6).astype(float)
+    last_pos = df["last_position"].fillna(0.0).astype(float).values
+    decay = 1 / (1 + np.exp(-args.decay_scale * delta_dec))
+    policy_sig = df["baseline_signed"].values * (1 + args.residual_scale * delta_sig)
+    policy_nosig = last_pos * decay
+    df["raw_trained"] = has_signal * policy_sig + (1 - has_signal) * policy_nosig
 
     portfolio = PortfolioLayer(PortfolioConfig(max_long=args.max_weight, max_short=args.max_weight, hold_decay=args.hold_decay))
     prev_base: Dict[str, float] = {}

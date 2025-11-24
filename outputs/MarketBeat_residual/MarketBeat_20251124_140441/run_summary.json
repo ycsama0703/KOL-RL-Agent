@@ -1,0 +1,37 @@
+{
+  "run_name": "MarketBeat_20251124_140441",
+  "timestamp": "20251124_140441",
+  "kol": "MarketBeat",
+  "train_samples": 341,
+  "bc_loss": 6.783430762880016e-06,
+  "metrics": {
+    "cumulative_return": 0.06663378104797468,
+    "sharpe": 2.762328072860715,
+    "max_drawdown": 0.04024981331548624
+  },
+  "config": {
+    "kol": "MarketBeat",
+    "replay_dir": "data/replay_buffer",
+    "ticker_vocab": "models/embedding/ticker_vocab.json",
+    "ticker_embedding": "models/embedding/ticker_embedding.pt",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/MarketBeat_residual",
+    "bc_epochs": 1,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.0,
+    "residual_scale": 0.3,
+    "decay_scale": 1.0,
+    "max_weight": 0.2,
+    "hold_decay": 0.99,
+    "device": "cuda"
+  }
+}

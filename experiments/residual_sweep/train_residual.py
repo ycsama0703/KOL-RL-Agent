@@ -52,7 +52,8 @@ class TrainingConfig:
     expectile: float = 0.7
     temperature_beta: float = 3.0
     fidelity_lambda: float = 0.3
-    residual_scale: float = 0.2  # 控制残差幅度，在 [-residual_scale, residual_scale] 之间缩放
+    residual_scale: float = 0.2  # 控制有信号分支的同向缩放幅度
+    decay_scale: float = 0.5  # 控制无信号分支的衰减幅度（decay = sigmoid(scale * delta_decay)）
     max_weight: float = 0.2
     hold_decay: float = 1.0
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
@@ -79,8 +80,10 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--temperature-beta", type=float, default=3.0)
     p.add_argument("--fidelity-lambda", type=float, default=0.3)
     p.add_argument("--residual-scale", type=float, default=0.2)
+    p.add_argument("--decay-scale", type=float, default=0.5)
     p.add_argument("--max-weight", type=float, default=0.2)
     p.add_argument("--hold-decay", type=float, default=1.0)
+    p.add_argument("--device", default=None, help="Force device (cuda/cpu). If None, auto-detect.")
     args = p.parse_args()
     return TrainingConfig(
         kol=args.kol,
@@ -102,8 +105,10 @@ def parse_args() -> TrainingConfig:
         temperature_beta=args.temperature_beta,
         fidelity_lambda=args.fidelity_lambda,
         residual_scale=args.residual_scale,
+        decay_scale=args.decay_scale,
         max_weight=args.max_weight,
         hold_decay=args.hold_decay,
+        device=args.device or ("cuda" if torch.cuda.is_available() else "cpu"),
     )
 
 
@@ -123,9 +128,19 @@ def behavior_cloning(actor, loader, cfg: TrainingConfig, device):
         for batch in tqdm(loader, desc=f"BC {epoch+1}/{cfg.bc_epochs}", leave=False):
             states = batch["state"].to(device)
             baseline_actions = batch["action"].to(device)
-            delta = actor(states)
-            policy = baseline_actions * (1 + cfg.residual_scale * delta)
-            loss = criterion(policy, baseline_actions)
+            out = actor(states)
+            delta_sig = out["delta_signal"]
+            delta_dec = out["delta_decay"]
+            has_signal = (baseline_actions.abs() > 1e-6).float()
+            # signal branch: same-direction scaling
+            policy_sig = baseline_actions * (1 + cfg.residual_scale * delta_sig)
+            # no-signal branch: decay on last_position (included as last feature)
+            last_pos = states[:, -2].unsqueeze(-1)  # last_position is penultimate feature; silence_days is last
+            decay = torch.sigmoid(cfg.decay_scale * delta_dec)
+            policy_nosig = last_pos * decay
+            policy = has_signal * policy_sig + (1 - has_signal) * policy_nosig
+            # BC: only enforce fidelity on has_signal branch
+            loss = criterion(policy * has_signal, baseline_actions * has_signal)
             opt.zero_grad()
             loss.backward()
             opt.step()
@@ -156,10 +171,17 @@ def iql_training(actor, critic, value_net, loader, cfg: TrainingConfig, device):
         next_states = batch["next_state"].to(device)
         dones = batch["done"].to(device).float()
 
-        delta = actor(states)
-        policy_actions = baseline_actions * (1 + cfg.residual_scale * delta)
+        out = actor(states)
+        delta_sig = out["delta_signal"]
+        delta_dec = out["delta_decay"]
+        has_signal = (baseline_actions.abs() > 1e-6).float()
+        last_pos = states[:, -2].unsqueeze(-1)  # last_position
+        decay = torch.sigmoid(cfg.decay_scale * delta_dec)
+        policy_sig = baseline_actions * (1 + cfg.residual_scale * delta_sig)
+        policy_nosig = last_pos * decay
+        policy_actions = has_signal * policy_sig + (1 - has_signal) * policy_nosig
 
-        fidelity_penalty = (policy_actions.detach() - baseline_actions).pow(2).squeeze(-1)
+        fidelity_penalty = (policy_actions.detach() - baseline_actions).pow(2).squeeze(-1) * has_signal.squeeze(-1)
         reward_aug = (rewards - cfg.fidelity_lambda * fidelity_penalty).unsqueeze(-1)
 
         with torch.no_grad():
@@ -184,7 +206,9 @@ def iql_training(actor, critic, value_net, loader, cfg: TrainingConfig, device):
         with torch.no_grad():
             adv = q_pi - v_pred
             weights = torch.clamp(torch.exp(cfg.temperature_beta * adv), max=100.0)
-        actor_loss = (weights * (policy_actions - baseline_actions).pow(2)).mean()
+        # Actor: maximize advantage-weighted Q; fidelity only on signal branch
+        reg = cfg.fidelity_lambda * (policy_actions - baseline_actions).pow(2) * has_signal
+        actor_loss = -(weights * q_pi).mean() + reg.mean()
         actor_opt.zero_grad()
         actor_loss.backward()
         actor_opt.step()
@@ -214,13 +238,23 @@ def evaluate(actor: ActorNetwork, buffer_path: Path, cfg: TrainingConfig, device
     dates = buf["meta"]["published_at"]
     tickers = buf["meta"]["ticker"]
 
-    preds = []
+    delta_sig_all = []
+    delta_dec_all = []
     with torch.no_grad():
         for start in range(0, states.size(0), 1024):
             batch = states[start : start + 1024].to(device)
-            preds.append(actor(batch).squeeze(-1).cpu())
-    delta = torch.cat(preds).numpy()
-    raw_scores = baseline_actions.squeeze(-1) * (1 + cfg.residual_scale * delta)
+            out = actor(batch)
+            delta_sig_all.append(out["delta_signal"].squeeze(-1).cpu())
+            delta_dec_all.append(out["delta_decay"].squeeze(-1).cpu())
+    delta_sig = torch.cat(delta_sig_all).numpy()
+    delta_dec = torch.cat(delta_dec_all).numpy()
+
+    has_signal = (baseline_actions.squeeze(-1) != 0).astype(float)
+    last_pos = states[:, -2].numpy()
+    decay = 1 / (1 + np.exp(-cfg.decay_scale * delta_dec))
+    policy_sig = baseline_actions.squeeze(-1) * (1 + cfg.residual_scale * delta_sig)
+    policy_nosig = last_pos * decay
+    raw_scores = has_signal * policy_sig + (1 - has_signal) * policy_nosig
 
     df = torch.tensor(rewards)  # dummy to avoid unused
     import pandas as pd

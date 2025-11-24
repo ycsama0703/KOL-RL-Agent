@@ -30,6 +30,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output", help="metrics json")
     p.add_argument("--positions-output", help="per-date positions csv")
     p.add_argument("--residual-scale", type=float, default=0.2)
+    p.add_argument("--decay-scale", type=float, default=0.5)
     p.add_argument("--max-weight", type=float, default=0.2)
     p.add_argument("--hold-decay", type=float, default=1.0)
     p.add_argument("--action-threshold", type=float, default=0.01)
@@ -61,13 +62,23 @@ def main():
     tickers = buffer["meta"]["ticker"]
 
     actor = load_actor(ckpt, states.shape[1], device)
-    preds = []
+    delta_sig_all = []
+    delta_dec_all = []
     with torch.no_grad():
         for start in range(0, states.size(0), 1024):
             batch = states[start : start + 1024].to(device)
-            preds.append(actor(batch).squeeze(-1).cpu())
-    delta = torch.cat(preds).numpy()
-    raw_scores = baseline_actions.squeeze(-1) * (1 + args.residual_scale * delta)
+            out = actor(batch)
+            delta_sig_all.append(out["delta_signal"].squeeze(-1).cpu())
+            delta_dec_all.append(out["delta_decay"].squeeze(-1).cpu())
+    delta_sig = torch.cat(delta_sig_all).numpy()
+    delta_dec = torch.cat(delta_dec_all).numpy()
+
+    has_signal = (baseline_actions.squeeze(-1) != 0).astype(float)
+    last_pos = states[:, -2].numpy()  # last_position
+    decay = 1 / (1 + np.exp(-args.decay_scale * delta_dec))  # sigmoid
+    policy_sig = baseline_actions.squeeze(-1) * (1 + args.residual_scale * delta_sig)
+    policy_nosig = last_pos * decay
+    raw_scores = has_signal * policy_sig + (1 - has_signal) * policy_nosig
 
     df = pd.DataFrame({"date": dates, "ticker": tickers, "reward": rewards, "raw_score": raw_scores})
     portfolio = PortfolioLayer(PortfolioConfig(max_long=args.max_weight, max_short=args.max_weight, hold_decay=args.hold_decay))

@@ -19,35 +19,77 @@ def load_ticker_embedder(weights_path: Path, vocab_path: Path, embedding_dim: in
 
 
 def annotate_positions(df: pd.DataFrame) -> pd.DataFrame:
-    """Reconstruct baseline positions to obtain last_position and baseline_weight.
+    """Reconstruct baseline positions and add carry rows for tickers not mentioned today.
 
-    Expects columns: ticker, published_at, baseline_raw_score.
+    Outputs last_position, baseline_weight, silence_days. For tickers held yesterday but
+    not mentioned today, we add a synthetic row with baseline_weight=0, baseline_raw_score=0,
+    sentiment/confidence=0, reward_1d=0, embeddings/text set to 0/"" so that the decay branch
+    has training/inference samples.
     """
 
     df = df.sort_values("published_at").reset_index(drop=True)
     portfolio = PortfolioLayer()
-    prev_weights: Dict[str, float] = {}
-    last_positions = np.zeros(len(df), dtype=np.float32)
-    baseline_weights = np.zeros(len(df), dtype=np.float32)
 
-    grouped = df.groupby("published_at", sort=True)
-    for _, group in grouped:
-        # 结合情感符号：正面→多头，负面→空头，缺失则视为 0
+    embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
+    base_defaults = {col: 0 for col in df.columns}
+    if "text" in base_defaults:
+        base_defaults["text"] = ""
+    if "video_id" in base_defaults:
+        base_defaults["video_id"] = ""
+    if "company" in base_defaults:
+        base_defaults["company"] = ""
+
+    prev_weights: Dict[str, float] = {}
+    last_dates: Dict[str, pd.Timestamp] = {}
+    rows: list[dict] = []
+
+    for date, group in df.groupby("published_at", sort=True):
         raw_dict = {
             row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
             for _, row in group.iterrows()
         }
-        # 未提到的旧仓位保持（由 PortfolioLayer 处理 hold/decay）
         weights = portfolio.allocate(raw_dict, prev_weights=prev_weights)
-        for idx, row in group.iterrows():
-            ticker = row["ticker"]
-            last_positions[idx] = prev_weights.get(ticker, 0.0)
-            baseline_weights[idx] = float(weights.get(ticker, {"weight": 0.0})["weight"])
-        prev_weights = {ticker: info["weight"] for ticker, info in weights.items()}
 
-    df["last_position"] = last_positions
-    df["baseline_weight"] = baseline_weights
-    return df
+        # real signal rows
+        for _, row in group.iterrows():
+            ticker = row["ticker"]
+            cur_date = row["published_at"]
+            prev_date = last_dates.get(ticker)
+            silence = float((cur_date - prev_date).days) if prev_date is not None else 0.0
+            last_dates[ticker] = cur_date
+            enriched = row.to_dict()
+            enriched["last_position"] = prev_weights.get(ticker, 0.0)
+            enriched["baseline_weight"] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+            enriched["silence_days"] = silence
+            enriched["has_signal"] = 1
+            rows.append(enriched)
+
+        # carry rows for tickers held yesterday but not mentioned today
+        carry = [t for t in prev_weights.keys() if t not in raw_dict]
+        for ticker in carry:
+            cur_date = date
+            prev_date = last_dates.get(ticker, cur_date)
+            silence = float((cur_date - prev_date).days)
+            last_dates[ticker] = cur_date
+            enriched = base_defaults.copy()
+            enriched["ticker"] = ticker
+            enriched["published_at"] = cur_date
+            enriched["sentiment"] = 0.0
+            enriched["confidence"] = 0.0
+            enriched["baseline_raw_score"] = 0.0
+            enriched["reward_1d"] = 0.0
+            enriched["done"] = False
+            for col in embedding_cols:
+                enriched[col] = 0.0
+            enriched["last_position"] = prev_weights.get(ticker, 0.0)
+            enriched["baseline_weight"] = 0.0
+            enriched["silence_days"] = silence
+            enriched["has_signal"] = 0
+            rows.append(enriched)
+
+        prev_weights = {t: info["weight"] for t, info in weights.items()}
+
+    return pd.DataFrame(rows)
 
 
 def compute_portfolio_rewards(df: pd.DataFrame) -> pd.Series:
@@ -88,7 +130,7 @@ def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarr
         [ticker_embedder.encode_single(str(ticker)) for ticker in df["ticker"].astype(str)],
         dtype=np.float32,
     )
-    feature_cols = ["sentiment", "confidence", "last_position"]
+    feature_cols = ["sentiment", "confidence", "last_position", "silence_days"]
     missing = [c for c in feature_cols if c not in df.columns]
     if missing:
         raise ValueError(f"Missing required feature columns: {missing}")

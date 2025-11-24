@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Sequence
@@ -13,6 +14,11 @@ import pandas as pd
 import torch
 import yfinance as yf
 from pandas.tseries.offsets import BDay
+
+# add repo root for local imports
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 from src.market.company_mapper import CompanyTickerMapper
 
@@ -131,10 +137,10 @@ def append_price_windows(
         history = series.loc[:cutoff].tail(len(price_cols))
         if len(history) < len(price_cols):
             continue
-        enriched = row.copy()
+        enriched = row.to_dict()
         for label, price in zip(price_cols, history.tolist()):
             enriched[label] = float(price)
-        enriched = enriched.drop(labels=["yf_ticker"])
+        enriched.pop("yf_ticker", None)
         filled.append(enriched)
     if not filled:
         return pd.DataFrame(columns=df.columns)
