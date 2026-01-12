@@ -15,6 +15,7 @@ class ReplayDataset(Dataset):
         self.states = data["states"].float()
         self.actions = data["actions"].float()
         self.baseline_actions = data.get("baseline_actions", self.actions).float()
+        self.next_baseline_actions = data.get("next_baseline_action", self.baseline_actions).float()
         # 如果存在组合层 reward（portfolio_rewards），优先使用；否则退回单票 reward_1d
         rewards_tensor = data.get("portfolio_rewards", data["rewards"])
         self.rewards = rewards_tensor.float()
@@ -29,6 +30,7 @@ class ReplayDataset(Dataset):
             "state": self.states[idx],
             "action": self.actions[idx],  # 行为策略（基线签名权重）
             "baseline_action": self.baseline_actions[idx],
+            "next_baseline_action": self.next_baseline_actions[idx],
             "reward": self.rewards[idx],
             "next_state": self.next_states[idx],
             "done": self.dones[idx],

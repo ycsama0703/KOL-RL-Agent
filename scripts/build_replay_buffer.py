@@ -70,12 +70,15 @@ def build_buffer(
     df = df.sort_values(["ticker", "published_at"]).reset_index(drop=True)
     states = build_states(df, ticker_embedder)
     next_states = np.zeros_like(states)
+    baseline = df["baseline_weight"].fillna(0.0).values.astype(np.float32)
+    next_baseline = np.zeros_like(baseline)
 
     next_indices = compute_next_indices(df)
     dones = df["done"].astype(bool).values.copy()
     for idx, next_idx in enumerate(next_indices):
         if next_idx >= 0:
             next_states[idx] = states[next_idx]
+            next_baseline[idx] = baseline[next_idx]
         else:
             dones[idx] = True
 
@@ -85,7 +88,9 @@ def build_buffer(
         "rewards": torch.from_numpy(df["reward_1d"].fillna(0.0).values.astype(np.float32)),
         "portfolio_rewards": torch.from_numpy(df["portfolio_reward"].fillna(0.0).values.astype(np.float32)),
         # 动作（基线签名权重，行为策略）
-        "actions": torch.from_numpy(df["baseline_weight"].fillna(0.0).values.astype(np.float32)).unsqueeze(-1),
+        "actions": torch.from_numpy(baseline).unsqueeze(-1),
+        # 下一步的基线动作（用于 residual-aware value）
+        "next_baseline_action": torch.from_numpy(next_baseline).unsqueeze(-1),
         "next_states": torch.from_numpy(next_states),
         "dones": torch.from_numpy(dones.astype(np.bool_)),
         "meta": {

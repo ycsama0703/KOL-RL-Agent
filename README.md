@@ -99,6 +99,39 @@ python scripts/plot_equity_curve.py \
   --benchmark-label "SPY (market)"
 ```
 
+6）**（可选）残差版：学习“无信号持有/退出”**  
+- 训练（BC+IQL，信号分支同向缩放，沉默分支自适应衰减/退出）：  
+  ```bash
+  python experiments/residual_sweep/train_residual.py \
+    --kol Everything_Money \
+    --replay-dir data/replay_buffer_residual \
+    --ticker-vocab models/embedding/ticker_vocab.json \
+    --ticker-embedding models/embedding/ticker_embedding.pt \
+    --output-dir outputs/Everything_Money_residual \
+    --fidelity-lambda 0.3 --residual-scale 0.2 --decay-scale 0.5 --max-weight 0.2 --hold-decay 1.0
+  ```
+- 回放/指标（test 集）：  
+  ```bash
+  latest=outputs/Everything_Money_residual/Everything_Money_<时间戳>
+  python experiments/residual_sweep/evaluate_residual.py \
+    --checkpoint "${latest}/checkpoints/policy.pt" \
+    --buffer data/replay_buffer/Everything_Money/test.pt \
+    --output "${latest}/metrics_test.json" \
+    --positions-output "${latest}/positions_test_everythingmoney.csv" \
+    --residual-scale 0.2 --decay-scale 0.5 --max-weight 0.2 --hold-decay 1.0
+  ```
+- 决策/净值（逐视频明细 + 净值曲线输入）：  
+  ```bash
+  python experiments/residual_sweep/export_decisions_residual.py \
+    --checkpoint "${latest}/checkpoints/policy.pt" \
+    --reward-csv data/processed/reward/Everything_Money/test.csv \
+    --vocab-path models/embedding/ticker_vocab.json \
+    --embedding-path models/embedding/ticker_embedding.pt \
+    --output "${latest}/signal_decisions_test.csv" \
+    --residual-scale 0.2 --decay-scale 0.5 --max-weight 0.2 --hold-decay 1.0
+  ```
+- 退出学习的实现位置：无信号分支 `policy_nosig = last_position * sigmoid(decay_scale * delta_decay)`（见 `train_residual.py`），状态中包含 `silence_days/last_position`，回放结果在 `positions_test*.csv` 的 `action` 列（CLOSE/DECREASE）和 `weight` 演化中可观察。
+
 
 ============================================================
 0+. 一键数据 Pipeline（cleaned → replay buffer）
