@@ -1,1 +1,7 @@
 data/processed/kol_text_with_sentiment.csv
+# training data / buffers
+data/
+
+# model & data artifacts
+*.pt
+*.csv
