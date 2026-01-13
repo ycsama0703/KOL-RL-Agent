@@ -50,28 +50,33 @@ def normalize_timestamp(value: pd.Timestamp) -> pd.Timestamp:
     return value
 
 
+def sanitize_ticker(ticker: str) -> str:
+    return ticker.strip().replace(".", "-").upper()
+
+
 def fetch_prices(
     ticker: str,
     period: str,
     cache: Dict[str, pd.Series],
 ) -> pd.Series:
-    if ticker in cache:
-        return cache[ticker]
-    data = yf.download(ticker, period=period, progress=False, auto_adjust=False)
+    yf_ticker = sanitize_ticker(ticker)
+    if yf_ticker in cache:
+        return cache[yf_ticker]
+    data = yf.download(yf_ticker, period=period, progress=False, auto_adjust=False)
     if data.empty:
         series = pd.Series(dtype=float)
-        cache[ticker] = series
+        cache[yf_ticker] = series
         return series
     close = data["Close"]
     if isinstance(close, pd.DataFrame):
         if close.shape[1] == 0:
-            cache[ticker] = pd.Series(dtype=float)
-            return cache[ticker]
+            cache[yf_ticker] = pd.Series(dtype=float)
+            return cache[yf_ticker]
         prices = close.iloc[:, 0].copy()
     else:
         prices = close.copy()
     prices.index = prices.index.tz_localize(None)
-    cache[ticker] = prices
+    cache[yf_ticker] = prices
     return prices
 
 
