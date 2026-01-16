@@ -71,6 +71,10 @@ class TrainingConfig:
 
     # Faithfulness shaping (IQL)
     fidelity_lambda: float = 0.1
+    # Soft alignment & soft intent penalties (actor update only)
+    actor_align_lambda: float = 0.1
+    entry_penalty_lambda: float = 0.1
+    reversal_penalty_lambda: float = 0.1
 
     # Explicit intent constraints (the “my method” part)
     entry_threshold: float = 1e-3   # baseline_action abs below this => no entry allowed
@@ -101,6 +105,9 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--expectile", type=float, default=0.7)
     p.add_argument("--temperature-beta", type=float, default=3.0)
     p.add_argument("--fidelity-lambda", type=float, default=0.1)
+    p.add_argument("--actor-align-lambda", type=float, default=0.1)
+    p.add_argument("--entry-penalty-lambda", type=float, default=0.1)
+    p.add_argument("--reversal-penalty-lambda", type=float, default=0.1)
 
     p.add_argument("--entry-threshold", type=float, default=1e-3)
     p.add_argument("--clamp-delta", type=float, default=1.0)
@@ -125,6 +132,9 @@ def parse_args() -> TrainingConfig:
         expectile=args.expectile,
         temperature_beta=args.temperature_beta,
         fidelity_lambda=args.fidelity_lambda,
+        actor_align_lambda=args.actor_align_lambda,
+        entry_penalty_lambda=args.entry_penalty_lambda,
+        reversal_penalty_lambda=args.reversal_penalty_lambda,
         entry_threshold=args.entry_threshold,
         clamp_delta=args.clamp_delta,
     )
@@ -182,6 +192,38 @@ def apply_intent_constraints(
 
     return proposed
 
+
+def build_policy_action_for_training(
+    baseline_action: torch.Tensor,
+    delta: torch.Tensor,
+    cfg: TrainingConfig,
+) -> torch.Tensor:
+    """
+    Training-time action (SOFT):
+    - residual form: a = baseline + clamp(delta)
+    - NO hard no-entry / no-reversal here
+    """
+    delta = torch.clamp(delta, -cfg.clamp_delta, cfg.clamp_delta)
+    return baseline_action + delta
+
+
+def intent_penalties_soft(
+    baseline_action: torch.Tensor,
+    policy_action: torch.Tensor,
+    cfg: TrainingConfig,
+) -> Dict[str, torch.Tensor]:
+    """
+    Differentiable intent penalties (actor loss only).
+    """
+    # soft no-entry
+    no_entry_mask = (baseline_action.abs() < cfg.entry_threshold).float()
+    entry_pen = (no_entry_mask * policy_action.abs()).mean()
+
+    # soft no-reversal (ignore baseline≈0)
+    has_signal = (baseline_action.abs() >= cfg.entry_threshold).float()
+    rev_pen = (has_signal * torch.relu(-(policy_action * baseline_action))).mean()
+
+    return {"entry_pen": entry_pen, "rev_pen": rev_pen}
 
 # -------------------------
 # BC
@@ -281,7 +323,10 @@ def iql_training(
         # Policy action = baseline + residual, with intent constraints
         actor_out = actor(state)
         delta = _extract_delta(actor_out, baseline_action)
-        policy_action = apply_intent_constraints(baseline_action, delta, cfg)
+
+        # Training-time policy action: SOFT (no hard gates)
+        policy_action = build_policy_action_for_training(baseline_action, delta, cfg)
+
         delta_behavior = behavior_action - baseline_action
         delta_pi = policy_action - baseline_action
 
@@ -309,14 +354,33 @@ def iql_training(
         value_loss.backward()
         value_opt.step()
 
-        # Actor update: weighted regression toward baseline_action (residual remains “execution”)
-        q_pi = critic(extended_state, delta_pi).squeeze(-1)  # [B]
+        # Actor update (AWAC-style) + soft alignment + soft intent penalties
+        # -------------------------
         with torch.no_grad():
+            # Advantage of BEHAVIOR action (in-distribution)
+            q_b = critic(extended_state, delta_behavior).squeeze(-1)
             v = value_net(extended_state).squeeze(-1)
-            adv = q_pi - v
-            weights = torch.clamp(torch.exp(cfg.temperature_beta * adv), max=100.0)  # [B]
+            adv_b = q_b - v
+            weights = torch.clamp(torch.exp(cfg.temperature_beta * adv_b), max=100.0)
 
-        actor_loss = (weights * (policy_action - baseline_action).pow(2).squeeze(-1)).mean()
+        # Weighted regression toward behavior action
+        loss_fit = (weights * (policy_action - behavior_action).pow(2).squeeze(-1)).mean()
+
+        # Soft alignment to baseline
+        loss_align = (policy_action - baseline_action).pow(2).mean()
+
+        # Soft intent penalties (replace hard gates during training)
+        pens = intent_penalties_soft(baseline_action, policy_action, cfg)
+        loss_entry = pens["entry_pen"]
+        loss_rev = pens["rev_pen"]
+
+        actor_loss = (
+            loss_fit
+            + cfg.actor_align_lambda * loss_align
+            + cfg.entry_penalty_lambda * loss_entry
+            + cfg.reversal_penalty_lambda * loss_rev
+        )
+
         actor_opt.zero_grad()
         actor_loss.backward()
         actor_opt.step()
