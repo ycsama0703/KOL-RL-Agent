@@ -92,7 +92,7 @@ def annotate_positions(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def compute_portfolio_rewards(df: pd.DataFrame) -> pd.Series:
+def compute_portfolio_rewards(df: pd.DataFrame, weight_col: str = "baseline_weight") -> pd.Series:
     """Compute portfolio-level reward (组合日收益，无换手成本惩罚).
 
     组合日收益: r_t = Σ_i weight_{t,i} * reward_1d_{t,i}
@@ -100,8 +100,8 @@ def compute_portfolio_rewards(df: pd.DataFrame) -> pd.Series:
     返回一个与 df 等长的 Series，每条样本对应其所属日期的组合 reward。
     """
 
-    if "baseline_weight" not in df.columns or "last_position" not in df.columns:
-        raise ValueError("compute_portfolio_rewards expects 'baseline_weight' and 'last_position' columns.")
+    if weight_col not in df.columns:
+        raise ValueError(f"compute_portfolio_rewards expects '{weight_col}' column.")
 
     df = df.sort_values("published_at").reset_index(drop=True)
     group_indices = df.groupby("published_at", sort=True).indices
@@ -110,12 +110,54 @@ def compute_portfolio_rewards(df: pd.DataFrame) -> pd.Series:
     for _, indices in group_indices.items():
         idx_list = list(indices)
         group = df.loc[idx_list]
-        w_today = group["baseline_weight"].astype(float)
+        w_today = group[weight_col].astype(float)
         r_today = group["reward_1d"].astype(float)
         r_port = float((w_today * r_today).sum())
         portfolio_rewards[idx_list] = r_port
 
     return pd.Series(portfolio_rewards, index=df.index, name="portfolio_reward")
+
+
+def build_behavior_weights(
+    df: pd.DataFrame,
+    alpha_entry: float = 0.3,
+    decay_exit: float = 0.2,
+    entry_threshold: float = 1e-3,
+    portfolio: PortfolioLayer | None = None,
+) -> pd.DataFrame:
+    """Build behavior weights via A+B: execution lag + slow exit.
+
+    behavior_raw = last_position + alpha * (baseline_weight - last_position)
+    alpha = alpha_entry when baseline has signal; else decay_exit.
+    """
+
+    required = {"baseline_weight", "last_position", "published_at", "ticker"}
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"build_behavior_weights missing columns: {missing}")
+
+    df = df.sort_values("published_at").reset_index(drop=True)
+    portfolio = portfolio or PortfolioLayer()
+
+    behavior_weights = np.zeros(len(df), dtype=np.float32)
+    group_indices = df.groupby("published_at", sort=True).indices
+    for date in sorted(group_indices.keys()):
+        idx_list = list(group_indices[date])
+        group = df.loc[idx_list]
+        baseline = group["baseline_weight"].astype(float).to_numpy()
+        last_pos = group["last_position"].astype(float).to_numpy()
+        has_signal = np.abs(baseline) >= entry_threshold
+        alpha = np.where(has_signal, alpha_entry, decay_exit)
+        raw = last_pos + alpha * (baseline - last_pos)
+
+        raw_dict = {str(t): float(r) for t, r in zip(group["ticker"], raw)}
+        weights = portfolio.allocate(raw_dict, prev_weights={})
+        for idx, ticker in zip(idx_list, group["ticker"]):
+            behavior_weights[idx] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+
+    df = df.copy()
+    df["behavior_weight"] = behavior_weights
+    return df
 
 
 def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarray:

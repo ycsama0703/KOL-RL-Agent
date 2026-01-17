@@ -255,14 +255,24 @@ def behavior_cloning(
 
             actor_out = actor(state)
             delta = _extract_delta(actor_out, baseline_action)
-            policy_action = apply_intent_constraints(baseline_action, delta, cfg)
+            policy_action = build_policy_action_for_training(baseline_action, delta, cfg)
+            pens = intent_penalties_soft(baseline_action, policy_action, cfg)
 
             if cfg.bc_fit_behavior:
                 loss_fit = mse(policy_action, behavior_action)
                 loss_anchor = mse(policy_action, baseline_action)
-                loss = loss_fit + cfg.bc_anchor_lambda * loss_anchor
+                loss = (
+                    loss_fit
+                    + cfg.bc_anchor_lambda * loss_anchor
+                    + cfg.entry_penalty_lambda * pens["entry_pen"]
+                    + cfg.reversal_penalty_lambda * pens["rev_pen"]
+                )
             else:
-                loss = mse(policy_action, baseline_action)
+                loss = (
+                    mse(policy_action, baseline_action)
+                    + cfg.entry_penalty_lambda * pens["entry_pen"]
+                    + cfg.reversal_penalty_lambda * pens["rev_pen"]
+                )
 
             opt.zero_grad()
             loss.backward()

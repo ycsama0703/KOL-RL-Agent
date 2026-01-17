@@ -21,7 +21,7 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Any
 
 import numpy as np
 import pandas as pd
@@ -63,12 +63,34 @@ def load_actor(checkpoint_path: Path, state_dim: int, device: torch.device) -> A
     return actor
 
 
-def predict_raw_scores(actor: ActorNetwork, states: torch.Tensor, device: torch.device, batch_size: int = 1024) -> np.ndarray:
+def _extract_delta(actor_out: Any, baseline_action: torch.Tensor) -> torch.Tensor:
+    if isinstance(actor_out, torch.Tensor):
+        return actor_out
+    if isinstance(actor_out, dict):
+        has_signal = baseline_action.abs() > 1e-6
+        delta_signal = actor_out.get("delta_signal")
+        delta_decay = actor_out.get("delta_decay")
+        if delta_signal is None or delta_decay is None:
+            raise KeyError("ActorNetwork returned dict but missing 'delta_signal'/'delta_decay' keys.")
+        return torch.where(has_signal, delta_signal, delta_decay)
+    raise TypeError(f"Unsupported actor output type: {type(actor_out)}")
+
+
+def predict_raw_scores(
+    actor: ActorNetwork,
+    states: torch.Tensor,
+    baseline_actions: torch.Tensor,
+    device: torch.device,
+    batch_size: int = 1024,
+) -> np.ndarray:
     preds: List[torch.Tensor] = []
     with torch.no_grad():
         for start in range(0, states.size(0), batch_size):
             batch = states[start : start + batch_size].to(device)
-            preds.append(actor(batch).squeeze(-1).cpu())
+            baseline_batch = baseline_actions[start : start + batch_size].to(device)
+            actor_out = actor(batch)
+            delta = _extract_delta(actor_out, baseline_batch)
+            preds.append(delta.squeeze(-1).cpu())
     return torch.cat(preds).numpy()
 
 
@@ -122,9 +144,12 @@ def main() -> None:
 
     states_np = build_states(df, ticker_embedder)
     states = torch.from_numpy(states_np)
+    baseline_actions = torch.from_numpy(
+        df["baseline_weight"].fillna(0.0).values.astype(np.float32)
+    ).unsqueeze(-1)
     state_dim = states_np.shape[1]
     actor = load_actor(checkpoint_path, state_dim, device)
-    raw_delta = predict_raw_scores(actor, states, device)
+    raw_delta = predict_raw_scores(actor, states, baseline_actions, device)
 
     df = df.sort_values("published_at").reset_index(drop=True)
     # 基线签名权重（含情感符号），训练输出为残差 delta

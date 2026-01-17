@@ -1,0 +1,31 @@
+{
+  "run_name": "Invest_with_Henry_20260114_141230",
+  "timestamp": "20260114_141230",
+  "kol": "Invest_with_Henry",
+  "train_samples": 2867,
+  "bc_loss": 5.677216374728127e-07,
+  "metrics": {},
+  "config": {
+    "kol": "Invest_with_Henry",
+    "replay_dir": "data/buffer_22-24",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/train",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "bc_fit_behavior": true,
+    "bc_anchor_lambda": 0.1,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.1,
+    "entry_threshold": 0.001,
+    "clamp_delta": 1.0,
+    "device": "cuda"
+  }
+}

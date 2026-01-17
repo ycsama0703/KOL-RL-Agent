@@ -11,7 +11,7 @@ import torch
 
 from src.portfolio.layer import PortfolioLayer
 from src.training.models import ActorNetwork
-from train import compute_metrics
+from train import TrainingConfig, apply_intent_constraints, compute_metrics
 
 
 def load_actor(checkpoint_path: Path, state_dim: int, device: torch.device) -> ActorNetwork:
@@ -25,12 +25,36 @@ def load_actor(checkpoint_path: Path, state_dim: int, device: torch.device) -> A
     return actor
 
 
-def _predict_raw_scores(actor: ActorNetwork, states: torch.Tensor, device: torch.device, batch_size: int = 1024) -> np.ndarray:
+def _extract_delta(actor_out: Any, baseline_action: torch.Tensor) -> torch.Tensor:
+    if isinstance(actor_out, torch.Tensor):
+        return actor_out
+    if isinstance(actor_out, dict):
+        has_signal = baseline_action.abs() > 1e-6
+        delta_signal = actor_out.get("delta_signal")
+        delta_decay = actor_out.get("delta_decay")
+        if delta_signal is None or delta_decay is None:
+            raise KeyError("ActorNetwork returned dict but missing 'delta_signal'/'delta_decay' keys.")
+        return torch.where(has_signal, delta_signal, delta_decay)
+    raise TypeError(f"Unsupported actor output type: {type(actor_out)}")
+
+
+def _predict_policy_actions(
+    actor: ActorNetwork,
+    states: torch.Tensor,
+    baseline_actions: torch.Tensor,
+    device: torch.device,
+    cfg: TrainingConfig,
+    batch_size: int = 1024,
+) -> np.ndarray:
     preds: list[torch.Tensor] = []
     with torch.no_grad():
         for start in range(0, states.size(0), batch_size):
             batch = states[start : start + batch_size].to(device)
-            preds.append(actor(batch).squeeze(-1).cpu())
+            baseline_batch = baseline_actions[start : start + batch_size].to(device)
+            actor_out = actor(batch)
+            delta = _extract_delta(actor_out, baseline_batch)
+            policy_action = apply_intent_constraints(baseline_batch, delta, cfg)
+            preds.append(policy_action.squeeze(-1).cpu())
     return torch.cat(preds).numpy()
 
 
@@ -55,6 +79,7 @@ def run_policy(
     buffer: Dict[str, Any],
     device: torch.device,
     action_threshold: float = 0.01,
+    cfg: TrainingConfig | None = None,
 ) -> Tuple[Dict[str, float], pd.DataFrame]:
     """Replay a policy on a buffer and record metrics plus per-date positions.
 
@@ -66,12 +91,16 @@ def run_policy(
 
     states = buffer["states"]
     rewards = buffer["rewards"].numpy()
-    baseline_actions = buffer["actions"].numpy()  # 基线签名权重
+    if "baseline_actions" in buffer:
+        baseline_actions = buffer["baseline_actions"]  # 基线签名权重
+    else:
+        baseline_actions = buffer["actions"]
     dates = buffer["meta"]["published_at"]
     tickers = buffer["meta"]["ticker"]
 
-    delta = _predict_raw_scores(actor, states, device)
-    raw_scores = baseline_actions.squeeze(-1) + delta  # 基线 + 残差
+    cfg = cfg or TrainingConfig()
+    policy_actions = _predict_policy_actions(actor, states, baseline_actions, device, cfg)
+    raw_scores = policy_actions  # 约束后的 policy_action 作为 raw_score
     df = pd.DataFrame(
         {
             "date": dates,

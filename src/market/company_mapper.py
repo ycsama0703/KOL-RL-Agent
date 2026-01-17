@@ -37,17 +37,31 @@ class CompanyTickerMapper:
     manual_overrides: Dict[str, Optional[str]] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        df = pd.read_excel(self.reference_path)
-        required = {"Symbol", "Company Name"}
-        missing = required - set(df.columns)
-        if missing:
-            raise ValueError(f"Reference file missing columns: {missing}")
+        if self.reference_path.suffix.lower() == ".csv":
+            df = pd.read_csv(self.reference_path)
+        else:
+            df = pd.read_excel(self.reference_path)
+
+        col_map = {col.strip().upper(): col for col in df.columns}
+        if {"SYMBOL", "COMPANY NAME"}.issubset(col_map):
+            symbol_col = col_map["SYMBOL"]
+            name_col = col_map["COMPANY NAME"]
+        elif {"TICKER", "COMNAM"}.issubset(col_map):
+            symbol_col = col_map["TICKER"]
+            name_col = col_map["COMNAM"]
+        else:
+            raise ValueError(
+                "Reference file missing required columns. "
+                "Expected (Symbol, Company Name) or (TICKER, COMNAM)."
+            )
 
         self._mapping: Dict[str, str] = {}
         for _, row in df.iterrows():
-            symbol = str(row["Symbol"]).strip().upper()
-            name = self._normalize(str(row["Company Name"]))
+            symbol = str(row[symbol_col]).strip().upper()
+            name = self._normalize(str(row[name_col]))
             if not name:
+                continue
+            if not symbol or symbol == "NAN":
                 continue
             self._mapping[name] = symbol
 
