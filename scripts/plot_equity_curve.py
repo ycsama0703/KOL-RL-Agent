@@ -19,17 +19,38 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 import pandas as pd
+import torch
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.evaluation.analyzer import load_actor, run_policy
+from src.training.data import load_buffer
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Plot baseline vs trained equity curves over time.")
     parser.add_argument(
         "--signal-decisions",
-        required=True,
         help="CSV produced by scripts/export_signal_decisions.py.",
+    )
+    parser.add_argument(
+        "--checkpoint",
+        help="Optional policy checkpoint; if provided with --buffer, plot from replay buffer.",
+    )
+    parser.add_argument(
+        "--buffer",
+        help="Optional replay buffer; if provided with --checkpoint, plot from replay buffer.",
+    )
+    parser.add_argument(
+        "--device",
+        default="cuda" if torch.cuda.is_available() else "cpu",
+        help="Device for buffer-based plotting.",
     )
     parser.add_argument(
         "--output-figure",
@@ -54,21 +75,64 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    csv_path = Path(args.signal_decisions)
-    if not csv_path.exists():
-        raise FileNotFoundError(f"Signal decisions CSV not found: {csv_path}")
 
-    df = pd.read_csv(csv_path)
-    if "date" not in df.columns or "equity_baseline" not in df.columns or "equity_trained" not in df.columns:
-        raise ValueError(
-            "CSV must contain 'date', 'equity_baseline', and 'equity_trained' columns. "
-            "Make sure it comes from export_signal_decisions.py."
-        )
+    def rebase_to_one(series: pd.Series | pd.DataFrame) -> pd.Series:
+        if isinstance(series, pd.DataFrame):
+            series = series.iloc[:, 0]
+        if series.empty:
+            return series
+        first = series.iloc[0]
+        if pd.isna(first) or first == 0:
+            return series
+        return series / first
 
-    # 每个日期可能有多条视频记录，这里按日期聚合（取该日最后一条记录的净值即可）。
-    df["date"] = pd.to_datetime(df["date"])
-    df_sorted = df.sort_values(["date"])
-    daily = df_sorted.groupby("date", as_index=False).last()
+    if args.checkpoint and args.buffer:
+        buffer = load_buffer(args.buffer)
+        state_dim = buffer["states"].shape[1]
+        device = torch.device(args.device)
+
+        actor = load_actor(Path(args.checkpoint), state_dim, device)
+
+        class ZeroActor(torch.nn.Module):
+            def forward(self, state: torch.Tensor) -> torch.Tensor:
+                return torch.zeros((state.size(0), 1), device=state.device)
+
+        def equity_series(positions: pd.DataFrame) -> pd.DataFrame:
+            df = positions.copy()
+            df["date"] = pd.to_datetime(df["date"])
+            df["weighted_return"] = df["weight"] * df["reward"]
+            daily = df.groupby("date", as_index=False)["weighted_return"].sum()
+            daily["equity"] = (1.0 + daily["weighted_return"]).cumprod()
+            return daily
+
+        _, pos_base = run_policy(ZeroActor().to(device), buffer, device)
+        _, pos_train = run_policy(actor, buffer, device)
+
+        base = equity_series(pos_base).rename(columns={"equity": "equity_baseline"})
+        train = equity_series(pos_train).rename(columns={"equity": "equity_trained"})
+        daily = pd.merge(base, train, on="date", how="inner").sort_values("date")
+    else:
+        if not args.signal_decisions:
+            raise ValueError("Provide either --signal-decisions or (--checkpoint and --buffer).")
+        csv_path = Path(args.signal_decisions)
+        if not csv_path.exists():
+            raise FileNotFoundError(f"Signal decisions CSV not found: {csv_path}")
+
+        df = pd.read_csv(csv_path)
+        if "date" not in df.columns or "equity_baseline" not in df.columns or "equity_trained" not in df.columns:
+            raise ValueError(
+                "CSV must contain 'date', 'equity_baseline', and 'equity_trained' columns. "
+                "Make sure it comes from export_signal_decisions.py."
+            )
+
+        # 每个日期可能有多条视频记录，这里按日期聚合（取该日最后一条记录的净值即可）。
+        df["date"] = pd.to_datetime(df["date"])
+        df_sorted = df.sort_values(["date"])
+        daily = df_sorted.groupby("date", as_index=False).last()
+
+    if not daily.empty:
+        daily["equity_baseline"] = rebase_to_one(daily["equity_baseline"])
+        daily["equity_trained"] = rebase_to_one(daily["equity_trained"])
 
     try:
         import matplotlib.pyplot as plt  # type: ignore[import]
@@ -91,12 +155,14 @@ def main() -> None:
 
         start = daily["date"].min().date()
         end = daily["date"].max().date()
-        data = yf.download(args.benchmark_ticker, start=start, end=end)  # type: ignore[arg-type]
+        data = yf.download(args.benchmark_ticker, start=start, end=end, auto_adjust=False)  # type: ignore[arg-type]
         if not data.empty and "Close" in data.columns:
             bench_ret = data["Close"].pct_change().fillna(0.0)
             bench_eq = (1.0 + bench_ret).cumprod()
             # 对齐到 daily 的日期索引
             bench_eq = bench_eq.reindex(pd.to_datetime(daily["date"]), method="ffill")
+            bench_eq = bench_eq.bfill()
+            bench_eq = rebase_to_one(bench_eq)
             benchmark_series = bench_eq.values
             benchmark_label = args.benchmark_label or args.benchmark_ticker
 

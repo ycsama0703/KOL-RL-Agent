@@ -395,14 +395,15 @@ python train.py \
 python scripts/evaluate_run.py \
   --checkpoint outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
   --buffer data/replay_buffer/<KOL>/test.pt \
-  --output outputs/<KOL>_<时间戳>/metrics_test.json \
-  --positions-output outputs/<KOL>_<时间戳>/positions_test.csv \
-  --action-threshold 0.02
+  --output-dir outputs/test/<KOL>_<时间戳> \
+  --action-threshold 0.02 \
+  --plot
 ```
 
 - `metrics_test.json`：`cumulative_return / sharpe / max_drawdown`；  
 - `positions_test.csv`：逐样本（ticker 粒度）记录：  
   `raw_score, prev_weight, weight, weight_delta, allocation, action`（OPEN / CLOSE / INCREASE / DECREASE / HOLD），用于检查某只股票在整个测试期的持仓和调仓路径。
+- `equity_test.png`：回放得到的净值曲线（baseline vs trained），与 `metrics_test.json` 对齐。
 
 ### 4.2 对比训练前后策略（同一测试集）
 
@@ -428,7 +429,9 @@ python scripts/export_signal_decisions.py \
   --reward-csv data/processed/reward/<KOL>/test.csv \
   --vocab-path models/embedding/ticker_vocab.json \
   --embedding-path models/embedding/ticker_embedding.pt \
-  --output outputs/<KOL>_<时间戳>/signal_decisions_test.csv
+  --output outputs/<KOL>_<时间戳>/signal_decisions_test.csv \
+  --entry-threshold 0.001 \
+  --clamp-delta 1.0
 ```
 
 `signal_decisions_test.csv` 每行对应一个 `video_id`，包含：
@@ -444,8 +447,17 @@ python scripts/export_signal_decisions.py \
 ### 4.4 净值曲线可视化 + 市场基准
 
 ```bash
+# 方式 A：从 signal_decisions 画图（更可解释）
 python scripts/plot_equity_curve.py \
   --signal-decisions outputs/<KOL>_<时间戳>/signal_decisions_test.csv \
+  --output-figure outputs/<KOL>_<时间戳>/equity_test_with_spy.png \
+  --benchmark-ticker SPY \
+  --benchmark-label "SPY (market)"
+
+# 方式 B：从 replay buffer 画图（与 metrics_test.json 严格一致）
+python scripts/plot_equity_curve.py \
+  --checkpoint outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
+  --buffer data/replay_buffer/<KOL>/test.pt \
   --output-figure outputs/<KOL>_<时间戳>/equity_test_with_spy.png \
   --benchmark-ticker SPY \
   --benchmark-label "SPY (market)"
@@ -453,6 +465,25 @@ python scripts/plot_equity_curve.py \
 
 - 画出 baseline / trained 两条净值曲线；  
 - 可选指定 `--benchmark-ticker`（如 `SPY` 或 `^GSPC`）叠加市场基准净值曲线，方便对比策略 vs 整体市场。
+
+### 4.5 批量测试 + 画图 + 决策导出（推荐）
+
+一键测试所有 KOL，输出到 `outputs/test_v2/<KOL>_<时间戳>/`，并可选导出 `signal_decisions_test.csv`：
+
+```bash
+bash scripts/batch_test_and_plot.sh
+```
+
+常用环境变量（可选）：
+
+- `TRAIN_DIR`（默认 `outputs/train_v2`）
+- `TEST_DIR`（默认 `outputs/test_v2`）
+- `BUFFER_ROOT`（默认 `data/buffer_22-24`）
+- `EXPORT_SIGNAL`（默认 `1`，需要 `data/processed/reward`）
+- `BENCHMARK_TICKER` / `BENCHMARK_LABEL`（默认 `SPY`）
+
+说明：
+- 批量脚本在导出 `signal_decisions_test.csv` 时会传入 replay buffer，以保证 `equity_*` / `cum_return_*` 与 `metrics_test.json` 同口径。
 
 
 ============================================================

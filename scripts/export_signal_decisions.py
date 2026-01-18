@@ -34,12 +34,16 @@ if str(ROOT) not in sys.path:
 from src.portfolio.layer import PortfolioLayer
 from src.pipeline.replay_utils import annotate_positions, build_states, load_ticker_embedder
 from src.training.models import ActorNetwork
+from src.evaluation.analyzer import run_policy
+from src.training.data import load_buffer
+from train import TrainingConfig, apply_intent_constraints
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Export per-signal decisions for baseline vs trained policy.")
     parser.add_argument("--checkpoint", required=True, help="Trained policy checkpoint (policy.pt or actor.pt).")
     parser.add_argument("--reward-csv", required=True, help="Reward CSV for the split to analyse (e.g., test.csv).")
+    parser.add_argument("--buffer", help="Optional replay buffer to align equity with evaluation.")
     parser.add_argument("--vocab-path", required=True, help="Path to ticker_vocab.json.")
     parser.add_argument("--embedding-path", required=True, help="Path to ticker_embedding.pt.")
     parser.add_argument("--output", required=True, help="Output CSV path for the decision trace.")
@@ -49,6 +53,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.01,
         help="最小权重/权重变化阈值；低于该值视为无仓位或小幅变动。",
+    )
+    parser.add_argument(
+        "--entry-threshold",
+        type=float,
+        default=1e-3,
+        help="Baseline weight abs threshold for intent constraints.",
+    )
+    parser.add_argument(
+        "--clamp-delta",
+        type=float,
+        default=1.0,
+        help="Clamp range for residual delta in intent constraints.",
     )
     return parser.parse_args()
 
@@ -81,6 +97,7 @@ def predict_raw_scores(
     states: torch.Tensor,
     baseline_actions: torch.Tensor,
     device: torch.device,
+    cfg: TrainingConfig,
     batch_size: int = 1024,
 ) -> np.ndarray:
     preds: List[torch.Tensor] = []
@@ -90,7 +107,8 @@ def predict_raw_scores(
             baseline_batch = baseline_actions[start : start + batch_size].to(device)
             actor_out = actor(batch)
             delta = _extract_delta(actor_out, baseline_batch)
-            preds.append(delta.squeeze(-1).cpu())
+            policy_action = apply_intent_constraints(baseline_batch, delta, cfg)
+            preds.append(policy_action.squeeze(-1).cpu())
     return torch.cat(preds).numpy()
 
 
@@ -140,7 +158,8 @@ def main() -> None:
         raise ValueError(f"Reward CSV missing columns: {missing}")
 
     ticker_embedder = load_ticker_embedder(Path(args.embedding_path), Path(args.vocab_path))
-    df = annotate_positions(df)
+    # Skip carry rows for faster export; we only need signal rows for per-video analysis.
+    df = annotate_positions(df, include_carry=False).sort_values("published_at").reset_index(drop=True)
 
     states_np = build_states(df, ticker_embedder)
     states = torch.from_numpy(states_np)
@@ -149,12 +168,49 @@ def main() -> None:
     ).unsqueeze(-1)
     state_dim = states_np.shape[1]
     actor = load_actor(checkpoint_path, state_dim, device)
-    raw_delta = predict_raw_scores(actor, states, baseline_actions, device)
+    cfg = TrainingConfig()
+    cfg.entry_threshold = args.entry_threshold
+    cfg.clamp_delta = args.clamp_delta
+    policy_actions = predict_raw_scores(actor, states, baseline_actions, device, cfg)
 
-    df = df.sort_values("published_at").reset_index(drop=True)
     # 基线签名权重（含情感符号），训练输出为残差 delta
     df["baseline_signed"] = df["baseline_weight"]
-    df["raw_trained"] = df["baseline_signed"] + raw_delta
+    df["raw_trained"] = policy_actions
+
+    def normalize_ts(value: object) -> pd.Timestamp:
+        ts = pd.to_datetime(value, utc=True)
+        if getattr(ts, "tzinfo", None) is not None:
+            ts = ts.tz_convert(None)
+        return ts
+
+    equity_by_date = None
+    if args.buffer:
+        buffer_path = Path(args.buffer)
+        if not buffer_path.exists():
+            raise FileNotFoundError(f"Replay buffer not found: {buffer_path}")
+        buffer = load_buffer(buffer_path)
+
+        class ZeroActor(torch.nn.Module):
+            def forward(self, state: torch.Tensor) -> torch.Tensor:
+                return torch.zeros((state.size(0), 1), device=state.device)
+
+        _, base_positions = run_policy(ZeroActor().to(device), buffer, device)
+        _, train_positions = run_policy(actor, buffer, device)
+
+        def equity_series(positions: pd.DataFrame) -> pd.Series:
+            df_pos = positions.copy()
+            df_pos["date"] = df_pos["date"].apply(normalize_ts)
+            df_pos["weighted_return"] = df_pos["weight"] * df_pos["reward"]
+            daily = df_pos.groupby("date", as_index=True)["weighted_return"].sum().sort_index()
+            equity = (1.0 + daily).cumprod()
+            return equity
+
+        eq_base = equity_series(base_positions)
+        eq_train = equity_series(train_positions)
+        equity_by_date = {
+            "baseline": eq_base.to_dict(),
+            "trained": eq_train.to_dict(),
+        }
 
     portfolio = PortfolioLayer()
     prev_weights_baseline: Dict[str, float] = {}
@@ -163,30 +219,46 @@ def main() -> None:
     equity_trained = 1.0
 
     records: List[Dict[str, object]] = []
+    missing_equity = 0
 
     for date, group in df.groupby("published_at", sort=True):
-        # baseline 组合：情感为正→多头，负→空头
+        group_signals = group
+        if "has_signal" in group.columns:
+            group_signals = group[group["has_signal"] == 1]
+
+        # baseline 组合：情感为正→多头，负→空头（仅信号行）
         raw_base = {
             row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
-            for _, row in group.iterrows()
+            for _, row in group_signals.iterrows()
         }
         weights_base_full = portfolio.allocate(raw_base, prev_weights=prev_weights_baseline)
         weights_base = {t: info["weight"] for t, info in weights_base_full.items()}
 
-        raw_train = {row["ticker"]: row["raw_trained"] for _, row in group.iterrows()}
+        raw_train = {row["ticker"]: row["raw_trained"] for _, row in group_signals.iterrows()}
         weights_train_full = portfolio.allocate(raw_train, prev_weights=prev_weights_trained)
         weights_train = {t: info["weight"] for t, info in weights_train_full.items()}
 
-        # 当日收益 & 净值更新
-        day_return_base = 0.0
-        day_return_train = 0.0
-        for _, row in group.iterrows():
-            ticker = row["ticker"]
-            r = float(row["reward_1d"])
-            day_return_base += weights_base.get(ticker, 0.0) * r
-            day_return_train += weights_train.get(ticker, 0.0) * r
-        equity_baseline *= 1.0 + day_return_base
-        equity_trained *= 1.0 + day_return_train
+        if equity_by_date is None:
+            # 当日收益 & 净值更新（fallback：仅用当前信号行）
+            day_return_base = 0.0
+            day_return_train = 0.0
+            for _, row in group.iterrows():
+                ticker = row["ticker"]
+                r = float(row["reward_1d"])
+                day_return_base += weights_base.get(ticker, 0.0) * r
+                day_return_train += weights_train.get(ticker, 0.0) * r
+            equity_baseline *= 1.0 + day_return_base
+            equity_trained *= 1.0 + day_return_train
+        else:
+            key = normalize_ts(date)
+            base_val = equity_by_date["baseline"].get(key)
+            train_val = equity_by_date["trained"].get(key)
+            if base_val is None or train_val is None:
+                missing_equity += 1
+                base_val = equity_baseline
+                train_val = equity_trained
+            equity_baseline = float(base_val)
+            equity_trained = float(train_val)
 
         portfolio_before_base = format_portfolio(prev_weights_baseline)
         portfolio_after_base = format_portfolio(weights_base)
@@ -223,7 +295,7 @@ def main() -> None:
             video_id_val = first.get("video_id", video_id if video_id is not None else "")
 
             record: Dict[str, object] = {
-                "date": date.strftime("%Y-%m-%d"),
+                "date": pd.to_datetime(date).isoformat(),
                 "video_id": video_id_val,
                 "text": text,
                 "tickers": ";".join(sorted(set(video_tickers))),
@@ -242,6 +314,9 @@ def main() -> None:
 
         prev_weights_baseline = weights_base
         prev_weights_trained = weights_train
+
+    if missing_equity:
+        print(f"[WARN] Missing equity lookups for {missing_equity} dates; check timestamp alignment.")
 
     out_df = pd.DataFrame(records)
     if "video_id" in out_df.columns:

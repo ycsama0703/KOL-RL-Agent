@@ -18,26 +18,28 @@ def load_ticker_embedder(weights_path: Path, vocab_path: Path, embedding_dim: in
     return TickerEmbedding.load(weights_path, vocab_path, embedding_dim=embedding_dim)
 
 
-def annotate_positions(df: pd.DataFrame) -> pd.DataFrame:
-    """Reconstruct baseline positions and add carry rows for tickers not mentioned today.
+def annotate_positions(df: pd.DataFrame, include_carry: bool = True) -> pd.DataFrame:
+    """Reconstruct baseline positions and optionally add carry rows for tickers not mentioned today.
 
-    Outputs last_position, baseline_weight, silence_days. For tickers held yesterday but
-    not mentioned today, we add a synthetic row with baseline_weight=0, baseline_raw_score=0,
-    sentiment/confidence=0, reward_1d=0, embeddings/text set to 0/"" so that the decay branch
-    has training/inference samples.
+    Outputs last_position, baseline_weight, silence_days. When include_carry=True, for tickers
+    held yesterday but not mentioned today, we add a synthetic row with baseline_weight=0,
+    baseline_raw_score=0, sentiment/confidence=0, reward_1d=0, embeddings/text set to 0/"" so
+    that the decay branch has training/inference samples.
     """
 
     df = df.sort_values("published_at").reset_index(drop=True)
     portfolio = PortfolioLayer()
 
     embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
-    base_defaults = {col: 0 for col in df.columns}
-    if "text" in base_defaults:
-        base_defaults["text"] = ""
-    if "video_id" in base_defaults:
-        base_defaults["video_id"] = ""
-    if "company" in base_defaults:
-        base_defaults["company"] = ""
+    base_defaults = {}
+    if include_carry:
+        base_defaults = {col: 0 for col in df.columns}
+        if "text" in base_defaults:
+            base_defaults["text"] = ""
+        if "video_id" in base_defaults:
+            base_defaults["video_id"] = ""
+        if "company" in base_defaults:
+            base_defaults["company"] = ""
 
     prev_weights: Dict[str, float] = {}
     last_dates: Dict[str, pd.Timestamp] = {}
@@ -64,28 +66,29 @@ def annotate_positions(df: pd.DataFrame) -> pd.DataFrame:
             enriched["has_signal"] = 1
             rows.append(enriched)
 
-        # carry rows for tickers held yesterday but not mentioned today
-        carry = [t for t in prev_weights.keys() if t not in raw_dict]
-        for ticker in carry:
-            cur_date = date
-            prev_date = last_dates.get(ticker, cur_date)
-            silence = float((cur_date - prev_date).days)
-            last_dates[ticker] = cur_date
-            enriched = base_defaults.copy()
-            enriched["ticker"] = ticker
-            enriched["published_at"] = cur_date
-            enriched["sentiment"] = 0.0
-            enriched["confidence"] = 0.0
-            enriched["baseline_raw_score"] = 0.0
-            enriched["reward_1d"] = 0.0
-            enriched["done"] = False
-            for col in embedding_cols:
-                enriched[col] = 0.0
-            enriched["last_position"] = prev_weights.get(ticker, 0.0)
-            enriched["baseline_weight"] = 0.0
-            enriched["silence_days"] = silence
-            enriched["has_signal"] = 0
-            rows.append(enriched)
+        if include_carry:
+            # carry rows for tickers held yesterday but not mentioned today
+            carry = [t for t in prev_weights.keys() if t not in raw_dict]
+            for ticker in carry:
+                cur_date = date
+                prev_date = last_dates.get(ticker, cur_date)
+                silence = float((cur_date - prev_date).days)
+                last_dates[ticker] = cur_date
+                enriched = base_defaults.copy()
+                enriched["ticker"] = ticker
+                enriched["published_at"] = cur_date
+                enriched["sentiment"] = 0.0
+                enriched["confidence"] = 0.0
+                enriched["baseline_raw_score"] = 0.0
+                enriched["reward_1d"] = 0.0
+                enriched["done"] = False
+                for col in embedding_cols:
+                    enriched[col] = 0.0
+                enriched["last_position"] = prev_weights.get(ticker, 0.0)
+                enriched["baseline_weight"] = 0.0
+                enriched["silence_days"] = silence
+                enriched["has_signal"] = 0
+                rows.append(enriched)
 
         prev_weights = {t: info["weight"] for t, info in weights.items()}
 
