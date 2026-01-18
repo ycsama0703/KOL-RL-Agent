@@ -396,14 +396,16 @@ python scripts/evaluate_run.py \
   --checkpoint outputs/<KOL>_<时间戳>/checkpoints/policy.pt \
   --buffer data/replay_buffer/<KOL>/test.pt \
   --output-dir outputs/test/<KOL>_<时间戳> \
+  --daily-output-dir outputs/test/<KOL>_<时间戳>/daily \
   --action-threshold 0.02 \
   --plot
 ```
 
-- `metrics_test.json`：`cumulative_return / sharpe / max_drawdown`；  
+- `metrics_test.json`：`cumulative_return / sharpe / max_drawdown`（含 `daily_metrics`）；  
 - `positions_test.csv`：逐样本（ticker 粒度）记录：  
   `raw_score, prev_weight, weight, weight_delta, allocation, action`（OPEN / CLOSE / INCREASE / DECREASE / HOLD），用于检查某只股票在整个测试期的持仓和调仓路径。
 - `equity_test.png`：回放得到的净值曲线（baseline vs trained），与 `metrics_test.json` 对齐。
+- 若提供 `--daily-output-dir`，会额外生成 `metrics_daily.json / equity_daily.csv / equity_daily.png`（日频口径）。
 
 ### 4.2 对比训练前后策略（同一测试集）
 
@@ -468,7 +470,7 @@ python scripts/plot_equity_curve.py \
 
 ### 4.5 批量测试 + 画图 + 决策导出（推荐）
 
-一键测试所有 KOL，输出到 `outputs/test_v2/<KOL>_<时间戳>/`，并可选导出 `signal_decisions_test.csv`：
+一键测试所有 KOL，输出到 `outputs/test_v2/<KOL>_<时间戳>/event`（视频频）和 `outputs/test_v2/<KOL>_<时间戳>/daily`（日频），并可选导出 `signal_decisions_test.csv`：
 
 ```bash
 bash scripts/batch_test_and_plot.sh
@@ -481,9 +483,28 @@ bash scripts/batch_test_and_plot.sh
 - `BUFFER_ROOT`（默认 `data/buffer_22-24`）
 - `EXPORT_SIGNAL`（默认 `1`，需要 `data/processed/reward`）
 - `BENCHMARK_TICKER` / `BENCHMARK_LABEL`（默认 `SPY`）
+- `DAILY_BENCHMARK_TICKER` / `DAILY_BENCHMARK_LABEL`（默认同 `BENCHMARK_*`）
 
 说明：
+- `event/` 下为视频频评测结果：`metrics_test.json`、`positions_test.csv`、`equity_test.png` 等。
+- `daily/` 下为日频聚合结果：`metrics_daily.json`、`equity_daily.csv`、`equity_daily.png`。
 - 批量脚本在导出 `signal_decisions_test.csv` 时会传入 replay buffer，以保证 `equity_*` / `cum_return_*` 与 `metrics_test.json` 同口径。
+
+### 4.6 批量对比 RORL benchmark
+
+一键对比 `bencmarks/RORL/<KOL>/performance.csv` 与我们的策略结果：
+
+```bash
+bash scripts/batch_compare_rorl.sh
+```
+
+常用环境变量（可选）：
+
+- `TRAIN_DIR`（默认 `outputs/train_v2`）
+- `BUFFER_ROOT`（默认自动选择 `data/buffer_22-24_end1231` 或 `data/buffer_22-24`）
+- `RORL_ROOT`（默认 `bencmarks/RORL`）
+- `ALIGN`（默认 `intersection`）
+- `ACTION_THRESHOLD`（默认 `0.01`）
 
 
 ============================================================

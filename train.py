@@ -330,7 +330,7 @@ def iql_training(
         extended_state = torch.cat([state, baseline_action], dim=-1)
         extended_next_state = torch.cat([next_state, next_baseline_action], dim=-1)
 
-        # Policy action = baseline + residual, with intent constraints
+        # Policy action = baseline + residual
         actor_out = actor(state)
         delta = _extract_delta(actor_out, baseline_action)
 
@@ -338,7 +338,6 @@ def iql_training(
         policy_action = build_policy_action_for_training(baseline_action, delta, cfg)
 
         delta_behavior = behavior_action - baseline_action
-        delta_pi = policy_action - baseline_action
 
         # Faithfulness shaping: penalize deviation from baseline (detach to avoid shortcut)
         fidelity_penalty = (policy_action.detach() - baseline_action).pow(2).squeeze(-1)  # [B]
@@ -524,9 +523,9 @@ def main() -> None:
     iql_loader = DataLoader(train_dataset, batch_size=cfg.iql_batch_size, shuffle=True, drop_last=True, pin_memory=True)
 
     actor = ActorNetwork(state_dim).to(device)
-    extended_state_dim = state_dim + 1
-    critic = CriticNetwork(extended_state_dim).to(device)
-    value_net = ValueNetwork(extended_state_dim).to(device)
+    critic_state_dim = state_dim + 1
+    critic = CriticNetwork(critic_state_dim).to(device)
+    value_net = ValueNetwork(critic_state_dim).to(device)
 
     bc_loss = behavior_cloning(actor, bc_loader, cfg, device)
     LOGGER.info("Behavior cloning finished. Avg loss=%.6f", bc_loss)

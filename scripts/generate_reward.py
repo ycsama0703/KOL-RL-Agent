@@ -33,6 +33,11 @@ def parse_args() -> argparse.Namespace:
         default="max",
         help="Historical period to download via yfinance (default: max).",
     )
+    parser.add_argument(
+        "--episode-end",
+        default=None,
+        help="Optional episode end date (YYYY-MM-DD). If set, the last signal reward spans to this date.",
+    )
     return parser.parse_args()
 
 
@@ -84,10 +89,11 @@ def find_span_reward(
     signal_time: pd.Timestamp,
     next_signal_time: Optional[pd.Timestamp],
     prices: pd.Series,
+    episode_end: Optional[pd.Timestamp],
 ) -> Tuple[float, Optional[pd.Timestamp], bool]:
     """Return (reward_span, end_trading_date, done) for窗口=当前视频→下一次视频.
 
-    - 若 next_signal_time 为 None，视为 episode 终点，reward=0，done=True；
+    - 若 next_signal_time 为 None，视为 episode 终点；若提供 episode_end，则以其为终点；
     - 否则：
       - start_price: 信号日当天（或之后最近一个有价格的交易日）的收盘价；
       - end_price:   下一次视频日期当天（或之后最近一个有价格的交易日）的收盘价；
@@ -96,8 +102,10 @@ def find_span_reward(
     if prices.empty:
         return 0.0, None, True
     if next_signal_time is None:
-        # 最后一条视频，没有“下一个视频”，episode 结束。
-        return 0.0, None, True
+        if episode_end is None:
+            # 最后一条视频，没有“下一个视频”，episode 结束。
+            return 0.0, None, True
+        next_signal_time = episode_end
 
     signal_time = signal_time.floor("D")
     next_signal_time = next_signal_time.floor("D")
@@ -135,6 +143,7 @@ def process_file(
     output_dir: Path,
     period: str,
     global_price_cache: Dict[str, pd.Series],
+    episode_end: Optional[pd.Timestamp],
 ) -> None:
     df = pd.read_csv(csv_path)
     if "ticker" not in df.columns or "published_at" not in df.columns:
@@ -160,7 +169,9 @@ def process_file(
         event_date = row.event_date
         next_event_date = next_date_map.get(event_date)
         prices = fetch_prices(ticker, period=period, cache=global_price_cache)
-        reward, end_trading_date, done = find_span_reward(signal_time, next_event_date, prices)
+        reward, end_trading_date, done = find_span_reward(
+            signal_time, next_event_date, prices, episode_end
+        )
         reward_col.append(reward)
         next_dates.append(end_trading_date.isoformat() if isinstance(end_trading_date, pd.Timestamp) else None)
         done_flags.append(bool(done))
@@ -190,6 +201,14 @@ def main() -> None:
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    episode_end = None
+    if args.episode_end:
+        episode_end = pd.to_datetime(args.episode_end)
+        if episode_end.tzinfo is not None:
+            episode_end = episode_end.tz_convert("UTC").tz_localize(None)
+        else:
+            episode_end = episode_end.tz_localize(None)
+
     price_cache: Dict[str, pd.DataFrame] = {}
     csv_files = collect_csv_files(input_path)
     if not csv_files:
@@ -197,7 +216,13 @@ def main() -> None:
         return
 
     for csv_path in csv_files:
-        process_file(csv_path, output_dir, period=args.period, global_price_cache=price_cache)
+        process_file(
+            csv_path,
+            output_dir,
+            period=args.period,
+            global_price_cache=price_cache,
+            episode_end=episode_end,
+        )
 
 
 if __name__ == "__main__":

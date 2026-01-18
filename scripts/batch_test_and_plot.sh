@@ -8,6 +8,8 @@ DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
 BENCHMARK_TICKER=${BENCHMARK_TICKER:-SPY}
 BENCHMARK_LABEL=${BENCHMARK_LABEL:-"SPY (market)"}
+DAILY_BENCHMARK_TICKER=${DAILY_BENCHMARK_TICKER:-$BENCHMARK_TICKER}
+DAILY_BENCHMARK_LABEL=${DAILY_BENCHMARK_LABEL:-$BENCHMARK_LABEL}
 EXPORT_SIGNAL=${EXPORT_SIGNAL:-1}
 REWARD_ROOT=${REWARD_ROOT:-data/processed/reward}
 TICKER_VOCAB=${TICKER_VOCAB:-models/embedding/22-24_ticker_vocab.json}
@@ -28,7 +30,9 @@ for d in "$BUFFER_ROOT"/*/; do
 
   run_name=$(basename "$run")
   out_dir="$TEST_DIR/$run_name"
-  mkdir -p "$out_dir"
+  event_dir="$out_dir/event"
+  daily_dir="$out_dir/daily"
+  mkdir -p "$event_dir" "$daily_dir"
 
   ckpt="$run/checkpoints/policy.pt"
   buffer="$BUFFER_ROOT/$kol/test.pt"
@@ -41,7 +45,10 @@ for d in "$BUFFER_ROOT"/*/; do
     --checkpoint "$ckpt" \
     --buffer "$buffer" \
     --device "$DEVICE" \
-    --output-dir "$out_dir" \
+    --output-dir "$event_dir" \
+    --daily-output-dir "$daily_dir" \
+    --daily-benchmark-ticker "$DAILY_BENCHMARK_TICKER" \
+    --daily-benchmark-label "$DAILY_BENCHMARK_LABEL" \
     --action-threshold "$ACTION_THRESHOLD" || {
       echo "Eval failed for $kol"
       continue
@@ -56,7 +63,7 @@ for d in "$BUFFER_ROOT"/*/; do
         --buffer "$buffer" \
         --vocab-path "$TICKER_VOCAB" \
         --embedding-path "$TICKER_EMB" \
-        --output "$out_dir/signal_decisions_test.csv" \
+        --output "$event_dir/signal_decisions_test.csv" \
         --entry-threshold "$ENTRY_THRESHOLD" \
         --clamp-delta "$CLAMP_DELTA" || echo "Signal export failed for $kol"
     else
@@ -68,7 +75,7 @@ for d in "$BUFFER_ROOT"/*/; do
     python ./scripts/plot_equity_curve.py
     --checkpoint "$ckpt"
     --buffer "$buffer"
-    --output-figure "$out_dir/equity_test.png"
+    --output-figure "$event_dir/equity_test.png"
     --device "$DEVICE"
   )
   if [ -n "$BENCHMARK_TICKER" ]; then
