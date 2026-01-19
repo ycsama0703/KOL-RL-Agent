@@ -1,0 +1,18 @@
+2026-01-19 00:18:26,457 - __main__ - INFO - Starting training run Invest_with_Henry_20260119_001826
+2026-01-19 00:18:26,457 - __main__ - INFO - Logging to outputs\ablation\local\bc_only\Invest_with_Henry_20260119_001826\logs\training.log
+2026-01-19 00:18:26,457 - __main__ - INFO - Checkpoints will be saved under outputs\ablation\local\bc_only\Invest_with_Henry_20260119_001826\checkpoints
+2026-01-19 00:18:26,486 - __main__ - INFO - Loaded replay buffer for Invest_with_Henry with 4311 samples, state_dim=804
+2026-01-19 00:18:27,520 - __main__ - INFO - BC epoch 1/10 - loss=0.004323
+2026-01-19 00:18:27,598 - __main__ - INFO - BC epoch 2/10 - loss=0.002856
+2026-01-19 00:18:27,677 - __main__ - INFO - BC epoch 3/10 - loss=0.002744
+2026-01-19 00:18:27,758 - __main__ - INFO - BC epoch 4/10 - loss=0.002631
+2026-01-19 00:18:27,836 - __main__ - INFO - BC epoch 5/10 - loss=0.002637
+2026-01-19 00:18:27,911 - __main__ - INFO - BC epoch 6/10 - loss=0.002534
+2026-01-19 00:18:27,993 - __main__ - INFO - BC epoch 7/10 - loss=0.002572
+2026-01-19 00:18:28,072 - __main__ - INFO - BC epoch 8/10 - loss=0.002539
+2026-01-19 00:18:28,153 - __main__ - INFO - BC epoch 9/10 - loss=0.002485
+2026-01-19 00:18:28,234 - __main__ - INFO - BC epoch 10/10 - loss=0.002504
+2026-01-19 00:18:28,234 - __main__ - INFO - Behavior cloning finished. Avg loss=0.002782
+2026-01-19 00:18:28,236 - __main__ - WARNING - Validation buffer data\buffer_22-24_end1231\Invest_with_Henry\val.pt not found; skipping evaluation.
+2026-01-19 00:18:28,246 - __main__ - INFO - Saved checkpoints to outputs\ablation\local\bc_only\Invest_with_Henry_20260119_001826\checkpoints
+2026-01-19 00:18:28,246 - __main__ - INFO - Saved run summary to outputs\ablation\local\bc_only\Invest_with_Henry_20260119_001826\run_summary.json

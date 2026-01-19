@@ -1,0 +1,25 @@
+{
+  "run_name": "Ale_s_World_of_Stocks_20260118_205953",
+  "timestamp": "20260118_205953",
+  "kol": "Ale_s_World_of_Stocks",
+  "train_samples": 45613,
+  "bc_loss": 0.00010405017444248117,
+  "config": {
+    "kol": "Ale_s_World_of_Stocks",
+    "replay_dir": "data/buffer_22-24_end1231",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/ablation/local/bc_plus_vanilla_iql",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "device": "cuda"
+  }
+}

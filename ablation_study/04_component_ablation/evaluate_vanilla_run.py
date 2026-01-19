@@ -169,7 +169,15 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def daily_equity(positions: pd.DataFrame) -> pd.DataFrame:
+def daily_equity(positions: pd.DataFrame, ref_dates: pd.Series | None = None) -> pd.DataFrame:
+    if positions.empty or "date" not in positions.columns:
+        if ref_dates is None or ref_dates.empty:
+            return pd.DataFrame(columns=["date", "weighted_return", "equity"])
+        base_dates = pd.to_datetime(ref_dates, errors="coerce").dropna().drop_duplicates().sort_values()
+        daily = pd.DataFrame({"date": base_dates, "weighted_return": 0.0})
+        daily["equity"] = 1.0
+        return daily
+
     df = positions.copy()
     df["date"] = pd.to_datetime(df["date"], errors="coerce").dt.normalize()
     df["weighted_return"] = df["weight"] * df["reward"]
@@ -233,7 +241,15 @@ def main() -> None:
 
         _, base_positions = run_policy(ZeroActor().to(device), buffer, device, action_threshold=args.action_threshold)
 
-        def equity_series(positions: pd.DataFrame) -> pd.DataFrame:
+        def equity_series(positions: pd.DataFrame, ref_dates: pd.Series | None = None) -> pd.DataFrame:
+            if positions.empty or "date" not in positions.columns:
+                if ref_dates is None or ref_dates.empty:
+                    return pd.DataFrame(columns=["date", "weighted_return", "equity"])
+                base_dates = pd.to_datetime(ref_dates, errors="coerce").dropna().drop_duplicates().sort_values()
+                daily = pd.DataFrame({"date": base_dates, "weighted_return": 0.0})
+                daily["equity"] = 1.0
+                return daily
+
             df = positions.copy()
             df["date"] = pd.to_datetime(df["date"])
             df["weighted_return"] = df["weight"] * df["reward"]
@@ -241,8 +257,8 @@ def main() -> None:
             daily["equity"] = (1.0 + daily["weighted_return"]).cumprod()
             return daily
 
-        base = equity_series(base_positions).rename(columns={"equity": "equity_baseline"})
         train = equity_series(positions_df).rename(columns={"equity": "equity_trained"})
+        base = equity_series(base_positions, ref_dates=train["date"]).rename(columns={"equity": "equity_baseline"})
         daily = pd.merge(base, train, on="date", how="inner")
 
         try:
@@ -284,8 +300,8 @@ def main() -> None:
                 action_threshold=args.action_threshold,
             )
 
-        daily_base = daily_equity(base_positions)
         daily_train = daily_equity(positions_df)
+        daily_base = daily_equity(base_positions, ref_dates=daily_train["date"])
         metrics_daily = {
             "trained": compute_metrics(daily_train["weighted_return"].to_numpy())
             if len(daily_train)

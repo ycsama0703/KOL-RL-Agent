@@ -1,0 +1,30 @@
+{
+  "model_a": {
+    "event": {
+      "cumulative_return": 0.5743652487598574,
+      "sharpe": 3.6540727905984975,
+      "max_drawdown": 0.12205073023486444
+    },
+    "daily": {
+      "cumulative_return": 0.5743652487598576,
+      "sharpe": 3.6540727905984975,
+      "max_drawdown": 0.12205073023486443
+    }
+  },
+  "model_b": {
+    "event": {
+      "cumulative_return": 0.4825687056848431,
+      "sharpe": 3.0245913070738233,
+      "max_drawdown": 0.1323431761414446
+    },
+    "daily": {
+      "cumulative_return": 0.4825687056848431,
+      "sharpe": 3.0245913070738233,
+      "max_drawdown": 0.1323431761414446
+    }
+  },
+  "labels": {
+    "model_a": "train_v2",
+    "model_b": "ablation_full"
+  }
+}

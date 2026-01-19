@@ -25,3 +25,4 @@ Optional env vars:
 - OUTPUT_DIR / TEST_DIR: output roots
 - DEVICE: evaluation device
 - EXPORT_SIGNAL: 1 to export signal_decisions_test.csv
+- BC_BATCH_SIZE / IQL_BATCH_SIZE: override batch sizes (default 256)

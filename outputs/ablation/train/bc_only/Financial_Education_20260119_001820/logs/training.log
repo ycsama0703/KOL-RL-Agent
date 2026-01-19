@@ -1,0 +1,18 @@
+2026-01-19 00:18:20,686 - __main__ - INFO - Starting training run Financial_Education_20260119_001820
+2026-01-19 00:18:20,686 - __main__ - INFO - Logging to outputs\ablation\local\bc_only\Financial_Education_20260119_001820\logs\training.log
+2026-01-19 00:18:20,686 - __main__ - INFO - Checkpoints will be saved under outputs\ablation\local\bc_only\Financial_Education_20260119_001820\checkpoints
+2026-01-19 00:18:20,762 - __main__ - INFO - Loaded replay buffer for Financial_Education with 15560 samples, state_dim=804
+2026-01-19 00:18:21,922 - __main__ - INFO - BC epoch 1/10 - loss=0.001032
+2026-01-19 00:18:22,220 - __main__ - INFO - BC epoch 2/10 - loss=0.000740
+2026-01-19 00:18:22,508 - __main__ - INFO - BC epoch 3/10 - loss=0.000724
+2026-01-19 00:18:22,852 - __main__ - INFO - BC epoch 4/10 - loss=0.000722
+2026-01-19 00:18:23,141 - __main__ - INFO - BC epoch 5/10 - loss=0.000715
+2026-01-19 00:18:23,432 - __main__ - INFO - BC epoch 6/10 - loss=0.000687
+2026-01-19 00:18:23,730 - __main__ - INFO - BC epoch 7/10 - loss=0.000678
+2026-01-19 00:18:24,020 - __main__ - INFO - BC epoch 8/10 - loss=0.000690
+2026-01-19 00:18:24,362 - __main__ - INFO - BC epoch 9/10 - loss=0.000664
+2026-01-19 00:18:24,662 - __main__ - INFO - BC epoch 10/10 - loss=0.000635
+2026-01-19 00:18:24,662 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000729
+2026-01-19 00:18:24,662 - __main__ - WARNING - Validation buffer data\buffer_22-24_end1231\Financial_Education\val.pt not found; skipping evaluation.
+2026-01-19 00:18:24,674 - __main__ - INFO - Saved checkpoints to outputs\ablation\local\bc_only\Financial_Education_20260119_001820\checkpoints
+2026-01-19 00:18:24,674 - __main__ - INFO - Saved run summary to outputs\ablation\local\bc_only\Financial_Education_20260119_001820\run_summary.json

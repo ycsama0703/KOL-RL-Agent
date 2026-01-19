@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-TRAIN_DIR=${TRAIN_DIR:-outputs/ablation/components/iql_vanilla_only}
-TEST_DIR=${TEST_DIR:-outputs/ablation/components/iql_vanilla_only_test}
+TRAIN_DIR=${TRAIN_DIR:-outputs/ablation/local/iql_vanilla_only}
+TEST_DIR=${TEST_DIR:-outputs/ablation/test/iql_vanilla_only}
 BUFFER_ROOT=${BUFFER_ROOT:-}
 DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}

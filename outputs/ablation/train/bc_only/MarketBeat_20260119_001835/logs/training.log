@@ -1,0 +1,18 @@
+2026-01-19 00:18:35,597 - __main__ - INFO - Starting training run MarketBeat_20260119_001835
+2026-01-19 00:18:35,597 - __main__ - INFO - Logging to outputs\ablation\local\bc_only\MarketBeat_20260119_001835\logs\training.log
+2026-01-19 00:18:35,597 - __main__ - INFO - Checkpoints will be saved under outputs\ablation\local\bc_only\MarketBeat_20260119_001835\checkpoints
+2026-01-19 00:18:35,647 - __main__ - INFO - Loaded replay buffer for MarketBeat with 11039 samples, state_dim=804
+2026-01-19 00:18:36,816 - __main__ - INFO - BC epoch 1/10 - loss=0.001672
+2026-01-19 00:18:37,030 - __main__ - INFO - BC epoch 2/10 - loss=0.001282
+2026-01-19 00:18:37,244 - __main__ - INFO - BC epoch 3/10 - loss=0.001255
+2026-01-19 00:18:37,453 - __main__ - INFO - BC epoch 4/10 - loss=0.001254
+2026-01-19 00:18:37,662 - __main__ - INFO - BC epoch 5/10 - loss=0.001259
+2026-01-19 00:18:37,919 - __main__ - INFO - BC epoch 6/10 - loss=0.001264
+2026-01-19 00:18:38,126 - __main__ - INFO - BC epoch 7/10 - loss=0.001264
+2026-01-19 00:18:38,331 - __main__ - INFO - BC epoch 8/10 - loss=0.001241
+2026-01-19 00:18:38,540 - __main__ - INFO - BC epoch 9/10 - loss=0.001234
+2026-01-19 00:18:38,744 - __main__ - INFO - BC epoch 10/10 - loss=0.001227
+2026-01-19 00:18:38,746 - __main__ - INFO - Behavior cloning finished. Avg loss=0.001295
+2026-01-19 00:18:38,746 - __main__ - WARNING - Validation buffer data\buffer_22-24_end1231\MarketBeat\val.pt not found; skipping evaluation.
+2026-01-19 00:18:38,758 - __main__ - INFO - Saved checkpoints to outputs\ablation\local\bc_only\MarketBeat_20260119_001835\checkpoints
+2026-01-19 00:18:38,758 - __main__ - INFO - Saved run summary to outputs\ablation\local\bc_only\MarketBeat_20260119_001835\run_summary.json

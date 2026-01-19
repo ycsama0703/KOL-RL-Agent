@@ -1,0 +1,25 @@
+{
+  "run_name": "Financial_Education_20260118_211225",
+  "timestamp": "20260118_211225",
+  "kol": "Financial_Education",
+  "train_samples": 15560,
+  "bc_loss": 0.0002613093564286828,
+  "config": {
+    "kol": "Financial_Education",
+    "replay_dir": "data/buffer_22-24_end1231",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/ablation/local/bc_plus_vanilla_iql",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "device": "cuda"
+  }
+}

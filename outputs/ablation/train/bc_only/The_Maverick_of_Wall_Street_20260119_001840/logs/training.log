@@ -1,0 +1,18 @@
+2026-01-19 00:18:40,581 - __main__ - INFO - Starting training run The_Maverick_of_Wall_Street_20260119_001840
+2026-01-19 00:18:40,581 - __main__ - INFO - Logging to outputs\ablation\local\bc_only\The_Maverick_of_Wall_Street_20260119_001840\logs\training.log
+2026-01-19 00:18:40,581 - __main__ - INFO - Checkpoints will be saved under outputs\ablation\local\bc_only\The_Maverick_of_Wall_Street_20260119_001840\checkpoints
+2026-01-19 00:18:41,059 - __main__ - INFO - Loaded replay buffer for The_Maverick_of_Wall_Street with 75969 samples, state_dim=804
+2026-01-19 00:18:43,495 - __main__ - INFO - BC epoch 1/10 - loss=0.000317
+2026-01-19 00:18:45,019 - __main__ - INFO - BC epoch 2/10 - loss=0.000239
+2026-01-19 00:18:46,497 - __main__ - INFO - BC epoch 3/10 - loss=0.000236
+2026-01-19 00:18:48,023 - __main__ - INFO - BC epoch 4/10 - loss=0.000220
+2026-01-19 00:18:49,537 - __main__ - INFO - BC epoch 5/10 - loss=0.000206
+2026-01-19 00:18:51,017 - __main__ - INFO - BC epoch 6/10 - loss=0.000195
+2026-01-19 00:18:52,588 - __main__ - INFO - BC epoch 7/10 - loss=0.000175
+2026-01-19 00:18:54,129 - __main__ - INFO - BC epoch 8/10 - loss=0.000175
+2026-01-19 00:18:55,682 - __main__ - INFO - BC epoch 9/10 - loss=0.000169
+2026-01-19 00:18:57,211 - __main__ - INFO - BC epoch 10/10 - loss=0.000162
+2026-01-19 00:18:57,211 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000210
+2026-01-19 00:18:57,211 - __main__ - WARNING - Validation buffer data\buffer_22-24_end1231\The_Maverick_of_Wall_Street\val.pt not found; skipping evaluation.
+2026-01-19 00:18:57,225 - __main__ - INFO - Saved checkpoints to outputs\ablation\local\bc_only\The_Maverick_of_Wall_Street_20260119_001840\checkpoints
+2026-01-19 00:18:57,225 - __main__ - INFO - Saved run summary to outputs\ablation\local\bc_only\The_Maverick_of_Wall_Street_20260119_001840\run_summary.json

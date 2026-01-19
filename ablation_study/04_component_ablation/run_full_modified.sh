@@ -3,10 +3,12 @@ set -euo pipefail
 
 PYTHON=${PYTHON:-python}
 BUFFER_ROOT=${BUFFER_ROOT:-}
-OUTPUT_DIR=${OUTPUT_DIR:-outputs/ablation/components/full_modified}
-TEST_DIR=${TEST_DIR:-outputs/ablation/components/full_modified_test}
+OUTPUT_DIR=${OUTPUT_DIR:-outputs/ablation/local/full_modified}
+TEST_DIR=${TEST_DIR:-outputs/ablation/test/full_modified}
 DEVICE=${DEVICE:-cpu}
 EXPORT_SIGNAL=${EXPORT_SIGNAL:-1}
+BC_BATCH_SIZE=${BC_BATCH_SIZE:-256}
+IQL_BATCH_SIZE=${IQL_BATCH_SIZE:-256}
 
 if [ -z "$BUFFER_ROOT" ]; then
   if [ -d "data/buffer_22-24_end1231" ]; then
@@ -29,7 +31,9 @@ for d in "$BUFFER_ROOT"/*/; do
   "$PYTHON" train.py \
     --kol "$kol" \
     --replay-dir "$BUFFER_ROOT" \
-    --output-dir "$OUTPUT_DIR"
+    --output-dir "$OUTPUT_DIR" \
+    --bc-batch-size "$BC_BATCH_SIZE" \
+    --iql-batch-size "$IQL_BATCH_SIZE"
 done
 
 TRAIN_DIR="$OUTPUT_DIR" \

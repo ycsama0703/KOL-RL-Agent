@@ -1,0 +1,25 @@
+{
+  "run_name": "Tom_Nash_20260118_235231",
+  "timestamp": "20260118_235231",
+  "kol": "Tom_Nash",
+  "train_samples": 18773,
+  "bc_loss": 0.0,
+  "config": {
+    "kol": "Tom_Nash",
+    "replay_dir": "data/buffer_22-24_end1231",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/ablation/local/iql_vanilla_only",
+    "bc_epochs": 0,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "iql_steps": 200000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "device": "cuda"
+  }
+}
