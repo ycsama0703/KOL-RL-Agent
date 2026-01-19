@@ -11,6 +11,7 @@ BENCHMARK_LABEL=${BENCHMARK_LABEL:-"SPY (market)"}
 DAILY_BENCHMARK_TICKER=${DAILY_BENCHMARK_TICKER:-$BENCHMARK_TICKER}
 DAILY_BENCHMARK_LABEL=${DAILY_BENCHMARK_LABEL:-$BENCHMARK_LABEL}
 EXPORT_SIGNAL=${EXPORT_SIGNAL:-1}
+DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
 REWARD_ROOT=${REWARD_ROOT:-data/processed/reward}
 TICKER_VOCAB=${TICKER_VOCAB:-models/embedding/22-24_ticker_vocab.json}
 TICKER_EMB=${TICKER_EMB:-models/embedding/22-24_ticker_embedding.pt}
@@ -49,7 +50,8 @@ for d in "$BUFFER_ROOT"/*/; do
     --daily-output-dir "$daily_dir" \
     --daily-benchmark-ticker "$DAILY_BENCHMARK_TICKER" \
     --daily-benchmark-label "$DAILY_BENCHMARK_LABEL" \
-    --action-threshold "$ACTION_THRESHOLD" || {
+    --action-threshold "$ACTION_THRESHOLD" \
+    $([ "$DAILY_PRICE_UPDATE" = "1" ] && echo "--daily-price-update") || {
       echo "Eval failed for $kol"
       continue
     }
