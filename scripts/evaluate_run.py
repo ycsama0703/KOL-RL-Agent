@@ -14,9 +14,69 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.evaluation import analyzer
 from src.evaluation.analyzer import load_actor, run_policy
 from src.training.data import load_buffer
-from train import compute_metrics
+from train import TrainingConfig, compute_metrics
+
+
+def compute_betrayal_metrics(
+    baseline_action: torch.Tensor,
+    policy_action: torch.Tensor,
+    *,
+    entry_threshold: float,
+    action_threshold: float,
+) -> dict:
+    baseline = baseline_action.detach().float().view(-1)
+    policy = policy_action.detach().float().view(-1)
+
+    eps = 1e-8
+    has_signal = baseline.abs() >= float(entry_threshold)
+    no_signal = ~has_signal
+
+    prod = baseline * policy
+    reversed_mask = has_signal & (prod < 0.0)
+    entry_violation = no_signal & (policy.abs() > float(action_threshold))
+
+    delta = policy - baseline
+    abs_delta = delta.abs()
+
+    def safe_mean(x: torch.Tensor) -> float:
+        if x.numel() == 0:
+            return 0.0
+        return float(x.mean().item())
+
+    def safe_rate(mask: torch.Tensor, denom_mask: torch.Tensor) -> float:
+        denom = float(denom_mask.sum().item())
+        if denom <= 0:
+            return 0.0
+        return float(mask.sum().item()) / denom
+
+    metrics = {
+        "num_samples": int(baseline.numel()),
+        "num_has_signal": int(has_signal.sum().item()),
+        "num_no_signal": int(no_signal.sum().item()),
+        "reversal_rate": safe_rate(reversed_mask, has_signal),
+        "reversal_mean_abs_action": safe_mean(policy[reversed_mask].abs()),
+        "reversal_mean_abs_delta": safe_mean(abs_delta[reversed_mask]),
+        "entry_violation_rate": safe_rate(entry_violation, no_signal),
+        "entry_violation_mean_abs_action": safe_mean(policy[entry_violation].abs()),
+        "mean_abs_deviation": safe_mean(abs_delta),
+        "mean_normalized_deviation": safe_mean(abs_delta[has_signal] / (baseline[has_signal].abs() + eps)),
+    }
+
+    same_sign = has_signal & (prod > 0.0)
+    metrics["sign_agreement_rate"] = safe_rate(same_sign, has_signal)
+
+    b = baseline[has_signal]
+    p = policy[has_signal]
+    if b.numel() >= 2 and float(b.std().item()) > 0 and float(p.std().item()) > 0:
+        corr = torch.corrcoef(torch.stack([b, p]))[0, 1]
+        metrics["baseline_policy_corr"] = float(corr.item())
+    else:
+        metrics["baseline_policy_corr"] = float("nan")
+
+    return metrics
 
 
 def parse_args() -> argparse.Namespace:
@@ -80,6 +140,27 @@ def main() -> None:
     state_dim = buffer["states"].shape[1]
     actor = load_actor(checkpoint_path, state_dim, device)
     metrics, positions_df = run_policy(actor, buffer, device, action_threshold=args.action_threshold)
+
+    baseline_tensor = (
+        buffer.get("baseline_actions")
+        or buffer.get("baseline_action")
+        or buffer["actions"]
+    ).float()
+    policy_np = analyzer._predict_policy_actions(  # type: ignore[attr-defined]
+        actor=actor,
+        states=buffer["states"].float(),
+        baseline_actions=baseline_tensor,
+        device=device,
+        cfg=TrainingConfig(),
+        batch_size=1024,
+    )
+    policy_tensor = torch.from_numpy(policy_np).view(-1, 1)
+    betrayal_metrics = compute_betrayal_metrics(
+        baseline_action=baseline_tensor,
+        policy_action=policy_tensor,
+        entry_threshold=TrainingConfig().entry_threshold,
+        action_threshold=args.action_threshold,
+    )
 
     def daily_equity(positions: pd.DataFrame) -> pd.DataFrame:
         df = positions.copy()
@@ -196,7 +277,7 @@ def main() -> None:
         daily_train = daily_equity(positions_df)
         daily_returns = daily_train["weighted_return"].to_numpy()
     daily_metrics = compute_metrics(daily_returns) if len(daily_returns) else metrics
-    metrics_out = {**metrics, "daily_metrics": daily_metrics}
+    metrics_out = {**metrics, "daily_metrics": daily_metrics, "betrayal_metrics": betrayal_metrics}
 
     print(json.dumps(metrics_out, indent=2))
 

@@ -6,6 +6,7 @@ TEST_DIR=${TEST_DIR:-outputs/ablation/test/iql_vanilla_only}
 BUFFER_ROOT=${BUFFER_ROOT:-}
 DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
+DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
 
 if [ -z "$BUFFER_ROOT" ]; then
   if [ -d "data/buffer_22-24_end1231" ]; then
@@ -45,6 +46,7 @@ for d in "$BUFFER_ROOT"/*/; do
     --output-dir "$event_dir" \
     --daily-output-dir "$daily_dir" \
     --action-threshold "$ACTION_THRESHOLD" \
+    $([ "$DAILY_PRICE_UPDATE" = "1" ] && echo "--daily-price-update") \
     --plot || {
       echo "Eval failed for $kol"
       continue

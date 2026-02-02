@@ -36,6 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--benchmark-label", default="SPY")
     parser.add_argument("--no-benchmark", action="store_true")
     parser.add_argument("--no-baseline", action="store_true")
+    parser.add_argument("--use-daily", action="store_true", help="Use daily equity outputs instead of event-time.")
     parser.add_argument("--action-threshold", type=float, default=0.02)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--only-kol", action="append", default=[])
@@ -70,6 +71,17 @@ def find_positions(run_dir: Path) -> Path | None:
     return None
 
 
+def find_daily_equity(run_dir: Path) -> Path | None:
+    candidates = [
+        run_dir / "daily/equity_daily.csv",
+        run_dir / "test/daily/equity_daily.csv",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path
+    return None
+
+
 def equity_from_positions(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
     df["date"] = pd.to_datetime(df["date"])
@@ -77,6 +89,30 @@ def equity_from_positions(path: Path) -> pd.DataFrame:
     daily = df.groupby("date", as_index=False)["weighted_return"].sum().sort_values("date")
     daily["equity"] = (1.0 + daily["weighted_return"]).cumprod()
     return daily[["date", "equity"]]
+
+
+def equity_from_daily(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path)
+    df["date"] = pd.to_datetime(df["date"])
+    if "equity_trained" in df.columns:
+        equity = df["equity_trained"]
+    elif "equity" in df.columns:
+        equity = df["equity"]
+    else:
+        raise ValueError(f"No equity column found in {path}")
+    return pd.DataFrame({"date": df["date"], "equity": equity})
+
+
+def baseline_from_daily(path: Path) -> pd.DataFrame | None:
+    df = pd.read_csv(path)
+    if "equity_baseline" not in df.columns:
+        return None
+    return pd.DataFrame(
+        {
+            "date": pd.to_datetime(df["date"]),
+            "equity": df["equity_baseline"],
+        }
+    )
 
 
 def add_series(merged: pd.DataFrame | None, series: pd.DataFrame, name: str) -> pd.DataFrame:
@@ -89,15 +125,21 @@ def add_series(merged: pd.DataFrame | None, series: pd.DataFrame, name: str) -> 
 def build_series_map(
     kol: str,
     dirs: Dict[str, Path],
+    use_daily: bool,
 ) -> Dict[str, Path]:
     series = {}
     for label, base in dirs.items():
         run = latest_run(base, kol)
         if not run:
             continue
-        positions = find_positions(run)
-        if positions:
-            series[label] = positions
+        if use_daily:
+            daily = find_daily_equity(run)
+            if daily:
+                series[label] = daily
+        else:
+            positions = find_positions(run)
+            if positions:
+                series[label] = positions
     return series
 
 
@@ -164,41 +206,57 @@ def main() -> None:
     }
 
     for kol in sorted(set(kol_names)):
-        series_map = build_series_map(kol, series_dirs)
+        series_map = build_series_map(kol, series_dirs, args.use_daily)
         if anchor_label not in series_map:
-            print(f"Skip {kol} (missing {anchor_label} positions_test.csv)")
+            kind = "daily equity" if args.use_daily else "positions_test.csv"
+            print(f"Skip {kol} (missing {anchor_label} {kind})")
             continue
         if not series_map:
-            print(f"Skip {kol} (no positions_test.csv found)")
+            kind = "daily equity" if args.use_daily else "positions_test.csv"
+            print(f"Skip {kol} (no {kind} found)")
             continue
 
         merged = None
         for label, path in series_map.items():
-            merged = add_series(merged, equity_from_positions(path), label)
+            if args.use_daily:
+                series = equity_from_daily(path)
+            else:
+                series = equity_from_positions(path)
+            if series.empty:
+                print(f"Skip {kol} {label} (empty series: {path})")
+                continue
+            merged = add_series(merged, series, label)
 
         if merged is None or merged.empty:
             print(f"Skip {kol} (no overlapping dates)")
             continue
 
         if not args.no_baseline:
-            buffer_path = Path(buffer_root) / kol / "test.pt"
-            if buffer_path.exists():
-                class ZeroActor(torch.nn.Module):
-                    def forward(self, state: torch.Tensor) -> torch.Tensor:
-                        return torch.zeros((state.size(0), 1), device=state.device)
+            base_series = None
+            if args.use_daily:
+                anchor_daily = series_map.get(anchor_label)
+                if anchor_daily:
+                    base_series = baseline_from_daily(anchor_daily)
+            if base_series is None:
+                buffer_path = Path(buffer_root) / kol / "test.pt"
+                if buffer_path.exists():
+                    class ZeroActor(torch.nn.Module):
+                        def forward(self, state: torch.Tensor) -> torch.Tensor:
+                            return torch.zeros((state.size(0), 1), device=state.device)
 
-                device = torch.device(args.device)
-                buffer = load_buffer(buffer_path)
-                _, base_positions = run_policy(
-                    ZeroActor().to(device),
-                    buffer,
-                    device,
-                    action_threshold=args.action_threshold,
-                )
-                base_series = equity_from_positions_df(base_positions)
+                    device = torch.device(args.device)
+                    buffer = load_buffer(buffer_path)
+                    _, base_positions = run_policy(
+                        ZeroActor().to(device),
+                        buffer,
+                        device,
+                        action_threshold=args.action_threshold,
+                    )
+                    base_series = equity_from_positions_df(base_positions)
+                else:
+                    print(f"Skip baseline for {kol} (missing buffer: {buffer_path})")
+            if base_series is not None and not base_series.empty:
                 merged = add_series(merged, base_series, "baseline")
-            else:
-                print(f"Skip baseline for {kol} (missing buffer: {buffer_path})")
 
         if not args.no_benchmark:
             bench_eq = fetch_benchmark(merged["date"], args.benchmark_ticker)
@@ -213,7 +271,7 @@ def main() -> None:
 
         out_dir = output_root / kol
         out_dir.mkdir(parents=True, exist_ok=True)
-        csv_path = out_dir / "compare_equity.csv"
+        csv_path = out_dir / ("compare_equity_daily.csv" if args.use_daily else "compare_equity.csv")
         merged.to_csv(csv_path, index=False)
 
         try:
@@ -248,11 +306,12 @@ def main() -> None:
             )
         ax.set_xlabel("Date")
         ax.set_ylabel("Equity (Rebased)")
-        ax.set_title(f"{kol} Equity Comparison (Event-Time)")
+        title = "Daily Equity Comparison" if args.use_daily else "Equity Comparison (Event-Time)"
+        ax.set_title(f"{kol} {title}")
         ax.grid(True, alpha=0.3)
         ax.legend()
         fig.autofmt_xdate()
-        fig_path = out_dir / "compare_equity.png"
+        fig_path = out_dir / ("compare_equity_daily.png" if args.use_daily else "compare_equity.png")
         fig.savefig(fig_path, bbox_inches="tight", dpi=150)
         plt.close(fig)
         print(f"Saved {fig_path}")
