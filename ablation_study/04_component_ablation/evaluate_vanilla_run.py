@@ -299,6 +299,29 @@ def main() -> None:
     actor = load_actor(checkpoint_path, state_dim, device)
     metrics, positions_df = run_policy(actor, buffer, device, action_threshold=args.action_threshold)
 
+    # Attach per-sample actions for downstream analysis (align by date+ticker)
+    states = buffer["states"]
+    preds: list[torch.Tensor] = []
+    with torch.no_grad():
+        for start in range(0, states.size(0), 1024):
+            batch = states[start : start + 1024].to(device)
+            preds.append(actor(batch).squeeze(-1).cpu())
+    policy_action = torch.cat(preds).numpy()
+    action_df = pd.DataFrame(
+        {
+            "date": buffer["meta"]["published_at"],
+            "ticker": buffer["meta"]["ticker"],
+            "policy_action": policy_action,
+        }
+    )
+    baseline_tensor = buffer.get("baseline_actions")
+    if baseline_tensor is None:
+        baseline_tensor = buffer.get("baseline_action")
+    if baseline_tensor is None:
+        baseline_tensor = buffer.get("actions")
+    if baseline_tensor is not None:
+        action_df["baseline_action"] = baseline_tensor.view(-1).cpu().numpy()
+
     if args.daily_price_update:
         tickers = sorted(safe_series(positions_df, "ticker").dropna().unique().tolist())
         dates = pd.to_datetime(safe_series(positions_df, "date"), errors="coerce")
@@ -335,7 +358,8 @@ def main() -> None:
         print(f"Saved metrics to {output_path}")
     if positions_path:
         positions_path.parent.mkdir(parents=True, exist_ok=True)
-        positions_df.to_csv(positions_path, index=False)
+        positions_out = positions_df.merge(action_df, on=["date", "ticker"], how="left")
+        positions_out.to_csv(positions_path, index=False)
         print(f"Saved positions log to {positions_path}")
 
     base_positions = None

@@ -79,6 +79,23 @@ def compute_betrayal_metrics(
     return metrics
 
 
+def build_action_frame(
+    buffer: dict,
+    baseline_action: torch.Tensor,
+    policy_action: torch.Tensor,
+) -> pd.DataFrame:
+    dates = buffer["meta"]["published_at"]
+    tickers = buffer["meta"]["ticker"]
+    return pd.DataFrame(
+        {
+            "date": dates,
+            "ticker": tickers,
+            "baseline_action": baseline_action.view(-1).cpu().numpy(),
+            "policy_action": policy_action.view(-1).cpu().numpy(),
+        }
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate a trained policy on a replay buffer split.")
     parser.add_argument("--checkpoint", required=True, help="Path to actor or policy checkpoint (pt file).")
@@ -141,24 +158,31 @@ def main() -> None:
     actor = load_actor(checkpoint_path, state_dim, device)
     metrics, positions_df = run_policy(actor, buffer, device, action_threshold=args.action_threshold)
 
-    baseline_tensor = (
-        buffer.get("baseline_actions")
-        or buffer.get("baseline_action")
-        or buffer["actions"]
-    ).float()
+    baseline_tensor = buffer.get("baseline_actions")
+    if baseline_tensor is None:
+        baseline_tensor = buffer.get("baseline_action")
+    if baseline_tensor is None:
+        baseline_tensor = buffer["actions"]
+    baseline_tensor = baseline_tensor.float()
+
+    eval_cfg = TrainingConfig(
+        entry_threshold=TrainingConfig().entry_threshold,
+        clamp_delta=TrainingConfig().clamp_delta,
+    )
     policy_np = analyzer._predict_policy_actions(  # type: ignore[attr-defined]
         actor=actor,
         states=buffer["states"].float(),
         baseline_actions=baseline_tensor,
         device=device,
-        cfg=TrainingConfig(),
+        cfg=eval_cfg,
         batch_size=1024,
     )
     policy_tensor = torch.from_numpy(policy_np).view(-1, 1)
+    action_df = build_action_frame(buffer, baseline_tensor, policy_tensor)
     betrayal_metrics = compute_betrayal_metrics(
         baseline_action=baseline_tensor,
         policy_action=policy_tensor,
-        entry_threshold=TrainingConfig().entry_threshold,
+        entry_threshold=eval_cfg.entry_threshold,
         action_threshold=args.action_threshold,
     )
 
@@ -298,7 +322,8 @@ def main() -> None:
         print(f"Saved metrics to {output_path}")
     if positions_path:
         positions_path.parent.mkdir(parents=True, exist_ok=True)
-        positions_df.to_csv(positions_path, index=False)
+        positions_out = positions_df.merge(action_df, on=["date", "ticker"], how="left")
+        positions_out.to_csv(positions_path, index=False)
         print(f"Saved positions log to {positions_path}")
 
     base_positions = None

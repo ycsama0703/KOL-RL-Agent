@@ -1,0 +1,10 @@
+{
+  "cumulative_return": -0.020854735865471263,
+  "sharpe": 0.2555127025970434,
+  "max_drawdown": 0.3124046415512326,
+  "daily_metrics": {
+    "cumulative_return": -0.013638306702014935,
+    "sharpe": 0.17194895325996867,
+    "max_drawdown": 0.3238999650338486
+  }
+}

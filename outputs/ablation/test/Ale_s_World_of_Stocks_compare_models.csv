@@ -1,0 +1,7 @@
+model,cumulative_return,sharpe,max_drawdown,betrayal_num_samples,betrayal_num_has_signal,betrayal_num_no_signal,betrayal_reversal_rate,betrayal_reversal_mean_abs_action,betrayal_reversal_mean_abs_delta,betrayal_entry_violation_rate,betrayal_entry_violation_mean_abs_action,betrayal_mean_abs_deviation,betrayal_mean_normalized_deviation,betrayal_sign_agreement_rate,betrayal_baseline_policy_corr
+bc_only,0.5937713444020738,3.4866691005285553,0.13087333985855545,4707.0,380.0,4327.0,0.0,0.0,0.0,0.0,0.0,0.0050912881270051,0.686090350151062,0.7105263157894737,0.878123939037323
+bc_plus_vanilla_iql,0.1876330250757441,3.3586944528934075,0.052074822039077755,,,,,,,,,,,,
+full,0.5743652948380067,3.6540729352692085,0.12205072995855502,,,,,,,,,,,,
+full_modified,0.3757214652096834,2.65057934143085,0.1364589825302739,,,,,,,,,,,,
+iql_modified_only,0.47337944632522366,3.107616925013365,0.13292859977481683,4707.0,380.0,4327.0,0.0,0.0,0.0,0.0,0.0,0.005238920450210571,0.7173569798469543,0.7052631578947368,0.8176615834236145
+iql_vanilla_only,0.21183929892204878,3.8712811512079033,0.037975282758394374,,,,,,,,,,,,

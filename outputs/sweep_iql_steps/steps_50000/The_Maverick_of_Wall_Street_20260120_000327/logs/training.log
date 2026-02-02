@@ -1,0 +1,68 @@
+2026-01-20 00:03:27,442 - __main__ - INFO - Starting training run The_Maverick_of_Wall_Street_20260120_000327
+2026-01-20 00:03:27,442 - __main__ - INFO - Logging to outputs\sweep_iql_steps\steps_50000\The_Maverick_of_Wall_Street_20260120_000327\logs\training.log
+2026-01-20 00:03:27,442 - __main__ - INFO - Checkpoints will be saved under outputs\sweep_iql_steps\steps_50000\The_Maverick_of_Wall_Street_20260120_000327\checkpoints
+2026-01-20 00:03:28,005 - __main__ - INFO - Loaded replay buffer for The_Maverick_of_Wall_Street with 75969 samples, state_dim=804
+2026-01-20 00:03:30,433 - __main__ - INFO - BC epoch 1/10 - loss=0.000335
+2026-01-20 00:03:31,946 - __main__ - INFO - BC epoch 2/10 - loss=0.000246
+2026-01-20 00:03:33,432 - __main__ - INFO - BC epoch 3/10 - loss=0.000225
+2026-01-20 00:03:34,982 - __main__ - INFO - BC epoch 4/10 - loss=0.000220
+2026-01-20 00:03:36,501 - __main__ - INFO - BC epoch 5/10 - loss=0.000210
+2026-01-20 00:03:37,971 - __main__ - INFO - BC epoch 6/10 - loss=0.000185
+2026-01-20 00:03:39,529 - __main__ - INFO - BC epoch 7/10 - loss=0.000174
+2026-01-20 00:03:40,994 - __main__ - INFO - BC epoch 8/10 - loss=0.000167
+2026-01-20 00:03:42,525 - __main__ - INFO - BC epoch 9/10 - loss=0.000184
+2026-01-20 00:03:44,056 - __main__ - INFO - BC epoch 10/10 - loss=0.000169
+2026-01-20 00:03:44,057 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000212
+2026-01-20 00:03:50,317 - __main__ - INFO - IQL step 1000/50000 - critic=14851.677734 value=94.016495 actor=0.000907
+2026-01-20 00:03:55,031 - __main__ - INFO - IQL step 2000/50000 - critic=1068.205933 value=39.130409 actor=0.000428
+2026-01-20 00:03:59,669 - __main__ - INFO - IQL step 3000/50000 - critic=1055.261719 value=27.617420 actor=0.003944
+2026-01-20 00:04:04,474 - __main__ - INFO - IQL step 4000/50000 - critic=123.354874 value=10.640383 actor=0.002354
+2026-01-20 00:04:09,779 - __main__ - INFO - IQL step 5000/50000 - critic=57.503582 value=4.049016 actor=0.000311
+2026-01-20 00:04:15,617 - __main__ - INFO - IQL step 6000/50000 - critic=30.955109 value=2.453761 actor=0.000464
+2026-01-20 00:04:21,754 - __main__ - INFO - IQL step 7000/50000 - critic=27.144030 value=2.501446 actor=0.001152
+2026-01-20 00:04:27,872 - __main__ - INFO - IQL step 8000/50000 - critic=686401472.000000 value=770085.687500 actor=0.001710
+2026-01-20 00:04:33,994 - __main__ - INFO - IQL step 9000/50000 - critic=2573230.250000 value=106715.789062 actor=0.000182
+2026-01-20 00:04:40,059 - __main__ - INFO - IQL step 10000/50000 - critic=302942.468750 value=39731.148438 actor=0.000785
+2026-01-20 00:04:46,138 - __main__ - INFO - IQL step 11000/50000 - critic=148636.812500 value=20102.275391 actor=0.000892
+2026-01-20 00:04:52,289 - __main__ - INFO - IQL step 12000/50000 - critic=113466.640625 value=5953.702148 actor=0.008233
+2026-01-20 00:04:58,441 - __main__ - INFO - IQL step 13000/50000 - critic=99378.781250 value=2027.539062 actor=0.000752
+2026-01-20 00:05:04,618 - __main__ - INFO - IQL step 14000/50000 - critic=33867.894531 value=1617.692017 actor=0.000876
+2026-01-20 00:05:10,728 - __main__ - INFO - IQL step 15000/50000 - critic=11058.522461 value=1577.717529 actor=0.000266
+2026-01-20 00:05:16,834 - __main__ - INFO - IQL step 16000/50000 - critic=414759296.000000 value=2780368.500000 actor=0.000112
+2026-01-20 00:05:22,965 - __main__ - INFO - IQL step 17000/50000 - critic=203168368.000000 value=289054.937500 actor=0.003788
+2026-01-20 00:05:29,219 - __main__ - INFO - IQL step 18000/50000 - critic=10288716.000000 value=39792.351562 actor=0.000096
+2026-01-20 00:05:35,402 - __main__ - INFO - IQL step 19000/50000 - critic=129233.937500 value=12743.861328 actor=0.000113
+2026-01-20 00:05:39,715 - __main__ - INFO - IQL step 20000/50000 - critic=136570.406250 value=14020.130859 actor=0.000471
+2026-01-20 00:05:44,221 - __main__ - INFO - IQL step 21000/50000 - critic=102483.703125 value=15051.261719 actor=0.002685
+2026-01-20 00:05:48,730 - __main__ - INFO - IQL step 22000/50000 - critic=353477.750000 value=16277.755859 actor=0.000812
+2026-01-20 00:05:53,299 - __main__ - INFO - IQL step 23000/50000 - critic=785046.312500 value=5366.675781 actor=0.000304
+2026-01-20 00:05:57,798 - __main__ - INFO - IQL step 24000/50000 - critic=803875.375000 value=10980.584961 actor=0.000551
+2026-01-20 00:06:02,231 - __main__ - INFO - IQL step 25000/50000 - critic=141648.265625 value=7438.062500 actor=0.000728
+2026-01-20 00:06:06,573 - __main__ - INFO - IQL step 26000/50000 - critic=1618395.250000 value=8624.475586 actor=0.002583
+2026-01-20 00:06:10,982 - __main__ - INFO - IQL step 27000/50000 - critic=665357120.000000 value=758878.437500 actor=0.000974
+2026-01-20 00:06:15,413 - __main__ - INFO - IQL step 28000/50000 - critic=466376.875000 value=198445.453125 actor=0.000490
+2026-01-20 00:06:19,972 - __main__ - INFO - IQL step 29000/50000 - critic=640671.937500 value=27685.693359 actor=0.000610
+2026-01-20 00:06:24,708 - __main__ - INFO - IQL step 30000/50000 - critic=798897.000000 value=36156.820312 actor=0.000669
+2026-01-20 00:06:29,768 - __main__ - INFO - IQL step 31000/50000 - critic=2739604.500000 value=104603.125000 actor=0.000467
+2026-01-20 00:06:34,202 - __main__ - INFO - IQL step 32000/50000 - critic=4842149.000000 value=105327.781250 actor=0.000749
+2026-01-20 00:06:38,702 - __main__ - INFO - IQL step 33000/50000 - critic=4405765.500000 value=26749.806641 actor=0.000535
+2026-01-20 00:06:43,088 - __main__ - INFO - IQL step 34000/50000 - critic=226975.343750 value=4708.967773 actor=0.000349
+2026-01-20 00:06:47,426 - __main__ - INFO - IQL step 35000/50000 - critic=108509864.000000 value=1323940.000000 actor=0.000300
+2026-01-20 00:06:51,817 - __main__ - INFO - IQL step 36000/50000 - critic=24394066.000000 value=75058.734375 actor=0.001696
+2026-01-20 00:06:56,235 - __main__ - INFO - IQL step 37000/50000 - critic=434758.937500 value=27582.302734 actor=0.000177
+2026-01-20 00:07:00,659 - __main__ - INFO - IQL step 38000/50000 - critic=252114.468750 value=18758.560547 actor=0.001083
+2026-01-20 00:07:05,081 - __main__ - INFO - IQL step 39000/50000 - critic=483075.312500 value=38272.851562 actor=0.000191
+2026-01-20 00:07:09,425 - __main__ - INFO - IQL step 40000/50000 - critic=504301.250000 value=26862.177734 actor=0.000874
+2026-01-20 00:07:13,790 - __main__ - INFO - IQL step 41000/50000 - critic=27410982.000000 value=78231.328125 actor=0.002280
+2026-01-20 00:07:18,196 - __main__ - INFO - IQL step 42000/50000 - critic=5449275.000000 value=82003.046875 actor=0.000569
+2026-01-20 00:07:22,612 - __main__ - INFO - IQL step 43000/50000 - critic=3472034.000000 value=45149.273438 actor=0.000552
+2026-01-20 00:07:26,991 - __main__ - INFO - IQL step 44000/50000 - critic=4736863.000000 value=15725.335938 actor=0.000267
+2026-01-20 00:07:31,362 - __main__ - INFO - IQL step 45000/50000 - critic=42409536.000000 value=67809.125000 actor=0.000249
+2026-01-20 00:07:35,739 - __main__ - INFO - IQL step 46000/50000 - critic=1572656.875000 value=22281.054688 actor=0.000356
+2026-01-20 00:07:40,140 - __main__ - INFO - IQL step 47000/50000 - critic=589990.750000 value=6540.798828 actor=0.000319
+2026-01-20 00:07:44,533 - __main__ - INFO - IQL step 48000/50000 - critic=794947712.000000 value=885243.687500 actor=0.000386
+2026-01-20 00:07:48,991 - __main__ - INFO - IQL step 49000/50000 - critic=7967665.000000 value=80177.953125 actor=0.000263
+2026-01-20 00:07:53,371 - __main__ - INFO - IQL step 50000/50000 - critic=2171970.500000 value=23634.699219 actor=0.000708
+2026-01-20 00:07:53,372 - __main__ - WARNING - Validation buffer data\buffer_22-24\The_Maverick_of_Wall_Street\val.pt not found; skipping evaluation.
+2026-01-20 00:07:53,385 - __main__ - INFO - Saved checkpoints to outputs\sweep_iql_steps\steps_50000\The_Maverick_of_Wall_Street_20260120_000327\checkpoints
+2026-01-20 00:07:53,386 - __main__ - INFO - Saved run summary to outputs\sweep_iql_steps\steps_50000\The_Maverick_of_Wall_Street_20260120_000327\run_summary.json
