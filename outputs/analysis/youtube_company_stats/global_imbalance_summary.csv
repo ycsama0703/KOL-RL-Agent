@@ -1,0 +1,2 @@
+posts_total,positive_count,negative_count,neutral_count,positive_ratio,negative_ratio,neutral_ratio,pos_to_neg_count,p_next_neg_given_pos,neg_to_pos_count,p_next_pos_given_neg
+48722,26432,13495,8795,0.542506465251837,0.27697959853864784,0.1805139362095152,4780,0.20909886264216973,4862,0.4156621355903223

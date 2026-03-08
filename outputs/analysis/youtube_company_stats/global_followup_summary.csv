@@ -1,0 +1,4 @@
+window_days,companies_total,no_followup_within_window_count,no_followup_within_window_pct
+30,6774,6068,0.8957779746087984
+60,6774,5809,0.8575435488633009
+90,6774,5614,0.8287570121051078

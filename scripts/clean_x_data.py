@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Clean X/Twitter jsonl into a minimal text-centric schema for LLM labeling.
+"""Clean X/Twitter jsonl into a compact schema for LLM labeling and analysis.
 
 Key transformations:
-- Drop non-text-heavy fields (media, author profile, extendedEntities, etc.)
+- Drop heavy profile/rendering fields while keeping core text, media, and engagement data
 - Normalize created_at to UTC ISO8601 (Z)
 - Optionally merge quoted/retweeted text into a single `text` field
 - Extract tickers from entities.symbols and cashtags in text
@@ -128,6 +128,15 @@ def sanitize_ticker(ticker: str) -> str:
     return ticker.strip().lstrip("$").upper().replace(".", "-")
 
 
+def safe_int(value: Any) -> int | None:
+    if value is None or value == "":
+        return None
+    try:
+        return int(value)
+    except Exception:
+        return None
+
+
 def build_text(tweet: Dict[str, Any], *, include_quote_text: bool, include_retweet_text: bool) -> Tuple[str, str | None, str | None]:
     main = tweet.get("text") if isinstance(tweet.get("text"), str) else ""
     main = main.strip()
@@ -149,6 +158,27 @@ def build_text(tweet: Dict[str, Any], *, include_quote_text: bool, include_retwe
     parts = [p for p in [main, quoted, retweeted] if p]
     combined = "\n\n".join(parts)
     return combined, quoted, retweeted
+
+
+def extract_media_items(obj: Dict[str, Any], tweet: Dict[str, Any]) -> List[Dict[str, str]]:
+    raw_items: List[Dict[str, Any]] = []
+    top_media = obj.get("media")
+    if isinstance(top_media, list):
+        raw_items.extend(item for item in top_media if isinstance(item, dict))
+
+    ext_media = ((tweet.get("extendedEntities") or {}).get("media")) or []
+    if isinstance(ext_media, list):
+        raw_items.extend(item for item in ext_media if isinstance(item, dict))
+
+    dedup: Dict[tuple[str, str], Dict[str, str]] = {}
+    for item in raw_items:
+        kind = str(item.get("kind") or item.get("type") or "unknown")
+        url = item.get("url") or item.get("media_url_https") or item.get("media_url")
+        if not url:
+            continue
+        key = (kind, str(url))
+        dedup[key] = {"kind": kind, "url": str(url)}
+    return list(dedup.values())
 
 
 def extract_tickers_main(tweet: Dict[str, Any], main_text: str) -> List[str]:
@@ -292,8 +322,10 @@ def main() -> None:
                     "tweet_id": str(tweet.get("id") or ""),
                     "tweet_type": obj.get("tweet_type"),
                     "created_at_utc": iso_z(created_utc),
+                    "fetched_at_utc": obj.get("fetched_at_utc"),
                     "lang": tweet.get("lang"),
                     "url": tweet.get("url") or tweet.get("twitterUrl"),
+                    "in_reply_to_username": tweet.get("inReplyToUsername"),
                     # Keep compatibility fields but make author/context explicit.
                     "text": pick_text_field(cfg.text_mode, main=main_text, quoted=quoted, retweeted=retweeted),
                     "text_main": main_text,
@@ -302,6 +334,20 @@ def main() -> None:
                     "tickers": tickers_all,
                     "tickers_main": tickers_main,
                     "tickers_context": tickers_context,
+                    "engagement": {
+                        "like_count": safe_int(tweet.get("likeCount")),
+                        "reply_count": safe_int(tweet.get("replyCount")),
+                        "retweet_count": safe_int(tweet.get("retweetCount")),
+                        "quote_count": safe_int(tweet.get("quoteCount")),
+                        "view_count": safe_int(tweet.get("viewCount")),
+                        "bookmark_count": safe_int(tweet.get("bookmarkCount")),
+                    },
+                    "author": {
+                        "username": tweet.get("author", {}).get("userName"),
+                        "name": tweet.get("author", {}).get("name"),
+                        "followers": safe_int(tweet.get("author", {}).get("followers")),
+                    },
+                    "media": extract_media_items(obj, tweet),
                 }
                 out.write(json.dumps(cleaned, ensure_ascii=False) + "\n")
                 update_stats(stats_by_out[out_path], created_utc)
