@@ -121,7 +121,7 @@ Script:
 Use seed list instead of top-k:
 ```bash
 python scripts/process_x_data_topk.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --output-dir data/x_data/processed_seed \
   --start 2022-01-01 \
   --end 2025-12-31 \
@@ -193,7 +193,7 @@ Aggregation behavior:
 Ticker mention frequency for one KOL:
 ```bash
 python scripts/x_kol_ticker_counts.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --kol unusual_whales \
   --top 50 \
   --output-csv data/x_data/processed/unusual_whales_ticker_counts.csv

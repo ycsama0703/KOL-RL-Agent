@@ -36,6 +36,8 @@ def annotate_positions(df: pd.DataFrame, include_carry: bool = True) -> pd.DataF
         base_defaults = {col: 0 for col in df.columns}
         if "text" in base_defaults:
             base_defaults["text"] = ""
+        if "event_id" in base_defaults:
+            base_defaults["event_id"] = ""
         if "video_id" in base_defaults:
             base_defaults["video_id"] = ""
         if "company" in base_defaults:

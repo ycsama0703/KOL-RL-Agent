@@ -47,8 +47,8 @@ LOGGER = get_logger(__name__)
 # -------------------------
 @dataclass
 class TrainingConfig:
-    kol: str = "Everything_Money"
-    replay_dir: str = "data/replay_buffer"
+    kol: str = "Ale_s_World_of_Stocks"
+    replay_dir: str = "data/buffer_22-24_end1231"
     checkpoints_dir: str = "models/checkpoints"
     output_dir: str = "outputs"
 
@@ -85,8 +85,8 @@ class TrainingConfig:
 
 def parse_args() -> TrainingConfig:
     p = argparse.ArgumentParser(description="Train KOL agent with BC + IQL (intent-constrained residual policy).")
-    p.add_argument("--kol", default="Everything_Money")
-    p.add_argument("--replay-dir", default="data/replay_buffer")
+    p.add_argument("--kol", default="Ale_s_World_of_Stocks")
+    p.add_argument("--replay-dir", default="data/buffer_22-24_end1231")
     p.add_argument("--checkpoints-dir", default="models/checkpoints")
     p.add_argument("--output-dir", default="outputs")
 

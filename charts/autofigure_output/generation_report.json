@@ -1,0 +1,186 @@
+{
+  "status": "success",
+  "output_format": "svg",
+  "final_quality_score": 8.6,
+  "total_iterations": 6,
+  "iteration_history": [
+    {
+      "iteration": 0,
+      "quality_score": 6.6,
+      "improvement": 0,
+      "critique": {
+        "scores": {
+          "aesthetic_design": 3,
+          "content_fidelity": 8,
+          "placeholder_usage": 9
+        },
+        "overall_quality": 6.6,
+        "critique_summary": "The figure successfully structures the requested 4-stage methodological pipeline and captures most of the detailed elements and pipeline connections. However, the aesthetic execution is severely compromised by massive text overflows and overlapping objects. In Stage 3, overly long text strings break out of their bounding boxes, and poorly placed interactive placeholders completely obscure crucial module text. These cascading spacing issues prevent it from being publication-ready.",
+        "specific_issues": [
+          "Aesthetic/Overlap: The 'Compact State Representation Fusion' text string in Stage 3 is too long and spills horizontally well beyond the borders of its container.",
+          "Aesthetic/Overlap: The 'Dynamic Mode Switch' placeholder and its label directly cover the informative bullet points within the 'Signal Mode' and 'Silence Mode' modules.",
+          "Aesthetic/Overflow: The 'Training-time Soft Constraints Context' string overflows the width of the outer dashed constraint envelope.",
+          "Content: The main titles for the stages use informal prefixes (e.g., 'Stage 4 Setup', 'Stage 1 Layout') instead of the precisely requested professional titles (e.g., 'Executable Portfolio Policy').",
+          "Aesthetic/Typography: Manual equation spacing via multiple tspan tags leads to some crowded sub/superscripts that slightly collide or misalign with base characters."
+        ],
+        "improvement_suggestions": [
+          "Implement explicit text wrapping using successive <tspan> elements with appropriate 'dy' attributes for all long descriptive strings (e.g., state representations and constraints).",
+          "Redesign the internal layout of Stage 3: shift the 'Dynamic Mode Switch' placeholder vertically (either above or below the parallel branches) to prevent it from obscuring module text.",
+          "Use the exact block titles specified in the prompt without appending meta-descriptions like 'Layout' or 'Setup'.",
+          "Widen Stage 3 horizontally to comfortably fit the dual parallel branches, as it is correctly designated as the largest/most important module.",
+          "Adjust sub/superscript elements in equations by adding small 'dx' offsets or utilizing monospaced/math-friendly fonts to prevent character collision."
+        ]
+      },
+      "human_quality_score": null,
+      "human_guidance": null
+    },
+    {
+      "iteration": 1,
+      "quality_score": 6.3,
+      "improvement": -0.2999999999999998,
+      "critique": {
+        "scores": {
+          "aesthetic_design": 3,
+          "content_fidelity": 9,
+          "placeholder_usage": 7
+        },
+        "overall_quality": 6.3,
+        "critique_summary": "The figure excellently captures the exact structural, content, and conceptual constraints requested, mapping the complex quantitative pipeline logically across the canvas with the correct semantic colors. However, the execution suffers from severe typographical overlapping and clipping. The manual pseudo-LaTeX text elements result in unreadable jumbled letters, and long strings heavily overflow their bounding containers.",
+        "specific_issues": [
+          "Stage 3.1 Overlap: The input fusion text `< market state | KOL baseline... >` lacks text anchoring and stretches far past the right side of the Stage 3 boundary, bleeding into empty space and outer dashed lines.",
+          "Broken Math Typography: The `<tspan>` sub/superscripts lack horizontal spacing (e.g., `a_t^{base}`), creating overlapping, illegible text clumps inside the Stage 2 equation bubble and Stage 3 equations.",
+          "Placeholder Bleed: The Action Representation placeholder in the central bridge contains a description (`[icon]: Abstract circle split into completed / missing parts`) that is much wider than its gray boundary box.",
+          "Misaligned Label: In the Offline RL block (Bottom Strip), the `Policy Core` label uses an offset `transform`, causing it to collide with surrounding framework text.",
+          "Vertical Cramping: In the Replay Buffer block, the `Buffer Storage Engine` placeholder is pushed tightly against the list text, looking slightly clustered."
+        ],
+        "improvement_suggestions": [
+          "Use multi-line `<tspan>` structure with explicit `dy` adjustments for the long Stage 3.1 input fusion sequence to contain it within the 510px width box.",
+          "Correct the math text typography by adding explicit `dx` (horizontal kerning) to `<tspan>` elements, or simplify the equations to standard unicode notation to prevent rendering collisions.",
+          "Shorten placeholder descriptions (e.g., `[icon]: split circle`) or increase the width of the placeholder rectangles to ensure text remains fully encapsulated.",
+          "Remove the `transform=\\\"translate(...)\\\"` attributes on placeholder elements and rely exclusively on absolute `x` and `y` exact placements to prevent unexpected drift.",
+          "Ensure all text lists have generous line height (`dy=\\\"15-18\\\"`) and do not sit flush against the top/bottom borders of their container rectangles."
+        ]
+      },
+      "human_quality_score": null,
+      "human_guidance": null
+    },
+    {
+      "iteration": 2,
+      "quality_score": 8.0,
+      "improvement": 1.4000000000000004,
+      "critique": {
+        "scores": {
+          "aesthetic_design": 5,
+          "content_fidelity": 9,
+          "placeholder_usage": 10
+        },
+        "overall_quality": 8.0,
+        "critique_summary": "The figure successfully maps an incredibly complex ML methodology, maintaining clean stylistic boundaries and perfectly executing the placeholder protocol. However, the aesthetic execution suffers heavily from severe text overlapping in Stage 3, where a section title crashes directly into two module boundaries. Furthermore, a logical flow error occurs with an arrow bypassing the Top-to-Bottom internal sequence of Stage 3, and there is a color palette violation in the training strip.",
+        "specific_issues": [
+          "Major Overlap: The text '3.2 Dual-Mode Completion Options' (y=340) directly overlaps the top borders and titles of the Signal Mode and Silence Mode boxes (which begin at y=320).",
+          "Color Violation: The 'Offline Training Pipeline' strip was explicitly requested in 'gray tones', but the internal boxes use prominent blue, yellow, and green pastel fills.",
+          "Incorrect Relationship/Flow: The main pipeline arrow leaving the Central Bridge enters Stage 3 at y=510, pointing directly into the final '3.3 Constrained Residual Policy Output', visually bypassing the entire 3.1 Fusion and 3.2 Completion logic.",
+          "Minor Overlap: The text label 'Mode Router' (baseline y=271) overlaps the horizontal distribution line at y=270."
+        ],
+        "improvement_suggestions": [
+          "Fix the Stage 3 overlap by moving the '3.2 Dual-Mode Completion Options' header to y=310 and properly bumping down the Signal/Silence modules.",
+          "Reroute the incoming arrow from the Central Bridge to angle upwards and attach to the left edge of '3.1 State Input Fusion' (y=218) to reflect accurate systemic data flow.",
+          "Change the fill colors of the modules in the bottom training strip to uniform gray tones (e.g., #F0F3F4, #E5E8E8) to follow palette constraints.",
+          "Shift the 'Mode Router' label upwards and the routing paths downwards to prevent text-stroke collisions."
+        ]
+      },
+      "human_quality_score": null,
+      "human_guidance": null
+    },
+    {
+      "iteration": 3,
+      "quality_score": null,
+      "improvement": 0,
+      "critique": null
+    },
+    {
+      "iteration": 4,
+      "quality_score": 7.3,
+      "improvement": -0.7000000000000002,
+      "critique": {
+        "scores": {
+          "aesthetic_design": 6,
+          "content_fidelity": 6,
+          "placeholder_usage": 10
+        },
+        "overall_quality": 7.3,
+        "critique_summary": "The figure beautifully captures the conceptual methodology with excellent use of color mapping, clear bounding boxes, and outstanding semantic grouping constraints. However, several specific structural details were abstracted too heavily or missed entirely. Notably, the multi-source input merging in Stage 1 was simplified into a single block, and the specified outputs for Stage 4 were omitted. Mathematical notation, while correctly colored, suffers from crude sequential sub/superscripting resulting in awkwardly spaced formulas, particularly in the Replay Buffer.",
+        "specific_issues": [
+          "Missing explicit flow in Stage 1: The prompt required visually showing YouTube videos and X/Social Media posts merging into a transcript text stream. This was entirely condensed into the ingestion description.",
+          "Missing specific text outputs in Stage 4: 'final portfolio weights' and 'executable daily strategy' are absent from the final visualization block.",
+          "Disconnected arrow between Stage 3 and Stage 4: The orange arrow abruptly stops at x=1380, leaving a disconnected 35px empty space before Stage 4 (which starts at x=1415).",
+          "Awkward typographic rendering of stacked subscripts/superscripts in SVG text elements (e.g., the replay buffer tuple and policy equations print sequentially rather than genuinely stacked)."
+        ],
+        "improvement_suggestions": [
+          "In Stage 1, physically break out YouTube and X sources into two small distinct nodes that feed into a 'Text/Transcript Stream' node, which then flows into Intent Extraction.",
+          "Add an explicit bulleted output list at the bottom of Stage 4 to include the required final components.",
+          "Extend the Stage 3 -> Stage 4 connecting <path> marker to reach all the way to the boundary of the Stage 4 group.",
+          "Improve SVG mathematical typesetting by adjusting the 'dx' attributes on consecutive <tspan> elements to properly stack subscripts and superscripts visually, or rely on a more unified text representation to avoid character mashups."
+        ]
+      },
+      "human_quality_score": null,
+      "human_guidance": null
+    },
+    {
+      "iteration": 5,
+      "quality_score": 8.6,
+      "improvement": 0.5999999999999996,
+      "critique": {
+        "scores": {
+          "aesthetic_design": 7,
+          "content_fidelity": 9,
+          "placeholder_usage": 10
+        },
+        "overall_quality": 8.6,
+        "critique_summary": "The layout is highly structured and perfectly matches the prompt's conceptual methodology, featuring beautifully embedded equations, exceptionally clear typography, and strictly defined placeholders. However, the macro-level connections between main pipeline stages severly disrupt the flow; the terminal arrows connecting Stage 1 to Stage 2 and Stage 3 to Stage 4 span massive vertical distances using clumsy, snaking rectangular paths rather than clean point-to-point connections.",
+        "specific_issues": [
+          "The connective path from Stage 1 to Stage 2 ('M 300 775 ... L 335 290') routes out the bottom, travels hundreds of pixels upwards, and hooks into Stage 2, creating an awkward looping pipe instead of a logical flow.",
+          "The arrow from Stage 3 to Stage 4 ('M 1150 795 ... L 1355 250') similarly drops down to y=820 just to cross over and travel straight up 570 pixels to inject into Stage 4, resembling a circuit board rather than an academic flowchart.",
+          "The annotation path connecting to 'Expressed by KOL: directional / entry intent' forms an unusually long spanning dashed line that stretches arbitrarily across empty space."
+        ],
+        "improvement_suggestions": [
+          "Realign the input/output nodes within each block vertically so that the terminal output of one stage shares the exact same Y-axis plane as the top input of the next stage, allowing for simple horizontal connection arrows.",
+          "If a horizontal flow requires outputting from the bottom of Stage 3 to the top of Stage 4, shift the vertical positioning of Stage 4 downward so its input aligns naturally with Stage 3's output.",
+          "Reduce the visual length of routing paths by employing subtle curvature or direct diagonal lines instead of rigid 90-degree orthogonal 'snaking' routes."
+        ]
+      },
+      "human_quality_score": null,
+      "human_guidance": null
+    }
+  ],
+  "output_files": {
+    "final_code": "./autofigure_output/figure_final.svg",
+    "final_png": "./autofigure_output/figure_final.png",
+    "output_directory": "./autofigure_output"
+  },
+  "configuration": {
+    "MAX_ITERATIONS": 5,
+    "QUALITY_THRESHOLD": 9.0,
+    "MIN_IMPROVEMENT": 0.2,
+    "OUTPUT_FORMAT": "svg",
+    "LLM_PROVIDER": "openrouter",
+    "OPENROUTER_BASE_URL": "https://openrouter.ai/api/v1",
+    "OPENROUTER_MODEL": "google/gemini-3.1-pro-preview",
+    "BIANXIE_BASE_URL": "https://api.bianxie.ai/v1",
+    "BIANXIE_CHAT_MODEL": "gemini-2.5-pro",
+    "GEMINI_BASE_URL": "https://generativelanguage.googleapis.com/v1beta/openai/",
+    "GEMINI_MODEL": "gemini-2.5-pro",
+    "SVG_WIDTH": 1333,
+    "SVG_HEIGHT": 750,
+    "OUTPUT_DIR": "./autofigure_output",
+    "MAX_REPAIR_RETRIES": 2,
+    "SUPPORTED_TOPICS": [
+      "paper",
+      "survey",
+      "blog",
+      "textbook"
+    ],
+    "HUMAN_IN_LOOP": false,
+    "AUTO_OPEN_IMAGES": false
+  }
+}

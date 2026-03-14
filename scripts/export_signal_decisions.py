@@ -1,9 +1,9 @@
-"""Export per-video decision trace for baseline vs trained policy.
+"""Export per-event decision trace for baseline vs trained policy.
 
-每一行对应 KOL 的一次发文（一个视频），包括：
-- 日期、video_id、原文 text
-- 该视频涉及到的所有 ticker 及其在训练前/后的动作标签（加仓/减仓/平仓等）
-- 两个策略在该视频对应交易日调仓前后的组合构成（以 ticker:weight 串表示）
+每一行对应 KOL 的一次发文（一个 event），包括：
+- 日期、event_id、原文 text
+- 该 event 涉及到的所有 ticker 及其在训练前/后的动作标签（加仓/减仓/平仓等）
+- 两个策略在该 event 对应交易日调仓前后的组合构成（以 ticker:weight 串表示）
 - 两个策略从测试期开始到当前日期为止的净值和累计收益率
 
 用法示例（Everything Money + test 集）：
@@ -265,15 +265,16 @@ def main() -> None:
         portfolio_before_train = format_portfolio(prev_weights_trained)
         portfolio_after_train = format_portfolio(weights_train)
 
-        # 以视频为粒度聚合：同一日期下按 video_id 分组
-        if "video_id" in group.columns:
-            video_groups = group.groupby("video_id", dropna=False)
+        # 以事件为粒度聚合：同一日期下按 event_id 分组
+        id_col = "event_id" if "event_id" in group.columns else "video_id" if "video_id" in group.columns else None
+        if id_col is not None:
+            video_groups = group.groupby(id_col, dropna=False)
         else:
-            # 如果没有 video_id，就把当日所有样本视为一个“视频”
+            # 如果没有 event_id/video_id，就把当日所有样本视为一个事件
             video_groups = [(None, group)]
 
-        for video_id, vgroup in video_groups:
-            # 一个视频可能涉及多个 ticker，这里汇总成 ticker:ACTION 列表
+        for event_id, vgroup in video_groups:
+            # 一个事件可能涉及多个 ticker，这里汇总成 ticker:ACTION 列表
             video_tickers: List[str] = []
             baseline_actions: List[str] = []
             trained_actions: List[str] = []
@@ -292,11 +293,11 @@ def main() -> None:
 
             first = vgroup.iloc[0]
             text = first["text"]
-            video_id_val = first.get("video_id", video_id if video_id is not None else "")
+            event_id_val = first.get("event_id", first.get("video_id", event_id if event_id is not None else ""))
 
             record: Dict[str, object] = {
                 "date": pd.to_datetime(date).isoformat(),
-                "video_id": video_id_val,
+                "event_id": event_id_val,
                 "text": text,
                 "tickers": ";".join(sorted(set(video_tickers))),
                 "baseline_actions": ";".join(baseline_actions),
@@ -319,8 +320,8 @@ def main() -> None:
         print(f"[WARN] Missing equity lookups for {missing_equity} dates; check timestamp alignment.")
 
     out_df = pd.DataFrame(records)
-    if "video_id" in out_df.columns:
-        out_df.sort_values(["date", "video_id"], inplace=True)
+    if "event_id" in out_df.columns:
+        out_df.sort_values(["date", "event_id"], inplace=True)
     else:
         out_df.sort_values(["date"], inplace=True)
     output_path = Path(args.output)

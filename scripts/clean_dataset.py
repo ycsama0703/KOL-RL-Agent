@@ -66,7 +66,7 @@ def clean_file(
         df["company"] = df["company"].map(normalize_company)
         df = df[~df["company"].apply(lambda name: should_drop_company(name, stoplist))]
 
-    subset_cols = [col for col in ["video_id", "company", "text"] if col in df.columns]
+    subset_cols = [col for col in ["event_id", "video_id", "company", "text"] if col in df.columns]
     if subset_cols:
         df = df.drop_duplicates(subset=subset_cols)
     df = df.reset_index(drop=True)

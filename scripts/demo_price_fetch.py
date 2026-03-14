@@ -1,4 +1,4 @@
-"""Demo script: augment first video with latest 5-day prices using yfinance."""
+"""Demo script: augment first event with latest 5-day prices using yfinance."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from pandas.tseries.offsets import BDay
 
 TRAIN_PATH = Path("data/processed/cleaned/Everything_Money/train.csv")
 EMB_PATH = Path("data/processed/embeddings/Everything_Money/train.pt")
-OUTPUT_PATH = Path("data/processed/cleaned/Everything_Money/demo_first_video_with_prices.csv")
+OUTPUT_PATH = Path("data/processed/cleaned/Everything_Money/demo_first_event_with_prices.csv")
 
 # Minimal name->ticker map for the demo KOL sample.
 COMPANY_TICKER_MAP: Dict[str, str] = {
@@ -77,12 +77,13 @@ def main() -> None:
     if len(embeddings) != len(df):
         raise SystemExit("Embedding rows do not match CSV rows; aborting.")
 
-    first_video_id = df.iloc[0]["video_id"]
-    video_rows = df[df["video_id"] == first_video_id].copy()
-    publish_ts = pd.to_datetime(video_rows.iloc[0]["published_at"], utc=True)
+    id_col = "event_id" if "event_id" in df.columns else "video_id"
+    first_event_id = df.iloc[0][id_col]
+    event_rows = df[df[id_col] == first_event_id].copy()
+    publish_ts = pd.to_datetime(event_rows.iloc[0]["published_at"], utc=True)
 
     enriched_rows = []
-    for _, row in video_rows.iterrows():
+    for _, row in event_rows.iterrows():
         company_name = str(row["company"]).strip().lower()
         ticker = COMPANY_TICKER_MAP.get(company_name)
         if not ticker:

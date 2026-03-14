@@ -1,0 +1,23 @@
+source,channel_name,days,mean,median,p90,max
+x,Stocktwits,963,9.612668743509865,9.0,16.0,43
+x,EliteOptions2,991,6.480322906155399,6.0,9.0,28
+x,Stephanie_Link,736,3.157608695652174,2.0,7.0,19
+x,traderstewie,518,2.581081081081081,2.0,5.0,39
+youtube,The Maverick of Wall Street,355,13.659154929577465,12.0,23.600000000000023,51
+youtube,Dividend Data,242,8.103305785123966,6.0,15.900000000000006,72
+youtube,Joseph Carlson,215,7.083720930232558,7.0,12.0,20
+youtube,Adam Khoo,191,6.329842931937173,5.0,12.0,35
+youtube,Ale's World of Stocks,328,6.088414634146342,5.0,12.0,35
+youtube,Financial Education,217,5.926267281105991,5.0,11.0,21
+youtube,Ticker Take,129,4.589147286821706,3.0,11.0,27
+youtube,Invest with Henry,266,3.9586466165413534,3.0,7.5,20
+youtube,Learn to Invest,137,3.8394160583941606,3.0,8.0,25
+youtube,MarketBeat,354,3.440677966101695,3.0,7.0,17
+youtube,Investing with Tom,115,3.382608695652174,2.0,5.0,23
+youtube,Everything Money,28,3.25,2.0,5.600000000000001,22
+youtube,Daniel Pronk,165,2.933333333333333,2.0,6.0,14
+youtube,"Sven Carlin, Ph.D.",199,2.763819095477387,2.0,6.0,22
+youtube,Tom Nash,320,2.48125,2.0,4.100000000000023,15
+youtube,"Cameron Stewart, CFA",142,2.4014084507042255,2.0,5.0,13
+youtube,Unrivaled Investing,177,2.2711864406779663,2.0,4.400000000000006,8
+youtube,Humbled Trader,38,1.8421052631578947,2.0,3.0,5

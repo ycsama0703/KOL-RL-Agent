@@ -159,6 +159,11 @@ def process_file(
     if df.empty:
         LOGGER.info("Skipping %s (empty)", csv_path)
         return
+    if "published_at" not in df.columns and "publishedAt" in df.columns:
+        df["published_at"] = df["publishedAt"]
+    if "published_at" not in df.columns:
+        LOGGER.warning("Missing published_at/publishedAt in %s; skipping.", csv_path)
+        return
     if not emb_path.exists():
         LOGGER.warning("Missing embedding file %s; skipping %s", emb_path, csv_path)
         return
@@ -176,7 +181,16 @@ def process_file(
     df = pd.concat([df, emb_df], axis=1)
 
     df["published_at"] = pd.to_datetime(df["published_at"], utc=True, errors="coerce")
-    df["ticker"] = df["company"].astype(str).apply(mapper.lookup)
+
+    if "ticker" in df.columns:
+        df["ticker"] = df["ticker"].astype(str).str.strip().str.upper()
+        df["ticker"] = df["ticker"].replace({"": pd.NA, "NAN": pd.NA, "NONE": pd.NA})
+    else:
+        if "company" not in df.columns:
+            LOGGER.warning("Missing both ticker and company in %s; skipping.", csv_path)
+            return
+        df["ticker"] = df["company"].astype(str).apply(mapper.lookup)
+
     df = df.dropna(subset=["published_at", "ticker"]).reset_index(drop=True)
     if df.empty:
         LOGGER.info("No usable rows after ticker filtering for %s", csv_path)

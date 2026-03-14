@@ -1,47 +1,80 @@
-# KOL-RL-Agent 方法说明（策略 & 评估）
+# KOL-RL-Agent 方法说明（与当前 `train.py` 对齐）
 
-面向技术报告的概要，聚焦算法与评估逻辑（少谈工程细节）。
+本说明聚焦当前主线训练脚本 `train.py` 的方法与评估逻辑。
 
-## 目标与假设
-- 目标：从 KOL 文本/情感信号学习可执行的多空组合策略，重点解决“无新信号时的持有/退出”。
-- 账户假设：无现金头寸，日级满仓；单票绝对权重上限（默认 20%）；无交易成本/滑点。
-- 回报计算：每日收益 = 持仓权重 × 单票收益求和；净值 = `cumprod(1 + daily_returns)`，累积收益 = 终值 - 1。
-- 频率假设：按自然日（或交易日）顺序回放，调仓在日初完成，使用当日的 reward 作为日收益。
+## 1) 任务定义与数据约定
 
-## 数据到 Replay Buffer
-- 清洗后文本 + ModernBERT embedding + 行情窗口 + reward → enriched/reward CSV。
-- 基线策略：文本情感分数经 `tanh` 归一化，生成有符号的 baseline raw score；组合层保持连续持仓（`hold_decay`）。
-- Replay buffer 关键字段：`states`（含 silence_days、last_position 等）、`actions`（baseline 权重）、`rewards`（逐票收益）、`meta`（date/ticker/文本）。
-- 状态特征示例：文本 embedding；行情窗口特征（近 N 日收益/波动等）；`silence_days`（距上次提及天数）；`last_position`（上一日权重）；可选基线打分。
-- Reward 构建：逐票日收益（如收盘价对数收益）；可选平滑/截断；当前未扣交易成本。
+- 训练目标：学习一个相对 KOL baseline 动作的残差策略（residual policy）。
+- Replay batch 关键字段：
+  - `state`, `next_state`
+  - `action`（behavior action）
+  - `baseline_action`, `next_baseline_action`
+  - `reward`, `done`
+- 策略输出形式：
+  - `policy_action = baseline_action + delta`
 
-## 策略与组合
-- 组合层（`PortfolioLayer`）：合并昨日仓位与当日 raw score，按绝对值归一化，截断单票上限，再归一化；无信号时旧仓位按 `hold_decay` 保留。
-- 残差策略（训练文件 `experiments/residual_sweep/train_residual.py`）：
-  - 有信号分支：`policy_sig = baseline * (1 + residual_scale * tanh(delta_sig))`（同向缩放，不翻转）。
-  - 无信号分支：`policy_nosig = last_position * sigmoid(decay_scale * delta_decay)`（沉默期的持有/衰减/退出由 RL 学习）。
-  - 合成：`policy = has_signal * policy_sig + (1 - has_signal) * policy_nosig`，`has_signal` 来自基线是否非零。
-  - 状态特征：`silence_days`、`last_position` 支撑退出决策。
-- 标准版策略（`train.py`）：直接预测 residual 加到 baseline 上，无显式无信号衰减分支。
-- 动作解释：输出的是目标权重（-1~1，受单票上限约束）；无现金位，权重会归一化；不涉及订单类型/成交价，假设能按权重即时成交。
+## 2) 策略结构与约束
 
-## 训练设置
-- 先 BC（SFT 角色）预热少量 epoch，再 IQL（Expectile + 温度参数）主训练。
-- 关键超参：`fidelity_lambda`（对齐基线强度）、`residual_scale`（同向缩放幅度）、`decay_scale`（沉默期衰减斜率）、`hold_decay`（组合层保留系数）、`max_weight`（单票上限）。
-- 设备自适应 CUDA/CPU；batch 默认 256，IQL steps 200k（可调）。
-- 优化细节：Adam 学习率 3e-4（actor/critic/value 相同，可分开调）；梯度裁剪可选（未默认开启）；BC 只跑 0~1 epoch，避免过拟合。
-- IQL 配置：expectile 默认 0.7；`temperature_beta` 默认 3.0；目标是 Advantage 加权学习 + 轻量 fidelity。
+- `ActorNetwork` 兼容两种输出：
+  - 直接输出 tensor `delta`
+  - 输出 dict（`delta_signal` / `delta_decay`），按 baseline 是否接近 0 选择分支
+- 训练期（soft）使用：
+  - `build_policy_action_for_training`: 仅做 `delta` 截断，不做硬门控
+  - `intent_penalties_soft`: 可微的 no-entry / no-reversal 软惩罚
+- 评估期（hard）使用：
+  - `apply_intent_constraints` 强制执行：
+    - baseline≈0 时不允许新开仓
+    - 不允许与 baseline 方向反转
 
-## 评估与产出
-- 指标：`metrics_test.json`（cumulative_return / sharpe / max_drawdown）。
-- 持仓轨迹：`positions_test*.csv`，字段含 `prev_weight/weight/weight_delta/allocation/raw_score/reward/action`（OPEN/CLOSE/INCREASE/DECREASE/HOLD），用于观察退出/减仓路径。
-- 决策明细：`signal_decisions_test.csv`（逐视频），含 `equity_baseline/equity_trained` 可绘净值曲线。
-- 可视化：`plot_equity_curve.py` 基于 `signal_decisions_test.csv` 生成净值图，可带基准（如 SPY）。
-- 指标计算：Sharpe = `mean(daily_returns)/std(daily_returns) * sqrt(252)`；最大回撤基于净值序列；若无收益序列则指标为 0。
-- Fidelity 评估（可选）：`scripts/evaluate_fidelity.py` 比较模型动作与基线动作一致率（`baseline_actions` vs `trained_actions`），用于衡量对齐程度。
+## 3) 训练流程（BC -> IQL）
 
-## 如何解读“持有/退出”
-- 查看 `positions_test*.csv` 中无新信号日的 `action` 列和 `weight` 变化：`DECREASE/CLOSE` 表示学习到的衰减/退出；`HOLD` 表示延续旧仓。
-- 对比基线与残差：基线无衰减分支，残差版在沉默期可主动降仓，是本方案学习持有/退出的核心体现。
-- 退出力度来源：`decay_scale` 调节 sigmoid 斜率；`hold_decay` 调节旧仓默认保留比；`fidelity_lambda` 越低，模型越敢偏离基线、加大退出。
-- 观察方法：按 ticker 绘制随时间的 `weight` 变化，或统计每日 `action` 分布，辨别“沉默期”是否出现系统性减仓。
+- BC 阶段：
+  - 默认 `bc_epochs=10`
+  - 默认 `bc_batch_size=256`
+  - 损失由以下部分组成（可加权）：
+    - 拟合 behavior action
+    - anchor 到 baseline action
+    - soft no-entry penalty
+    - soft no-reversal penalty
+- IQL 阶段：
+  - 默认 `iql_steps=200000`
+  - critic/value 输入是 `concat(state, baseline_action)`
+  - critic 回归 `target_q = reward_aug + gamma*(1-done)*V(next_state)`
+  - value 使用 expectile loss（默认 `expectile=0.7`）
+  - actor 使用 advantage-weighted 回归 + 软对齐/软约束：
+    - `loss_fit`（拟合 behavior）
+    - `actor_align_lambda * loss_align`
+    - `entry_penalty_lambda * loss_entry`
+    - `reversal_penalty_lambda * loss_rev`
+
+## 4) 奖励与保真度 shaping
+
+- IQL 中使用 reward shaping：
+  - `reward_aug = reward - fidelity_lambda * ||policy_action - baseline_action||^2`
+- 目的：控制偏离 baseline 的幅度，避免策略过度漂移。
+
+## 5) 评估逻辑
+
+- 评估入口：`evaluate(...)`（在 `train.py` 内）
+- 流程：
+  - actor 输出 `delta`
+  - 应用 `apply_intent_constraints`（hard 约束）
+  - 通过 `PortfolioLayer.allocate` 得到组合权重
+  - 按日聚合收益得到 `daily_returns`
+- 输出指标：
+  - `cumulative_return`
+  - `sharpe`（`sqrt(252)` 年化）
+  - `max_drawdown`
+
+## 6) 当前默认配置（主线）
+
+- 默认 KOL：`Ale_s_World_of_Stocks`
+- 默认 replay 路径：`data/buffer_22-24_end1231`
+- 其他关键默认超参：
+  - `bc_batch_size=256`, `iql_batch_size=256`
+  - `actor/critic/value lr = 3e-4`
+  - `gamma=0.99`, `temperature_beta=3.0`
+  - `fidelity_lambda=0.1`
+  - `actor_align_lambda=0.1`
+  - `entry_penalty_lambda=0.1`
+  - `reversal_penalty_lambda=0.1`

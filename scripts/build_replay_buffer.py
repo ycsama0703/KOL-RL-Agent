@@ -107,6 +107,14 @@ def build_buffer(
         else:
             dones[idx] = True
 
+    event_ids = (
+        df["event_id"].astype(str)
+        if "event_id" in df.columns
+        else df["video_id"].astype(str)
+        if "video_id" in df.columns
+        else pd.Series([""] * len(df))
+    )
+
     buffer = {
         "states": torch.from_numpy(states),
         # 单票 reward_1d 仍然保留，用于评估/回放；组合级 reward 存在 portfolio_rewards 中供训练使用。
@@ -122,7 +130,7 @@ def build_buffer(
         "dones": torch.from_numpy(dones.astype(np.bool_)),
         "meta": {
             "ticker": df["ticker"].astype(str).tolist(),
-            "video_id": df["video_id"].astype(str).tolist(),
+            "event_id": event_ids.tolist(),
             "published_at": df["published_at"].astype(str).tolist(),
             "baseline_raw_score": df["baseline_raw_score"].astype(float).tolist(),
         },

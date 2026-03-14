@@ -14,7 +14,7 @@ The guiding principles are:
 
 Recommended folder layout:
 - Raw:
-  - `data/x_data/raw/fin1-45.jsonl`
+  - `data/x_data/raw/*.jsonl`
 - Processed (organization / selection, still JSONL):
   - `data/x_data/processed/`
 - Cleaned (text-centric schema for labeling):
@@ -59,7 +59,7 @@ Script:
 Command:
 ```bash
 python scripts/split_x_raw_by_kol_type.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --output-dir data/x_data/raw_by_type
 ```
 
@@ -72,7 +72,7 @@ Performance notes:
 - You can reduce simultaneous open files with:
 ```bash
 python scripts/split_x_raw_by_kol_type.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --output-dir data/x_data/raw_by_type \
   --max-open-files 64
 ```
@@ -94,7 +94,7 @@ What it does:
 Command (example: Top-20 within 2022-01-01..2025-12-31):
 ```bash
 python scripts/process_x_data_topk.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --output-dir data/x_data/processed \
   --start 2022-01-01 \
   --end 2025-12-31 \
@@ -243,7 +243,7 @@ Script:
 Example:
 ```bash
 python scripts/x_kol_ticker_counts.py \
-  --input data/x_data/raw/fin1-45.jsonl \
+  --input data/x_data/raw \
   --kol unusual_whales \
   --top 50 \
   --output-csv data/x_data/processed/unusual_whales_ticker_counts.csv

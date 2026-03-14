@@ -1,4 +1,4 @@
-"""Split channel datasets into train/val/test partitions by video chronology."""
+"""Split channel datasets into train/val/test partitions by event chronology."""
 
 from __future__ import annotations
 
@@ -87,34 +87,33 @@ def assign_splits(video_order: Sequence[str], counts: Tuple[int, int, int]) -> D
 
 def split_channel(path: Path, output_dir: Path, ratios: Tuple[float, float, float]) -> None:
     df = pd.read_csv(path)
-    if "published_at" not in df.columns or "video_id" not in df.columns:
+    id_col = "event_id" if "event_id" in df.columns else "video_id" if "video_id" in df.columns else None
+    if "published_at" not in df.columns or id_col is None:
         print(f"[WARN] {path.name} missing required columns; skipping.")
         return
 
     df["published_at"] = pd.to_datetime(df["published_at"], errors="coerce")
-    grouped = (
-        df.groupby("video_id")["published_at"].min().dropna().sort_values().reset_index()
-    )
-    total_videos = len(grouped)
-    if total_videos == 0:
-        print(f"[WARN] {path.name} has no valid videos; skipping.")
+    grouped = df.groupby(id_col)["published_at"].min().dropna().sort_values().reset_index()
+    total_events = len(grouped)
+    if total_events == 0:
+        print(f"[WARN] {path.name} has no valid events; skipping.")
         return
 
-    counts = compute_counts(total_videos, ratios)
-    video_order = grouped["video_id"].tolist()
-    mapping = assign_splits(video_order, counts)
-    df["split"] = df["video_id"].map(mapping)
+    counts = compute_counts(total_events, ratios)
+    event_order = grouped[id_col].tolist()
+    mapping = assign_splits(event_order, counts)
+    df["split"] = df[id_col].map(mapping)
 
     channel_dir = output_dir / path.stem
     channel_dir.mkdir(parents=True, exist_ok=True)
     summary: Dict[str, int] = {}
     for split_name in ("train", "val", "test"):
         split_df = df[df["split"] == split_name].drop(columns=["split"])
-        summary[split_name] = split_df["video_id"].nunique()
+        summary[split_name] = split_df[id_col].nunique()
         split_df.to_csv(channel_dir / f"{split_name}.csv", index=False)
 
     print(
-        f"{path.stem}: total_videos={total_videos} "
+        f"{path.stem}: total_events={total_events} "
         f"train={summary['train']} val={summary['val']} test={summary['test']}"
     )
 

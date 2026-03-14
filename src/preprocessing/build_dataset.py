@@ -21,7 +21,7 @@ USELESS_PATTERNS = [
 class Record:
     source_file: str
     platform: str
-    video_id: str
+    event_id: str
     channel_name: str
     published_at: str
     title: str
@@ -95,7 +95,9 @@ def process_file(path: Path) -> List[Record]:
         if not text or looks_useless(text):
             continue
 
-        video_id = str(row.get(column_map.get("video_id", ""), "")).strip()
+        event_id = str(row.get(column_map.get("event_id", ""), "")).strip()
+        if not event_id:
+            event_id = str(row.get(column_map.get("video_id", ""), "")).strip()
         channel_name = str(row.get(column_map.get("channel_name", ""), "")).strip()
         published_at = str(row.get(column_map.get("publishedat", ""), "")).strip()
         title = str(row.get(column_map.get("title", ""), "")).strip()
@@ -105,7 +107,7 @@ def process_file(path: Path) -> List[Record]:
             Record(
                 source_file=path.name,
                 platform=platform,
-                video_id=video_id,
+                event_id=event_id,
                 channel_name=channel_name,
                 published_at=published_at,
                 title=title,
@@ -125,7 +127,7 @@ def build_dataset(input_dir: Path) -> pd.DataFrame:
     if not all_records:
         return pd.DataFrame()
     df = pd.DataFrame([record.__dict__ for record in all_records])
-    df = df.drop_duplicates(subset=["video_id", "company", "text"])
+    df = df.drop_duplicates(subset=["event_id", "company", "text"])
     df = df[df["text"].str.len() >= MIN_TEXT_LENGTH]
     df = df.reset_index(drop=True)
     return df
