@@ -1,0 +1,331 @@
+2026-03-15 01:13:09,222 | INFO | generate_embeddings | Log file: logs/embed_qwen4b_d1024.log
+2026-03-15 01:13:09,222 | INFO | generate_embeddings | Input: data/multisource_ready_22-25/04_clean
+2026-03-15 01:13:09,223 | INFO | generate_embeddings | Output: data/multisource_ready_22-25/05_embeddings_qwen4b_d1024
+2026-03-15 01:13:09,223 | INFO | generate_embeddings | Loading model: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:13:09,223 | INFO | generate_embeddings | SentenceTransformer kwargs: {'device': 'cuda', 'trust_remote_code': True, 'model_kwargs': {'attn_implementation': 'flash_attention_2', 'torch_dtype': torch.float16}, 'tokenizer_kwargs': {'padding_side': 'left'}}
+2026-03-15 01:13:09,223 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:13:09,487 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:09,495 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:09,504 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:09,743 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:09,752 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:09,762 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:10,002 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:10,010 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:10,240 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:10,249 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/README.md "HTTP/1.1 200 OK"
+2026-03-15 01:13:10,260 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/README.md "HTTP/1.1 200 OK"
+2026-03-15 01:13:10,508 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:10,515 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:10,746 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_bert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:10,981 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:11,211 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_distilbert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:11,438 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_camembert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:11,679 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_albert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:11,919 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlm-roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:12,151 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlnet_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:12,387 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:12,630 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:12,632 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-15 01:13:12,640 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:12,649 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:12,927 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-03-15 01:13:13,168 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/model.safetensors.index.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:13:13,177 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/model.safetensors.index.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:13,187 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/model.safetensors.index.json "HTTP/1.1 200 OK"
+2026-03-15 01:13:13,456 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/revision/main "HTTP/1.1 200 OK"
+2026-03-15 01:13:13,709 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/5cf2132abc99cad020ac570b19d031efec650f2b/model-00001-of-00002.safetensors "HTTP/1.1 302 Found"
+2026-03-15 01:13:13,712 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/5cf2132abc99cad020ac570b19d031efec650f2b/model-00002-of-00002.safetensors "HTTP/1.1 302 Found"
+2026-03-15 01:13:13,959 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/xet-read-token/5cf2132abc99cad020ac570b19d031efec650f2b "HTTP/1.1 200 OK"
+2026-03-15 01:13:13,961 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/xet-read-token/5cf2132abc99cad020ac570b19d031efec650f2b "HTTP/1.1 200 OK"
+2026-03-15 01:17:24,936 | INFO | generate_embeddings | Log file: logs/embed_qwen4b_d1024.log
+2026-03-15 01:17:24,936 | INFO | generate_embeddings | Input: data/multisource_ready_22-25/04_clean
+2026-03-15 01:17:24,936 | INFO | generate_embeddings | Output: data/multisource_ready_22-25/05_embeddings_qwen4b_d1024
+2026-03-15 01:17:24,936 | INFO | generate_embeddings | Loading model: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:17:24,936 | INFO | generate_embeddings | SentenceTransformer kwargs: {'device': 'cuda', 'trust_remote_code': True, 'model_kwargs': {'torch_dtype': torch.float16}, 'tokenizer_kwargs': {'padding_side': 'left'}}
+2026-03-15 01:17:24,936 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:17:25,280 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:25,287 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:25,535 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:25,542 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:25,789 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:25,790 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-15 01:17:25,796 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:26,028 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:26,035 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/README.md "HTTP/1.1 200 OK"
+2026-03-15 01:17:26,264 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:26,271 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:26,501 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_bert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:26,738 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:26,975 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_distilbert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:27,215 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_camembert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:27,445 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_albert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:27,682 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlm-roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:27,924 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlnet_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:28,163 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:28,402 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:28,410 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:30,032 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:30,039 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:30,274 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:30,291 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:30,300 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:30,544 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:30,795 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-15 01:17:31,043 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/vocab.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:31,055 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/vocab.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:31,096 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/vocab.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:31,410 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/merges.txt "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:31,418 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/merges.txt "HTTP/1.1 200 OK"
+2026-03-15 01:17:31,428 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/merges.txt "HTTP/1.1 200 OK"
+2026-03-15 01:17:31,741 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+2026-03-15 01:17:31,986 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/xet-read-token/5cf2132abc99cad020ac570b19d031efec650f2b "HTTP/1.1 200 OK"
+2026-03-15 01:17:33,865 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/added_tokens.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:34,106 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/special_tokens_map.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:34,343 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-15 01:17:35,489 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-15 01:17:35,720 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:17:35,729 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:35,738 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-15 01:17:35,981 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-15 01:17:37,538 | INFO | sentence_transformers.SentenceTransformer | 1 prompt is loaded, with the key: query
+2026-03-15 01:17:37,538 | INFO | generate_embeddings | Model loaded. max_seq_length=8192
+2026-03-15 01:19:49,097 | INFO | generate_embeddings | Log file: logs/embed_qwen4b_d1024.log
+2026-03-15 01:19:49,097 | INFO | generate_embeddings | Input: data/multisource_ready_22-25/04_clean
+2026-03-15 01:19:49,097 | INFO | generate_embeddings | Output: data/multisource_ready_22-25/05_embeddings_qwen4b_d1024
+2026-03-15 01:19:49,097 | INFO | generate_embeddings | Loading model: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:19:49,097 | INFO | generate_embeddings | SentenceTransformer kwargs: {'device': 'cuda', 'trust_remote_code': True, 'model_kwargs': {'torch_dtype': torch.float16}, 'tokenizer_kwargs': {'padding_side': 'left'}}
+2026-03-15 01:19:49,097 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: Qwen/Qwen3-Embedding-4B
+2026-03-15 01:19:49,357 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:49,365 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:49,594 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:49,595 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-15 01:19:49,602 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:49,842 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:49,849 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:50,077 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:50,085 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/README.md "HTTP/1.1 200 OK"
+2026-03-15 01:19:50,322 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:50,330 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:50,560 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_bert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:50,832 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:51,068 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_distilbert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:51,296 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_camembert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:51,541 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_albert_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:51,783 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlm-roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:52,024 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlnet_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:52,265 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:52,501 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:52,509 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:54,132 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:54,139 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:54,373 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:54,381 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:54,629 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-15 01:19:54,868 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-15 01:19:56,000 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-15 01:19:56,234 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-15 01:19:56,241 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-15 01:19:56,484 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-15 01:19:57,961 | INFO | sentence_transformers.SentenceTransformer | 1 prompt is loaded, with the key: query
+2026-03-15 01:19:57,961 | INFO | generate_embeddings | Model loaded. max_seq_length=8192
+2026-03-15 01:19:57,962 | INFO | generate_embeddings | Discovered 66 csv file(s).
+2026-03-15 01:19:57,962 | INFO | generate_embeddings | [1/66] Start file: data/multisource_ready_22-25/04_clean/x/EliteOptions2/test.csv
+2026-03-15 01:19:57,968 | INFO | generate_embeddings | [1/66] Encoding rows=1332 batch=2
+2026-03-15 01:20:22,146 | INFO | generate_embeddings | [1/66] Done rows=1332 dim=1024 elapsed=24.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/EliteOptions2/test.pt
+2026-03-15 01:20:22,146 | INFO | generate_embeddings | [2/66] Start file: data/multisource_ready_22-25/04_clean/x/EliteOptions2/train.csv
+2026-03-15 01:20:22,158 | INFO | generate_embeddings | [2/66] Encoding rows=3150 batch=2
+2026-03-15 01:21:17,102 | INFO | generate_embeddings | [2/66] Done rows=3150 dim=1024 elapsed=55.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/EliteOptions2/train.pt
+2026-03-15 01:21:17,102 | INFO | generate_embeddings | [3/66] Start file: data/multisource_ready_22-25/04_clean/x/EliteOptions2/val.csv
+2026-03-15 01:21:17,108 | INFO | generate_embeddings | [3/66] Encoding rows=1214 batch=2
+2026-03-15 01:21:38,519 | INFO | generate_embeddings | [3/66] Done rows=1214 dim=1024 elapsed=21.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/EliteOptions2/val.pt
+2026-03-15 01:21:38,520 | INFO | generate_embeddings | [4/66] Start file: data/multisource_ready_22-25/04_clean/x/Stephanie_Link/test.csv
+2026-03-15 01:21:38,523 | INFO | generate_embeddings | [4/66] Encoding rows=460 batch=2
+2026-03-15 01:21:46,480 | INFO | generate_embeddings | [4/66] Done rows=460 dim=1024 elapsed=8.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stephanie_Link/test.pt
+2026-03-15 01:21:46,480 | INFO | generate_embeddings | [5/66] Start file: data/multisource_ready_22-25/04_clean/x/Stephanie_Link/train.csv
+2026-03-15 01:21:46,486 | INFO | generate_embeddings | [5/66] Encoding rows=1169 batch=2
+2026-03-15 01:22:06,698 | INFO | generate_embeddings | [5/66] Done rows=1169 dim=1024 elapsed=20.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stephanie_Link/train.pt
+2026-03-15 01:22:06,698 | INFO | generate_embeddings | [6/66] Start file: data/multisource_ready_22-25/04_clean/x/Stephanie_Link/val.csv
+2026-03-15 01:22:06,701 | INFO | generate_embeddings | [6/66] Encoding rows=421 batch=2
+2026-03-15 01:22:14,113 | INFO | generate_embeddings | [6/66] Done rows=421 dim=1024 elapsed=7.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stephanie_Link/val.pt
+2026-03-15 01:22:14,113 | INFO | generate_embeddings | [7/66] Start file: data/multisource_ready_22-25/04_clean/x/Stocktwits/test.csv
+2026-03-15 01:22:14,121 | INFO | generate_embeddings | [7/66] Encoding rows=1512 batch=2
+2026-03-15 01:22:40,333 | INFO | generate_embeddings | [7/66] Done rows=1512 dim=1024 elapsed=26.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stocktwits/test.pt
+2026-03-15 01:22:40,333 | INFO | generate_embeddings | [8/66] Start file: data/multisource_ready_22-25/04_clean/x/Stocktwits/train.csv
+2026-03-15 01:22:40,346 | INFO | generate_embeddings | [8/66] Encoding rows=4089 batch=2
+2026-03-15 01:23:51,036 | INFO | generate_embeddings | [8/66] Done rows=4089 dim=1024 elapsed=70.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stocktwits/train.pt
+2026-03-15 01:23:51,037 | INFO | generate_embeddings | [9/66] Start file: data/multisource_ready_22-25/04_clean/x/Stocktwits/val.csv
+2026-03-15 01:23:51,041 | INFO | generate_embeddings | [9/66] Encoding rows=900 batch=2
+2026-03-15 01:24:06,753 | INFO | generate_embeddings | [9/66] Done rows=900 dim=1024 elapsed=15.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/Stocktwits/val.pt
+2026-03-15 01:24:06,753 | INFO | generate_embeddings | [10/66] Start file: data/multisource_ready_22-25/04_clean/x/traderstewie/test.csv
+2026-03-15 01:24:06,756 | INFO | generate_embeddings | [10/66] Encoding rows=198 batch=2
+2026-03-15 01:24:10,464 | INFO | generate_embeddings | [10/66] Done rows=198 dim=1024 elapsed=3.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/traderstewie/test.pt
+2026-03-15 01:24:10,464 | INFO | generate_embeddings | [11/66] Start file: data/multisource_ready_22-25/04_clean/x/traderstewie/train.csv
+2026-03-15 01:24:10,469 | INFO | generate_embeddings | [11/66] Encoding rows=802 batch=2
+2026-03-15 01:24:25,218 | INFO | generate_embeddings | [11/66] Done rows=802 dim=1024 elapsed=14.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/traderstewie/train.pt
+2026-03-15 01:24:25,218 | INFO | generate_embeddings | [12/66] Start file: data/multisource_ready_22-25/04_clean/x/traderstewie/val.csv
+2026-03-15 01:24:25,221 | INFO | generate_embeddings | [12/66] Encoding rows=174 batch=2
+2026-03-15 01:24:28,313 | INFO | generate_embeddings | [12/66] Done rows=174 dim=1024 elapsed=3.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/x/traderstewie/val.pt
+2026-03-15 01:24:28,313 | INFO | generate_embeddings | [13/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Adam_Khoo/test.csv
+2026-03-15 01:24:28,319 | INFO | generate_embeddings | [13/66] Encoding rows=531 batch=2
+2026-03-15 01:24:42,079 | INFO | generate_embeddings | [13/66] Done rows=531 dim=1024 elapsed=13.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Adam_Khoo/test.pt
+2026-03-15 01:24:42,080 | INFO | generate_embeddings | [14/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Adam_Khoo/train.csv
+2026-03-15 01:24:42,099 | INFO | generate_embeddings | [14/66] Encoding rows=1657 batch=2
+2026-03-15 01:26:02,707 | INFO | generate_embeddings | [14/66] Done rows=1657 dim=1024 elapsed=80.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Adam_Khoo/train.pt
+2026-03-15 01:26:02,708 | INFO | generate_embeddings | [15/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Adam_Khoo/val.csv
+2026-03-15 01:26:02,716 | INFO | generate_embeddings | [15/66] Encoding rows=590 batch=2
+2026-03-15 01:26:24,953 | INFO | generate_embeddings | [15/66] Done rows=590 dim=1024 elapsed=22.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Adam_Khoo/val.pt
+2026-03-15 01:26:24,953 | INFO | generate_embeddings | [16/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ale_s_World_of_Stocks/test.csv
+2026-03-15 01:26:24,968 | INFO | generate_embeddings | [16/66] Encoding rows=1101 batch=2
+2026-03-15 01:27:04,320 | INFO | generate_embeddings | [16/66] Done rows=1101 dim=1024 elapsed=39.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ale_s_World_of_Stocks/test.pt
+2026-03-15 01:27:04,320 | INFO | generate_embeddings | [17/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ale_s_World_of_Stocks/train.csv
+2026-03-15 01:27:04,359 | INFO | generate_embeddings | [17/66] Encoding rows=2767 batch=2
+2026-03-15 01:28:53,323 | INFO | generate_embeddings | [17/66] Done rows=2767 dim=1024 elapsed=109.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ale_s_World_of_Stocks/train.pt
+2026-03-15 01:28:53,324 | INFO | generate_embeddings | [18/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ale_s_World_of_Stocks/val.csv
+2026-03-15 01:28:53,340 | INFO | generate_embeddings | [18/66] Encoding rows=1053 batch=2
+2026-03-15 01:29:35,953 | INFO | generate_embeddings | [18/66] Done rows=1053 dim=1024 elapsed=42.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ale_s_World_of_Stocks/val.pt
+2026-03-15 01:29:35,953 | INFO | generate_embeddings | [19/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Cameron_Stewart_CFA/test.csv
+2026-03-15 01:29:35,958 | INFO | generate_embeddings | [19/66] Encoding rows=232 batch=2
+2026-03-15 01:29:49,858 | INFO | generate_embeddings | [19/66] Done rows=232 dim=1024 elapsed=13.9s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Cameron_Stewart_CFA/test.pt
+2026-03-15 01:29:49,858 | INFO | generate_embeddings | [20/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Cameron_Stewart_CFA/train.csv
+2026-03-15 01:29:49,872 | INFO | generate_embeddings | [20/66] Encoding rows=464 batch=2
+2026-03-15 01:30:41,307 | INFO | generate_embeddings | [20/66] Done rows=464 dim=1024 elapsed=51.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Cameron_Stewart_CFA/train.pt
+2026-03-15 01:30:41,308 | INFO | generate_embeddings | [21/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Cameron_Stewart_CFA/val.csv
+2026-03-15 01:30:41,313 | INFO | generate_embeddings | [21/66] Encoding rows=147 batch=2
+2026-03-15 01:30:51,935 | INFO | generate_embeddings | [21/66] Done rows=147 dim=1024 elapsed=10.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Cameron_Stewart_CFA/val.pt
+2026-03-15 01:30:51,935 | INFO | generate_embeddings | [22/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Daniel_Pronk/test.csv
+2026-03-15 01:30:51,945 | INFO | generate_embeddings | [22/66] Encoding rows=546 batch=2
+2026-03-15 01:31:25,065 | INFO | generate_embeddings | [22/66] Done rows=546 dim=1024 elapsed=33.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Daniel_Pronk/test.pt
+2026-03-15 01:31:25,066 | INFO | generate_embeddings | [23/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Daniel_Pronk/train.csv
+2026-03-15 01:31:25,085 | INFO | generate_embeddings | [23/66] Encoding rows=912 batch=2
+2026-03-15 01:32:36,615 | INFO | generate_embeddings | [23/66] Done rows=912 dim=1024 elapsed=71.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Daniel_Pronk/train.pt
+2026-03-15 01:32:36,615 | INFO | generate_embeddings | [24/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Daniel_Pronk/val.csv
+2026-03-15 01:32:36,624 | INFO | generate_embeddings | [24/66] Encoding rows=297 batch=2
+2026-03-15 01:33:04,402 | INFO | generate_embeddings | [24/66] Done rows=297 dim=1024 elapsed=27.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Daniel_Pronk/val.pt
+2026-03-15 01:33:04,402 | INFO | generate_embeddings | [25/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Dividend_Data/test.csv
+2026-03-15 01:33:04,412 | INFO | generate_embeddings | [25/66] Encoding rows=693 batch=2
+2026-03-15 01:33:32,486 | INFO | generate_embeddings | [25/66] Done rows=693 dim=1024 elapsed=28.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Dividend_Data/test.pt
+2026-03-15 01:33:32,486 | INFO | generate_embeddings | [26/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Dividend_Data/train.csv
+2026-03-15 01:33:32,505 | INFO | generate_embeddings | [26/66] Encoding rows=1664 batch=2
+2026-03-15 01:34:33,320 | INFO | generate_embeddings | [26/66] Done rows=1664 dim=1024 elapsed=60.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Dividend_Data/train.pt
+2026-03-15 01:34:33,320 | INFO | generate_embeddings | [27/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Dividend_Data/val.csv
+2026-03-15 01:34:33,331 | INFO | generate_embeddings | [27/66] Encoding rows=681 batch=2
+2026-03-15 01:35:01,276 | INFO | generate_embeddings | [27/66] Done rows=681 dim=1024 elapsed=28.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Dividend_Data/val.pt
+2026-03-15 01:35:01,277 | INFO | generate_embeddings | [28/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Everything_Money/test.csv
+2026-03-15 01:35:01,280 | INFO | generate_embeddings | [28/66] Encoding rows=49 batch=2
+2026-03-15 01:35:05,423 | INFO | generate_embeddings | [28/66] Done rows=49 dim=1024 elapsed=4.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Everything_Money/test.pt
+2026-03-15 01:35:05,423 | INFO | generate_embeddings | [29/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Everything_Money/train.csv
+2026-03-15 01:35:05,426 | INFO | generate_embeddings | [29/66] Encoding rows=98 batch=2
+2026-03-15 01:35:09,830 | INFO | generate_embeddings | [29/66] Done rows=98 dim=1024 elapsed=4.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Everything_Money/train.pt
+2026-03-15 01:35:09,830 | INFO | generate_embeddings | [30/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Everything_Money/val.csv
+2026-03-15 01:35:09,833 | INFO | generate_embeddings | [30/66] Encoding rows=63 batch=2
+2026-03-15 01:35:12,217 | INFO | generate_embeddings | [30/66] Done rows=63 dim=1024 elapsed=2.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Everything_Money/val.pt
+2026-03-15 01:35:12,218 | INFO | generate_embeddings | [31/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Financial_Education/test.csv
+2026-03-15 01:35:12,231 | INFO | generate_embeddings | [31/66] Encoding rows=807 batch=2
+2026-03-15 01:35:52,949 | INFO | generate_embeddings | [31/66] Done rows=807 dim=1024 elapsed=40.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Financial_Education/test.pt
+2026-03-15 01:35:52,949 | INFO | generate_embeddings | [32/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Financial_Education/train.csv
+2026-03-15 01:35:52,977 | INFO | generate_embeddings | [32/66] Encoding rows=2095 batch=2
+2026-03-15 01:37:19,405 | INFO | generate_embeddings | [32/66] Done rows=2095 dim=1024 elapsed=86.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Financial_Education/train.pt
+2026-03-15 01:37:19,406 | INFO | generate_embeddings | [33/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Financial_Education/val.csv
+2026-03-15 01:37:19,419 | INFO | generate_embeddings | [33/66] Encoding rows=717 batch=2
+2026-03-15 01:38:05,717 | INFO | generate_embeddings | [33/66] Done rows=717 dim=1024 elapsed=46.3s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Financial_Education/val.pt
+2026-03-15 01:38:05,717 | INFO | generate_embeddings | [34/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Humbled_Trader/test.csv
+2026-03-15 01:38:05,720 | INFO | generate_embeddings | [34/66] Encoding rows=109 batch=2
+2026-03-15 01:38:08,919 | INFO | generate_embeddings | [34/66] Done rows=109 dim=1024 elapsed=3.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Humbled_Trader/test.pt
+2026-03-15 01:38:08,920 | INFO | generate_embeddings | [35/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Humbled_Trader/train.csv
+2026-03-15 01:38:08,925 | INFO | generate_embeddings | [35/66] Encoding rows=268 batch=2
+2026-03-15 01:38:19,428 | INFO | generate_embeddings | [35/66] Done rows=268 dim=1024 elapsed=10.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Humbled_Trader/train.pt
+2026-03-15 01:38:19,428 | INFO | generate_embeddings | [36/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Humbled_Trader/val.csv
+2026-03-15 01:38:19,431 | INFO | generate_embeddings | [36/66] Encoding rows=71 batch=2
+2026-03-15 01:38:22,303 | INFO | generate_embeddings | [36/66] Done rows=71 dim=1024 elapsed=2.9s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Humbled_Trader/val.pt
+2026-03-15 01:38:22,303 | INFO | generate_embeddings | [37/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Invest_with_Henry/test.csv
+2026-03-15 01:38:22,312 | INFO | generate_embeddings | [37/66] Encoding rows=573 batch=2
+2026-03-15 01:38:48,438 | INFO | generate_embeddings | [37/66] Done rows=573 dim=1024 elapsed=26.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Invest_with_Henry/test.pt
+2026-03-15 01:38:48,438 | INFO | generate_embeddings | [38/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Invest_with_Henry/train.csv
+2026-03-15 01:38:48,459 | INFO | generate_embeddings | [38/66] Encoding rows=1446 batch=2
+2026-03-15 01:40:12,577 | INFO | generate_embeddings | [38/66] Done rows=1446 dim=1024 elapsed=84.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Invest_with_Henry/train.pt
+2026-03-15 01:40:12,578 | INFO | generate_embeddings | [39/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Invest_with_Henry/val.csv
+2026-03-15 01:40:12,589 | INFO | generate_embeddings | [39/66] Encoding rows=702 batch=2
+2026-03-15 01:40:57,665 | INFO | generate_embeddings | [39/66] Done rows=702 dim=1024 elapsed=45.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Invest_with_Henry/val.pt
+2026-03-15 01:40:57,666 | INFO | generate_embeddings | [40/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Investing_with_Tom/test.csv
+2026-03-15 01:40:57,672 | INFO | generate_embeddings | [40/66] Encoding rows=272 batch=2
+2026-03-15 01:41:10,756 | INFO | generate_embeddings | [40/66] Done rows=272 dim=1024 elapsed=13.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Investing_with_Tom/test.pt
+2026-03-15 01:41:10,756 | INFO | generate_embeddings | [41/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Investing_with_Tom/train.csv
+2026-03-15 01:41:10,767 | INFO | generate_embeddings | [41/66] Encoding rows=799 batch=2
+2026-03-15 01:41:44,507 | INFO | generate_embeddings | [41/66] Done rows=799 dim=1024 elapsed=33.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Investing_with_Tom/train.pt
+2026-03-15 01:41:44,507 | INFO | generate_embeddings | [42/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Investing_with_Tom/val.csv
+2026-03-15 01:41:44,512 | INFO | generate_embeddings | [42/66] Encoding rows=195 batch=2
+2026-03-15 01:41:55,205 | INFO | generate_embeddings | [42/66] Done rows=195 dim=1024 elapsed=10.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Investing_with_Tom/val.pt
+2026-03-15 01:41:55,205 | INFO | generate_embeddings | [43/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Joseph_Carlson/test.csv
+2026-03-15 01:41:55,216 | INFO | generate_embeddings | [43/66] Encoding rows=787 batch=2
+2026-03-15 01:42:27,782 | INFO | generate_embeddings | [43/66] Done rows=787 dim=1024 elapsed=32.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Joseph_Carlson/test.pt
+2026-03-15 01:42:27,783 | INFO | generate_embeddings | [44/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Joseph_Carlson/train.csv
+2026-03-15 01:42:27,810 | INFO | generate_embeddings | [44/66] Encoding rows=1961 batch=2
+2026-03-15 01:43:52,564 | INFO | generate_embeddings | [44/66] Done rows=1961 dim=1024 elapsed=84.8s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Joseph_Carlson/train.pt
+2026-03-15 01:43:52,565 | INFO | generate_embeddings | [45/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Joseph_Carlson/val.csv
+2026-03-15 01:43:52,577 | INFO | generate_embeddings | [45/66] Encoding rows=667 batch=2
+2026-03-15 01:44:25,229 | INFO | generate_embeddings | [45/66] Done rows=667 dim=1024 elapsed=32.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Joseph_Carlson/val.pt
+2026-03-15 01:44:25,229 | INFO | generate_embeddings | [46/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Learn_to_Invest/test.csv
+2026-03-15 01:44:25,234 | INFO | generate_embeddings | [46/66] Encoding rows=167 batch=2
+2026-03-15 01:44:32,820 | INFO | generate_embeddings | [46/66] Done rows=167 dim=1024 elapsed=7.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Learn_to_Invest/test.pt
+2026-03-15 01:44:32,820 | INFO | generate_embeddings | [47/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Learn_to_Invest/train.csv
+2026-03-15 01:44:32,831 | INFO | generate_embeddings | [47/66] Encoding rows=725 batch=2
+2026-03-15 01:45:01,773 | INFO | generate_embeddings | [47/66] Done rows=725 dim=1024 elapsed=29.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Learn_to_Invest/train.pt
+2026-03-15 01:45:01,773 | INFO | generate_embeddings | [48/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Learn_to_Invest/val.csv
+2026-03-15 01:45:01,779 | INFO | generate_embeddings | [48/66] Encoding rows=180 batch=2
+2026-03-15 01:45:12,381 | INFO | generate_embeddings | [48/66] Done rows=180 dim=1024 elapsed=10.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Learn_to_Invest/val.pt
+2026-03-15 01:45:12,381 | INFO | generate_embeddings | [49/66] Start file: data/multisource_ready_22-25/04_clean/youtube/MarketBeat/test.csv
+2026-03-15 01:45:12,397 | INFO | generate_embeddings | [49/66] Encoding rows=1099 batch=2
+2026-03-15 01:45:57,304 | INFO | generate_embeddings | [49/66] Done rows=1099 dim=1024 elapsed=44.9s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/MarketBeat/test.pt
+2026-03-15 01:45:57,304 | INFO | generate_embeddings | [50/66] Start file: data/multisource_ready_22-25/04_clean/youtube/MarketBeat/train.csv
+2026-03-15 01:45:57,321 | INFO | generate_embeddings | [50/66] Encoding rows=1328 batch=2
+2026-03-15 01:46:44,776 | INFO | generate_embeddings | [50/66] Done rows=1328 dim=1024 elapsed=47.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/MarketBeat/train.pt
+2026-03-15 01:46:44,776 | INFO | generate_embeddings | [51/66] Start file: data/multisource_ready_22-25/04_clean/youtube/MarketBeat/val.csv
+2026-03-15 01:46:44,787 | INFO | generate_embeddings | [51/66] Encoding rows=778 batch=2
+2026-03-15 01:47:15,115 | INFO | generate_embeddings | [51/66] Done rows=778 dim=1024 elapsed=30.3s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/MarketBeat/val.pt
+2026-03-15 01:47:15,115 | INFO | generate_embeddings | [52/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Sven_Carlin_Ph.D./test.csv
+2026-03-15 01:47:15,120 | INFO | generate_embeddings | [52/66] Encoding rows=355 batch=2
+2026-03-15 01:47:24,976 | INFO | generate_embeddings | [52/66] Done rows=355 dim=1024 elapsed=9.9s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Sven_Carlin_Ph.D./test.pt
+2026-03-15 01:47:24,976 | INFO | generate_embeddings | [53/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Sven_Carlin_Ph.D./train.csv
+2026-03-15 01:47:24,991 | INFO | generate_embeddings | [53/66] Encoding rows=1097 batch=2
+2026-03-15 01:48:07,494 | INFO | generate_embeddings | [53/66] Done rows=1097 dim=1024 elapsed=42.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Sven_Carlin_Ph.D./train.pt
+2026-03-15 01:48:07,494 | INFO | generate_embeddings | [54/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Sven_Carlin_Ph.D./val.csv
+2026-03-15 01:48:07,500 | INFO | generate_embeddings | [54/66] Encoding rows=358 batch=2
+2026-03-15 01:48:19,448 | INFO | generate_embeddings | [54/66] Done rows=358 dim=1024 elapsed=12.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Sven_Carlin_Ph.D./val.pt
+2026-03-15 01:48:19,448 | INFO | generate_embeddings | [55/66] Start file: data/multisource_ready_22-25/04_clean/youtube/The_Maverick_of_Wall_Street/test.csv
+2026-03-15 01:48:19,468 | INFO | generate_embeddings | [55/66] Encoding rows=2335 batch=2
+2026-03-15 01:49:27,093 | INFO | generate_embeddings | [55/66] Done rows=2335 dim=1024 elapsed=67.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/The_Maverick_of_Wall_Street/test.pt
+2026-03-15 01:49:27,093 | INFO | generate_embeddings | [56/66] Start file: data/multisource_ready_22-25/04_clean/youtube/The_Maverick_of_Wall_Street/train.csv
+2026-03-15 01:49:27,147 | INFO | generate_embeddings | [56/66] Encoding rows=5811 batch=2
+2026-03-15 01:52:57,671 | INFO | generate_embeddings | [56/66] Done rows=5811 dim=1024 elapsed=210.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/The_Maverick_of_Wall_Street/train.pt
+2026-03-15 01:52:57,672 | INFO | generate_embeddings | [57/66] Start file: data/multisource_ready_22-25/04_clean/youtube/The_Maverick_of_Wall_Street/val.csv
+2026-03-15 01:52:57,695 | INFO | generate_embeddings | [57/66] Encoding rows=2473 batch=2
+2026-03-15 01:54:17,030 | INFO | generate_embeddings | [57/66] Done rows=2473 dim=1024 elapsed=79.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/The_Maverick_of_Wall_Street/val.pt
+2026-03-15 01:54:17,031 | INFO | generate_embeddings | [58/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ticker_Take/test.csv
+2026-03-15 01:54:17,035 | INFO | generate_embeddings | [58/66] Encoding rows=351 batch=2
+2026-03-15 01:54:25,021 | INFO | generate_embeddings | [58/66] Done rows=351 dim=1024 elapsed=8.0s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ticker_Take/test.pt
+2026-03-15 01:54:25,021 | INFO | generate_embeddings | [59/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ticker_Take/train.csv
+2026-03-15 01:54:25,027 | INFO | generate_embeddings | [59/66] Encoding rows=664 batch=2
+2026-03-15 01:54:38,467 | INFO | generate_embeddings | [59/66] Done rows=664 dim=1024 elapsed=13.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ticker_Take/train.pt
+2026-03-15 01:54:38,468 | INFO | generate_embeddings | [60/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Ticker_Take/val.csv
+2026-03-15 01:54:38,472 | INFO | generate_embeddings | [60/66] Encoding rows=302 batch=2
+2026-03-15 01:54:45,657 | INFO | generate_embeddings | [60/66] Done rows=302 dim=1024 elapsed=7.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Ticker_Take/val.pt
+2026-03-15 01:54:45,657 | INFO | generate_embeddings | [61/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Tom_Nash/test.csv
+2026-03-15 01:54:45,664 | INFO | generate_embeddings | [61/66] Encoding rows=496 batch=2
+2026-03-15 01:55:04,152 | INFO | generate_embeddings | [61/66] Done rows=496 dim=1024 elapsed=18.5s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Tom_Nash/test.pt
+2026-03-15 01:55:04,152 | INFO | generate_embeddings | [62/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Tom_Nash/train.csv
+2026-03-15 01:55:04,176 | INFO | generate_embeddings | [62/66] Encoding rows=1663 batch=2
+2026-03-15 01:56:24,376 | INFO | generate_embeddings | [62/66] Done rows=1663 dim=1024 elapsed=80.2s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Tom_Nash/train.pt
+2026-03-15 01:56:24,377 | INFO | generate_embeddings | [63/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Tom_Nash/val.csv
+2026-03-15 01:56:24,387 | INFO | generate_embeddings | [63/66] Encoding rows=551 batch=2
+2026-03-15 01:56:52,091 | INFO | generate_embeddings | [63/66] Done rows=551 dim=1024 elapsed=27.7s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Tom_Nash/val.pt
+2026-03-15 01:56:52,091 | INFO | generate_embeddings | [64/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Unrivaled_Investing/test.csv
+2026-03-15 01:56:52,097 | INFO | generate_embeddings | [64/66] Encoding rows=284 batch=2
+2026-03-15 01:57:09,681 | INFO | generate_embeddings | [64/66] Done rows=284 dim=1024 elapsed=17.6s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Unrivaled_Investing/test.pt
+2026-03-15 01:57:09,681 | INFO | generate_embeddings | [65/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Unrivaled_Investing/train.csv
+2026-03-15 01:57:09,698 | INFO | generate_embeddings | [65/66] Encoding rows=872 batch=2
+2026-03-15 01:58:04,748 | INFO | generate_embeddings | [65/66] Done rows=872 dim=1024 elapsed=55.1s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Unrivaled_Investing/train.pt
+2026-03-15 01:58:04,748 | INFO | generate_embeddings | [66/66] Start file: data/multisource_ready_22-25/04_clean/youtube/Unrivaled_Investing/val.csv
+2026-03-15 01:58:04,755 | INFO | generate_embeddings | [66/66] Encoding rows=291 batch=2
+2026-03-15 01:58:27,192 | INFO | generate_embeddings | [66/66] Done rows=291 dim=1024 elapsed=22.4s -> data/multisource_ready_22-25/05_embeddings_qwen4b_d1024/youtube/Unrivaled_Investing/val.pt
+2026-03-15 01:58:27,192 | INFO | generate_embeddings | Finished. success=66 skipped_or_failed=0 elapsed=2309.2s
