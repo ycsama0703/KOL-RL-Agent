@@ -70,10 +70,18 @@ def parse_args() -> argparse.Namespace:
 
 
 def collect_reward_files(reward_dir: Path) -> Dict[str, List[Path]]:
+    """Group reward CSVs by their relative parent path under reward_dir.
+
+    Examples:
+    - reward_dir/<kol>/<split>.csv              -> group "<kol>"
+    - reward_dir/<source>/<kol>/<split>.csv     -> group "<source>/<kol>"
+    """
+
     files: Dict[str, List[Path]] = {}
-    for csv in reward_dir.rglob("*.csv"):
-        kol = csv.parent.name
-        files.setdefault(kol, []).append(csv)
+    for csv in sorted(reward_dir.rglob("*.csv")):
+        rel_parent = csv.relative_to(reward_dir).parent
+        group = str(rel_parent) if str(rel_parent) != "." else csv.parent.name
+        files.setdefault(group, []).append(csv)
     return files
 
 
@@ -182,8 +190,15 @@ def main() -> None:
         return
 
     for kol, csv_files in files_by_kol.items():
+        split_seen = set()
         for csv_path in csv_files:
             split = csv_path.stem  # train/val/test
+            if split in split_seen:
+                raise ValueError(
+                    f"Duplicate split '{split}' under group '{kol}'. "
+                    f"Please ensure only one {split}.csv per group."
+                )
+            split_seen.add(split)
             out_path = output_dir / kol / f"{split}.pt"
             process_file(
                 csv_path,

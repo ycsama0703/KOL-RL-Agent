@@ -93,7 +93,7 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--bc-epochs", type=int, default=10)
     p.add_argument("--bc-batch-size", type=int, default=256)
     p.add_argument("--bc-lr", type=float, default=3e-4)
-    p.add_argument("--bc-fit-behavior", action="store_true", default=True)
+    p.add_argument("--bc-fit-behavior", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--bc-anchor-lambda", type=float, default=0.1)
 
     p.add_argument("--iql-steps", type=int, default=200_000)
@@ -255,7 +255,8 @@ def behavior_cloning(
 
             actor_out = actor(state)
             delta = _extract_delta(actor_out, baseline_action)
-            policy_action = build_policy_action_for_training(baseline_action, delta, cfg)
+            # Use the same hard intent constraints as evaluation to avoid train-test mismatch.
+            policy_action = apply_intent_constraints(baseline_action, delta, cfg)
             pens = intent_penalties_soft(baseline_action, policy_action, cfg)
 
             if cfg.bc_fit_behavior:
@@ -334,8 +335,8 @@ def iql_training(
         actor_out = actor(state)
         delta = _extract_delta(actor_out, baseline_action)
 
-        # Training-time policy action: SOFT (no hard gates)
-        policy_action = build_policy_action_for_training(baseline_action, delta, cfg)
+        # Training-time policy action: HARD (same constraints as evaluation)
+        policy_action = apply_intent_constraints(baseline_action, delta, cfg)
 
         delta_behavior = behavior_action - baseline_action
 
