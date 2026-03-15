@@ -18,6 +18,7 @@ Then we enforce:
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import logging
 import math
@@ -25,7 +26,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime
 from itertools import cycle
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 import numpy as np
 import pandas as pd
@@ -80,6 +81,11 @@ class TrainingConfig:
     entry_threshold: float = 1e-3   # baseline_action abs below this => no entry allowed
     clamp_delta: float = 1.0        # delta is clamped to [-clamp_delta, +clamp_delta]
 
+    # Logging
+    log_interval: int = 200
+    write_iql_csv: bool = True
+    progress_bar: bool = True
+
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
 
@@ -111,6 +117,9 @@ def parse_args() -> TrainingConfig:
 
     p.add_argument("--entry-threshold", type=float, default=1e-3)
     p.add_argument("--clamp-delta", type=float, default=1.0)
+    p.add_argument("--log-interval", type=int, default=200)
+    p.add_argument("--write-iql-csv", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--progress-bar", action=argparse.BooleanOptionalAction, default=True)
 
     args = p.parse_args()
     return TrainingConfig(
@@ -137,6 +146,9 @@ def parse_args() -> TrainingConfig:
         reversal_penalty_lambda=args.reversal_penalty_lambda,
         entry_threshold=args.entry_threshold,
         clamp_delta=args.clamp_delta,
+        log_interval=args.log_interval,
+        write_iql_csv=args.write_iql_csv,
+        progress_bar=args.progress_bar,
     )
 
 
@@ -303,6 +315,7 @@ def iql_training(
     dataloader: DataLoader,
     cfg: TrainingConfig,
     device: torch.device,
+    iql_metrics_csv_path: Optional[Path] = None,
 ) -> None:
     actor_opt = torch.optim.Adam(actor.parameters(), lr=cfg.actor_lr)
     critic_opt = torch.optim.Adam(critic.parameters(), lr=cfg.critic_lr)
@@ -315,7 +328,60 @@ def iql_training(
     critic.train()
     value_net.train()
 
-    for step in tqdm(range(1, cfg.iql_steps + 1), desc="IQL Training"):
+    csv_fp = None
+    csv_writer = None
+    if cfg.write_iql_csv and iql_metrics_csv_path is not None:
+        iql_metrics_csv_path.parent.mkdir(parents=True, exist_ok=True)
+        csv_fp = iql_metrics_csv_path.open("w", newline="", encoding="utf-8")
+        csv_writer = csv.writer(csv_fp)
+        csv_writer.writerow(
+            [
+                "step",
+                "critic_loss",
+                "value_loss",
+                "actor_loss",
+                "loss_fit",
+                "loss_align",
+                "loss_entry",
+                "loss_rev",
+                "reward_mean",
+                "done_ratio",
+                "adv_mean",
+                "adv_std",
+                "weight_mean",
+                "weight_max",
+                "policy_abs_mean",
+                "baseline_abs_mean",
+                "behavior_abs_mean",
+            ]
+        )
+        csv_fp.flush()
+
+    rolling = {
+        "critic_loss": 0.0,
+        "value_loss": 0.0,
+        "actor_loss": 0.0,
+        "loss_fit": 0.0,
+        "loss_align": 0.0,
+        "loss_entry": 0.0,
+        "loss_rev": 0.0,
+        "reward_mean": 0.0,
+        "done_ratio": 0.0,
+        "adv_mean": 0.0,
+        "adv_std": 0.0,
+        "weight_mean": 0.0,
+        "weight_max": 0.0,
+        "policy_abs_mean": 0.0,
+        "baseline_abs_mean": 0.0,
+        "behavior_abs_mean": 0.0,
+    }
+    rolling_n = 0
+
+    steps_iter = range(1, cfg.iql_steps + 1)
+    if cfg.progress_bar:
+        steps_iter = tqdm(steps_iter, desc="IQL Training")
+
+    for step in steps_iter:
         batch = next(it)
         state = batch["state"].to(device)
         next_state = batch["next_state"].to(device)
@@ -395,15 +461,77 @@ def iql_training(
         actor_loss.backward()
         actor_opt.step()
 
-        if step % 1000 == 0:
+        rolling["critic_loss"] += float(critic_loss.item())
+        rolling["value_loss"] += float(value_loss.item())
+        rolling["actor_loss"] += float(actor_loss.item())
+        rolling["loss_fit"] += float(loss_fit.item())
+        rolling["loss_align"] += float(loss_align.item())
+        rolling["loss_entry"] += float(loss_entry.item())
+        rolling["loss_rev"] += float(loss_rev.item())
+        rolling["reward_mean"] += float(reward.mean().item())
+        rolling["done_ratio"] += float(done.mean().item())
+        rolling["adv_mean"] += float(adv_b.mean().item())
+        rolling["adv_std"] += float(adv_b.std(unbiased=False).item())
+        rolling["weight_mean"] += float(weights.mean().item())
+        rolling["weight_max"] += float(weights.max().item())
+        rolling["policy_abs_mean"] += float(policy_action.abs().mean().item())
+        rolling["baseline_abs_mean"] += float(baseline_action.abs().mean().item())
+        rolling["behavior_abs_mean"] += float(behavior_action.abs().mean().item())
+        rolling_n += 1
+
+        if step % max(cfg.log_interval, 1) == 0 or step == cfg.iql_steps:
+            avg = {k: v / max(rolling_n, 1) for k, v in rolling.items()}
             LOGGER.info(
-                "IQL step %d/%d - critic=%.6f value=%.6f actor=%.6f",
+                "IQL step %d/%d | critic=%.6f value=%.6f actor=%.6f fit=%.6f align=%.6f entry=%.6f rev=%.6f reward=%.6f done=%.4f adv=%.6f(+/-%.6f) w=%.6f(max=%.4f) | |a|=%.6f |b|=%.6f |beh|=%.6f",
                 step,
                 cfg.iql_steps,
-                critic_loss.item(),
-                value_loss.item(),
-                actor_loss.item(),
+                avg["critic_loss"],
+                avg["value_loss"],
+                avg["actor_loss"],
+                avg["loss_fit"],
+                avg["loss_align"],
+                avg["loss_entry"],
+                avg["loss_rev"],
+                avg["reward_mean"],
+                avg["done_ratio"],
+                avg["adv_mean"],
+                avg["adv_std"],
+                avg["weight_mean"],
+                avg["weight_max"],
+                avg["policy_abs_mean"],
+                avg["baseline_abs_mean"],
+                avg["behavior_abs_mean"],
             )
+            if csv_writer is not None:
+                csv_writer.writerow(
+                    [
+                        step,
+                        avg["critic_loss"],
+                        avg["value_loss"],
+                        avg["actor_loss"],
+                        avg["loss_fit"],
+                        avg["loss_align"],
+                        avg["loss_entry"],
+                        avg["loss_rev"],
+                        avg["reward_mean"],
+                        avg["done_ratio"],
+                        avg["adv_mean"],
+                        avg["adv_std"],
+                        avg["weight_mean"],
+                        avg["weight_max"],
+                        avg["policy_abs_mean"],
+                        avg["baseline_abs_mean"],
+                        avg["behavior_abs_mean"],
+                    ]
+                )
+                csv_fp.flush()
+
+            for k in rolling:
+                rolling[k] = 0.0
+            rolling_n = 0
+
+    if csv_fp is not None:
+        csv_fp.close()
 
 
 # -------------------------
@@ -512,6 +640,10 @@ def main() -> None:
     LOGGER.info("Starting training run %s", run_name)
     LOGGER.info("Logging to %s", log_path)
     LOGGER.info("Checkpoints will be saved under %s", checkpoint_dir)
+    LOGGER.info("Training config: %s", json.dumps(asdict(cfg), ensure_ascii=False, sort_keys=True))
+    if torch.cuda.is_available() and device.type == "cuda":
+        LOGGER.info("CUDA device: %s", torch.cuda.get_device_name(device))
+    LOGGER.info("Device: %s", device)
 
     if not train_path.exists():
         raise FileNotFoundError(f"Replay buffer not found: {train_path}")
@@ -519,6 +651,16 @@ def main() -> None:
     train_dataset = ReplayDataset(train_path)
     state_dim = int(train_dataset.states.shape[1])
     LOGGER.info("Loaded replay buffer for %s with %d samples, state_dim=%d", cfg.kol, len(train_dataset), state_dim)
+    baseline_abs = train_dataset.baseline_actions.abs()
+    behavior_abs = train_dataset.actions.abs()
+    baseline_zero_ratio = float((baseline_abs < cfg.entry_threshold).float().mean().item())
+    LOGGER.info(
+        "Dataset stats | baseline_abs_mean=%.6f behavior_abs_mean=%.6f baseline_zero_ratio(th=%.1e)=%.4f",
+        float(baseline_abs.mean().item()),
+        float(behavior_abs.mean().item()),
+        cfg.entry_threshold,
+        baseline_zero_ratio,
+    )
 
     bc_loader = DataLoader(train_dataset, batch_size=cfg.bc_batch_size, shuffle=True, drop_last=True, pin_memory=True)
     iql_loader = DataLoader(train_dataset, batch_size=cfg.iql_batch_size, shuffle=True, drop_last=True, pin_memory=True)
@@ -531,7 +673,18 @@ def main() -> None:
     bc_loss = behavior_cloning(actor, bc_loader, cfg, device)
     LOGGER.info("Behavior cloning finished. Avg loss=%.6f", bc_loss)
 
-    iql_training(actor, critic, value_net, iql_loader, cfg, device)
+    iql_metrics_csv_path = log_dir / "iql_metrics.csv"
+    if cfg.write_iql_csv:
+        LOGGER.info("IQL metrics CSV: %s", iql_metrics_csv_path)
+    iql_training(
+        actor,
+        critic,
+        value_net,
+        iql_loader,
+        cfg,
+        device,
+        iql_metrics_csv_path=iql_metrics_csv_path,
+    )
 
     metrics = {}
     if val_path.exists():
