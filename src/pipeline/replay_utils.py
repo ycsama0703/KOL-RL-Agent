@@ -11,6 +11,8 @@ import pandas as pd
 from src.portfolio.layer import PortfolioLayer
 from src.state.ticker_embedding import TickerEmbedding
 
+MARKET_FEATURE_COLS = ["ret_1d", "ret_5d", "vol_5d", "vol_20d", "volu_z_20d", "dist_sma20"]
+
 
 def load_ticker_embedder(weights_path: Path, vocab_path: Path, embedding_dim: int = 32) -> TickerEmbedding:
     """Load a TickerEmbedding with consistent default dimension."""
@@ -168,7 +170,7 @@ def build_behavior_weights(
 def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarray:
     """Construct state vectors consistent with training time definition.
 
-    state = [ModernBERT embedding || ticker embedding || sentiment || confidence || last_position]
+    state = [text embedding || ticker embedding || core scalar features || market factors]
     """
 
     embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
@@ -181,6 +183,8 @@ def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarr
     missing = [c for c in feature_cols if c not in df.columns]
     if missing:
         raise ValueError(f"Missing required feature columns: {missing}")
-    extra_features = df[feature_cols].fillna(0.0).values.astype(np.float32)
+    active_market_cols = [c for c in MARKET_FEATURE_COLS if c in df.columns]
+    all_scalar_cols = feature_cols + active_market_cols
+    extra_features = df[all_scalar_cols].fillna(0.0).values.astype(np.float32)
     states = np.concatenate([text_emb, ticker_vectors, extra_features], axis=1)
     return states

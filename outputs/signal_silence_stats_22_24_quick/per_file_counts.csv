@@ -1,0 +1,15 @@
+file,kol,split,signal_key,d_sig,d_sil,d_total,rho_sig,rho_sil,sil_sig_ratio
+data/replay_buffer/22-24/Ale_s_World_of_Stocks/test.pt,Ale_s_World_of_Stocks,test,actions,307,3443,3750,0.08186666666666667,0.9181333333333334,11.214983713355048
+data/replay_buffer/22-24/Ale_s_World_of_Stocks/train.pt,Ale_s_World_of_Stocks,train,actions,933,24843,25776,0.036196461824953445,0.9638035381750466,26.627009646302252
+data/replay_buffer/22-24/Financial_Education/test.pt,Financial_Education,test,actions,419,4001,4420,0.09479638009049773,0.9052036199095023,9.54892601431981
+data/replay_buffer/22-24/Financial_Education/train.pt,Financial_Education,train,actions,540,7186,7726,0.06989386487186125,0.9301061351281388,13.307407407407407
+data/replay_buffer/22-24/Invest_with_Henry/test.pt,Invest_with_Henry,test,actions,395,3522,3917,0.10084248149093694,0.8991575185090631,8.916455696202531
+data/replay_buffer/22-24/Invest_with_Henry/train.pt,Invest_with_Henry,train,actions,343,2524,2867,0.11963725148238577,0.8803627485176142,7.358600583090379
+data/replay_buffer/22-24/Joseph_Carlson/test.pt,Joseph_Carlson,test,actions,359,2361,2720,0.13198529411764706,0.868014705882353,6.576601671309192
+data/replay_buffer/22-24/Joseph_Carlson/train.pt,Joseph_Carlson,train,actions,812,7940,8752,0.09277879341864717,0.9072212065813529,9.77832512315271
+data/replay_buffer/22-24/MarketBeat/test.pt,MarketBeat,test,actions,264,5294,5558,0.04749910039582584,0.9525008996041742,20.053030303030305
+data/replay_buffer/22-24/MarketBeat/train.pt,MarketBeat,train,actions,230,5678,5908,0.038930264048747464,0.9610697359512526,24.68695652173913
+data/replay_buffer/22-24/The_Maverick_of_Wall_Street/test.pt,The_Maverick_of_Wall_Street,test,actions,1043,9136,10179,0.10246586108655074,0.8975341389134492,8.75934803451582
+data/replay_buffer/22-24/The_Maverick_of_Wall_Street/train.pt,The_Maverick_of_Wall_Street,train,actions,2365,36819,39184,0.06035626786443446,0.9396437321355655,15.568287526427062
+data/replay_buffer/22-24/Tom_Nash/test.pt,Tom_Nash,test,actions,122,928,1050,0.11619047619047619,0.8838095238095238,7.60655737704918
+data/replay_buffer/22-24/Tom_Nash/train.pt,Tom_Nash,train,actions,437,9877,10314,0.04236959472561567,0.9576304052743844,22.601830663615562

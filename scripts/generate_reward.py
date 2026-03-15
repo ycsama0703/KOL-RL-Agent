@@ -140,6 +140,7 @@ def find_span_reward(
 
 def process_file(
     csv_path: Path,
+    input_root: Path,
     output_dir: Path,
     period: str,
     global_price_cache: Dict[str, pd.Series],
@@ -182,9 +183,9 @@ def process_file(
     df["done"] = done_flags
 
     try:
-        relative = csv_path.relative_to(Path("data/processed/enriched"))
+        relative = csv_path.relative_to(input_root)
     except ValueError:
-        relative = csv_path.name
+        relative = Path(csv_path.name)
     output_path = output_dir / relative
     output_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(output_path, index=False)
@@ -218,6 +219,7 @@ def main() -> None:
     for csv_path in csv_files:
         process_file(
             csv_path,
+            input_path,
             output_dir,
             period=args.period,
             global_price_cache=price_cache,

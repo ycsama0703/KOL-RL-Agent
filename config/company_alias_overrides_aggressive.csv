@@ -1,0 +1,344 @@
+alias,ticker
+s&p 500,SPY
+sp 500,SPY
+nasdaq,QQQ
+dow jones,DIA
+qqq,QQQ
+spy,SPY
+walgreens,WBA
+walgreens boots alliance,WBA
+verizon,VZ
+chipotle,CMG
+gm,GM
+texas roadhouse,TXRH
+american airlines,AAL
+toyota,TM
+ibm,IBM
+asml,ASML
+snowflake,SNOW
+amc,AMC
+tencent,TCEHY
+cisco,CSCO
+lululemon,LULU
+merck,MRK
+eli lilly,LLY
+jd,JD
+activision blizzard,ATVI
+byd,BYDDY
+rivian,RIVN
+micron,MU
+snapchat,SNAP
+interactive brokers,IBKR
+ups,UPS
+microstrategy,MSTR
+estee lauder,EL
+carvana,CVNA
+baidu,BIDU
+nio,NIO
+exxon,XOM
+canadian pacific,CPKC
+zoom,ZM
+novo nordisk,NVO
+tsmc,TSM
+spotify,SPOT
+cvs,CVS
+raytheon,RTX
+celsius,CELH
+roku,ROKU
+dell,DELL
+pinduoduo,PDD
+lyft,LYFT
+paramount,PARA
+paramount global,PARA
+lucid,LCID
+honda,HMC
+instagram,META
+domino s,DPZ
+deutsche bank,DB
+philip morris,PM
+stellantis,STLA
+hims,HIMS
+smci,SMCI
+vici,VICI
+roblox,RBLX
+shell,SHEL
+ferrari,RACE
+ubs,UBS
+draftkings,DKNG
+duolingo,DUOL
+sony,SONY
+zillow,Z
+adm,ADM
+berkshire,BRK-B
+alphabet google,GOOGL
+wall street,
+wall street journal,
+warren buffett,
+seeking alpha,
+ai ticker chat,
+openai,
+youtube,
+cnbc,
+bloomberg,
+federal reserve,
+opec,
+x,
+tiktok,
+chatgpt,
+spacex,
+silicon valley bank,
+fed,
+tiktok,
+vanguard,VOO
+brookfield corporation,BN
+brookfield,BN
+brookfield asset management,BAM
+samsung,SSNLF
+peloton,PTON
+aws,AMZN
+ark invest,ARKK
+neo,NIO
+c3 ai,AI
+toll brothers,TOL
+valero,VLO
+credit suisse,UBS
+fubo,FUBO
+cheesecake factory,CAKE
+nutrien,NTR
+beyond meat,BYND
+foot locker,FL
+airbus,EADSY
+honeywell,HON
+rh,RH
+bp,BP
+taiwan semiconductor manufacturing company,TSM
+softbank,SFTBY
+square,SQ
+docusign,DOCU
+whirlpool,WHR
+alcoa,AA
+volkswagen,VWAGY
+activision,ATVI
+elf beauty,ELF
+schwab,SCHW
+constellation software,CNSWF
+etsy,ETSY
+affirm,AFRM
+ally financial,ALLY
+mercado libre,MELI
+cloudflare,NET
+archer aviation,ACHR
+enterprise product partners,EPD
+macy s,M
+e l f beauty,ELF
+soundhound,SOUN
+nordstrom,JWN
+daily journal corporation,DJCO
+lvmh,LVMUY
+arm holdings,ARM
+bristol myers,BMY
+citibank,C
+nintendo,NTDOY
+upstart,UPST
+lemonade,LMND
+joby aviation,JOBY
+xpeng,XPEV
+revolve,RVLV
+the honest company,HNST
+delta,DAL
+hyundai,HYMTF
+twilio,TWLO
+mercedes,MBGYY
+capital one,COF
+john deere,DE
+barclays,BCS
+nikola,NKLA
+td ameritrade,AMTD
+cava,CAVA
+deere,DE
+bmw,BMWYY
+marriott,MAR
+hilton,HLT
+ulta,ULTA
+albertsons,ACI
+plug power,PLUG
+hess midstream,HESM
+cameco,CCJ
+wayfair,W
+crispr therapeutics,CRSP
+corsair gaming,CRSR
+amc entertainment,AMC
+sofi technologies,SOFI
+take-two interactive,TTWO
+crocs,CROX
+super micro,SMCI
+dutch bros,BROS
+unilever,UL
+rocket lab,RKLB
+kkr,KKR
+mongodb,MDB
+zscaler,ZS
+teladoc,TDOC
+teladoc health,TDOC
+jetblue,JBLU
+winnebago,WGO
+monster,MNST
+google cloud,GOOGL
+s&p,SPY
+iwm,IWM
+russell 2000,IWM
+mondelez,MDLZ
+elon musk,TSLA
+tj maxx,TJX
+barrick gold,GOLD
+applied digital,APLD
+chase,JPM
+oatly,OTLY
+oatley,OTLY
+seritage growth properties,SRG
+thor industries,THO
+schd,SCHD
+archer,ACHR
+louis vuitton,LVMUY
+google alphabet,GOOGL
+whole foods,AMZN
+discovery,WBD
+morningstar,MORN
+venmo,PYPL
+british american tobacco,BTI
+pinterest,PINS
+regeneron,REGN
+apollo,APO
+li auto,LI
+kellogg s,K
+mobileye,MBLY
+u s bank,USB
+lucid motors,LCID
+factset,FDS
+temu,PDD
+whatsapp,META
+mp materials,MP
+vw,VWAGY
+occidental,OXY
+porsche,POAHY
+prosus,PROSY
+chat gpt,MSFT
+e trade,MS
+hims & hers health,HIMS
+hims & hers,HIMS
+nestle,NSRGY
+applovin,APP
+carnival cruises,CCL
+corsair,CRSR
+panasonic,PCRFY
+azure,MSFT
+vertiv,VRT
+chewy,CHWY
+marathon digital holdings,MARA
+lockheed,LMT
+ethereum,ETH-USD
+amazon web services,AMZN
+blackberry,BB
+sea limited,SE
+dick s sporting goods,DKS
+cbs,PARA
+caesars,CZR
+citi,C
+petrobras,PBR
+glencore,GLNCY
+rio tinto,RIO
+adidas,ADDYY
+astrazeneca,AZN
+diageo,DEO
+gitlab,GTLB
+ross,ROST
+kohl s,KSS
+fubotv,FUBO
+scotts miracle-gro,SMG
+fairfax financial,FRFHF
+pershing square,PSHZF
+fairfax,FRFHF
+equitable bank,EQBK
+qualtrim,XM
+vmware,VMW
+bed bath & beyond,BBBYQ
+fdic,KRE
+first republic,KRE
+twitter,META
+x,META
+youtube,GOOGL
+cnbc,SPY
+bloomberg,SPY
+wall street journal,SPY
+the wall street journal,SPY
+wall street,SPY
+federal reserve,SPY
+fed,SPY
+the fed,SPY
+opec,XLE
+new york times,SPY
+yahoo finance,SPY
+cnn,SPY
+seeking alpha,SPY
+reddit,RDDT
+discord,SPY
+reuters,SPY
+openai,MSFT
+open ai,MSFT
+chatgpt,MSFT
+anthropic,MSFT
+xai,TSLA
+perplexity,MSFT
+coreweave,NVDA
+waymo,GOOGL
+spacex,RKLB
+starlink,RKLB
+tiktok,META
+linkedin,MSFT
+hulu,DIS
+hbo,WBD
+hbo max,WBD
+espn,DIS
+geico,BRK-B
+warren buffett,BRK-B
+fidelity,FNF
+vanguard,VOO
+ark invest,ARKK
+bridgewater associates,SPY
+pimco,SPY
+bitcoin,BTC-USD
+binance,BTC-USD
+ftx,BTC-USD
+ecb,FXE
+bank of england,FXB
+lehman brothers,SPY
+bear stearns,SPY
+td ameritrade,SCHW
+citadel,SPY
+china,MCHI
+huawei,FXI
+evergrande,FXI
+sec,SPY
+deloitte,SPY
+stock unlock,SPY
+ai ticker chat,SPY
+unrivaled investing,SPY
+dividend data,SPY
+piranha profits,SPY
+m1 finance,SPY
+cash app,SQ
+yahoo,SPY
+forbes,SPY
+financial times,SPY
+business insider,SPY
+fox news,SPY
+washington post,SPY
+the washington post,SPY
+tradingview,SPY
+fitch,SPY
+android,GOOGL
+youtube tv,GOOGL
+gmo,SPY
+the planet,SPY
+optionsfy,SPY
+investors grow,SPY

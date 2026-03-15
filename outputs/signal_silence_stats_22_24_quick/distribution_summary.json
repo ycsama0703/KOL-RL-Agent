@@ -1,0 +1,17 @@
+{
+  "num_files": 14,
+  "signal_key_used": "actions",
+  "signal_threshold": 1e-08,
+  "d_sig": 8569,
+  "d_sil": 123552,
+  "d_total": 132121,
+  "global_sil_sig_ratio": 14.418485237483953,
+  "num_tickers": 337,
+  "num_tickers_sil_gt_sig": 336,
+  "pct_tickers_sil_gt_sig": 0.9970326409495549,
+  "num_tickers_sig_eq_0": 6,
+  "ratio_mean_finite": 51.10028360837693,
+  "ratio_median_finite": 33.333333333333336,
+  "ratio_p25_finite": 17.392473118279568,
+  "ratio_p75_finite": 62.8
+}
