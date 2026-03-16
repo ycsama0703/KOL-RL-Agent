@@ -1,0 +1,41 @@
+{
+  "run_name": "youtube/Invest_with_Henry_20260316_154602",
+  "timestamp": "20260316_154602",
+  "kol": "youtube/Invest_with_Henry",
+  "train_samples": 7805,
+  "bc_loss": 0.0021338269374488543,
+  "metrics": {
+    "cumulative_return": 0.6077605251267444,
+    "sharpe": 3.3354866117578967,
+    "max_drawdown": 0.0974569296257532
+  },
+  "config": {
+    "kol": "youtube/Invest_with_Henry",
+    "replay_dir": "data/multisource_ready_22-25/08_replay_buffer_daily",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/multisource_daily_train/youtube",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "bc_fit_behavior": true,
+    "bc_anchor_lambda": 0.03,
+    "iql_steps": 100000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.03,
+    "actor_align_lambda": 0.04,
+    "entry_penalty_lambda": 0.02,
+    "reversal_penalty_lambda": 0.05,
+    "entry_threshold": 0.0005,
+    "clamp_delta": 1.8,
+    "log_interval": 100,
+    "write_iql_csv": true,
+    "progress_bar": false,
+    "device": "cuda"
+  }
+}

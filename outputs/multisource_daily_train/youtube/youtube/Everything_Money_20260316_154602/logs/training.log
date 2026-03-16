@@ -1,0 +1,20 @@
+2026-03-16 15:46:02,223 - __main__ - INFO - Starting training run youtube/Everything_Money_20260316_154602
+2026-03-16 15:46:02,223 - __main__ - INFO - Logging to outputs/multisource_daily_train/youtube/youtube/Everything_Money_20260316_154602/logs/training.log
+2026-03-16 15:46:02,223 - __main__ - INFO - Checkpoints will be saved under outputs/multisource_daily_train/youtube/youtube/Everything_Money_20260316_154602/checkpoints
+2026-03-16 15:46:02,223 - __main__ - INFO - Training config: {"actor_align_lambda": 0.04, "actor_lr": 0.0003, "bc_anchor_lambda": 0.03, "bc_batch_size": 256, "bc_epochs": 10, "bc_fit_behavior": true, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "clamp_delta": 1.8, "critic_lr": 0.0003, "device": "cuda", "entry_penalty_lambda": 0.02, "entry_threshold": 0.0005, "expectile": 0.7, "fidelity_lambda": 0.03, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 100000, "kol": "youtube/Everything_Money", "log_interval": 100, "output_dir": "outputs/multisource_daily_train/youtube", "progress_bar": false, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer_daily", "reversal_penalty_lambda": 0.05, "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-16 15:46:02,295 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-16 15:46:02,295 - __main__ - INFO - Device: cuda
+2026-03-16 15:46:02,314 - __main__ - INFO - Loaded replay buffer for youtube/Everything_Money with 223 samples, state_dim=1066
+2026-03-16 15:46:02,318 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.040560 behavior_abs_mean=0.071749 baseline_zero_ratio(th=5.0e-04)=0.8251
+2026-03-16 15:46:04,157 - __main__ - INFO - BC epoch 1/10 - loss=nan
+2026-03-16 15:46:04,161 - __main__ - INFO - BC epoch 2/10 - loss=nan
+2026-03-16 15:46:04,162 - __main__ - INFO - BC epoch 3/10 - loss=nan
+2026-03-16 15:46:04,163 - __main__ - INFO - BC epoch 4/10 - loss=nan
+2026-03-16 15:46:04,167 - __main__ - INFO - BC epoch 5/10 - loss=nan
+2026-03-16 15:46:04,167 - __main__ - INFO - BC epoch 6/10 - loss=nan
+2026-03-16 15:46:04,168 - __main__ - INFO - BC epoch 7/10 - loss=nan
+2026-03-16 15:46:04,169 - __main__ - INFO - BC epoch 8/10 - loss=nan
+2026-03-16 15:46:04,173 - __main__ - INFO - BC epoch 9/10 - loss=nan
+2026-03-16 15:46:04,173 - __main__ - INFO - BC epoch 10/10 - loss=nan
+2026-03-16 15:46:04,174 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000000
+2026-03-16 15:46:04,174 - __main__ - INFO - IQL metrics CSV: outputs/multisource_daily_train/youtube/youtube/Everything_Money_20260316_154602/logs/iql_metrics.csv

@@ -1,0 +1,1 @@
+step,critic_loss,value_loss,actor_loss,loss_fit,loss_align,loss_entry,loss_rev,reward_mean,done_ratio,adv_mean,adv_std,weight_mean,weight_max,policy_abs_mean,baseline_abs_mean,behavior_abs_mean
