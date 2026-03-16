@@ -58,7 +58,7 @@ class TrainingConfig:
     bc_batch_size: int = 256
     bc_lr: float = 3e-4
     bc_fit_behavior: bool = True
-    bc_anchor_lambda: float = 0.1  # pulls policy toward baseline_action even when fitting behavior
+    bc_anchor_lambda: float = 0.03  # lighter anchor under hard constraints
 
     # IQL
     iql_steps: int = 200_000
@@ -71,15 +71,15 @@ class TrainingConfig:
     temperature_beta: float = 3.0
 
     # Faithfulness shaping (IQL)
-    fidelity_lambda: float = 0.1
+    fidelity_lambda: float = 0.03
     # Soft alignment & soft intent penalties (actor update only)
-    actor_align_lambda: float = 0.1
-    entry_penalty_lambda: float = 0.1
-    reversal_penalty_lambda: float = 0.1
+    actor_align_lambda: float = 0.04
+    entry_penalty_lambda: float = 0.02
+    reversal_penalty_lambda: float = 0.05
 
     # Explicit intent constraints (the “my method” part)
-    entry_threshold: float = 1e-3   # baseline_action abs below this => no entry allowed
-    clamp_delta: float = 1.0        # delta is clamped to [-clamp_delta, +clamp_delta]
+    entry_threshold: float = 5e-4   # baseline_action abs below this => no entry allowed
+    clamp_delta: float = 1.8        # delta is clamped to [-clamp_delta, +clamp_delta]
 
     # Logging
     log_interval: int = 200
@@ -100,7 +100,7 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--bc-batch-size", type=int, default=256)
     p.add_argument("--bc-lr", type=float, default=3e-4)
     p.add_argument("--bc-fit-behavior", action=argparse.BooleanOptionalAction, default=True)
-    p.add_argument("--bc-anchor-lambda", type=float, default=0.1)
+    p.add_argument("--bc-anchor-lambda", type=float, default=0.03)
 
     p.add_argument("--iql-steps", type=int, default=200_000)
     p.add_argument("--iql-batch-size", type=int, default=256)
@@ -110,13 +110,13 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--gamma", type=float, default=0.99)
     p.add_argument("--expectile", type=float, default=0.7)
     p.add_argument("--temperature-beta", type=float, default=3.0)
-    p.add_argument("--fidelity-lambda", type=float, default=0.1)
-    p.add_argument("--actor-align-lambda", type=float, default=0.1)
-    p.add_argument("--entry-penalty-lambda", type=float, default=0.1)
-    p.add_argument("--reversal-penalty-lambda", type=float, default=0.1)
+    p.add_argument("--fidelity-lambda", type=float, default=0.03)
+    p.add_argument("--actor-align-lambda", type=float, default=0.04)
+    p.add_argument("--entry-penalty-lambda", type=float, default=0.02)
+    p.add_argument("--reversal-penalty-lambda", type=float, default=0.05)
 
-    p.add_argument("--entry-threshold", type=float, default=1e-3)
-    p.add_argument("--clamp-delta", type=float, default=1.0)
+    p.add_argument("--entry-threshold", type=float, default=5e-4)
+    p.add_argument("--clamp-delta", type=float, default=1.8)
     p.add_argument("--log-interval", type=int, default=200)
     p.add_argument("--write-iql-csv", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--progress-bar", action=argparse.BooleanOptionalAction, default=True)

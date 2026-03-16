@@ -66,6 +66,12 @@ def parse_args() -> argparse.Namespace:
         default=1e-3,
         help="Baseline weight abs threshold for signal vs no-signal.",
     )
+    parser.add_argument(
+        "--next-state-mode",
+        choices=["next_event", "next_date"],
+        default="next_event",
+        help="How to build next_state links: next mention event or by next_date column.",
+    )
     return parser.parse_args()
 
 
@@ -95,9 +101,45 @@ def compute_next_indices(df: pd.DataFrame) -> np.ndarray:
     return next_idx
 
 
+def compute_next_indices_by_next_date(df: pd.DataFrame) -> np.ndarray:
+    """Map each row to same-ticker row located on `next_date` (date-level match)."""
+    next_idx = np.full(len(df), -1, dtype=np.int64)
+    if "next_date" not in df.columns:
+        return next_idx
+
+    day_col = "trading_day" if "trading_day" in df.columns else "__event_day"
+    if day_col == "__event_day":
+        df = df.copy()
+        df[day_col] = pd.to_datetime(df["published_at"], errors="coerce").dt.strftime("%Y-%m-%d")
+
+    # first row index for each (ticker, day)
+    first_index: Dict[tuple[str, str], int] = {}
+    for i, row in df.reset_index().iterrows():
+        ticker = str(row["ticker"])
+        day = str(row[day_col]) if pd.notna(row[day_col]) else ""
+        if not day:
+            continue
+        key = (ticker, day)
+        if key not in first_index:
+            first_index[key] = int(row["index"])
+
+    for i, row in df.iterrows():
+        ticker = str(row["ticker"])
+        nd = row.get("next_date", None)
+        if not isinstance(nd, str) or not nd:
+            continue
+        day = nd[:10]
+        j = first_index.get((ticker, day), -1)
+        if j >= 0:
+            next_idx[i] = j
+    return next_idx
+
+
 def build_buffer(
     df: pd.DataFrame,
     ticker_embedder,
+    *,
+    next_state_mode: str = "next_event",
 ) -> Dict[str, torch.Tensor | List[str]]:
     df = df.sort_values(["ticker", "published_at"]).reset_index(drop=True)
     states = build_states(df, ticker_embedder)
@@ -106,7 +148,10 @@ def build_buffer(
     behavior = df["behavior_weight"].fillna(0.0).values.astype(np.float32)
     next_baseline = np.zeros_like(baseline)
 
-    next_indices = compute_next_indices(df)
+    if next_state_mode == "next_date":
+        next_indices = compute_next_indices_by_next_date(df)
+    else:
+        next_indices = compute_next_indices(df)
     dones = df["done"].astype(bool).values.copy()
     for idx, next_idx in enumerate(next_indices):
         if next_idx >= 0:
@@ -154,6 +199,7 @@ def process_file(
     behavior_alpha: float,
     behavior_decay: float,
     behavior_entry_threshold: float,
+    next_state_mode: str,
 ) -> None:
     df = pd.read_csv(csv_path, parse_dates=["published_at"])
     required_cols = {"sentiment", "confidence", "reward_1d", "baseline_raw_score", "ticker"}
@@ -171,7 +217,7 @@ def process_file(
     )
     # 组合层 reward：多空权重 * 单票收益（无额外成本），基于行为权重
     df["portfolio_reward"] = compute_portfolio_rewards(df, weight_col="behavior_weight").astype(np.float32)
-    buffer = build_buffer(df, ticker_embedder)
+    buffer = build_buffer(df, ticker_embedder, next_state_mode=next_state_mode)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(buffer, output_path)
     print(f"{csv_path.name}: saved replay buffer with {len(df)} samples -> {output_path}")
@@ -207,6 +253,7 @@ def main() -> None:
                 behavior_alpha=args.behavior_alpha,
                 behavior_decay=args.behavior_decay,
                 behavior_entry_threshold=args.behavior_entry_threshold,
+                next_state_mode=args.next_state_mode,
             )
 
 
