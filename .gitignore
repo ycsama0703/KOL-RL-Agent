@@ -3,3 +3,12 @@ data/processed/kol_text_with_sentiment.csv
 data/
 charts/AutoFigure/
 charts/
+
+# python cache
+__pycache__/
+*.pyc
+
+# generated artifacts
+outputs/
+models/embedding/multisource_22-25_daily_ticker_embedding.pt
+models/embedding/multisource_22-25_daily_ticker_vocab.json

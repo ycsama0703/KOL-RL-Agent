@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from bisect import bisect_left
 from pathlib import Path
 from typing import Dict, List
 
@@ -123,6 +124,14 @@ def compute_next_indices_by_next_date(df: pd.DataFrame) -> np.ndarray:
         if key not in first_index:
             first_index[key] = int(row["index"])
 
+    # sorted available days per ticker for fallback:
+    # if exact next_date is missing, link to first available mention day >= next_date.
+    ticker_days: Dict[str, List[str]] = {}
+    for (ticker, day), _ in first_index.items():
+        ticker_days.setdefault(ticker, []).append(day)
+    for ticker in ticker_days:
+        ticker_days[ticker].sort()
+
     for i, row in df.iterrows():
         ticker = str(row["ticker"])
         nd = row.get("next_date", None)
@@ -130,6 +139,12 @@ def compute_next_indices_by_next_date(df: pd.DataFrame) -> np.ndarray:
             continue
         day = nd[:10]
         j = first_index.get((ticker, day), -1)
+        if j < 0:
+            days = ticker_days.get(ticker, [])
+            if days:
+                pos = bisect_left(days, day)
+                if pos < len(days):
+                    j = first_index.get((ticker, days[pos]), -1)
         if j >= 0:
             next_idx[i] = j
     return next_idx
@@ -150,6 +165,11 @@ def build_buffer(
 
     if next_state_mode == "next_date":
         next_indices = compute_next_indices_by_next_date(df)
+        # Fallback: when next_date cannot be resolved for a ticker/day pair,
+        # link to the next available same-ticker event to keep transitions connected.
+        next_indices_event = compute_next_indices(df)
+        unresolved = next_indices < 0
+        next_indices[unresolved] = next_indices_event[unresolved]
     else:
         next_indices = compute_next_indices(df)
     dones = df["done"].astype(bool).values.copy()

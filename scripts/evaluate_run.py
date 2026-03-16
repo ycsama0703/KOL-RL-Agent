@@ -186,9 +186,18 @@ def main() -> None:
         action_threshold=args.action_threshold,
     )
 
+    def normalize_to_naive_day(values) -> pd.Series:
+        """Parse timestamps as UTC, then drop tz and normalize to day."""
+        return pd.to_datetime(values, errors="coerce", utc=True).dt.tz_localize(None).dt.normalize()
+
+    def normalize_index_to_naive_day(index_like) -> pd.DatetimeIndex:
+        idx = pd.to_datetime(index_like, errors="coerce", utc=True)
+        idx = pd.DatetimeIndex(idx).tz_localize(None).normalize()
+        return idx
+
     def daily_equity(positions: pd.DataFrame) -> pd.DataFrame:
         df = positions.copy()
-        df["date"] = pd.to_datetime(df["date"], errors="coerce").dt.normalize()
+        df["date"] = normalize_to_naive_day(df["date"])
         df["weighted_return"] = df["weight"] * df["reward"]
         daily = df.groupby("date", as_index=False)["weighted_return"].sum().sort_values("date")
         daily["equity"] = (1.0 + daily["weighted_return"]).cumprod()
@@ -246,9 +255,12 @@ def main() -> None:
         weights: pd.DataFrame,
         trading_dates: pd.DatetimeIndex,
     ) -> pd.DataFrame:
+        trading_dates = normalize_index_to_naive_day(trading_dates)
         mapped = pd.DataFrame(index=trading_dates, columns=weights.columns, dtype=float)
-        dates = pd.to_datetime(weights.index).to_list()
+        dates = normalize_index_to_naive_day(weights.index).to_list()
         for date, row in zip(dates, weights.itertuples(index=False, name=None)):
+            if pd.isna(date):
+                continue
             idx = trading_dates.searchsorted(date, side="left")
             if idx < len(trading_dates) and trading_dates[idx] == date:
                 idx += 1
@@ -262,13 +274,14 @@ def main() -> None:
             return pd.DataFrame(columns=["date", "daily_return", "equity"])
 
         df = positions.copy()
-        df["date"] = pd.to_datetime(df["date"], errors="coerce").dt.normalize()
+        df["date"] = normalize_to_naive_day(df["date"])
         weights = (
             df.pivot_table(index="date", columns="ticker", values="weight", aggfunc="last")
             .sort_index()
         )
 
         returns = prices.pct_change().fillna(0.0)
+        returns.index = normalize_index_to_naive_day(returns.index)
         returns = returns.reindex(sorted(returns.columns), axis=1)
 
         weights = weights.reindex(columns=returns.columns, fill_value=0.0)
@@ -288,8 +301,9 @@ def main() -> None:
     # Daily metrics: either calendar aggregation or mark-to-market via daily prices.
     if args.daily_price_update:
         tickers = sorted(positions_df["ticker"].dropna().unique().tolist())
-        start = pd.to_datetime(positions_df["date"], errors="coerce").min()
-        end = pd.to_datetime(positions_df["date"], errors="coerce").max()
+        pos_dates = normalize_to_naive_day(positions_df["date"])
+        start = pos_dates.min()
+        end = pos_dates.max()
         if tickers and pd.notna(start) and pd.notna(end):
             price_frame = fetch_close_prices(tickers, start=start, end=end)
             daily_train = daily_equity_price_update(positions_df, price_frame)
@@ -401,14 +415,11 @@ def main() -> None:
             tickers = sorted(
                 pd.concat([positions_df["ticker"], base_positions["ticker"]]).dropna().unique().tolist()
             )
-            start = pd.to_datetime(
+            all_dates = normalize_to_naive_day(
                 pd.concat([positions_df["date"], base_positions["date"]]),
-                errors="coerce",
-            ).min()
-            end = pd.to_datetime(
-                pd.concat([positions_df["date"], base_positions["date"]]),
-                errors="coerce",
-            ).max()
+            )
+            start = all_dates.min()
+            end = all_dates.max()
             if tickers and pd.notna(start) and pd.notna(end):
                 price_frame = fetch_close_prices(tickers, start=start, end=end)
                 daily_base = daily_equity_price_update(base_positions, price_frame)

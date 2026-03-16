@@ -144,9 +144,7 @@ def process_file(
     next_dates: list[Optional[str]] = []
     done_flags: list[bool] = []
 
-    for row in df.itertuples(index=False):
-        td = row._trading_day  # type: ignore[attr-defined]
-        ticker = row.ticker  # type: ignore[attr-defined]
+    for ticker, td in zip(df["ticker"].astype(str).tolist(), df["_trading_day"].tolist()):
         if pd.isna(td):
             rewards.append(0.0)
             next_dates.append(None)
@@ -202,4 +200,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

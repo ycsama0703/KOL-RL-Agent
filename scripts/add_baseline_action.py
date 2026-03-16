@@ -38,7 +38,7 @@ def baseline_raw_score(sentiment: float, confidence: float) -> float:
     return math.tanh(value)
 
 
-def process_file(csv_path: Path, output_root: Path | None) -> None:
+def process_file(csv_path: Path, input_root: Path, output_root: Path | None) -> None:
     df = pd.read_csv(csv_path)
     if "sentiment" not in df.columns or "confidence" not in df.columns:
         print(f"[WARN] {csv_path} missing sentiment/confidence; skipping.")
@@ -49,9 +49,9 @@ def process_file(csv_path: Path, output_root: Path | None) -> None:
 
     if output_root:
         try:
-            relative = csv_path.relative_to(Path("data/processed/reward"))
+            relative = csv_path.relative_to(input_root)
         except ValueError:
-            relative = csv_path.name
+            relative = Path(csv_path.name)
         out_path = output_root / relative
         out_path.parent.mkdir(parents=True, exist_ok=True)
     else:
@@ -70,7 +70,7 @@ def main() -> None:
         output_root.mkdir(parents=True, exist_ok=True)
 
     for csv_file in collect_csv_files(input_path):
-        process_file(csv_file, output_root)
+        process_file(csv_file, input_path, output_root)
 
 
 if __name__ == "__main__":
