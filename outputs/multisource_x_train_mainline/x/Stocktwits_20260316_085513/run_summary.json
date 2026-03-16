@@ -1,0 +1,41 @@
+{
+  "run_name": "x/Stocktwits_20260316_085513",
+  "timestamp": "20260316_085513",
+  "kol": "x/Stocktwits",
+  "train_samples": 196286,
+  "bc_loss": 0.000245886383344193,
+  "metrics": {
+    "cumulative_return": -0.039691603291278965,
+    "sharpe": 0.12090271300798751,
+    "max_drawdown": 0.33989528259308655
+  },
+  "config": {
+    "kol": "x/Stocktwits",
+    "replay_dir": "data/multisource_ready_22-25/08_replay_buffer",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/multisource_x_train_mainline",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "bc_fit_behavior": true,
+    "bc_anchor_lambda": 0.1,
+    "iql_steps": 100000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.1,
+    "actor_align_lambda": 0.1,
+    "entry_penalty_lambda": 0.1,
+    "reversal_penalty_lambda": 0.1,
+    "entry_threshold": 0.001,
+    "clamp_delta": 1.0,
+    "log_interval": 100,
+    "write_iql_csv": true,
+    "progress_bar": false,
+    "device": "cuda"
+  }
+}
