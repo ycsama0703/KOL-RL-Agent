@@ -1,0 +1,41 @@
+{
+  "run_name": "youtube/Humbled_Trader_20260316_014416",
+  "timestamp": "20260316_014416",
+  "kol": "youtube/Humbled_Trader",
+  "train_samples": 364,
+  "bc_loss": 0.010738458670675754,
+  "metrics": {
+    "cumulative_return": -0.021330434176390578,
+    "sharpe": -0.21490641915407893,
+    "max_drawdown": 0.08846475846625546
+  },
+  "config": {
+    "kol": "youtube/Humbled_Trader",
+    "replay_dir": "data/multisource_ready_22-25/08_replay_buffer",
+    "checkpoints_dir": "models/checkpoints",
+    "output_dir": "outputs/multisource_youtube_train_mainline",
+    "bc_epochs": 10,
+    "bc_batch_size": 256,
+    "bc_lr": 0.0003,
+    "bc_fit_behavior": true,
+    "bc_anchor_lambda": 0.1,
+    "iql_steps": 100000,
+    "iql_batch_size": 256,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "value_lr": 0.0003,
+    "gamma": 0.99,
+    "expectile": 0.7,
+    "temperature_beta": 3.0,
+    "fidelity_lambda": 0.1,
+    "actor_align_lambda": 0.1,
+    "entry_penalty_lambda": 0.1,
+    "reversal_penalty_lambda": 0.1,
+    "entry_threshold": 0.001,
+    "clamp_delta": 1.0,
+    "log_interval": 100,
+    "write_iql_csv": true,
+    "progress_bar": false,
+    "device": "cuda"
+  }
+}
