@@ -4,10 +4,11 @@ set -euo pipefail
 PYTHON=${PYTHON:-python}
 BUFFER_ROOT=${BUFFER_ROOT:-data/multisource_ready_22-25/08_replay_buffer}
 OUTPUT_ROOT=${OUTPUT_ROOT:-outputs/benchmarks/generic_rl/iql}
-BC_BATCH_SIZE=${BC_BATCH_SIZE:-256}
 IQL_BATCH_SIZE=${IQL_BATCH_SIZE:-256}
+IQL_STEPS=${IQL_STEPS:-200000}
 RUN_TAG=${RUN_TAG:-$(date +%Y%m%d_%H%M%S)}
 LOG_ROOT=${LOG_ROOT:-logs/$(basename "$OUTPUT_ROOT")}
+DEVICE=${DEVICE:-cuda}
 
 if [ ! -d "$BUFFER_ROOT" ]; then
   echo "BUFFER_ROOT not found: $BUFFER_ROOT" >&2
@@ -19,13 +20,20 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   echo "Train vanilla IQL benchmark for $rel"
   mkdir -p "$LOG_ROOT"
   safe_name="${rel//\//_}_${RUN_TAG}"
-  "$PYTHON" benchmarks/01_generic_rl/train_generic_rl.py \
-    --method iql \
+  "$PYTHON" train.py \
     --kol "$rel" \
     --replay-dir "$BUFFER_ROOT" \
     --output-dir "$OUTPUT_ROOT" \
+    --device "$DEVICE" \
     --bc-epochs 0 \
-    --bc-batch-size "$BC_BATCH_SIZE" \
+    --iql-steps "$IQL_STEPS" \
+    --no-hard-intent-constraints \
+    --fidelity-lambda 0.0 \
+    --actor-align-lambda 0.0 \
+    --entry-penalty-lambda 0.0 \
+    --reversal-penalty-lambda 0.0 \
+    --bc-batch-size "$IQL_BATCH_SIZE" \
     --iql-batch-size "$IQL_BATCH_SIZE" \
+    --no-progress-bar \
     >"$LOG_ROOT/${safe_name}.log" 2>&1
 done

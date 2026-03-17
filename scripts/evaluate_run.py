@@ -139,6 +139,12 @@ def parse_args() -> argparse.Namespace:
         default=0.01,
         help="Minimum absolute weight/weight delta treated as a position or action.",
     )
+    parser.add_argument(
+        "--hard-intent-constraints",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Use hard intent constraints when mapping actor output to policy actions.",
+    )
     return parser.parse_args()
 
 
@@ -156,7 +162,18 @@ def main() -> None:
     buffer = load_buffer(buffer_path)
     state_dim = buffer["states"].shape[1]
     actor = load_actor(checkpoint_path, state_dim, device)
-    metrics, positions_df = run_policy(actor, buffer, device, action_threshold=args.action_threshold)
+    eval_cfg = TrainingConfig(
+        hard_intent_constraints=args.hard_intent_constraints,
+        entry_threshold=TrainingConfig().entry_threshold,
+        clamp_delta=TrainingConfig().clamp_delta,
+    )
+    metrics, positions_df = run_policy(
+        actor,
+        buffer,
+        device,
+        action_threshold=args.action_threshold,
+        cfg=eval_cfg,
+    )
 
     baseline_tensor = buffer.get("baseline_actions")
     if baseline_tensor is None:
@@ -165,10 +182,6 @@ def main() -> None:
         baseline_tensor = buffer["actions"]
     baseline_tensor = baseline_tensor.float()
 
-    eval_cfg = TrainingConfig(
-        entry_threshold=TrainingConfig().entry_threshold,
-        clamp_delta=TrainingConfig().clamp_delta,
-    )
     policy_np = analyzer._predict_policy_actions(  # type: ignore[attr-defined]
         actor=actor,
         states=buffer["states"].float(),
@@ -357,6 +370,7 @@ def main() -> None:
             buffer,
             device,
             action_threshold=args.action_threshold,
+            cfg=eval_cfg,
         )
 
         def equity_series(positions: pd.DataFrame) -> pd.DataFrame:
@@ -409,6 +423,7 @@ def main() -> None:
                 buffer,
                 device,
                 action_threshold=args.action_threshold,
+                cfg=eval_cfg,
             )
 
         if args.daily_price_update:

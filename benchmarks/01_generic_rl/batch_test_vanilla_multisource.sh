@@ -7,6 +7,7 @@ TEST_ROOT=${TEST_ROOT:-outputs/benchmarks/generic_rl/iql_test}
 DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
 DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
+HARD_INTENT_CONSTRAINTS=${HARD_INTENT_CONSTRAINTS:-0}
 RUN_TAG=${RUN_TAG:-$(date +%Y%m%d_%H%M%S)}
 LOG_ROOT=${LOG_ROOT:-logs/$(basename "$TEST_ROOT")}
 
@@ -48,7 +49,7 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   fi
 
   cmd=(
-    python benchmarks/01_generic_rl/evaluate_generic_rl.py
+    python scripts/evaluate_run.py
     --checkpoint "$ckpt"
     --buffer "$buffer"
     --device "$DEVICE"
@@ -60,6 +61,11 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
 
   if [ "$DAILY_PRICE_UPDATE" = "1" ]; then
     cmd+=(--daily-price-update)
+  fi
+  if [ "$HARD_INTENT_CONSTRAINTS" = "1" ]; then
+    cmd+=(--hard-intent-constraints)
+  else
+    cmd+=(--no-hard-intent-constraints)
   fi
 
   echo "Test $rel -> $out_dir"

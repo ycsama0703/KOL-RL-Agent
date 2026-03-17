@@ -78,6 +78,7 @@ class TrainingConfig:
     reversal_penalty_lambda: float = 0.05
 
     # Explicit intent constraints (the “my method” part)
+    hard_intent_constraints: bool = True
     entry_threshold: float = 5e-4   # baseline_action abs below this => no entry allowed
     clamp_delta: float = 1.8        # delta is clamped to [-clamp_delta, +clamp_delta]
 
@@ -117,6 +118,7 @@ def parse_args() -> TrainingConfig:
 
     p.add_argument("--entry-threshold", type=float, default=5e-4)
     p.add_argument("--clamp-delta", type=float, default=1.8)
+    p.add_argument("--hard-intent-constraints", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--log-interval", type=int, default=200)
     p.add_argument("--write-iql-csv", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--progress-bar", action=argparse.BooleanOptionalAction, default=True)
@@ -144,6 +146,7 @@ def parse_args() -> TrainingConfig:
         actor_align_lambda=args.actor_align_lambda,
         entry_penalty_lambda=args.entry_penalty_lambda,
         reversal_penalty_lambda=args.reversal_penalty_lambda,
+        hard_intent_constraints=args.hard_intent_constraints,
         entry_threshold=args.entry_threshold,
         clamp_delta=args.clamp_delta,
         log_interval=args.log_interval,
@@ -190,6 +193,10 @@ def apply_intent_constraints(
     """
     # Clamp delta magnitude to keep residual interpretation stable
     delta = torch.clamp(delta, -cfg.clamp_delta, cfg.clamp_delta)
+
+    # Vanilla path: keep residual form only, do not apply hard admissibility constraints.
+    if not cfg.hard_intent_constraints:
+        return baseline_action + delta
 
     # No entry zone: if baseline ≈ 0, force delta to 0 -> policy_action = 0
     no_entry = baseline_action.abs() < cfg.entry_threshold

@@ -1,108 +1,76 @@
-# Generic RL Benchmarks
+# Generic RL Benchmarks (Mainline Entrypoints)
 
-This folder contains benchmark scripts for generic methods that do **not** use the repository's intent-preserving completion design.
+This folder runs benchmark baselines using the same mainline entrypoints as your current pipeline:
 
-Current methods:
+- training: `train.py`
+- evaluation: `scripts/evaluate_run.py`
 
-- `BC`: vanilla single-head behavior cloning
-- `IQL`: vanilla single-head IQL without BC warm start
+No custom benchmark trainer/evaluator is used.
 
-These scripts are intended for **benchmark comparison**, not ablation.
+## Methods
 
-Implementation note:
-
-- the current benchmark folder uses its own benchmark-native trainer/evaluator
-- but the run structure is aligned with the mainline:
-  - per-run `logs/training.log`
-  - `checkpoints/policy.pt`
-  - `run_summary.json`
-  - batch-level flat logs under top-level `logs/<job_name>/*.log`
-
-## Data requirement
-
-No new data generation is required if you already have replay buffers.
-
-Supported replay roots:
-
-- mainline: `data/multisource_ready_22-25/08_replay_buffer`
-- dailyline: `data/multisource_ready_22-25/08_replay_buffer_daily`
-
-You only need to rebuild data if you change:
-
-- state definition
-- reward definition
-- replay construction logic
+- `BC` benchmark:
+  - `iql_steps=0`
+  - hard constraints disabled
+  - intent auxiliary losses disabled
+- `vanilla IQL` benchmark:
+  - `bc_epochs=0`
+  - hard constraints disabled
+  - intent auxiliary losses disabled
 
 ## Training
 
-### BC benchmark
+### BC (all sources/all KOLs)
 
 ```bash
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/bc_mainline \
+LOG_ROOT=logs/benchmark_bc_mainline \
+DEVICE=cuda \
 bash benchmarks/01_generic_rl/run_bc_multisource.sh
 ```
 
-### Vanilla IQL benchmark
+### Vanilla IQL (all sources/all KOLs)
 
 ```bash
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/iql_mainline \
+LOG_ROOT=logs/benchmark_iql_mainline \
+DEVICE=cuda \
+IQL_STEPS=200000 \
 bash benchmarks/01_generic_rl/run_iql_multisource.sh
 ```
 
 ## Testing
 
-### BC benchmark
+### BC test (event + daily outputs)
 
 ```bash
 TRAIN_ROOT=outputs/benchmarks/generic_rl/bc_mainline \
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 TEST_ROOT=outputs/benchmarks/generic_rl/bc_mainline_test \
+LOG_ROOT=logs/benchmark_bc_mainline_test \
 DEVICE=cuda \
+HARD_INTENT_CONSTRAINTS=0 \
+DAILY_PRICE_UPDATE=1 \
 bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
 ```
 
-### Vanilla IQL benchmark
+### Vanilla IQL test (event + daily outputs)
 
 ```bash
 TRAIN_ROOT=outputs/benchmarks/generic_rl/iql_mainline \
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 TEST_ROOT=outputs/benchmarks/generic_rl/iql_mainline_test \
+LOG_ROOT=logs/benchmark_iql_mainline_test \
 DEVICE=cuda \
+HARD_INTENT_CONSTRAINTS=0 \
+DAILY_PRICE_UPDATE=1 \
 bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
 ```
 
-## Dailyline example
+## Dailyline
 
-BC:
+Replace `BUFFER_ROOT` with:
 
-```bash
-BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer_daily \
-OUTPUT_ROOT=outputs/benchmarks/generic_rl/bc_daily \
-bash benchmarks/01_generic_rl/run_bc_multisource.sh
-```
-
-```bash
-TRAIN_ROOT=outputs/benchmarks/generic_rl/bc_daily \
-BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer_daily \
-TEST_ROOT=outputs/benchmarks/generic_rl/bc_daily_test \
-DEVICE=cuda \
-bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
-```
-
-IQL:
-
-```bash
-BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer_daily \
-OUTPUT_ROOT=outputs/benchmarks/generic_rl/iql_daily \
-bash benchmarks/01_generic_rl/run_iql_multisource.sh
-```
-
-```bash
-TRAIN_ROOT=outputs/benchmarks/generic_rl/iql_daily \
-BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer_daily \
-TEST_ROOT=outputs/benchmarks/generic_rl/iql_daily_test \
-DEVICE=cuda \
-bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
-```
+- `data/multisource_ready_22-25/08_replay_buffer_daily`
