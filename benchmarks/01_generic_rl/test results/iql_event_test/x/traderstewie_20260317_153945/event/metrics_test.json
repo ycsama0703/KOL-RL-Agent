@@ -1,0 +1,24 @@
+{
+  "cumulative_return": 0.02445934785747772,
+  "sharpe": 0.4268138561329009,
+  "max_drawdown": 0.05988020761734878,
+  "daily_metrics": {
+    "cumulative_return": -0.1033898300562206,
+    "sharpe": 0.02801224716620604,
+    "max_drawdown": 0.3893189637691053
+  },
+  "betrayal_metrics": {
+    "num_samples": 4545,
+    "num_has_signal": 171,
+    "num_no_signal": 4374,
+    "reversal_rate": 0.2631578947368421,
+    "reversal_mean_abs_action": 0.03490624576807022,
+    "reversal_mean_abs_delta": 0.0757591724395752,
+    "entry_violation_rate": 0.15249199817101053,
+    "entry_violation_mean_abs_action": 0.10680481791496277,
+    "mean_abs_deviation": 0.021303310990333557,
+    "mean_normalized_deviation": 1.0344487428665161,
+    "sign_agreement_rate": 0.7368421052631579,
+    "baseline_policy_corr": 0.9064288139343262
+  }
+}

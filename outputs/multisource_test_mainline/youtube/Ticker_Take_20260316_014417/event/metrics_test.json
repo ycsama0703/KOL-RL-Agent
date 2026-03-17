@@ -3,9 +3,9 @@
   "sharpe": 1.0755222672091882,
   "max_drawdown": 0.12336183402767217,
   "daily_metrics": {
-    "cumulative_return": 0.07447117304567108,
-    "sharpe": 1.130688095331071,
-    "max_drawdown": 0.12836321208980112
+    "cumulative_return": 0.059610027178514935,
+    "sharpe": 0.9532032294763835,
+    "max_drawdown": 0.12836321207438658
   },
   "betrayal_metrics": {
     "num_samples": 1183,
