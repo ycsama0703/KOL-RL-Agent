@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+shopt -s nullglob
 
 TRAIN_ROOT=${TRAIN_ROOT:-outputs/benchmarks/generic_rl/iql}
 BUFFER_ROOT=${BUFFER_ROOT:-data/multisource_ready_22-25/08_replay_buffer}
@@ -10,6 +11,7 @@ DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
 HARD_INTENT_CONSTRAINTS=${HARD_INTENT_CONSTRAINTS:-0}
 RUN_TAG=${RUN_TAG:-$(date +%Y%m%d_%H%M%S)}
 LOG_ROOT=${LOG_ROOT:-logs/$(basename "$TEST_ROOT")}
+MAX_JOBS=${MAX_JOBS:-8}
 
 export MPLBACKEND=Agg
 
@@ -23,10 +25,26 @@ if [ ! -d "$BUFFER_ROOT" ]; then
   exit 1
 fi
 
-find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group_dir; do
+mkdir -p "$LOG_ROOT" "$TEST_ROOT"
+
+TASKS=()
+while IFS= read -r group_dir; do
   rel="${group_dir#$BUFFER_ROOT/}"
   source_name="${rel%%/*}"
   kol="${rel#*/}"
+  TASKS+=("${source_name}|${kol}")
+done < <(find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort)
+
+if [ "${#TASKS[@]}" -eq 0 ]; then
+  echo "No source/KOL folders found under $BUFFER_ROOT" >&2
+  exit 1
+fi
+
+i=0
+for task in "${TASKS[@]}"; do
+  source_name="${task%%|*}"
+  kol="${task#*|}"
+  rel="${source_name}/${kol}"
 
   run=$(ls -td "$TRAIN_ROOT/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
   if [ -z "$run" ]; then
@@ -39,7 +57,6 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   event_dir="$out_dir/event"
   daily_dir="$out_dir/daily"
   mkdir -p "$event_dir" "$daily_dir"
-  mkdir -p "$LOG_ROOT"
 
   ckpt="$run/checkpoints/policy.pt"
   buffer="$BUFFER_ROOT/$rel/test.pt"
@@ -68,10 +85,16 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
     cmd+=(--no-hard-intent-constraints)
   fi
 
-  echo "Test $rel -> $out_dir"
-  safe_name="${source_name}_${run_name}_${RUN_TAG}"
-  "${cmd[@]}" >"$LOG_ROOT/${safe_name}.log" 2>&1 || {
-    echo "Eval failed for $rel"
-    continue
-  }
+  safe_name="${source_name}_${kol}_${RUN_TAG}"
+  log_file="$LOG_ROOT/${safe_name}.log"
+
+  echo "Launch test $rel -> $out_dir (log: $log_file)"
+  nohup "${cmd[@]}" >"$log_file" 2>&1 &
+
+  ((i += 1))
+  while (( $(jobs -pr | wc -l | tr -d ' ') >= MAX_JOBS )); do
+    sleep 1
+  done
 done
+
+wait

@@ -20,12 +20,21 @@ No custom benchmark trainer/evaluator is used.
 
 ## Training
 
+Launch style is aligned with your recent `ours` batch runs:
+
+- one `nohup train.py` per KOL
+- flat logs under `LOG_ROOT` named as `<source>_<kol>_<RUN_TAG>.log`
+- output split by source (`OUTPUT_ROOT/youtube`, `OUTPUT_ROOT/x`)
+- parallelism controlled by `MAX_JOBS`
+- testing follows the same launch/logging style
+
 ### BC (all sources/all KOLs)
 
 ```bash
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/bc_mainline \
 LOG_ROOT=logs/benchmark_bc_mainline \
+MAX_JOBS=8 \
 bash benchmarks/01_generic_rl/run_bc_multisource.sh
 ```
 
@@ -35,8 +44,15 @@ bash benchmarks/01_generic_rl/run_bc_multisource.sh
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/iql_mainline \
 LOG_ROOT=logs/benchmark_iql_mainline \
+MAX_JOBS=8 \
 IQL_STEPS=200000 \
 bash benchmarks/01_generic_rl/run_iql_multisource.sh
+```
+
+If you want to pin visible GPUs, set it outside:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 ...
 ```
 
 ## Testing
@@ -51,6 +67,7 @@ LOG_ROOT=logs/benchmark_bc_mainline_test \
 DEVICE=cuda \
 HARD_INTENT_CONSTRAINTS=0 \
 DAILY_PRICE_UPDATE=1 \
+MAX_JOBS=8 \
 bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
 ```
 
@@ -64,6 +81,7 @@ LOG_ROOT=logs/benchmark_iql_mainline_test \
 DEVICE=cuda \
 HARD_INTENT_CONSTRAINTS=0 \
 DAILY_PRICE_UPDATE=1 \
+MAX_JOBS=8 \
 bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
 ```
 
