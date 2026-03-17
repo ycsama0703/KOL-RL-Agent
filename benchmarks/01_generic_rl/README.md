@@ -26,7 +26,6 @@ No custom benchmark trainer/evaluator is used.
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/bc_mainline \
 LOG_ROOT=logs/benchmark_bc_mainline \
-DEVICE=cuda \
 bash benchmarks/01_generic_rl/run_bc_multisource.sh
 ```
 
@@ -36,7 +35,6 @@ bash benchmarks/01_generic_rl/run_bc_multisource.sh
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 OUTPUT_ROOT=outputs/benchmarks/generic_rl/iql_mainline \
 LOG_ROOT=logs/benchmark_iql_mainline \
-DEVICE=cuda \
 IQL_STEPS=200000 \
 bash benchmarks/01_generic_rl/run_iql_multisource.sh
 ```

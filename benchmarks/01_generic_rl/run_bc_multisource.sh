@@ -8,7 +8,6 @@ BC_BATCH_SIZE=${BC_BATCH_SIZE:-256}
 BC_EPOCHS=${BC_EPOCHS:-10}
 RUN_TAG=${RUN_TAG:-$(date +%Y%m%d_%H%M%S)}
 LOG_ROOT=${LOG_ROOT:-logs/$(basename "$OUTPUT_ROOT")}
-DEVICE=${DEVICE:-cuda}
 
 if [ ! -d "$BUFFER_ROOT" ]; then
   echo "BUFFER_ROOT not found: $BUFFER_ROOT" >&2
@@ -24,7 +23,6 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
     --kol "$rel" \
     --replay-dir "$BUFFER_ROOT" \
     --output-dir "$OUTPUT_ROOT" \
-    --device "$DEVICE" \
     --bc-epochs "$BC_EPOCHS" \
     --bc-fit-behavior \
     --bc-anchor-lambda 0.0 \
