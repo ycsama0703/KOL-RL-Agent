@@ -1,0 +1,24 @@
+2026-03-17 14:07:11,760 - __main__ - INFO - Starting generic benchmark run Ticker_Take_20260317_140711
+2026-03-17 14:07:11,760 - __main__ - INFO - Method: bc
+2026-03-17 14:07:11,761 - __main__ - INFO - Group: youtube/Ticker_Take
+2026-03-17 14:07:11,761 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Ticker_Take_20260317_140711/logs/training.log
+2026-03-17 14:07:11,761 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Ticker_Take_20260317_140711/checkpoints
+2026-03-17 14:07:11,761 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Ticker_Take", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:07:11,779 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:07:11,779 - __main__ - INFO - Device: cuda
+2026-03-17 14:07:11,861 - __main__ - INFO - Loaded replay buffer for youtube/Ticker_Take with 6182 samples, state_dim=1066
+2026-03-17 14:07:11,862 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.007667 behavior_abs_mean=0.015367
+BC 1/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 1/10:   4%|▍         | 1/24 [00:00<00:08,  2.86it/s]BC 1/10:  79%|███████▉  | 19/24 [00:00<00:00, 54.01it/s]                                                        2026-03-17 14:07:13,156 - __main__ - INFO - BC epoch 1/10 - loss=0.001623
+BC 2/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 2/10:  83%|████████▎ | 20/24 [00:00<00:00, 196.43it/s]                                                         2026-03-17 14:07:13,278 - __main__ - INFO - BC epoch 2/10 - loss=0.001468
+BC 3/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 3/10:  83%|████████▎ | 20/24 [00:00<00:00, 197.16it/s]                                                         2026-03-17 14:07:13,401 - __main__ - INFO - BC epoch 3/10 - loss=0.001416
+BC 4/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 4/10:  83%|████████▎ | 20/24 [00:00<00:00, 195.26it/s]                                                         2026-03-17 14:07:13,524 - __main__ - INFO - BC epoch 4/10 - loss=0.001348
+BC 5/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 5/10:  83%|████████▎ | 20/24 [00:00<00:00, 197.44it/s]                                                         2026-03-17 14:07:13,646 - __main__ - INFO - BC epoch 5/10 - loss=0.001170
+BC 6/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 6/10:  83%|████████▎ | 20/24 [00:00<00:00, 195.74it/s]                                                         2026-03-17 14:07:13,770 - __main__ - INFO - BC epoch 6/10 - loss=0.000900
+BC 7/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 7/10:  83%|████████▎ | 20/24 [00:00<00:00, 196.01it/s]                                                         2026-03-17 14:07:13,893 - __main__ - INFO - BC epoch 7/10 - loss=0.000585
+BC 8/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 8/10:  83%|████████▎ | 20/24 [00:00<00:00, 196.30it/s]                                                         2026-03-17 14:07:14,016 - __main__ - INFO - BC epoch 8/10 - loss=0.000299
+BC 9/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 9/10:  83%|████████▎ | 20/24 [00:00<00:00, 196.18it/s]                                                         2026-03-17 14:07:14,139 - __main__ - INFO - BC epoch 9/10 - loss=0.000186
+BC 10/10:   0%|          | 0/24 [00:00<?, ?it/s]BC 10/10:  83%|████████▎ | 20/24 [00:00<00:00, 196.70it/s]                                                          2026-03-17 14:07:14,261 - __main__ - INFO - BC epoch 10/10 - loss=0.000126
+2026-03-17 14:07:14,262 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000912
+2026-03-17 14:07:14,352 - __main__ - INFO - Validation metrics for youtube/Ticker_Take: cumulative_return=0.0339, sharpe=3.3655, max_drawdown=0.0111
+2026-03-17 14:07:14,370 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Ticker_Take_20260317_140711/checkpoints
+2026-03-17 14:07:14,371 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Ticker_Take_20260317_140711/run_summary.json

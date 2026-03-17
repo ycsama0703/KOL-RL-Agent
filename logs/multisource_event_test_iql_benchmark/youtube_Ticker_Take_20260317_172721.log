@@ -1,0 +1,35 @@
+
+1 Failed download:
+['WDC']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.04653186173460511,
+  "sharpe": 3.5757283226942667,
+  "max_drawdown": 0.020115453778686426,
+  "daily_metrics": {
+    "cumulative_return": 0.13207339432551768,
+    "sharpe": 2.4253910621841865,
+    "max_drawdown": 0.07484132147265693
+  },
+  "betrayal_metrics": {
+    "num_samples": 1183,
+    "num_has_signal": 142,
+    "num_no_signal": 1041,
+    "reversal_rate": 0.3591549295774648,
+    "reversal_mean_abs_action": 0.029997926205396652,
+    "reversal_mean_abs_delta": 0.09811946749687195,
+    "entry_violation_rate": 0.22478386167146974,
+    "entry_violation_mean_abs_action": 0.08922159671783447,
+    "mean_abs_deviation": 0.030131522566080093,
+    "mean_normalized_deviation": 0.9733484983444214,
+    "sign_agreement_rate": 0.6408450704225352,
+    "baseline_policy_corr": 0.8830171823501587
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Ticker_Take_20260317_164729/daily/equity_daily.png

@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.011031926350462795,
+  "sharpe": 0.4054595123759062,
+  "max_drawdown": 0.08877242943521571,
+  "daily_metrics": {
+    "cumulative_return": 0.0031970780752355044,
+    "sharpe": 0.16747275567501463,
+    "max_drawdown": 0.18764222996503516
+  },
+  "betrayal_metrics": {
+    "num_samples": 1076,
+    "num_has_signal": 211,
+    "num_no_signal": 865,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.012674759142100811,
+    "mean_normalized_deviation": 0.4867931604385376,
+    "sign_agreement_rate": 0.8672985781990521,
+    "baseline_policy_corr": 0.8269323706626892
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/youtube/Daniel_Pronk_20260316_014417/daily/equity_daily.png

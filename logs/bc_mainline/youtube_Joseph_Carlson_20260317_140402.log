@@ -1,0 +1,24 @@
+2026-03-17 14:06:33,469 - __main__ - INFO - Starting generic benchmark run Joseph_Carlson_20260317_140633
+2026-03-17 14:06:33,470 - __main__ - INFO - Method: bc
+2026-03-17 14:06:33,470 - __main__ - INFO - Group: youtube/Joseph_Carlson
+2026-03-17 14:06:33,470 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Joseph_Carlson_20260317_140633/logs/training.log
+2026-03-17 14:06:33,470 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Joseph_Carlson_20260317_140633/checkpoints
+2026-03-17 14:06:33,470 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Joseph_Carlson", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:06:33,487 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:06:33,487 - __main__ - INFO - Device: cuda
+2026-03-17 14:06:33,608 - __main__ - INFO - Loaded replay buffer for youtube/Joseph_Carlson with 9454 samples, state_dim=1066
+2026-03-17 14:06:33,609 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.011522 behavior_abs_mean=0.013751
+BC 1/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 1/10:   3%|▎         | 1/36 [00:00<00:12,  2.89it/s]BC 1/10:  53%|█████▎    | 19/36 [00:00<00:00, 54.39it/s]                                                        2026-03-17 14:06:34,955 - __main__ - INFO - BC epoch 1/10 - loss=0.000850
+BC 2/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 2/10:  56%|█████▌    | 20/36 [00:00<00:00, 197.27it/s]                                                         2026-03-17 14:06:35,138 - __main__ - INFO - BC epoch 2/10 - loss=0.000687
+BC 3/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 3/10:  56%|█████▌    | 20/36 [00:00<00:00, 197.46it/s]                                                         2026-03-17 14:06:35,321 - __main__ - INFO - BC epoch 3/10 - loss=0.000647
+BC 4/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 4/10:  56%|█████▌    | 20/36 [00:00<00:00, 197.62it/s]                                                         2026-03-17 14:06:35,505 - __main__ - INFO - BC epoch 4/10 - loss=0.000607
+BC 5/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 5/10:  56%|█████▌    | 20/36 [00:00<00:00, 196.86it/s]                                                         2026-03-17 14:06:35,688 - __main__ - INFO - BC epoch 5/10 - loss=0.000497
+BC 6/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 6/10:  56%|█████▌    | 20/36 [00:00<00:00, 197.12it/s]                                                         2026-03-17 14:06:35,871 - __main__ - INFO - BC epoch 6/10 - loss=0.000364
+BC 7/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 7/10:  56%|█████▌    | 20/36 [00:00<00:00, 195.83it/s]                                                         2026-03-17 14:06:36,056 - __main__ - INFO - BC epoch 7/10 - loss=0.000152
+BC 8/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 8/10:  56%|█████▌    | 20/36 [00:00<00:00, 196.00it/s]                                                         2026-03-17 14:06:36,241 - __main__ - INFO - BC epoch 8/10 - loss=0.000067
+BC 9/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 9/10:  56%|█████▌    | 20/36 [00:00<00:00, 196.14it/s]                                                         2026-03-17 14:06:36,425 - __main__ - INFO - BC epoch 9/10 - loss=0.000044
+BC 10/10:   0%|          | 0/36 [00:00<?, ?it/s]BC 10/10:  56%|█████▌    | 20/36 [00:00<00:00, 196.30it/s]                                                          2026-03-17 14:06:36,610 - __main__ - INFO - BC epoch 10/10 - loss=0.000030
+2026-03-17 14:06:36,611 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000394
+2026-03-17 14:06:36,784 - __main__ - INFO - Validation metrics for youtube/Joseph_Carlson: cumulative_return=0.1651, sharpe=5.3712, max_drawdown=0.0223
+2026-03-17 14:06:36,802 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Joseph_Carlson_20260317_140633/checkpoints
+2026-03-17 14:06:36,803 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Joseph_Carlson_20260317_140633/run_summary.json

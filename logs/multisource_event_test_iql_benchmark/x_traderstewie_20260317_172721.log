@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.02445934785747772,
+  "sharpe": 0.4268138561329009,
+  "max_drawdown": 0.05988020761734878,
+  "daily_metrics": {
+    "cumulative_return": -0.1033898300562206,
+    "sharpe": 0.02801224716620604,
+    "max_drawdown": 0.3893189637691053
+  },
+  "betrayal_metrics": {
+    "num_samples": 4545,
+    "num_has_signal": 171,
+    "num_no_signal": 4374,
+    "reversal_rate": 0.2631578947368421,
+    "reversal_mean_abs_action": 0.03490624576807022,
+    "reversal_mean_abs_delta": 0.0757591724395752,
+    "entry_violation_rate": 0.15249199817101053,
+    "entry_violation_mean_abs_action": 0.10680481791496277,
+    "mean_abs_deviation": 0.021303310990333557,
+    "mean_normalized_deviation": 1.0344487428665161,
+    "sign_agreement_rate": 0.7368421052631579,
+    "baseline_policy_corr": 0.9064288139343262
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/x/traderstewie_20260317_153945/daily/equity_daily.png

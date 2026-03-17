@@ -1,0 +1,24 @@
+2026-03-17 14:06:24,392 - __main__ - INFO - Starting generic benchmark run Investing_with_Tom_20260317_140624
+2026-03-17 14:06:24,392 - __main__ - INFO - Method: bc
+2026-03-17 14:06:24,393 - __main__ - INFO - Group: youtube/Investing_with_Tom
+2026-03-17 14:06:24,393 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Investing_with_Tom_20260317_140624/logs/training.log
+2026-03-17 14:06:24,393 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Investing_with_Tom_20260317_140624/checkpoints
+2026-03-17 14:06:24,393 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Investing_with_Tom", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:06:24,411 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:06:24,411 - __main__ - INFO - Device: cuda
+2026-03-17 14:06:24,462 - __main__ - INFO - Loaded replay buffer for youtube/Investing_with_Tom with 3125 samples, state_dim=1066
+2026-03-17 14:06:24,463 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.012944 behavior_abs_mean=0.026434
+BC 1/10:   0%|          | 0/12 [00:00<?, ?it/s]BC 1/10:   8%|▊         | 1/12 [00:00<00:03,  2.89it/s]                                                       2026-03-17 14:06:25,672 - __main__ - INFO - BC epoch 1/10 - loss=0.002937
+BC 2/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:25,733 - __main__ - INFO - BC epoch 2/10 - loss=0.002109
+BC 3/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:25,795 - __main__ - INFO - BC epoch 3/10 - loss=0.001925
+BC 4/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:25,857 - __main__ - INFO - BC epoch 4/10 - loss=0.001825
+BC 5/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:25,918 - __main__ - INFO - BC epoch 5/10 - loss=0.001703
+BC 6/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:25,980 - __main__ - INFO - BC epoch 6/10 - loss=0.001657
+BC 7/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:26,041 - __main__ - INFO - BC epoch 7/10 - loss=0.001490
+BC 8/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:26,102 - __main__ - INFO - BC epoch 8/10 - loss=0.001395
+BC 9/10:   0%|          | 0/12 [00:00<?, ?it/s]                                               2026-03-17 14:06:26,163 - __main__ - INFO - BC epoch 9/10 - loss=0.001219
+BC 10/10:   0%|          | 0/12 [00:00<?, ?it/s]                                                2026-03-17 14:06:26,224 - __main__ - INFO - BC epoch 10/10 - loss=0.001012
+2026-03-17 14:06:26,224 - __main__ - INFO - Behavior cloning finished. Avg loss=0.001727
+2026-03-17 14:06:26,267 - __main__ - INFO - Validation metrics for youtube/Investing_with_Tom: cumulative_return=0.1558, sharpe=5.3662, max_drawdown=0.0197
+2026-03-17 14:06:26,286 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Investing_with_Tom_20260317_140624/checkpoints
+2026-03-17 14:06:26,286 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Investing_with_Tom_20260317_140624/run_summary.json

@@ -1,0 +1,35 @@
+
+1 Failed download:
+['SHOP']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.3528872252154047,
+  "sharpe": 4.225103210559967,
+  "max_drawdown": 0.2853356974487406,
+  "daily_metrics": {
+    "cumulative_return": 0.2419405892152291,
+    "sharpe": 0.8037107310385795,
+    "max_drawdown": 0.3575650400667623
+  },
+  "betrayal_metrics": {
+    "num_samples": 137,
+    "num_has_signal": 24,
+    "num_no_signal": 113,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.012321625836193562,
+    "mean_normalized_deviation": 0.33024224638938904,
+    "sign_agreement_rate": 0.9583333333333334,
+    "baseline_policy_corr": 0.9213789105415344
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/youtube/Humbled_Trader_20260316_014416/daily/equity_daily.png

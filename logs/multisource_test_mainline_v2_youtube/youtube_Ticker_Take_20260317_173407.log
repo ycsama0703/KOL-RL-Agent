@@ -1,0 +1,35 @@
+
+1 Failed download:
+['CEG']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.04048120795478671,
+  "sharpe": 1.0755222672091882,
+  "max_drawdown": 0.12336183402767217,
+  "daily_metrics": {
+    "cumulative_return": 0.059610027178514935,
+    "sharpe": 0.9532032294763835,
+    "max_drawdown": 0.12836321207438658
+  },
+  "betrayal_metrics": {
+    "num_samples": 1183,
+    "num_has_signal": 142,
+    "num_no_signal": 1041,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.008552026934921741,
+    "mean_normalized_deviation": 0.6710187792778015,
+    "sign_agreement_rate": 0.6830985915492958,
+    "baseline_policy_corr": 0.9122835397720337
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/youtube/Ticker_Take_20260316_014417/daily/equity_daily.png

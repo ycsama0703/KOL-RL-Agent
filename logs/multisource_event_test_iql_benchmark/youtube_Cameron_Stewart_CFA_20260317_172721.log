@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.3419156868984079,
+  "sharpe": 3.048768777162968,
+  "max_drawdown": 0.024895409811125774,
+  "daily_metrics": {
+    "cumulative_return": 0.9273964790664915,
+    "sharpe": 1.8667734348542064,
+    "max_drawdown": 0.2147285749730906
+  },
+  "betrayal_metrics": {
+    "num_samples": 1377,
+    "num_has_signal": 94,
+    "num_no_signal": 1283,
+    "reversal_rate": 0.2872340425531915,
+    "reversal_mean_abs_action": 0.041125208139419556,
+    "reversal_mean_abs_delta": 0.14711831510066986,
+    "entry_violation_rate": 0.2642244738893219,
+    "entry_violation_mean_abs_action": 0.08436813950538635,
+    "mean_abs_deviation": 0.030479827895760536,
+    "mean_normalized_deviation": 0.8560378551483154,
+    "sign_agreement_rate": 0.7127659574468085,
+    "baseline_policy_corr": 0.8366362452507019
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Cameron_Stewart_CFA_20260317_153946/daily/equity_daily.png

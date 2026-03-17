@@ -1,0 +1,35 @@
+
+1 Failed download:
+['CRM']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 1.139045751642659,
+  "sharpe": 3.766365279826297,
+  "max_drawdown": 0.12326878597066745,
+  "daily_metrics": {
+    "cumulative_return": 0.9997185253941905,
+    "sharpe": 1.811351094298593,
+    "max_drawdown": 0.25062461992486507
+  },
+  "betrayal_metrics": {
+    "num_samples": 2465,
+    "num_has_signal": 266,
+    "num_no_signal": 2199,
+    "reversal_rate": 0.10150375939849623,
+    "reversal_mean_abs_action": 0.02938235178589821,
+    "reversal_mean_abs_delta": 0.10650265961885452,
+    "entry_violation_rate": 0.15779899954524784,
+    "entry_violation_mean_abs_action": 0.10196325182914734,
+    "mean_abs_deviation": 0.022582946345210075,
+    "mean_normalized_deviation": 0.45786675810813904,
+    "sign_agreement_rate": 0.8984962406015038,
+    "baseline_policy_corr": 0.8720436096191406
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Tom_Nash_20260317_164729/daily/equity_daily.png

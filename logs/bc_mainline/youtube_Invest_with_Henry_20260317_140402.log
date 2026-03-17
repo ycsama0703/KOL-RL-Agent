@@ -1,0 +1,24 @@
+2026-03-17 14:06:28,326 - __main__ - INFO - Starting generic benchmark run Invest_with_Henry_20260317_140628
+2026-03-17 14:06:28,326 - __main__ - INFO - Method: bc
+2026-03-17 14:06:28,326 - __main__ - INFO - Group: youtube/Invest_with_Henry
+2026-03-17 14:06:28,326 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Invest_with_Henry_20260317_140628/logs/training.log
+2026-03-17 14:06:28,326 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Invest_with_Henry_20260317_140628/checkpoints
+2026-03-17 14:06:28,326 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Invest_with_Henry", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:06:28,342 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:06:28,343 - __main__ - INFO - Device: cuda
+2026-03-17 14:06:28,430 - __main__ - INFO - Loaded replay buffer for youtube/Invest_with_Henry with 7805 samples, state_dim=1066
+2026-03-17 14:06:28,431 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.017089 behavior_abs_mean=0.024511
+BC 1/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 1/10:   3%|▎         | 1/30 [00:00<00:10,  2.80it/s]BC 1/10:  60%|██████    | 18/30 [00:00<00:00, 50.24it/s]                                                        2026-03-17 14:06:29,755 - __main__ - INFO - BC epoch 1/10 - loss=0.001911
+BC 2/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 2/10:  67%|██████▋   | 20/30 [00:00<00:00, 196.78it/s]                                                         2026-03-17 14:06:29,908 - __main__ - INFO - BC epoch 2/10 - loss=0.001521
+BC 3/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 3/10:  63%|██████▎   | 19/30 [00:00<00:00, 186.83it/s]                                                         2026-03-17 14:06:30,069 - __main__ - INFO - BC epoch 3/10 - loss=0.001411
+BC 4/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 4/10:  67%|██████▋   | 20/30 [00:00<00:00, 198.37it/s]                                                         2026-03-17 14:06:30,221 - __main__ - INFO - BC epoch 4/10 - loss=0.001198
+BC 5/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 5/10:  67%|██████▋   | 20/30 [00:00<00:00, 198.81it/s]                                                         2026-03-17 14:06:30,372 - __main__ - INFO - BC epoch 5/10 - loss=0.000758
+BC 6/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 6/10:  70%|███████   | 21/30 [00:00<00:00, 200.24it/s]                                                         2026-03-17 14:06:30,523 - __main__ - INFO - BC epoch 6/10 - loss=0.000345
+BC 7/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 7/10:  70%|███████   | 21/30 [00:00<00:00, 200.28it/s]                                                         2026-03-17 14:06:30,673 - __main__ - INFO - BC epoch 7/10 - loss=0.000173
+BC 8/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 8/10:  67%|██████▋   | 20/30 [00:00<00:00, 199.84it/s]                                                         2026-03-17 14:06:30,824 - __main__ - INFO - BC epoch 8/10 - loss=0.000090
+BC 9/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 9/10:  67%|██████▋   | 20/30 [00:00<00:00, 198.44it/s]                                                         2026-03-17 14:06:30,975 - __main__ - INFO - BC epoch 9/10 - loss=0.000071
+BC 10/10:   0%|          | 0/30 [00:00<?, ?it/s]BC 10/10:  70%|███████   | 21/30 [00:00<00:00, 200.05it/s]                                                          2026-03-17 14:06:31,126 - __main__ - INFO - BC epoch 10/10 - loss=0.000067
+2026-03-17 14:06:31,126 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000755
+2026-03-17 14:06:31,411 - __main__ - INFO - Validation metrics for youtube/Invest_with_Henry: cumulative_return=0.1950, sharpe=2.2261, max_drawdown=0.1030
+2026-03-17 14:06:31,429 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Invest_with_Henry_20260317_140628/checkpoints
+2026-03-17 14:06:31,430 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Invest_with_Henry_20260317_140628/run_summary.json

@@ -1,0 +1,18 @@
+2026-03-17 18:13:18,113 - __main__ - INFO - Starting training run youtube/Everything_Money_20260317_181318
+2026-03-17 18:13:18,113 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/iql_daily/youtube/youtube/Everything_Money_20260317_181318/logs/training.log
+2026-03-17 18:13:18,113 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/iql_daily/youtube/youtube/Everything_Money_20260317_181318/checkpoints
+2026-03-17 18:13:18,113 - __main__ - INFO - Training config: {"actor_align_lambda": 0.0, "actor_lr": 0.0003, "bc_anchor_lambda": 0.03, "bc_batch_size": 256, "bc_epochs": 0, "bc_fit_behavior": true, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "clamp_delta": 1.8, "critic_lr": 0.0003, "device": "cuda", "entry_penalty_lambda": 0.0, "entry_threshold": 0.0005, "expectile": 0.7, "fidelity_lambda": 0.0, "gamma": 0.99, "hard_intent_constraints": false, "iql_batch_size": 256, "iql_steps": 100000, "kol": "youtube/Everything_Money", "log_interval": 200, "output_dir": "outputs/benchmarks/generic_rl/iql_daily/youtube", "progress_bar": false, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer_daily", "reversal_penalty_lambda": 0.0, "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 18:13:18,131 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 18:13:18,132 - __main__ - INFO - Device: cuda
+2026-03-17 18:13:18,138 - __main__ - INFO - Loaded replay buffer for youtube/Everything_Money with 223 samples, state_dim=1066
+2026-03-17 18:13:18,138 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.040560 behavior_abs_mean=0.071749 baseline_zero_ratio(th=5.0e-04)=0.8251
+2026-03-17 18:13:19,260 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000000
+2026-03-17 18:13:19,261 - __main__ - INFO - IQL metrics CSV: outputs/benchmarks/generic_rl/iql_daily/youtube/youtube/Everything_Money_20260317_181318/logs/iql_metrics.csv
+Traceback (most recent call last):
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 727, in <module>
+    main()
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 686, in main
+    iql_training(
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 392, in iql_training
+    batch = next(it)
+StopIteration

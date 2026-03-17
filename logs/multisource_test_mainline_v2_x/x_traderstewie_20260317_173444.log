@@ -1,0 +1,35 @@
+
+1 Failed download:
+['MSTR']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.08284099684193436,
+  "sharpe": 0.3221461001931835,
+  "max_drawdown": 0.37585400252803025,
+  "daily_metrics": {
+    "cumulative_return": -0.07586744903589482,
+    "sharpe": 0.23492241485470292,
+    "max_drawdown": 0.38408624384607193
+  },
+  "betrayal_metrics": {
+    "num_samples": 4545,
+    "num_has_signal": 171,
+    "num_no_signal": 4374,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.004514881409704685,
+    "mean_normalized_deviation": 0.6882548928260803,
+    "sign_agreement_rate": 0.7485380116959064,
+    "baseline_policy_corr": 0.9143127799034119
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/x/traderstewie_20260316_085513/daily/equity_daily.png

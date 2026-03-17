@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.45577271848287526,
+  "sharpe": 4.965750679919653,
+  "max_drawdown": 0.07429696378486662,
+  "daily_metrics": {
+    "cumulative_return": 0.4899202457257912,
+    "sharpe": 2.556927676468013,
+    "max_drawdown": 0.08961999051414783
+  },
+  "betrayal_metrics": {
+    "num_samples": 4948,
+    "num_has_signal": 393,
+    "num_no_signal": 4555,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.005014331545680761,
+    "mean_normalized_deviation": 0.7240515947341919,
+    "sign_agreement_rate": 0.5826972010178118,
+    "baseline_policy_corr": 0.835117757320404
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/youtube/Dividend_Data_20260316_014416/daily/equity_daily.png

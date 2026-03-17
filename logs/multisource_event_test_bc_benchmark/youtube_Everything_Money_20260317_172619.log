@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.19605237128474196,
+  "sharpe": 7.019105593050555,
+  "max_drawdown": 0.0607504854943611,
+  "daily_metrics": {
+    "cumulative_return": 0.2398163643405895,
+    "sharpe": 1.356026962773631,
+    "max_drawdown": 0.16646025745146104
+  },
+  "betrayal_metrics": {
+    "num_samples": 62,
+    "num_has_signal": 22,
+    "num_no_signal": 40,
+    "reversal_rate": 0.13636363636363635,
+    "reversal_mean_abs_action": 0.007325276732444763,
+    "reversal_mean_abs_delta": 0.08294486254453659,
+    "entry_violation_rate": 1.0,
+    "entry_violation_mean_abs_action": 0.03668776899576187,
+    "mean_abs_deviation": 0.045466724783182144,
+    "mean_normalized_deviation": 0.5086171627044678,
+    "sign_agreement_rate": 0.8636363636363636,
+    "baseline_policy_corr": 0.973145067691803
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/bc_event_test/youtube/Everything_Money_20260317_153553/daily/equity_daily.png

@@ -1,0 +1,24 @@
+2026-03-17 14:06:00,142 - __main__ - INFO - Starting generic benchmark run Daniel_Pronk_20260317_140600
+2026-03-17 14:06:00,142 - __main__ - INFO - Method: bc
+2026-03-17 14:06:00,142 - __main__ - INFO - Group: youtube/Daniel_Pronk
+2026-03-17 14:06:00,142 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Daniel_Pronk_20260317_140600/logs/training.log
+2026-03-17 14:06:00,142 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Daniel_Pronk_20260317_140600/checkpoints
+2026-03-17 14:06:00,142 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Daniel_Pronk", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:06:00,160 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:06:00,160 - __main__ - INFO - Device: cuda
+2026-03-17 14:06:00,261 - __main__ - INFO - Loaded replay buffer for youtube/Daniel_Pronk with 7961 samples, state_dim=1066
+2026-03-17 14:06:00,261 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.007470 behavior_abs_mean=0.014571
+BC 1/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 1/10:   3%|▎         | 1/31 [00:00<00:10,  2.87it/s]BC 1/10:  61%|██████▏   | 19/31 [00:00<00:00, 54.38it/s]                                                        2026-03-17 14:06:01,561 - __main__ - INFO - BC epoch 1/10 - loss=0.001629
+BC 2/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 2/10:  65%|██████▍   | 20/31 [00:00<00:00, 199.20it/s]                                                         2026-03-17 14:06:01,716 - __main__ - INFO - BC epoch 2/10 - loss=0.001211
+BC 3/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 3/10:  68%|██████▊   | 21/31 [00:00<00:00, 200.64it/s]                                                         2026-03-17 14:06:01,872 - __main__ - INFO - BC epoch 3/10 - loss=0.001116
+BC 4/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 4/10:  68%|██████▊   | 21/31 [00:00<00:00, 199.93it/s]                                                         2026-03-17 14:06:02,028 - __main__ - INFO - BC epoch 4/10 - loss=0.001051
+BC 5/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 5/10:  68%|██████▊   | 21/31 [00:00<00:00, 200.70it/s]                                                         2026-03-17 14:06:02,183 - __main__ - INFO - BC epoch 5/10 - loss=0.000907
+BC 6/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 6/10:  65%|██████▍   | 20/31 [00:00<00:00, 199.33it/s]                                                         2026-03-17 14:06:02,339 - __main__ - INFO - BC epoch 6/10 - loss=0.000632
+BC 7/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 7/10:  65%|██████▍   | 20/31 [00:00<00:00, 199.51it/s]                                                         2026-03-17 14:06:02,495 - __main__ - INFO - BC epoch 7/10 - loss=0.000382
+BC 8/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 8/10:  65%|██████▍   | 20/31 [00:00<00:00, 199.89it/s]                                                         2026-03-17 14:06:02,651 - __main__ - INFO - BC epoch 8/10 - loss=0.000267
+BC 9/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 9/10:  65%|██████▍   | 20/31 [00:00<00:00, 198.80it/s]                                                         2026-03-17 14:06:02,807 - __main__ - INFO - BC epoch 9/10 - loss=0.000146
+BC 10/10:   0%|          | 0/31 [00:00<?, ?it/s]BC 10/10:  65%|██████▍   | 20/31 [00:00<00:00, 198.43it/s]                                                          2026-03-17 14:06:02,964 - __main__ - INFO - BC epoch 10/10 - loss=0.000087
+2026-03-17 14:06:02,964 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000743
+2026-03-17 14:06:03,035 - __main__ - INFO - Validation metrics for youtube/Daniel_Pronk: cumulative_return=-0.0384, sharpe=-1.2624, max_drawdown=0.0818
+2026-03-17 14:06:03,053 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Daniel_Pronk_20260317_140600/checkpoints
+2026-03-17 14:06:03,053 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Daniel_Pronk_20260317_140600/run_summary.json

@@ -1,0 +1,35 @@
+
+1 Failed download:
+['MOS']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.05237423192625523,
+  "sharpe": 2.2007836796695575,
+  "max_drawdown": 0.02870419130681571,
+  "daily_metrics": {
+    "cumulative_return": 0.16130539631852403,
+    "sharpe": 0.9324965173246905,
+    "max_drawdown": 0.1507644716216263
+  },
+  "betrayal_metrics": {
+    "num_samples": 1496,
+    "num_has_signal": 103,
+    "num_no_signal": 1393,
+    "reversal_rate": 0.17475728155339806,
+    "reversal_mean_abs_action": 0.031262025237083435,
+    "reversal_mean_abs_delta": 0.14501242339611053,
+    "entry_violation_rate": 0.28786791098348885,
+    "entry_violation_mean_abs_action": 0.09637867659330368,
+    "mean_abs_deviation": 0.034936632961034775,
+    "mean_normalized_deviation": 0.6804724931716919,
+    "sign_agreement_rate": 0.8252427184466019,
+    "baseline_policy_corr": 0.778231680393219
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Sven_Carlin_Ph.D._20260317_164724/daily/equity_daily.png

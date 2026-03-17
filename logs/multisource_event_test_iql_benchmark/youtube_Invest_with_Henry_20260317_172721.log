@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.30549214458625684,
+  "sharpe": 4.3109165423119835,
+  "max_drawdown": 0.06528645437665959,
+  "daily_metrics": {
+    "cumulative_return": 0.33427323788521757,
+    "sharpe": 2.1327710112254272,
+    "max_drawdown": 0.14007403206813074
+  },
+  "betrayal_metrics": {
+    "num_samples": 1820,
+    "num_has_signal": 356,
+    "num_no_signal": 1464,
+    "reversal_rate": 0.10955056179775281,
+    "reversal_mean_abs_action": 0.02973240427672863,
+    "reversal_mean_abs_delta": 0.09935827553272247,
+    "entry_violation_rate": 0.2336065573770492,
+    "entry_violation_mean_abs_action": 0.0917973741889,
+    "mean_abs_deviation": 0.031214667484164238,
+    "mean_normalized_deviation": 0.5763854384422302,
+    "sign_agreement_rate": 0.8904494382022472,
+    "baseline_policy_corr": 0.845808744430542
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Invest_with_Henry_20260317_161340/daily/equity_daily.png

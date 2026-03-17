@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.3095478480493248,
+  "sharpe": 3.5643074117187643,
+  "max_drawdown": 0.048335066098336314,
+  "daily_metrics": {
+    "cumulative_return": 0.4362574296959505,
+    "sharpe": 1.085494034457303,
+    "max_drawdown": 0.24083405761311102
+  },
+  "betrayal_metrics": {
+    "num_samples": 2173,
+    "num_has_signal": 408,
+    "num_no_signal": 1765,
+    "reversal_rate": 0.23774509803921567,
+    "reversal_mean_abs_action": 0.02429346926510334,
+    "reversal_mean_abs_delta": 0.07792865484952927,
+    "entry_violation_rate": 0.13654390934844193,
+    "entry_violation_mean_abs_action": 0.07135255634784698,
+    "mean_abs_deviation": 0.01936100423336029,
+    "mean_normalized_deviation": 0.7372482419013977,
+    "sign_agreement_rate": 0.7622549019607843,
+    "baseline_policy_corr": 0.7912647724151611
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_event_test/youtube/Joseph_Carlson_20260317_161342/daily/equity_daily.png

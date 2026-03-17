@@ -1,0 +1,27 @@
+2026-03-17 17:37:13,208 - __main__ - INFO - Starting training run youtube/Everything_Money_20260317_173713
+2026-03-17 17:37:13,208 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_daily/youtube/youtube/Everything_Money_20260317_173713/logs/training.log
+2026-03-17 17:37:13,209 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_daily/youtube/youtube/Everything_Money_20260317_173713/checkpoints
+2026-03-17 17:37:13,209 - __main__ - INFO - Training config: {"actor_align_lambda": 0.0, "actor_lr": 0.0003, "bc_anchor_lambda": 0.0, "bc_batch_size": 256, "bc_epochs": 10, "bc_fit_behavior": true, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "clamp_delta": 1.8, "critic_lr": 0.0003, "device": "cuda", "entry_penalty_lambda": 0.0, "entry_threshold": 0.0005, "expectile": 0.7, "fidelity_lambda": 0.0, "gamma": 0.99, "hard_intent_constraints": false, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Everything_Money", "log_interval": 200, "output_dir": "outputs/benchmarks/generic_rl/bc_daily/youtube", "progress_bar": false, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer_daily", "reversal_penalty_lambda": 0.0, "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 17:37:13,252 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 17:37:13,252 - __main__ - INFO - Device: cuda
+2026-03-17 17:37:13,270 - __main__ - INFO - Loaded replay buffer for youtube/Everything_Money with 223 samples, state_dim=1066
+2026-03-17 17:37:13,273 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.040560 behavior_abs_mean=0.071749 baseline_zero_ratio(th=5.0e-04)=0.8251
+BC 1/10: 0it [00:00, ?it/s]                           /home/ycliu0703/miniconda3/envs/kolrl/lib/python3.10/site-packages/numpy/_core/fromnumeric.py:3860: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/home/ycliu0703/miniconda3/envs/kolrl/lib/python3.10/site-packages/numpy/_core/_methods.py:145: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+2026-03-17 17:37:16,529 - __main__ - INFO - BC epoch 1/10 - loss=nan
+BC 2/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,530 - __main__ - INFO - BC epoch 2/10 - loss=nan
+BC 3/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,540 - __main__ - INFO - BC epoch 3/10 - loss=nan
+BC 4/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,541 - __main__ - INFO - BC epoch 4/10 - loss=nan
+BC 5/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,541 - __main__ - INFO - BC epoch 5/10 - loss=nan
+BC 6/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,542 - __main__ - INFO - BC epoch 6/10 - loss=nan
+BC 7/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,542 - __main__ - INFO - BC epoch 7/10 - loss=nan
+BC 8/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,542 - __main__ - INFO - BC epoch 8/10 - loss=nan
+BC 9/10: 0it [00:00, ?it/s]                           2026-03-17 17:37:16,543 - __main__ - INFO - BC epoch 9/10 - loss=nan
+BC 10/10: 0it [00:00, ?it/s]                            2026-03-17 17:37:16,551 - __main__ - INFO - BC epoch 10/10 - loss=nan
+2026-03-17 17:37:16,551 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000000
+2026-03-17 17:37:16,551 - __main__ - INFO - IQL metrics CSV: outputs/benchmarks/generic_rl/bc_daily/youtube/youtube/Everything_Money_20260317_173713/logs/iql_metrics.csv
+2026-03-17 17:37:17,224 - __main__ - INFO - Validation metrics for youtube/Everything_Money: cumulative_return=0.0397, sharpe=51.4660, max_drawdown=0.0000
+2026-03-17 17:37:17,306 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_daily/youtube/youtube/Everything_Money_20260317_173713/checkpoints
+2026-03-17 17:37:17,312 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_daily/youtube/youtube/Everything_Money_20260317_173713/run_summary.json

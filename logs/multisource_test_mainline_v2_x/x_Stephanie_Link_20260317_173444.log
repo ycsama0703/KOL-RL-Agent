@@ -1,0 +1,35 @@
+
+1 Failed download:
+['CRWD']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.07348151514075996,
+  "sharpe": -0.06217858422371285,
+  "max_drawdown": 0.2629303503031047,
+  "daily_metrics": {
+    "cumulative_return": -0.03901719104018819,
+    "sharpe": 0.1185205859809305,
+    "max_drawdown": 0.25069503648179425
+  },
+  "betrayal_metrics": {
+    "num_samples": 11197,
+    "num_has_signal": 421,
+    "num_no_signal": 10776,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.004220322240144014,
+    "mean_normalized_deviation": 0.6776607036590576,
+    "sign_agreement_rate": 0.7933491686460807,
+    "baseline_policy_corr": 0.8728355169296265
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_v2/x/Stephanie_Link_20260316_085513/daily/equity_daily.png

@@ -1,0 +1,24 @@
+2026-03-17 14:06:21,096 - __main__ - INFO - Starting generic benchmark run Humbled_Trader_20260317_140621
+2026-03-17 14:06:21,097 - __main__ - INFO - Method: bc
+2026-03-17 14:06:21,097 - __main__ - INFO - Group: youtube/Humbled_Trader
+2026-03-17 14:06:21,097 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_mainline/youtube/Humbled_Trader_20260317_140621/logs/training.log
+2026-03-17 14:06:21,097 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_mainline/youtube/Humbled_Trader_20260317_140621/checkpoints
+2026-03-17 14:06:21,097 - __main__ - INFO - Training config: {"actor_lr": 0.0003, "bc_batch_size": 256, "bc_epochs": 10, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "critic_lr": 0.0003, "device": "cuda", "expectile": 0.7, "gamma": 0.99, "iql_batch_size": 256, "iql_steps": 0, "kol": "youtube/Humbled_Trader", "log_interval": 200, "method": "bc", "output_dir": "outputs/benchmarks/generic_rl/bc_mainline", "progress_bar": true, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-17 14:06:21,113 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-17 14:06:21,113 - __main__ - INFO - Device: cuda
+2026-03-17 14:06:21,121 - __main__ - INFO - Loaded replay buffer for youtube/Humbled_Trader with 364 samples, state_dim=1066
+2026-03-17 14:06:21,122 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.030046 behavior_abs_mean=0.074176
+BC 1/10:   0%|          | 0/1 [00:00<?, ?it/s]BC 1/10: 100%|██████████| 1/1 [00:00<00:00,  2.82it/s]                                                      2026-03-17 14:06:22,274 - __main__ - INFO - BC epoch 1/10 - loss=0.027345
+BC 2/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,287 - __main__ - INFO - BC epoch 2/10 - loss=0.020149
+BC 3/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,296 - __main__ - INFO - BC epoch 3/10 - loss=0.018235
+BC 4/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,304 - __main__ - INFO - BC epoch 4/10 - loss=0.014627
+BC 5/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,311 - __main__ - INFO - BC epoch 5/10 - loss=0.010457
+BC 6/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,318 - __main__ - INFO - BC epoch 6/10 - loss=0.008657
+BC 7/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,325 - __main__ - INFO - BC epoch 7/10 - loss=0.009425
+BC 8/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,332 - __main__ - INFO - BC epoch 8/10 - loss=0.010420
+BC 9/10:   0%|          | 0/1 [00:00<?, ?it/s]                                              2026-03-17 14:06:22,339 - __main__ - INFO - BC epoch 9/10 - loss=0.009879
+BC 10/10:   0%|          | 0/1 [00:00<?, ?it/s]                                               2026-03-17 14:06:22,346 - __main__ - INFO - BC epoch 10/10 - loss=0.009639
+2026-03-17 14:06:22,346 - __main__ - INFO - Behavior cloning finished. Avg loss=0.013883
+2026-03-17 14:06:22,356 - __main__ - INFO - Validation metrics for youtube/Humbled_Trader: cumulative_return=0.0240, sharpe=1.8694, max_drawdown=0.0064
+2026-03-17 14:06:22,376 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_mainline/youtube/Humbled_Trader_20260317_140621/checkpoints
+2026-03-17 14:06:22,376 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_mainline/youtube/Humbled_Trader_20260317_140621/run_summary.json
