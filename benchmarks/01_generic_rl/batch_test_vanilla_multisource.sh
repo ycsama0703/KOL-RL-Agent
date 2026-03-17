@@ -25,6 +25,24 @@ if [ ! -d "$BUFFER_ROOT" ]; then
   exit 1
 fi
 
+find_latest_run_dir() {
+  local train_root="$1"
+  local source_name="$2"
+  local kol="$3"
+  local nested_root="$train_root/$source_name/$source_name"
+  local flat_root="$train_root/$source_name"
+  local run=""
+
+  if [ -d "$nested_root" ]; then
+    run=$(find "$nested_root" -mindepth 1 -maxdepth 1 -type d -name "${kol}_*" | sort -r | head -n1 || true)
+  fi
+  if [ -z "$run" ] && [ -d "$flat_root" ]; then
+    run=$(find "$flat_root" -mindepth 1 -maxdepth 1 -type d -name "${kol}_*" | sort -r | head -n1 || true)
+  fi
+
+  printf "%s" "$run"
+}
+
 mkdir -p "$LOG_ROOT" "$TEST_ROOT"
 
 TASKS=()
@@ -46,10 +64,7 @@ for task in "${TASKS[@]}"; do
   kol="${task#*|}"
   rel="${source_name}/${kol}"
 
-  run=$(ls -td "$TRAIN_ROOT/$source_name/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
-  if [ -z "$run" ]; then
-    run=$(ls -td "$TRAIN_ROOT/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
-  fi
+  run=$(find_latest_run_dir "$TRAIN_ROOT" "$source_name" "$kol")
   if [ -z "$run" ]; then
     echo "Skip $rel (no run found)"
     continue
