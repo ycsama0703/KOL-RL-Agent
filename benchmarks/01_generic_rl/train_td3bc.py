@@ -15,6 +15,7 @@ import csv
 import json
 import logging
 import random
+import sys
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from itertools import cycle
@@ -26,6 +27,11 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+# Ensure repo root is importable when this script is launched via a relative path.
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from src.evaluation import analyzer
 from src.training.data import ReplayDataset, load_buffer
