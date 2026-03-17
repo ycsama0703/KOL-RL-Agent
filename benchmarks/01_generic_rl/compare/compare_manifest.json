@@ -1,0 +1,10 @@
+{
+  "mode": "anchor_ours",
+  "methods": {
+    "IntentComp-RL": "outputs/multisource_test_mainline",
+    "BC": "benchmarks/01_generic_rl/test results/bc_event_test",
+    "IQL": "benchmarks/01_generic_rl/test results/iql_event_test"
+  },
+  "n_kols_total": 21,
+  "output_dir": "benchmarks/01_generic_rl/compare"
+}

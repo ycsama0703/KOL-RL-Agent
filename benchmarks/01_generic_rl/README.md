@@ -119,3 +119,26 @@ bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
 Replace `BUFFER_ROOT` with:
 
 - `data/multisource_ready_22-25/08_replay_buffer_daily`
+
+## Comparison / Reporting
+
+Use the compare builder to merge `KICL + BC + IQL` results into one reporting folder:
+
+```bash
+python benchmarks/01_generic_rl/build_compare_report.py \
+  --mode anchor_ours \
+  --event-curve-mode daily_mtm
+```
+
+Default output:
+
+- `benchmarks/compare`
+
+Important:
+
+- With `--event-curve-mode daily_mtm`, `event_equity_compare` should be interpreted with `daily_metrics_compare` (not `event_metrics_compare`).
+- If you need strict event-step curve/metric alignment, switch to `--event-curve-mode signal_step`.
+
+Detailed protocol:
+
+- `docs/benchmark_compare_protocol.md`

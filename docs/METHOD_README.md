@@ -78,3 +78,9 @@
   - `actor_align_lambda=0.1`
   - `entry_penalty_lambda=0.1`
   - `reversal_penalty_lambda=0.1`
+
+## 7) Benchmark Comparison Protocol
+
+For current benchmark naming, comparison roots, curve/metric alignment rules, and reproducible compare commands, see:
+
+- `docs/benchmark_compare_protocol.md`
