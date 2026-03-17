@@ -46,7 +46,10 @@ for task in "${TASKS[@]}"; do
   kol="${task#*|}"
   rel="${source_name}/${kol}"
 
-  run=$(ls -td "$TRAIN_ROOT/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
+  run=$(ls -td "$TRAIN_ROOT/$source_name/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
+  if [ -z "$run" ]; then
+    run=$(ls -td "$TRAIN_ROOT/$source_name/${kol}_"* 2>/dev/null | head -n1 || true)
+  fi
   if [ -z "$run" ]; then
     echo "Skip $rel (no run found)"
     continue
