@@ -16,7 +16,7 @@ Implementation note:
   - per-run `logs/training.log`
   - `checkpoints/policy.pt`
   - `run_summary.json`
-  - batch-level `_batch_logs/*.log`
+  - batch-level flat logs under top-level `logs/<job_name>/*.log`
 
 ## Data requirement
 
