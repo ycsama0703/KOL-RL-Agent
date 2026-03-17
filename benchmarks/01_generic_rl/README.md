@@ -9,6 +9,15 @@ Current methods:
 
 These scripts are intended for **benchmark comparison**, not ablation.
 
+Implementation note:
+
+- the current benchmark folder uses its own benchmark-native trainer/evaluator
+- but the run structure is aligned with the mainline:
+  - per-run `logs/training.log`
+  - `checkpoints/policy.pt`
+  - `run_summary.json`
+  - batch-level `_batch_logs/*.log`
+
 ## Data requirement
 
 No new data generation is required if you already have replay buffers.

@@ -7,6 +7,7 @@ TEST_ROOT=${TEST_ROOT:-outputs/benchmarks/generic_rl/iql_test}
 DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
 DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
+LOG_ROOT=${LOG_ROOT:-$TEST_ROOT/_batch_logs}
 
 export MPLBACKEND=Agg
 
@@ -36,6 +37,7 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   event_dir="$out_dir/event"
   daily_dir="$out_dir/daily"
   mkdir -p "$event_dir" "$daily_dir"
+  mkdir -p "$LOG_ROOT"
 
   ckpt="$run/checkpoints/policy.pt"
   buffer="$BUFFER_ROOT/$rel/test.pt"
@@ -45,7 +47,7 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   fi
 
   cmd=(
-    python ablation_study/04_component_ablation/evaluate_vanilla_run.py
+    python benchmarks/01_generic_rl/evaluate_generic_rl.py
     --checkpoint "$ckpt"
     --buffer "$buffer"
     --device "$DEVICE"
@@ -60,7 +62,8 @@ find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort | while read -r group
   fi
 
   echo "Test $rel -> $out_dir"
-  "${cmd[@]}" || {
+  safe_name="${source_name}__${run_name}"
+  "${cmd[@]}" >"$LOG_ROOT/${safe_name}.log" 2>&1 || {
     echo "Eval failed for $rel"
     continue
   }
