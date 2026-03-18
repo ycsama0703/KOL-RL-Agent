@@ -26,6 +26,11 @@ No custom benchmark trainer/evaluator is used.
   - TD3+BC-style actor update for stability
   - hard constraints disabled
   - intent auxiliary losses disabled
+- `AWAC` benchmark:
+  - advantage-weighted actor update (weighted behavior cloning)
+  - twin-critic Bellman training
+  - hard constraints disabled
+  - intent auxiliary losses disabled
 
 ## Training
 
@@ -79,6 +84,18 @@ MAX_JOBS=8 \
 CQL_STEPS=200000 \
 CQL_ALPHA=1.0 \
 bash benchmarks/01_generic_rl/run_cql_multisource.sh
+```
+
+### AWAC (all sources/all KOLs)
+
+```bash
+BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
+OUTPUT_ROOT=outputs/benchmarks/generic_rl/awac_mainline \
+LOG_ROOT=logs/benchmark_awac_mainline \
+MAX_JOBS=8 \
+AWAC_STEPS=200000 \
+AWAC_BETA=1.0 \
+bash benchmarks/01_generic_rl/run_awac_multisource.sh
 ```
 
 If you want to pin visible GPUs, set it outside:
@@ -138,6 +155,20 @@ TRAIN_ROOT=outputs/benchmarks/generic_rl/cql_mainline \
 BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
 TEST_ROOT=outputs/benchmarks/generic_rl/cql_mainline_test \
 LOG_ROOT=logs/benchmark_cql_mainline_test \
+DEVICE=cuda \
+HARD_INTENT_CONSTRAINTS=0 \
+DAILY_PRICE_UPDATE=1 \
+MAX_JOBS=8 \
+bash benchmarks/01_generic_rl/batch_test_vanilla_multisource.sh
+```
+
+### AWAC test (event + daily outputs)
+
+```bash
+TRAIN_ROOT=outputs/benchmarks/generic_rl/awac_mainline \
+BUFFER_ROOT=data/multisource_ready_22-25/08_replay_buffer \
+TEST_ROOT=outputs/benchmarks/generic_rl/awac_mainline_test \
+LOG_ROOT=logs/benchmark_awac_mainline_test \
 DEVICE=cuda \
 HARD_INTENT_CONSTRAINTS=0 \
 DAILY_PRICE_UPDATE=1 \
