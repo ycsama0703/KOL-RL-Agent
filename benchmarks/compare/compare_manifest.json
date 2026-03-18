@@ -4,7 +4,8 @@
   "methods": {
     "KICL": "outputs/multisource_test_mainline",
     "BC": "benchmarks/01_generic_rl/test results/bc_event_test",
-    "IQL": "benchmarks/01_generic_rl/test results/iql_event_test"
+    "IQL": "benchmarks/01_generic_rl/test results/iql_event_test",
+    "TD3BC": "benchmarks/01_generic_rl/test results/td3bc_event_test"
   },
   "n_kols_total": 21,
   "output_dir": "benchmarks/compare"

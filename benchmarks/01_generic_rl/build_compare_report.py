@@ -476,16 +476,15 @@ def main() -> None:
     args = parse_args()
 
     methods = {args.ours_name: Path(args.ours_root)}
+    default_methods = {
+        "BC": Path("benchmarks/01_generic_rl/test results/bc_event_test"),
+        "IQL": Path("benchmarks/01_generic_rl/test results/iql_event_test"),
+    }
+    for name, path in default_methods.items():
+        if path.exists():
+            methods[name] = path
     if args.method:
         methods.update(parse_method_args(args.method))
-    else:
-        default_methods = {
-            "BC": Path("benchmarks/01_generic_rl/test results/bc_event_test"),
-            "IQL": Path("benchmarks/01_generic_rl/test results/iql_event_test"),
-        }
-        for name, path in default_methods.items():
-            if path.exists():
-                methods[name] = path
     method_order = list(methods.keys())
     anchor_method = args.ours_name
 

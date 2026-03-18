@@ -84,3 +84,9 @@
 For current benchmark naming, comparison roots, curve/metric alignment rules, and reproducible compare commands, see:
 
 - `docs/benchmark_compare_protocol.md`
+
+## 8) Evaluation Metrics
+
+For metric definitions, formulas, and event-vs-daily alignment rules, see:
+
+- `docs/evaluation_metrics.md`
