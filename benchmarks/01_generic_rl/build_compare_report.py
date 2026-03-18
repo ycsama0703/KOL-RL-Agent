@@ -18,6 +18,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import matplotlib.patheffects as pe
 import pandas as pd
 
 
@@ -92,6 +94,40 @@ def parse_args() -> argparse.Namespace:
             "daily_mtm=use daily mark-to-market trained equity (non-flat between signals); "
             "signal_step=accumulate signal-step returns from positions_test.csv."
         ),
+    )
+    p.add_argument(
+        "--include-baseline",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Whether to include baseline curve in per-KOL daily equity plots/csv.",
+    )
+    p.add_argument(
+        "--highlight-method",
+        default=None,
+        help="Method name to highlight in per-KOL equity curves. Default: --ours-name.",
+    )
+    p.add_argument(
+        "--highlight-color",
+        default="#1f77b4",
+        help="Color for highlighted method curve.",
+    )
+    p.add_argument(
+        "--highlight-linewidth",
+        type=float,
+        default=3.2,
+        help="Line width for highlighted method curve.",
+    )
+    p.add_argument(
+        "--other-linewidth",
+        type=float,
+        default=1.8,
+        help="Line width for non-highlighted curves.",
+    )
+    p.add_argument(
+        "--other-alpha",
+        type=float,
+        default=1.0,
+        help="Alpha for non-highlighted curves.",
     )
     return p.parse_args()
 
@@ -230,6 +266,122 @@ def safe_col(name: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]+", "_", name).strip("_").lower()
 
 
+def method_styles(
+    method_order: List[str],
+    highlight_method: str,
+    highlight_color: str,
+    highlight_linewidth: float,
+    other_linewidth: float,
+    other_alpha: float,
+) -> Dict[str, Dict]:
+    base_palette = {
+        "BC": "#8c564b",
+        "IQL": "#2ca02c",
+        "CQL": "#d62728",
+        "TD3BC": "#9467bd",
+        "AWAC": "#17becf",
+    }
+    cmap = plt.get_cmap("tab10")
+    out: Dict[str, Dict] = {}
+    for i, method in enumerate(method_order):
+        out[method] = {
+            "color": base_palette.get(method, cmap(i % 10)),
+            "linewidth": other_linewidth,
+            "alpha": other_alpha,
+            "zorder": 2,
+            "label": method,
+            "highlight": False,
+        }
+    if highlight_method in out:
+        out[highlight_method].update(
+            {
+                "color": highlight_color,
+                "linewidth": highlight_linewidth,
+                "alpha": 1.0,
+                "zorder": 6,
+                "label": f"{highlight_method} (Ours)",
+                "highlight": True,
+            }
+        )
+    return out
+
+
+def beautify_equity_axis(ax: plt.Axes, title: str) -> None:
+    ax.set_title(title, fontsize=12, pad=10, fontweight="semibold")
+    ax.set_xlabel("Date", fontsize=10)
+    ax.set_ylabel("Equity", fontsize=10)
+
+    # Light, readable grid: major + minor on y; major on x.
+    ax.set_facecolor("#fbfcff")
+    ax.grid(True, which="major", axis="both", linestyle="--", linewidth=0.7, alpha=0.28)
+    ax.grid(True, which="minor", axis="y", linestyle=":", linewidth=0.5, alpha=0.22)
+    ax.minorticks_on()
+    # Reference line for initial equity.
+    ax.axhline(1.0, color="#666666", linestyle=":", linewidth=1.0, alpha=0.55, zorder=0)
+
+    # Improve date readability with explicit month-year ticks.
+    xmin, xmax = ax.get_xlim()
+    left = mdates.num2date(xmin)
+    right = mdates.num2date(xmax)
+    span_days = max(1, (right - left).days)
+    if span_days <= 220:
+        month_interval = 1
+    elif span_days <= 500:
+        month_interval = 2
+    else:
+        month_interval = 3
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=month_interval))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    for lbl in ax.get_xticklabels():
+        lbl.set_rotation(30)
+        lbl.set_ha("right")
+
+    # Subtle frame styling.
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_alpha(0.5)
+    ax.spines["bottom"].set_alpha(0.5)
+    ax.tick_params(axis="both", labelsize=9, length=4, width=0.8)
+
+
+def draw_method_line(
+    ax: plt.Axes,
+    x: pd.Series,
+    y: pd.Series,
+    style: Dict,
+) -> None:
+    line = ax.plot(
+        x,
+        y,
+        label=style.get("label", ""),
+        linewidth=style.get("linewidth", 1.8),
+        color=style.get("color"),
+        alpha=style.get("alpha", 1.0),
+        zorder=style.get("zorder", 2),
+    )[0]
+    if style.get("highlight", False):
+        line.set_path_effects(
+            [
+                pe.Stroke(linewidth=style.get("linewidth", 1.8) + 2.0, foreground="white"),
+                pe.Normal(),
+            ]
+        )
+        y_clean = pd.to_numeric(y, errors="coerce")
+        valid = y_clean.notna()
+        if valid.any():
+            x_last = x[valid].iloc[-1]
+            y_last = y_clean[valid].iloc[-1]
+            ax.scatter(
+                [x_last],
+                [y_last],
+                s=34,
+                color=style.get("color"),
+                edgecolors="white",
+                linewidths=0.9,
+                zorder=8,
+            )
+
+
 def build_key_set(
     mode: str,
     method_runs: Dict[str, Dict[Tuple[str, str], RunInfo]],
@@ -252,6 +404,8 @@ def write_per_kol_outputs(
     output_root: Path,
     plot_format: str,
     event_curve_mode: str,
+    styles: Dict[str, Dict],
+    include_baseline: bool,
 ) -> Dict:
     source, kol = key
     kol_dir = output_root / source / kol
@@ -298,7 +452,12 @@ def write_per_kol_outputs(
         if not eq.empty and "equity_trained" in eq.columns:
             curve = eq[["date", "equity_trained"]].rename(columns={"equity_trained": method})
             curves.append(curve)
-        if baseline_curve is None and not eq.empty and "equity_baseline" in eq.columns:
+        if (
+            include_baseline
+            and baseline_curve is None
+            and not eq.empty
+            and "equity_baseline" in eq.columns
+        ):
             baseline_curve = eq[["date", "equity_baseline"]].rename(
                 columns={"equity_baseline": "Baseline"}
             )
@@ -327,7 +486,7 @@ def write_per_kol_outputs(
         else:
             merged = merged.merge(c, on="date", how="outer")
     if merged is not None:
-        if baseline_curve is not None:
+        if include_baseline and baseline_curve is not None:
             merged = merged.merge(baseline_curve, on="date", how="left")
         merged = merged.sort_values("date")
         merged["date"] = merged["date"].dt.strftime("%Y-%m-%d")
@@ -337,27 +496,27 @@ def write_per_kol_outputs(
         plot_df["date"] = pd.to_datetime(plot_df["date"], errors="coerce")
         plot_df = plot_df.dropna(subset=["date"]).sort_values("date")
 
-        plt.figure(figsize=(9.2, 5.2))
+        fig, ax = plt.subplots(figsize=(9.6, 5.4))
         for method in method_order:
             if method in plot_df.columns:
-                plt.plot(plot_df["date"], plot_df[method], label=method, linewidth=1.8)
-        if "Baseline" in plot_df.columns:
-            plt.plot(
+                style = styles.get(method, {})
+                draw_method_line(ax=ax, x=plot_df["date"], y=plot_df[method], style=style)
+        if include_baseline and "Baseline" in plot_df.columns:
+            ax.plot(
                 plot_df["date"],
                 plot_df["Baseline"],
                 label="Baseline",
                 linestyle="--",
-                linewidth=1.5,
-                color="black",
-                alpha=0.8,
+                linewidth=1.3,
+                color="#444444",
+                alpha=0.62,
+                zorder=1,
             )
-        plt.title(f"{source}/{kol} Daily Equity Comparison")
-        plt.xlabel("Date")
-        plt.ylabel("Equity")
-        plt.legend()
-        plt.tight_layout()
-        plt.savefig(kol_dir / f"equity_daily_compare.{plot_format}", dpi=180)
-        plt.close()
+        beautify_equity_axis(ax, f"{source}/{kol} Daily Equity Comparison")
+        ax.legend(loc="best", frameon=True, framealpha=0.9, fontsize=9, ncol=1)
+        fig.tight_layout()
+        fig.savefig(kol_dir / f"equity_daily_compare.{plot_format}", dpi=200)
+        plt.close(fig)
 
     merged_event: Optional[pd.DataFrame] = None
     for c in event_curves:
@@ -372,17 +531,16 @@ def write_per_kol_outputs(
         merged_event_out.to_csv(kol_dir / "event_equity_compare.csv", index=False)
 
         plot_df = merged_event.sort_values("date")
-        plt.figure(figsize=(9.2, 5.2))
+        fig, ax = plt.subplots(figsize=(9.6, 5.4))
         for method in method_order:
             if method in plot_df.columns:
-                plt.plot(plot_df["date"], plot_df[method], label=method, linewidth=1.8)
-        plt.title(f"{source}/{kol} Event Equity Comparison")
-        plt.xlabel("Date")
-        plt.ylabel("Equity")
-        plt.legend()
-        plt.tight_layout()
-        plt.savefig(kol_dir / f"event_equity_compare.{plot_format}", dpi=180)
-        plt.close()
+                style = styles.get(method, {})
+                draw_method_line(ax=ax, x=plot_df["date"], y=plot_df[method], style=style)
+        beautify_equity_axis(ax, f"{source}/{kol} Event Equity Comparison")
+        ax.legend(loc="best", frameon=True, framealpha=0.9, fontsize=9, ncol=1)
+        fig.tight_layout()
+        fig.savefig(kol_dir / f"event_equity_compare.{plot_format}", dpi=200)
+        plt.close(fig)
 
     return summary_row
 
@@ -487,6 +645,15 @@ def main() -> None:
         methods.update(parse_method_args(args.method))
     method_order = list(methods.keys())
     anchor_method = args.ours_name
+    highlight_method = args.highlight_method or args.ours_name
+    styles = method_styles(
+        method_order=method_order,
+        highlight_method=highlight_method,
+        highlight_color=args.highlight_color,
+        highlight_linewidth=args.highlight_linewidth,
+        other_linewidth=args.other_linewidth,
+        other_alpha=args.other_alpha,
+    )
 
     method_runs = {name: discover_latest_runs(root) for name, root in methods.items()}
     keys = build_key_set(args.mode, method_runs, anchor_method=anchor_method)
@@ -504,6 +671,8 @@ def main() -> None:
                 output_root=out_dir,
                 plot_format=args.plot_format,
                 event_curve_mode=args.event_curve_mode,
+                styles=styles,
+                include_baseline=args.include_baseline,
             )
         )
 
@@ -517,6 +686,8 @@ def main() -> None:
     meta = {
         "mode": args.mode,
         "event_curve_mode": args.event_curve_mode,
+        "include_baseline": args.include_baseline,
+        "highlight_method": highlight_method,
         "methods": {k: str(v) for k, v in methods.items()},
         "n_kols_total": int(len(summary_df)),
         "output_dir": str(out_dir),
