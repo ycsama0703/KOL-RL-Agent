@@ -43,6 +43,8 @@ BATCH_SIZE=${BATCH_SIZE:-256}
 DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
 DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
+MARKET_FACTOR_DIM=${MARKET_FACTOR_DIM:-6}
+FULL_TEST_ROOT=${FULL_TEST_ROOT:-$TEST_ROOT_BASE/full}
 
 # Report
 EVENT_CURVE_MODE=${EVENT_CURVE_MODE:-daily_mtm}
@@ -54,6 +56,11 @@ VARIANTS=(
   "w_no_soft"
   "w_no_bc_anchor"
   "w_no_rl_completion"
+  "w_no_fidelity"
+  "w_no_reversal_penalty"
+  "w_no_entry_penalty"
+  "w_no_market_factors"
+  "w_single_head_no_regime_split"
 )
 VARIANTS_FILTER=${VARIANTS_FILTER:-}
 
@@ -71,6 +78,8 @@ Key env vars:
   LOG_ROOT_BASE     log root
   MAX_JOBS          concurrent jobs
   DEVICE            evaluate_run device (cpu/cuda)
+  MARKET_FACTOR_DIM trailing state dims treated as market factors (default: 6)
+  FULL_TEST_ROOT    full-model test root used as anchor in report mode
 USAGE
 }
 
@@ -162,6 +171,21 @@ variant_train_args() {
     w_no_rl_completion)
       echo "--iql-steps 0 --no-bc-fit-behavior --bc-anchor-lambda 0.0"
       ;;
+    w_no_fidelity)
+      echo "--fidelity-lambda 0.0"
+      ;;
+    w_no_reversal_penalty)
+      echo "--reversal-penalty-lambda 0.0"
+      ;;
+    w_no_entry_penalty)
+      echo "--entry-penalty-lambda 0.0"
+      ;;
+    w_no_market_factors)
+      echo "--zero-market-factors --market-factor-dim ${MARKET_FACTOR_DIM}"
+      ;;
+    w_single_head_no_regime_split)
+      echo "--no-regime-split"
+      ;;
     *)
       echo "Unknown variant: $variant" >&2
       exit 1
@@ -174,6 +198,21 @@ variant_test_hard_flag() {
   case "$variant" in
     w_no_hard) echo "0" ;;
     *) echo "1" ;;
+  esac
+}
+
+variant_test_extra_args() {
+  local variant="$1"
+  case "$variant" in
+    w_no_market_factors)
+      echo "--zero-market-factors --market-factor-dim ${MARKET_FACTOR_DIM}"
+      ;;
+    w_single_head_no_regime_split)
+      echo "--no-regime-split"
+      ;;
+    *)
+      echo ""
+      ;;
   esac
 }
 
@@ -256,6 +295,8 @@ run_test() {
   for variant in "${selected_variants[@]}"; do
     local hard_flag
     hard_flag=$(variant_test_hard_flag "$variant")
+    local extra_eval
+    extra_eval=$(variant_test_extra_args "$variant")
     local variant_train_root="$TRAIN_ROOT_BASE/$variant"
     local variant_test_root="$TEST_ROOT_BASE/$variant"
     local variant_log_root="$LOG_ROOT_BASE/test/$variant"
@@ -303,6 +344,11 @@ run_test() {
       else
         cmd+=(--no-hard-intent-constraints)
       fi
+      if [[ -n "$extra_eval" ]]; then
+        # shellcheck disable=SC2206
+        extra_eval_arr=($extra_eval)
+        cmd+=("${extra_eval_arr[@]}")
+      fi
 
       safe_name="${source_name}_${kol}_${RUN_TAG}"
       log_file="$variant_log_root/${safe_name}.log"
@@ -323,15 +369,11 @@ run_report() {
   local out_dir="$REPORT_ROOT/$report_suffix"
   mkdir -p "$out_dir"
 
-  # Report currently expects all 5 variants to exist.
+  # Build report from all available ablation test roots.
   cmd=(
     "$PYTHON" benchmarks/01_generic_rl/build_compare_report.py
-    --ours-root "$TEST_ROOT_BASE/full"
+    --ours-root "$FULL_TEST_ROOT"
     --ours-name FULL
-    --method WO_HARD="$TEST_ROOT_BASE/w_no_hard"
-    --method WO_SOFT="$TEST_ROOT_BASE/w_no_soft"
-    --method WO_BC_ANCHOR="$TEST_ROOT_BASE/w_no_bc_anchor"
-    --method WO_RL_COMPLETION="$TEST_ROOT_BASE/w_no_rl_completion"
     --output-dir "$out_dir"
     --mode anchor_ours
     --event-curve-mode "$EVENT_CURVE_MODE"
@@ -339,6 +381,38 @@ run_report() {
     --no-include-baseline
     --highlight-method FULL
   )
+
+  if [[ ! -d "$FULL_TEST_ROOT" ]]; then
+    echo "FULL_TEST_ROOT not found: $FULL_TEST_ROOT" >&2
+    exit 1
+  fi
+
+  local any_method=0
+  local label=""
+  for v in "${VARIANTS[@]}"; do
+    [[ "$v" == "full" ]] && continue
+    local root="$TEST_ROOT_BASE/$v"
+    [[ -d "$root" ]] || continue
+    case "$v" in
+      w_no_hard) label="WO_HARD" ;;
+      w_no_soft) label="WO_SOFT" ;;
+      w_no_bc_anchor) label="WO_BC_ANCHOR" ;;
+      w_no_rl_completion) label="WO_RL_COMPLETION" ;;
+      w_no_fidelity) label="WO_FIDELITY" ;;
+      w_no_reversal_penalty) label="WO_REV_PEN" ;;
+      w_no_entry_penalty) label="WO_ENTRY_PEN" ;;
+      w_no_market_factors) label="WO_MKT_FACTORS" ;;
+      w_single_head_no_regime_split) label="WO_REGIME_SPLIT" ;;
+      *) label="${v^^}" ;;
+    esac
+    cmd+=(--method "${label}=${root}")
+    any_method=1
+  done
+
+  if [[ "$any_method" -eq 0 ]]; then
+    echo "No ablation test roots found under $TEST_ROOT_BASE" >&2
+    exit 1
+  fi
 
   echo "== Build report -> $out_dir =="
   "${cmd[@]}"
@@ -350,6 +424,8 @@ echo "BUFFER_ROOT=$BUFFER_ROOT"
 echo "TRAIN_ROOT_BASE=$TRAIN_ROOT_BASE"
 echo "TEST_ROOT_BASE=$TEST_ROOT_BASE"
 echo "REPORT_ROOT=$REPORT_ROOT"
+echo "MARKET_FACTOR_DIM=$MARKET_FACTOR_DIM"
+echo "FULL_TEST_ROOT=$FULL_TEST_ROOT"
 
 case "$MODE" in
   train)

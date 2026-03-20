@@ -81,6 +81,9 @@ class TrainingConfig:
     hard_intent_constraints: bool = True
     entry_threshold: float = 5e-4   # baseline_action abs below this => no entry allowed
     clamp_delta: float = 1.8        # delta is clamped to [-clamp_delta, +clamp_delta]
+    regime_split: bool = True       # if False, disable signal/silence routing and use one head
+    zero_market_factors: bool = False
+    market_factor_dim: int = 6      # tail dims in state reserved for market factors
 
     # Logging
     log_interval: int = 200
@@ -119,6 +122,9 @@ def parse_args() -> TrainingConfig:
     p.add_argument("--entry-threshold", type=float, default=5e-4)
     p.add_argument("--clamp-delta", type=float, default=1.8)
     p.add_argument("--hard-intent-constraints", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--regime-split", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--zero-market-factors", action=argparse.BooleanOptionalAction, default=False)
+    p.add_argument("--market-factor-dim", type=int, default=6)
     p.add_argument("--log-interval", type=int, default=200)
     p.add_argument("--write-iql-csv", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--progress-bar", action=argparse.BooleanOptionalAction, default=True)
@@ -149,6 +155,9 @@ def parse_args() -> TrainingConfig:
         hard_intent_constraints=args.hard_intent_constraints,
         entry_threshold=args.entry_threshold,
         clamp_delta=args.clamp_delta,
+        regime_split=args.regime_split,
+        zero_market_factors=args.zero_market_factors,
+        market_factor_dim=args.market_factor_dim,
         log_interval=args.log_interval,
         write_iql_csv=args.write_iql_csv,
         progress_bar=args.progress_bar,
@@ -158,7 +167,7 @@ def parse_args() -> TrainingConfig:
 # -------------------------
 # Intent-constrained residual policy utilities
 # -------------------------
-def _extract_delta(actor_out, baseline_action: torch.Tensor) -> torch.Tensor:
+def _extract_delta(actor_out, baseline_action: torch.Tensor, cfg: TrainingConfig) -> torch.Tensor:
     """
     Compatibility layer:
     - If ActorNetwork returns a Tensor: use it as delta directly (shape [B,1]).
@@ -170,6 +179,12 @@ def _extract_delta(actor_out, baseline_action: torch.Tensor) -> torch.Tensor:
         return actor_out
 
     if isinstance(actor_out, dict):
+        # Single-head ablation: bypass regime routing and always use one head.
+        if not cfg.regime_split:
+            delta_signal = actor_out.get("delta_signal", None)
+            if delta_signal is None:
+                raise KeyError("ActorNetwork returned dict but missing 'delta_signal' key.")
+            return delta_signal
         # Heuristic based on baseline magnitude: signal if baseline is not ~0
         has_signal = (baseline_action.abs() > 1e-6)
         delta_signal = actor_out.get("delta_signal", None)
@@ -179,6 +194,18 @@ def _extract_delta(actor_out, baseline_action: torch.Tensor) -> torch.Tensor:
         return torch.where(has_signal, delta_signal, delta_decay)
 
     raise TypeError(f"Unsupported actor output type: {type(actor_out)}")
+
+
+def maybe_zero_market_factors(states: torch.Tensor, cfg: TrainingConfig) -> torch.Tensor:
+    """Optionally zero out trailing market-factor dimensions for ablation."""
+    if not cfg.zero_market_factors:
+        return states
+    dim = int(max(cfg.market_factor_dim, 0))
+    if dim <= 0:
+        return states
+    tail = min(dim, int(states.shape[1]))
+    states[..., -tail:] = 0.0
+    return states
 
 
 def apply_intent_constraints(
@@ -273,7 +300,7 @@ def behavior_cloning(
             baseline_action = batch["baseline_action"].to(device)        # [B,1]
 
             actor_out = actor(state)
-            delta = _extract_delta(actor_out, baseline_action)
+            delta = _extract_delta(actor_out, baseline_action, cfg)
             # Use the same hard intent constraints as evaluation to avoid train-test mismatch.
             policy_action = apply_intent_constraints(baseline_action, delta, cfg)
             pens = intent_penalties_soft(baseline_action, policy_action, cfg)
@@ -406,7 +433,7 @@ def iql_training(
 
         # Policy action = baseline + residual
         actor_out = actor(state)
-        delta = _extract_delta(actor_out, baseline_action)
+        delta = _extract_delta(actor_out, baseline_action, cfg)
 
         # Training-time policy action: HARD (same constraints as evaluation)
         policy_action = apply_intent_constraints(baseline_action, delta, cfg)
@@ -562,6 +589,7 @@ def evaluate(actor: ActorNetwork, buffer_path: Path, cfg: TrainingConfig, device
     buffer = load_buffer(buffer_path)
 
     states = buffer["states"].float()
+    states = maybe_zero_market_factors(states, cfg)
     rewards = buffer["rewards"].float().cpu().numpy()
 
     # Prefer baseline actions if available (robust to naming)
@@ -584,7 +612,7 @@ def evaluate(actor: ActorNetwork, buffer_path: Path, cfg: TrainingConfig, device
             s = states[start : start + 1024].to(device)
             b = baseline[start : start + 1024].to(device)
             out = actor(s)
-            d = _extract_delta(out, b)
+            d = _extract_delta(out, b, cfg)
             a = apply_intent_constraints(b, d, cfg)
             deltas.append((a.squeeze(-1).cpu().numpy() - b.squeeze(-1).cpu().numpy()))
     delta_np = np.concatenate(deltas, axis=0)
@@ -668,6 +696,16 @@ def main() -> None:
         cfg.entry_threshold,
         baseline_zero_ratio,
     )
+    if cfg.zero_market_factors:
+        # Apply once at dataset level to keep train/val/inference behavior consistent for this run.
+        before_nonzero = float((train_dataset.states[:, -min(cfg.market_factor_dim, state_dim):].abs() > 0).float().mean().item()) if cfg.market_factor_dim > 0 else 0.0
+        maybe_zero_market_factors(train_dataset.states, cfg)
+        maybe_zero_market_factors(train_dataset.next_states, cfg)
+        LOGGER.info(
+            "Ablation: zero_market_factors enabled | market_factor_dim=%d | nonzero_ratio_before=%.4f",
+            cfg.market_factor_dim,
+            before_nonzero,
+        )
 
     bc_loader = DataLoader(train_dataset, batch_size=cfg.bc_batch_size, shuffle=True, drop_last=True, pin_memory=True)
     iql_loader = DataLoader(train_dataset, batch_size=cfg.iql_batch_size, shuffle=True, drop_last=True, pin_memory=True)

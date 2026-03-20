@@ -145,6 +145,24 @@ def parse_args() -> argparse.Namespace:
         default=True,
         help="Use hard intent constraints when mapping actor output to policy actions.",
     )
+    parser.add_argument(
+        "--regime-split",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Whether to use signal/silence routing when decoding actor output.",
+    )
+    parser.add_argument(
+        "--zero-market-factors",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Zero out trailing market-factor dims in state for ablation.",
+    )
+    parser.add_argument(
+        "--market-factor-dim",
+        type=int,
+        default=6,
+        help="Number of trailing market-factor dimensions in state.",
+    )
     return parser.parse_args()
 
 
@@ -166,6 +184,9 @@ def main() -> None:
         hard_intent_constraints=args.hard_intent_constraints,
         entry_threshold=TrainingConfig().entry_threshold,
         clamp_delta=TrainingConfig().clamp_delta,
+        regime_split=args.regime_split,
+        zero_market_factors=args.zero_market_factors,
+        market_factor_dim=args.market_factor_dim,
     )
     metrics, positions_df = run_policy(
         actor,
