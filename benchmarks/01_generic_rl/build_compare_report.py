@@ -561,6 +561,28 @@ def summarize_by_method(summary_df: pd.DataFrame, method_order: List[str]) -> pd
     return pd.DataFrame(rows)
 
 
+def summarize_by_method_by_source(
+    summary_df: pd.DataFrame, method_order: List[str]
+) -> pd.DataFrame:
+    rows = []
+    if "source" not in summary_df.columns:
+        return pd.DataFrame(rows)
+
+    for source, sdf in summary_df.groupby("source"):
+        for method in method_order:
+            prefix = safe_col(method)
+            row = {"source": source, "method": method, "n_kols": len(sdf)}
+            for k in EVENT_KEYS:
+                row[f"event_mean_{k}"] = sdf[f"{prefix}_event_{k}"].mean()
+            for k in BETRAYAL_KEYS:
+                row[f"betrayal_mean_{k}"] = sdf[f"{prefix}_betrayal_{k}"].mean()
+            for k in EVENT_KEYS:
+                row[f"daily_trained_mean_{k}"] = sdf[f"{prefix}_daily_trained_{k}"].mean()
+                row[f"daily_baseline_mean_{k}"] = sdf[f"{prefix}_daily_baseline_{k}"].mean()
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
 def write_overview_plots(
     summary_df: pd.DataFrame, method_order: List[str], output_dir: Path
 ) -> None:
@@ -681,6 +703,8 @@ def main() -> None:
 
     method_summary = summarize_by_method(summary_df, method_order)
     method_summary.to_csv(out_dir / "summary_by_method_mean.csv", index=False)
+    method_summary_by_source = summarize_by_method_by_source(summary_df, method_order)
+    method_summary_by_source.to_csv(out_dir / "summary_by_method_mean_by_source.csv", index=False)
     write_overview_plots(summary_df, method_order, out_dir)
 
     meta = {
