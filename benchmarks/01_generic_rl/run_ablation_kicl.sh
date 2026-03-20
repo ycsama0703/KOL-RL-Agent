@@ -55,6 +55,7 @@ VARIANTS=(
   "w_no_bc_anchor"
   "w_no_rl_completion"
 )
+VARIANTS_FILTER=${VARIANTS_FILTER:-}
 
 usage() {
   cat <<'USAGE'
@@ -118,6 +119,31 @@ collect_tasks() {
   done < <(find "$BUFFER_ROOT" -mindepth 2 -maxdepth 2 -type d | sort)
 }
 
+select_variants() {
+  local -n selected_ref=$1
+  selected_ref=()
+  if [[ -z "$VARIANTS_FILTER" ]]; then
+    selected_ref=("${VARIANTS[@]}")
+    return
+  fi
+
+  IFS=',' read -r -a want <<< "$VARIANTS_FILTER"
+  for w in "${want[@]}"; do
+    local found=0
+    for v in "${VARIANTS[@]}"; do
+      if [[ "$w" == "$v" ]]; then
+        selected_ref+=("$v")
+        found=1
+        break
+      fi
+    done
+    if [[ "$found" -eq 0 ]]; then
+      echo "Unknown variant in VARIANTS_FILTER: $w" >&2
+      exit 1
+    fi
+  done
+}
+
 variant_train_args() {
   local variant="$1"
   case "$variant" in
@@ -164,7 +190,9 @@ run_train() {
     exit 1
   fi
 
-  for variant in "${VARIANTS[@]}"; do
+  local selected_variants=()
+  select_variants selected_variants
+  for variant in "${selected_variants[@]}"; do
     local variant_train_root="$TRAIN_ROOT_BASE/$variant"
     local variant_log_root="$LOG_ROOT_BASE/train/$variant"
     mkdir -p "$variant_train_root" "$variant_log_root"
@@ -223,7 +251,9 @@ run_test() {
     exit 1
   fi
 
-  for variant in "${VARIANTS[@]}"; do
+  local selected_variants=()
+  select_variants selected_variants
+  for variant in "${selected_variants[@]}"; do
     local hard_flag
     hard_flag=$(variant_test_hard_flag "$variant")
     local variant_train_root="$TRAIN_ROOT_BASE/$variant"
@@ -293,6 +323,7 @@ run_report() {
   local out_dir="$REPORT_ROOT/$report_suffix"
   mkdir -p "$out_dir"
 
+  # Report currently expects all 5 variants to exist.
   cmd=(
     "$PYTHON" benchmarks/01_generic_rl/build_compare_report.py
     --ours-root "$TEST_ROOT_BASE/full"
@@ -314,6 +345,7 @@ run_report() {
 }
 
 echo "MODE=$MODE SOURCE_FILTER=$SOURCE_FILTER MAX_JOBS=$MAX_JOBS RUN_TAG=$RUN_TAG"
+echo "VARIANTS_FILTER=${VARIANTS_FILTER:-<all>}"
 echo "BUFFER_ROOT=$BUFFER_ROOT"
 echo "TRAIN_ROOT_BASE=$TRAIN_ROOT_BASE"
 echo "TEST_ROOT_BASE=$TEST_ROOT_BASE"
@@ -343,4 +375,3 @@ case "$MODE" in
     exit 1
     ;;
 esac
-
