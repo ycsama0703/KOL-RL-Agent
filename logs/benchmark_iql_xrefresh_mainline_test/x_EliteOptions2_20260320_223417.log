@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.10736981657373534,
+  "sharpe": 0.6230450515278336,
+  "max_drawdown": 0.10801718627111667,
+  "daily_metrics": {
+    "cumulative_return": 0.17539098741229564,
+    "sharpe": 0.7213782770099503,
+    "max_drawdown": 0.2045163438914071
+  },
+  "betrayal_metrics": {
+    "num_samples": 6566,
+    "num_has_signal": 1084,
+    "num_no_signal": 5482,
+    "reversal_rate": 0.08302583025830258,
+    "reversal_mean_abs_action": 0.021009856835007668,
+    "reversal_mean_abs_delta": 0.11898700147867203,
+    "entry_violation_rate": 0.14173659248449472,
+    "entry_violation_mean_abs_action": 0.09713741391897202,
+    "mean_abs_deviation": 0.025634068995714188,
+    "mean_normalized_deviation": 0.5131245255470276,
+    "sign_agreement_rate": 0.9169741697416974,
+    "baseline_policy_corr": 0.6524393558502197
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/EliteOptions2_20260320_181510/daily/equity_daily.png

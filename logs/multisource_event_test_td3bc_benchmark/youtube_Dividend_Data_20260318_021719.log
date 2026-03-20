@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.010432105346134035,
+  "sharpe": 1.1605845369461154,
+  "max_drawdown": 0.007781895769807781,
+  "daily_metrics": {
+    "cumulative_return": -0.060257855164462915,
+    "sharpe": -0.996400534004742,
+    "max_drawdown": 0.10117687601344758
+  },
+  "betrayal_metrics": {
+    "num_samples": 4948,
+    "num_has_signal": 393,
+    "num_no_signal": 4555,
+    "reversal_rate": 0.6335877862595419,
+    "reversal_mean_abs_action": 0.09842429310083389,
+    "reversal_mean_abs_delta": 0.17585690319538116,
+    "entry_violation_rate": 0.8871569703622393,
+    "entry_violation_mean_abs_action": 0.1472429484128952,
+    "mean_abs_deviation": 0.13252805173397064,
+    "mean_normalized_deviation": 2.8747591972351074,
+    "sign_agreement_rate": 0.366412213740458,
+    "baseline_policy_corr": 0.5623723864555359
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Dividend_Data_20260318_003828/daily/equity_daily.png

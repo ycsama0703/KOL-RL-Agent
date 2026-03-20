@@ -1,0 +1,35 @@
+
+26 Failed downloads:
+['OKLO', 'GOOGL', 'FIG', 'BULL', 'BMNR', 'QQQ', 'HIMS', 'MU', 'NFLX', 'MP', 'MDB', 'LLY', 'TSLA', 'SHOP', 'CRWV', 'AAPL', 'TSM', 'COIN', 'GOLD', 'SMH', 'SNOW', 'NBIS', 'AMD', 'CRWD', 'AMZN', 'ORCL']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.12118630099511996,
+  "sharpe": 0.6720884181403587,
+  "max_drawdown": 0.1081261546127092,
+  "daily_metrics": {
+    "cumulative_return": 0.09187144340665632,
+    "sharpe": 0.6263491662121802,
+    "max_drawdown": 0.16388442987538052
+  },
+  "betrayal_metrics": {
+    "num_samples": 6566,
+    "num_has_signal": 1084,
+    "num_no_signal": 5482,
+    "reversal_rate": 0.07287822878228782,
+    "reversal_mean_abs_action": 0.019329961389303207,
+    "reversal_mean_abs_delta": 0.11577929556369781,
+    "entry_violation_rate": 0.1391827800072966,
+    "entry_violation_mean_abs_action": 0.09764102846384048,
+    "mean_abs_deviation": 0.02402404136955738,
+    "mean_normalized_deviation": 0.4765031039714813,
+    "sign_agreement_rate": 0.9271217712177122,
+    "baseline_policy_corr": 0.6803249716758728
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/EliteOptions2_20260320_213517/daily/equity_daily.png

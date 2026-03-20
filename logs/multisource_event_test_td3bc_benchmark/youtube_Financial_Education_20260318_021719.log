@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.054412160134005516,
+  "sharpe": -1.7647389020746604,
+  "max_drawdown": 0.10359193764017996,
+  "daily_metrics": {
+    "cumulative_return": -0.27232548095795783,
+    "sharpe": -1.7414544292068943,
+    "max_drawdown": 0.30315986742197676
+  },
+  "betrayal_metrics": {
+    "num_samples": 2261,
+    "num_has_signal": 410,
+    "num_no_signal": 1851,
+    "reversal_rate": 0.5658536585365853,
+    "reversal_mean_abs_action": 0.11763153225183487,
+    "reversal_mean_abs_delta": 0.19660724699497223,
+    "entry_violation_rate": 0.9627228525121556,
+    "entry_violation_mean_abs_action": 0.1531168520450592,
+    "mean_abs_deviation": 0.14621685445308685,
+    "mean_normalized_deviation": 2.1317179203033447,
+    "sign_agreement_rate": 0.43414634146341463,
+    "baseline_policy_corr": 0.4249885380268097
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Financial_Education_20260318_003834/daily/equity_daily.png

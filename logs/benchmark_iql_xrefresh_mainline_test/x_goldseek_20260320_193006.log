@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.0526459978947631,
+  "sharpe": -0.401191975599767,
+  "max_drawdown": 0.08303263502847087,
+  "daily_metrics": {
+    "cumulative_return": 0.491817656511669,
+    "sharpe": 1.8631171521942476,
+    "max_drawdown": 0.20276186733606907
+  },
+  "betrayal_metrics": {
+    "num_samples": 4337,
+    "num_has_signal": 327,
+    "num_no_signal": 4010,
+    "reversal_rate": 0.06422018348623854,
+    "reversal_mean_abs_action": 0.03506071865558624,
+    "reversal_mean_abs_delta": 0.15597622096538544,
+    "entry_violation_rate": 0.2139650872817955,
+    "entry_violation_mean_abs_action": 0.12134203314781189,
+    "mean_abs_deviation": 0.03258582949638367,
+    "mean_normalized_deviation": 0.4642222821712494,
+    "sign_agreement_rate": 0.9357798165137615,
+    "baseline_policy_corr": 0.8163521885871887
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/goldseek_20260320_181510/daily/equity_daily.png

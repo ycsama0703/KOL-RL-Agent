@@ -1,0 +1,35 @@
+
+1 Failed download:
+['NTRA']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.051935273595615006,
+  "sharpe": -0.7850501663314919,
+  "max_drawdown": 0.10580450071186934,
+  "daily_metrics": {
+    "cumulative_return": -0.46926672091474575,
+    "sharpe": -1.240100067616485,
+    "max_drawdown": 0.5606707629312397
+  },
+  "betrayal_metrics": {
+    "num_samples": 4545,
+    "num_has_signal": 171,
+    "num_no_signal": 4374,
+    "reversal_rate": 0.9532163742690059,
+    "reversal_mean_abs_action": 0.1496933251619339,
+    "reversal_mean_abs_delta": 0.3454356789588928,
+    "entry_violation_rate": 0.9787379972565158,
+    "entry_violation_mean_abs_action": 0.24128076434135437,
+    "mean_abs_deviation": 0.24024952948093414,
+    "mean_normalized_deviation": 3.6845438480377197,
+    "sign_agreement_rate": 0.04678362573099415,
+    "baseline_policy_corr": 0.8166318535804749
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/traderstewie_20260320_194041/daily/equity_daily.png

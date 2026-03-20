@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.05689932892323468,
+  "sharpe": 2.475276345920246,
+  "max_drawdown": 0.012991183687245408,
+  "daily_metrics": {
+    "cumulative_return": -0.1568318448202609,
+    "sharpe": -0.9160794984348897,
+    "max_drawdown": 0.2999758961410311
+  },
+  "betrayal_metrics": {
+    "num_samples": 7486,
+    "num_has_signal": 639,
+    "num_no_signal": 6847,
+    "reversal_rate": 0.8560250391236307,
+    "reversal_mean_abs_action": 0.1459188163280487,
+    "reversal_mean_abs_delta": 0.2439289540052414,
+    "entry_violation_rate": 0.9912370381188842,
+    "entry_violation_mean_abs_action": 0.19602598249912262,
+    "mean_abs_deviation": 0.19725048542022705,
+    "mean_normalized_deviation": 3.453676700592041,
+    "sign_agreement_rate": 0.14397496087636932,
+    "baseline_policy_corr": 0.5138813257217407
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Ale_s_World_of_Stocks_20260317_234331/daily/equity_daily.png

@@ -1,0 +1,23 @@
+2026-03-20 19:36:31,094 - __main__ - INFO - Starting training run x/intocryptoverse_20260320_193631
+2026-03-20 19:36:31,094 - __main__ - INFO - Logging to outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x/x/intocryptoverse_20260320_193631/logs/training.log
+2026-03-20 19:36:31,094 - __main__ - INFO - Checkpoints will be saved under outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x/x/intocryptoverse_20260320_193631/checkpoints
+2026-03-20 19:36:31,095 - __main__ - INFO - Training config: {"actor_align_lambda": 0.0, "actor_lr": 0.0003, "bc_anchor_lambda": 0.0, "bc_batch_size": 256, "bc_epochs": 10, "bc_fit_behavior": true, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "clamp_delta": 1.8, "critic_lr": 0.0003, "device": "cuda", "entry_penalty_lambda": 0.0, "entry_threshold": 0.0005, "expectile": 0.7, "fidelity_lambda": 0.0, "gamma": 0.99, "hard_intent_constraints": false, "iql_batch_size": 256, "iql_steps": 0, "kol": "x/intocryptoverse", "log_interval": 200, "output_dir": "outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x", "progress_bar": false, "replay_dir": "data/multisource_ready_22-25_xrefresh_20260320_144701/08_replay_buffer_benchmark_x_min1000", "reversal_penalty_lambda": 0.0, "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-20 19:36:31,128 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-20 19:36:31,128 - __main__ - INFO - Device: cuda
+2026-03-20 19:36:31,164 - __main__ - INFO - Loaded replay buffer for x/intocryptoverse with 1156 samples, state_dim=1066
+2026-03-20 19:36:31,165 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.023981 behavior_abs_mean=0.064879 baseline_zero_ratio(th=5.0e-04)=0.9239
+BC 1/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 1/10:  25%|██▌       | 1/4 [00:00<00:01,  1.63it/s]BC 1/10: 100%|██████████| 4/4 [00:00<00:00,  6.96it/s]                                                      2026-03-20 19:36:33,311 - __main__ - INFO - BC epoch 1/10 - loss=0.005598
+BC 2/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 2/10: 100%|██████████| 4/4 [00:00<00:00, 32.27it/s]                                                      2026-03-20 19:36:33,436 - __main__ - INFO - BC epoch 2/10 - loss=0.005210
+BC 3/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 3/10: 100%|██████████| 4/4 [00:00<00:00, 35.93it/s]                                                      2026-03-20 19:36:33,548 - __main__ - INFO - BC epoch 3/10 - loss=0.005009
+BC 4/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 4/10: 100%|██████████| 4/4 [00:00<00:00, 39.14it/s]                                                      2026-03-20 19:36:33,651 - __main__ - INFO - BC epoch 4/10 - loss=0.004688
+BC 5/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 5/10: 100%|██████████| 4/4 [00:00<00:00, 32.80it/s]                                                      2026-03-20 19:36:33,774 - __main__ - INFO - BC epoch 5/10 - loss=0.004706
+BC 6/10:   0%|          | 0/4 [00:00<?, ?it/s]                                              2026-03-20 19:36:33,874 - __main__ - INFO - BC epoch 6/10 - loss=0.004593
+BC 7/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 7/10: 100%|██████████| 4/4 [00:00<00:00, 39.03it/s]                                                      2026-03-20 19:36:33,977 - __main__ - INFO - BC epoch 7/10 - loss=0.004405
+BC 8/10:   0%|          | 0/4 [00:00<?, ?it/s]                                              2026-03-20 19:36:34,068 - __main__ - INFO - BC epoch 8/10 - loss=0.004364
+BC 9/10:   0%|          | 0/4 [00:00<?, ?it/s]                                              2026-03-20 19:36:34,159 - __main__ - INFO - BC epoch 9/10 - loss=0.004335
+BC 10/10:   0%|          | 0/4 [00:00<?, ?it/s]BC 10/10: 100%|██████████| 4/4 [00:00<00:00, 30.75it/s]                                                       2026-03-20 19:36:34,290 - __main__ - INFO - BC epoch 10/10 - loss=0.004207
+2026-03-20 19:36:34,290 - __main__ - INFO - Behavior cloning finished. Avg loss=0.004711
+2026-03-20 19:36:34,293 - __main__ - INFO - IQL metrics CSV: outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x/x/intocryptoverse_20260320_193631/logs/iql_metrics.csv
+2026-03-20 19:36:34,545 - __main__ - INFO - Validation metrics for x/intocryptoverse: cumulative_return=0.2371, sharpe=2.7205, max_drawdown=0.0678
+2026-03-20 19:36:34,587 - __main__ - INFO - Saved checkpoints to outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x/x/intocryptoverse_20260320_193631/checkpoints
+2026-03-20 19:36:34,591 - __main__ - INFO - Saved run summary to outputs/benchmarks/generic_rl/bc_xrefresh_mainline/x/x/intocryptoverse_20260320_193631/run_summary.json

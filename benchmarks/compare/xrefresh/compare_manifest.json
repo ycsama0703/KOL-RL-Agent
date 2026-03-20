@@ -1,0 +1,16 @@
+{
+  "mode": "intersection",
+  "event_curve_mode": "daily_mtm",
+  "include_baseline": false,
+  "highlight_method": "KICL",
+  "methods": {
+    "KICL": "outputs/multisource_test_mainline_x_merged",
+    "BC": "outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test",
+    "IQL": "outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test",
+    "TD3BC": "outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test",
+    "CQL": "outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test",
+    "AWAC": "outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test"
+  },
+  "n_kols_total": 11,
+  "output_dir": "benchmarks/compare/xrefresh"
+}

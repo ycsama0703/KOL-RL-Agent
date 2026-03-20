@@ -1,0 +1,35 @@
+
+1 Failed download:
+['BA']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.0977864439732099,
+  "sharpe": 4.486099433847121,
+  "max_drawdown": 0.017494779634720257,
+  "daily_metrics": {
+    "cumulative_return": 0.23049390800221237,
+    "sharpe": 1.474786024764486,
+    "max_drawdown": 0.09739505065965319
+  },
+  "betrayal_metrics": {
+    "num_samples": 2261,
+    "num_has_signal": 410,
+    "num_no_signal": 1851,
+    "reversal_rate": 0.35365853658536583,
+    "reversal_mean_abs_action": 0.1790294349193573,
+    "reversal_mean_abs_delta": 0.2639321982860565,
+    "entry_violation_rate": 0.9119394921663966,
+    "entry_violation_mean_abs_action": 0.2285161167383194,
+    "mean_abs_deviation": 0.19864141941070557,
+    "mean_normalized_deviation": 2.139387845993042,
+    "sign_agreement_rate": 0.6463414634146342,
+    "baseline_policy_corr": 0.18223091959953308
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Financial_Education_20260318_170154/daily/equity_daily.png

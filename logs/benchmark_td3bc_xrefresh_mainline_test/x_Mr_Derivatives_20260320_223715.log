@@ -1,0 +1,39 @@
+
+1 Failed download:
+['RGC']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.16692316893806236,
+  "sharpe": 1.8541217760306445,
+  "max_drawdown": 0.049377562684424184,
+  "daily_metrics": {
+    "cumulative_return": 0.11018978161065607,
+    "sharpe": 0.7224824575544363,
+    "max_drawdown": 0.1587510973856727
+  },
+  "betrayal_metrics": {
+    "num_samples": 30410,
+    "num_has_signal": 1865,
+    "num_no_signal": 28545,
+    "reversal_rate": 0.35281501340482574,
+    "reversal_mean_abs_action": 0.05621813237667084,
+    "reversal_mean_abs_delta": 0.11813196539878845,
+    "entry_violation_rate": 0.27990891574706606,
+    "entry_violation_mean_abs_action": 0.24643509089946747,
+    "mean_abs_deviation": 0.07945255935192108,
+    "mean_normalized_deviation": 2.3831024169921875,
+    "sign_agreement_rate": 0.6471849865951743,
+    "baseline_policy_corr": 0.19328954815864563
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_194041/daily/equity_daily.png

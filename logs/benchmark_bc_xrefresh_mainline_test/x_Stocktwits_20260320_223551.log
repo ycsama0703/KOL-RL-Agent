@@ -1,0 +1,36 @@
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.05135638220867311,
+  "sharpe": 0.393828758510459,
+  "max_drawdown": 0.10173507467815807,
+  "daily_metrics": {
+    "cumulative_return": -0.04219496796489508,
+    "sharpe": 0.03977004477869343,
+    "max_drawdown": 0.2612520319390148
+  },
+  "betrayal_metrics": {
+    "num_samples": 36089,
+    "num_has_signal": 1333,
+    "num_no_signal": 34756,
+    "reversal_rate": 0.36084021005251316,
+    "reversal_mean_abs_action": 0.03319767490029335,
+    "reversal_mean_abs_delta": 0.09137925505638123,
+    "entry_violation_rate": 0.043330647945678445,
+    "entry_violation_mean_abs_action": 0.07922706753015518,
+    "mean_abs_deviation": 0.006959858816117048,
+    "mean_normalized_deviation": 1.0092499256134033,
+    "sign_agreement_rate": 0.6391597899474869,
+    "baseline_policy_corr": 0.8317086100578308
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Stocktwits_20260320_193630/daily/equity_daily.png

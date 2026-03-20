@@ -1,0 +1,37 @@
+
+1 Failed download:
+['MOG-A']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.022980466614181627,
+  "sharpe": -0.2570084737407069,
+  "max_drawdown": 0.059983139963726784,
+  "daily_metrics": {
+    "cumulative_return": 0.036851561379523945,
+    "sharpe": 0.34660763418943735,
+    "max_drawdown": 0.1178307439037213
+  },
+  "betrayal_metrics": {
+    "num_samples": 61244,
+    "num_has_signal": 1012,
+    "num_no_signal": 60232,
+    "reversal_rate": 0.25790513833992096,
+    "reversal_mean_abs_action": 0.03127977252006531,
+    "reversal_mean_abs_delta": 0.09691236913204193,
+    "entry_violation_rate": 0.02772612564749635,
+    "entry_violation_mean_abs_action": 0.0777381956577301,
+    "mean_abs_deviation": 0.004850970581173897,
+    "mean_normalized_deviation": 0.8527927398681641,
+    "sign_agreement_rate": 0.7420948616600791,
+    "baseline_policy_corr": 0.8021313548088074
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/bespokeinvest_20260320_193630/daily/equity_daily.png

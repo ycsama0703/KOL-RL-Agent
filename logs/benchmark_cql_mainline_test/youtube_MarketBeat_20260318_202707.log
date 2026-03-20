@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.004933444248001462,
+  "sharpe": -1.0154785146518972,
+  "max_drawdown": 0.007930430751848091,
+  "daily_metrics": {
+    "cumulative_return": 0.15791096098334423,
+    "sharpe": 2.930488226900489,
+    "max_drawdown": 0.049498386039146344
+  },
+  "betrayal_metrics": {
+    "num_samples": 6848,
+    "num_has_signal": 404,
+    "num_no_signal": 6444,
+    "reversal_rate": 0.08415841584158416,
+    "reversal_mean_abs_action": 0.06080307066440582,
+    "reversal_mean_abs_delta": 0.1477612853050232,
+    "entry_violation_rate": 0.9543761638733705,
+    "entry_violation_mean_abs_action": 0.2003788948059082,
+    "mean_abs_deviation": 0.18452253937721252,
+    "mean_normalized_deviation": 0.694674551486969,
+    "sign_agreement_rate": 0.9158415841584159,
+    "baseline_policy_corr": 0.5589664578437805
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/MarketBeat_20260318_185335/daily/equity_daily.png

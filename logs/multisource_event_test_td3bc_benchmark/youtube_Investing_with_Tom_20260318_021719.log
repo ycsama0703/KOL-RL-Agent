@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.012748852841903746,
+  "sharpe": 1.8163968350377984,
+  "max_drawdown": 0.015784532330762897,
+  "daily_metrics": {
+    "cumulative_return": 0.023460611946309884,
+    "sharpe": 0.40602648973013367,
+    "max_drawdown": 0.09483613487003607
+  },
+  "betrayal_metrics": {
+    "num_samples": 576,
+    "num_has_signal": 78,
+    "num_no_signal": 498,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 1.0,
+    "entry_violation_mean_abs_action": 0.24831995368003845,
+    "mean_abs_deviation": 0.2316346913576126,
+    "mean_normalized_deviation": 0.944107174873352,
+    "sign_agreement_rate": 1.0,
+    "baseline_policy_corr": 0.7354673743247986
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_event_test/youtube/Investing_with_Tom_20260318_003838/daily/equity_daily.png

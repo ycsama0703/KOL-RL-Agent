@@ -1,0 +1,34 @@
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.2548348756320491,
+  "sharpe": 0.7621173320267859,
+  "max_drawdown": 0.2942407090937647,
+  "daily_metrics": {
+    "cumulative_return": 0.36864758500482675,
+    "sharpe": 0.9305872830571902,
+    "max_drawdown": 0.29424071511738004
+  },
+  "betrayal_metrics": {
+    "num_samples": 36089,
+    "num_has_signal": 1333,
+    "num_no_signal": 34756,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.002476762980222702,
+    "mean_normalized_deviation": 0.7223945260047913,
+    "sign_agreement_rate": 0.6189047261815454,
+    "baseline_policy_corr": 0.7993995547294617
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_xrefresh/x/Stocktwits_20260320_161844/daily/equity_daily.png

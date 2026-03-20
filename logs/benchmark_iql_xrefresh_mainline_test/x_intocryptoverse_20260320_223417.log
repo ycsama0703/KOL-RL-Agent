@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.0491478419690391,
+  "sharpe": -0.5437486893243881,
+  "max_drawdown": 0.13095236091197393,
+  "daily_metrics": {
+    "cumulative_return": -0.31958901274773366,
+    "sharpe": -0.7374465136825757,
+    "max_drawdown": 0.37246555926479513
+  },
+  "betrayal_metrics": {
+    "num_samples": 616,
+    "num_has_signal": 138,
+    "num_no_signal": 478,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.8640167364016736,
+    "entry_violation_mean_abs_action": 0.13955263793468475,
+    "mean_abs_deviation": 0.10974205285310745,
+    "mean_normalized_deviation": 0.23105169832706451,
+    "sign_agreement_rate": 1.0,
+    "baseline_policy_corr": 0.9196792244911194
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/intocryptoverse_20260320_181510/daily/equity_daily.png

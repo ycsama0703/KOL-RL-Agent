@@ -1,0 +1,37 @@
+
+1 Failed download:
+['EXR']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.0498008173356731,
+  "sharpe": -1.746305794787146,
+  "max_drawdown": 0.060702371194275274,
+  "daily_metrics": {
+    "cumulative_return": 0.12777692703139532,
+    "sharpe": 0.9144396677411475,
+    "max_drawdown": 0.17216001277040072
+  },
+  "betrayal_metrics": {
+    "num_samples": 7486,
+    "num_has_signal": 639,
+    "num_no_signal": 6847,
+    "reversal_rate": 0.08450704225352113,
+    "reversal_mean_abs_action": 0.06357710808515549,
+    "reversal_mean_abs_delta": 0.12757062911987305,
+    "entry_violation_rate": 0.9325251935154082,
+    "entry_violation_mean_abs_action": 0.18524761497974396,
+    "mean_abs_deviation": 0.16653403639793396,
+    "mean_normalized_deviation": 1.5396153926849365,
+    "sign_agreement_rate": 0.9154929577464789,
+    "baseline_policy_corr": 0.49489298462867737
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ale_s_World_of_Stocks_20260318_150919/daily/equity_daily.png

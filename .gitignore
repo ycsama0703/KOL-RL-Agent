@@ -12,3 +12,5 @@ __pycache__/
 outputs/
 models/embedding/multisource_22-25_daily_ticker_embedding.pt
 models/embedding/multisource_22-25_daily_ticker_vocab.json
+
+transfer/*.tgz

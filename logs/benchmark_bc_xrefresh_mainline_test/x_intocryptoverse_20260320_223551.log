@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.06841474025828564,
+  "sharpe": -0.6820824282173867,
+  "max_drawdown": 0.15999526874876435,
+  "daily_metrics": {
+    "cumulative_return": -0.32986251343166795,
+    "sharpe": -0.7717266212600111,
+    "max_drawdown": 0.38016594116153474
+  },
+  "betrayal_metrics": {
+    "num_samples": 616,
+    "num_has_signal": 138,
+    "num_no_signal": 478,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 1.0,
+    "entry_violation_mean_abs_action": 0.07750197499990463,
+    "mean_abs_deviation": 0.07985329627990723,
+    "mean_normalized_deviation": 0.2980509102344513,
+    "sign_agreement_rate": 1.0,
+    "baseline_policy_corr": 0.9792904853820801
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/intocryptoverse_20260320_193631/daily/equity_daily.png

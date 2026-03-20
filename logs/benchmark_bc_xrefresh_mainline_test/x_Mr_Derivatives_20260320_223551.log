@@ -1,0 +1,36 @@
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.07738174674554865,
+  "sharpe": 0.6381275007245714,
+  "max_drawdown": 0.12702554953612477,
+  "daily_metrics": {
+    "cumulative_return": 0.20060575656214108,
+    "sharpe": 0.9563993112343062,
+    "max_drawdown": 0.19187428867080536
+  },
+  "betrayal_metrics": {
+    "num_samples": 30410,
+    "num_has_signal": 1865,
+    "num_no_signal": 28545,
+    "reversal_rate": 0.22466487935656837,
+    "reversal_mean_abs_action": 0.019293181598186493,
+    "reversal_mean_abs_delta": 0.06851933896541595,
+    "entry_violation_rate": 0.05454545454545454,
+    "entry_violation_mean_abs_action": 0.06431330740451813,
+    "mean_abs_deviation": 0.007373542990535498,
+    "mean_normalized_deviation": 0.7564300894737244,
+    "sign_agreement_rate": 0.7753351206434317,
+    "baseline_policy_corr": 0.8129892349243164
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/bc_xrefresh_mainline_test/x/Mr_Derivatives_20260320_193631/daily/equity_daily.png

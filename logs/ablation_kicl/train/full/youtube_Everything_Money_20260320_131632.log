@@ -1,0 +1,33 @@
+nohup: ignoring input
+2026-03-20 13:16:34,664 - __main__ - INFO - Starting training run youtube/Everything_Money_20260320_131634
+2026-03-20 13:16:34,664 - __main__ - INFO - Logging to outputs/ablation/kicl_train/full/youtube/youtube/Everything_Money_20260320_131634/logs/training.log
+2026-03-20 13:16:34,664 - __main__ - INFO - Checkpoints will be saved under outputs/ablation/kicl_train/full/youtube/youtube/Everything_Money_20260320_131634/checkpoints
+2026-03-20 13:16:34,664 - __main__ - INFO - Training config: {"actor_align_lambda": 0.04, "actor_lr": 0.0003, "bc_anchor_lambda": 0.03, "bc_batch_size": 256, "bc_epochs": 10, "bc_fit_behavior": true, "bc_lr": 0.0003, "checkpoints_dir": "models/checkpoints", "clamp_delta": 1.8, "critic_lr": 0.0003, "device": "cuda", "entry_penalty_lambda": 0.02, "entry_threshold": 0.0005, "expectile": 0.7, "fidelity_lambda": 0.03, "gamma": 0.99, "hard_intent_constraints": true, "iql_batch_size": 256, "iql_steps": 200000, "kol": "youtube/Everything_Money", "log_interval": 200, "output_dir": "outputs/ablation/kicl_train/full/youtube", "progress_bar": false, "replay_dir": "data/multisource_ready_22-25/08_replay_buffer", "reversal_penalty_lambda": 0.05, "temperature_beta": 3.0, "value_lr": 0.0003, "write_iql_csv": true}
+2026-03-20 13:16:34,683 - __main__ - INFO - CUDA device: NVIDIA GeForce RTX 5080
+2026-03-20 13:16:34,683 - __main__ - INFO - Device: cuda
+2026-03-20 13:16:34,688 - __main__ - INFO - Loaded replay buffer for youtube/Everything_Money with 223 samples, state_dim=1066
+2026-03-20 13:16:34,689 - __main__ - INFO - Dataset stats | baseline_abs_mean=0.040560 behavior_abs_mean=0.071749 baseline_zero_ratio(th=5.0e-04)=0.8251
+BC 1/10: 0it [00:00, ?it/s]                           /home/ycliu0703/miniconda3/envs/kolrl/lib/python3.10/site-packages/numpy/_core/fromnumeric.py:3860: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/home/ycliu0703/miniconda3/envs/kolrl/lib/python3.10/site-packages/numpy/_core/_methods.py:145: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+2026-03-20 13:16:35,725 - __main__ - INFO - BC epoch 1/10 - loss=nan
+BC 2/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,726 - __main__ - INFO - BC epoch 2/10 - loss=nan
+BC 3/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,726 - __main__ - INFO - BC epoch 3/10 - loss=nan
+BC 4/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,727 - __main__ - INFO - BC epoch 4/10 - loss=nan
+BC 5/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,727 - __main__ - INFO - BC epoch 5/10 - loss=nan
+BC 6/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,727 - __main__ - INFO - BC epoch 6/10 - loss=nan
+BC 7/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,728 - __main__ - INFO - BC epoch 7/10 - loss=nan
+BC 8/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,728 - __main__ - INFO - BC epoch 8/10 - loss=nan
+BC 9/10: 0it [00:00, ?it/s]                           2026-03-20 13:16:35,728 - __main__ - INFO - BC epoch 9/10 - loss=nan
+BC 10/10: 0it [00:00, ?it/s]                            2026-03-20 13:16:35,729 - __main__ - INFO - BC epoch 10/10 - loss=nan
+2026-03-20 13:16:35,729 - __main__ - INFO - Behavior cloning finished. Avg loss=0.000000
+2026-03-20 13:16:35,729 - __main__ - INFO - IQL metrics CSV: outputs/ablation/kicl_train/full/youtube/youtube/Everything_Money_20260320_131634/logs/iql_metrics.csv
+Traceback (most recent call last):
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 727, in <module>
+    main()
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 686, in main
+    iql_training(
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/train.py", line 392, in iql_training
+    batch = next(it)
+StopIteration

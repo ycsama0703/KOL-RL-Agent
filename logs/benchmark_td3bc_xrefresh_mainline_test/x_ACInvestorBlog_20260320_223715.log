@@ -1,0 +1,39 @@
+
+1 Failed download:
+['NFLX']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.07462681803983551,
+  "sharpe": 1.3170361789970555,
+  "max_drawdown": 0.037483530256814133,
+  "daily_metrics": {
+    "cumulative_return": -0.03966908691953086,
+    "sharpe": -0.08944212681268161,
+    "max_drawdown": 0.2396137670998806
+  },
+  "betrayal_metrics": {
+    "num_samples": 33332,
+    "num_has_signal": 1926,
+    "num_no_signal": 31406,
+    "reversal_rate": 0.6801661474558671,
+    "reversal_mean_abs_action": 0.21095730364322662,
+    "reversal_mean_abs_delta": 0.2989397644996643,
+    "entry_violation_rate": 0.7976501305483029,
+    "entry_violation_mean_abs_action": 0.23938530683517456,
+    "mean_abs_deviation": 0.19612734019756317,
+    "mean_normalized_deviation": 3.143803834915161,
+    "sign_agreement_rate": 0.31983385254413293,
+    "baseline_policy_corr": 0.15554727613925934
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/ACInvestorBlog_20260320_194041/daily/equity_daily.png

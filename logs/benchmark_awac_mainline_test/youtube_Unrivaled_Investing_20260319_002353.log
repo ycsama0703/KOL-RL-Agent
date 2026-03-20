@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.010486398698403954,
+  "sharpe": -0.182274947278657,
+  "max_drawdown": 0.032713169113576496,
+  "daily_metrics": {
+    "cumulative_return": 0.2425785046563207,
+    "sharpe": 1.3417976019134645,
+    "max_drawdown": 0.14102895144725275
+  },
+  "betrayal_metrics": {
+    "num_samples": 1060,
+    "num_has_signal": 59,
+    "num_no_signal": 1001,
+    "reversal_rate": 0.03389830508474576,
+    "reversal_mean_abs_action": 0.02720637619495392,
+    "reversal_mean_abs_delta": 0.13132703304290771,
+    "entry_violation_rate": 0.3096903096903097,
+    "entry_violation_mean_abs_action": 0.09537536650896072,
+    "mean_abs_deviation": 0.03636908531188965,
+    "mean_normalized_deviation": 0.5769163370132446,
+    "sign_agreement_rate": 0.9661016949152542,
+    "baseline_policy_corr": 0.9466238617897034
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Unrivaled_Investing_20260318_230632/daily/equity_daily.png

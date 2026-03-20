@@ -1,0 +1,167 @@
+2026-03-20 14:06:30,501 | INFO | generate_embeddings | Log file: logs/embed_qwen4b_d1024_xrefresh.log
+2026-03-20 14:06:30,501 | INFO | generate_embeddings | Input: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x
+2026-03-20 14:06:30,501 | INFO | generate_embeddings | Output: data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x
+2026-03-20 14:06:30,501 | INFO | generate_embeddings | Loading model: Qwen/Qwen3-Embedding-4B
+2026-03-20 14:06:30,501 | INFO | generate_embeddings | SentenceTransformer kwargs: {'device': 'cuda', 'trust_remote_code': True, 'model_kwargs': {'torch_dtype': torch.float16}, 'tokenizer_kwargs': {'padding_side': 'left'}}
+2026-03-20 14:06:30,502 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: Qwen/Qwen3-Embedding-4B
+2026-03-20 14:06:30,760 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:30,767 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:31,000 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:31,007 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:31,243 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:31,250 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:31,488 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:31,495 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/README.md "HTTP/1.1 200 OK"
+2026-03-20 14:06:31,718 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:31,727 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/modules.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:31,965 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_bert_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:32,195 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:32,442 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_distilbert_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:32,675 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_camembert_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:32,914 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_albert_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:33,144 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlm-roberta_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:33,376 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/sentence_xlnet_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:33,826 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:33,826 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-20 14:06:34,064 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:34,070 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:36,705 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:36,711 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/config.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:36,954 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:36,960 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:37,205 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-20 14:06:37,432 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-20 14:06:38,882 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-20 14:06:39,117 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-Embedding-4B/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-20 14:06:39,123 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-Embedding-4B/5cf2132abc99cad020ac570b19d031efec650f2b/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-20 14:06:39,354 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-4B "HTTP/1.1 200 OK"
+2026-03-20 14:06:41,503 | INFO | sentence_transformers.SentenceTransformer | 1 prompt is loaded, with the key: query
+2026-03-20 14:06:41,503 | INFO | generate_embeddings | Model loaded. max_seq_length=8192
+2026-03-20 14:06:41,505 | INFO | generate_embeddings | Discovered 42 csv file(s).
+2026-03-20 14:06:41,505 | INFO | generate_embeddings | [1/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/ACInvestorBlog/test.csv
+2026-03-20 14:06:41,518 | INFO | generate_embeddings | [1/42] Encoding rows=2203 batch=2
+2026-03-20 14:07:41,422 | INFO | generate_embeddings | [1/42] Done rows=2203 dim=1024 elapsed=59.9s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/ACInvestorBlog/test.pt
+2026-03-20 14:07:41,423 | INFO | generate_embeddings | [2/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/ACInvestorBlog/train.csv
+2026-03-20 14:07:41,452 | INFO | generate_embeddings | [2/42] Encoding rows=6095 batch=2
+2026-03-20 14:10:24,037 | INFO | generate_embeddings | [2/42] Done rows=6095 dim=1024 elapsed=162.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/ACInvestorBlog/train.pt
+2026-03-20 14:10:24,038 | INFO | generate_embeddings | [3/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/ACInvestorBlog/val.csv
+2026-03-20 14:10:24,050 | INFO | generate_embeddings | [3/42] Encoding rows=2094 batch=2
+2026-03-20 14:11:19,940 | INFO | generate_embeddings | [3/42] Done rows=2094 dim=1024 elapsed=55.9s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/ACInvestorBlog/val.pt
+2026-03-20 14:11:19,940 | INFO | generate_embeddings | [4/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/CryptoCapo_/test.csv
+2026-03-20 14:11:19,943 | INFO | generate_embeddings | [4/42] Encoding rows=60 batch=2
+2026-03-20 14:11:21,543 | INFO | generate_embeddings | [4/42] Done rows=60 dim=1024 elapsed=1.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/CryptoCapo_/test.pt
+2026-03-20 14:11:21,543 | INFO | generate_embeddings | [5/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/CryptoCapo_/train.csv
+2026-03-20 14:11:21,547 | INFO | generate_embeddings | [5/42] Encoding rows=171 batch=2
+2026-03-20 14:11:26,186 | INFO | generate_embeddings | [5/42] Done rows=171 dim=1024 elapsed=4.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/CryptoCapo_/train.pt
+2026-03-20 14:11:26,187 | INFO | generate_embeddings | [6/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/CryptoCapo_/val.csv
+2026-03-20 14:11:26,189 | INFO | generate_embeddings | [6/42] Encoding rows=66 batch=2
+2026-03-20 14:11:27,986 | INFO | generate_embeddings | [6/42] Done rows=66 dim=1024 elapsed=1.8s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/CryptoCapo_/val.pt
+2026-03-20 14:11:27,986 | INFO | generate_embeddings | [7/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/EliteOptions2/test.csv
+2026-03-20 14:11:27,995 | INFO | generate_embeddings | [7/42] Encoding rows=1332 batch=2
+2026-03-20 14:12:03,374 | INFO | generate_embeddings | [7/42] Done rows=1332 dim=1024 elapsed=35.4s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/EliteOptions2/test.pt
+2026-03-20 14:12:03,375 | INFO | generate_embeddings | [8/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/EliteOptions2/train.csv
+2026-03-20 14:12:03,392 | INFO | generate_embeddings | [8/42] Encoding rows=3150 batch=2
+2026-03-20 14:13:27,204 | INFO | generate_embeddings | [8/42] Done rows=3150 dim=1024 elapsed=83.8s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/EliteOptions2/train.pt
+2026-03-20 14:13:27,204 | INFO | generate_embeddings | [9/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/EliteOptions2/val.csv
+2026-03-20 14:13:27,211 | INFO | generate_embeddings | [9/42] Encoding rows=1214 batch=2
+2026-03-20 14:13:59,676 | INFO | generate_embeddings | [9/42] Done rows=1214 dim=1024 elapsed=32.5s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/EliteOptions2/val.pt
+2026-03-20 14:13:59,676 | INFO | generate_embeddings | [10/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/GoldTelegraph_/test.csv
+2026-03-20 14:13:59,680 | INFO | generate_embeddings | [10/42] Encoding rows=381 batch=2
+2026-03-20 14:14:10,021 | INFO | generate_embeddings | [10/42] Done rows=381 dim=1024 elapsed=10.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/GoldTelegraph_/test.pt
+2026-03-20 14:14:10,022 | INFO | generate_embeddings | [11/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/GoldTelegraph_/train.csv
+2026-03-20 14:14:10,029 | INFO | generate_embeddings | [11/42] Encoding rows=1197 batch=2
+2026-03-20 14:14:42,115 | INFO | generate_embeddings | [11/42] Done rows=1197 dim=1024 elapsed=32.1s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/GoldTelegraph_/train.pt
+2026-03-20 14:14:42,116 | INFO | generate_embeddings | [12/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/GoldTelegraph_/val.csv
+2026-03-20 14:14:42,119 | INFO | generate_embeddings | [12/42] Encoding rows=378 batch=2
+2026-03-20 14:14:52,171 | INFO | generate_embeddings | [12/42] Done rows=378 dim=1024 elapsed=10.1s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/GoldTelegraph_/val.pt
+2026-03-20 14:14:52,171 | INFO | generate_embeddings | [13/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Jake__Wujastyk/test.csv
+2026-03-20 14:14:52,177 | INFO | generate_embeddings | [13/42] Encoding rows=915 batch=2
+2026-03-20 14:15:16,451 | INFO | generate_embeddings | [13/42] Done rows=915 dim=1024 elapsed=24.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Jake__Wujastyk/test.pt
+2026-03-20 14:15:16,451 | INFO | generate_embeddings | [14/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Jake__Wujastyk/train.csv
+2026-03-20 14:15:16,464 | INFO | generate_embeddings | [14/42] Encoding rows=2542 batch=2
+2026-03-20 14:16:24,253 | INFO | generate_embeddings | [14/42] Done rows=2542 dim=1024 elapsed=67.8s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Jake__Wujastyk/train.pt
+2026-03-20 14:16:24,253 | INFO | generate_embeddings | [15/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Jake__Wujastyk/val.csv
+2026-03-20 14:16:24,261 | INFO | generate_embeddings | [15/42] Encoding rows=1114 batch=2
+2026-03-20 14:16:54,002 | INFO | generate_embeddings | [15/42] Done rows=1114 dim=1024 elapsed=29.7s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Jake__Wujastyk/val.pt
+2026-03-20 14:16:54,002 | INFO | generate_embeddings | [16/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Mr_Derivatives/test.csv
+2026-03-20 14:16:54,015 | INFO | generate_embeddings | [16/42] Encoding rows=2216 batch=2
+2026-03-20 14:17:53,259 | INFO | generate_embeddings | [16/42] Done rows=2216 dim=1024 elapsed=59.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Mr_Derivatives/test.pt
+2026-03-20 14:17:53,259 | INFO | generate_embeddings | [17/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Mr_Derivatives/train.csv
+2026-03-20 14:17:53,288 | INFO | generate_embeddings | [17/42] Encoding rows=5271 batch=2
+2026-03-20 14:20:13,908 | INFO | generate_embeddings | [17/42] Done rows=5271 dim=1024 elapsed=140.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Mr_Derivatives/train.pt
+2026-03-20 14:20:13,909 | INFO | generate_embeddings | [18/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Mr_Derivatives/val.csv
+2026-03-20 14:20:13,920 | INFO | generate_embeddings | [18/42] Encoding rows=2043 batch=2
+2026-03-20 14:21:08,286 | INFO | generate_embeddings | [18/42] Done rows=2043 dim=1024 elapsed=54.4s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Mr_Derivatives/val.pt
+2026-03-20 14:21:08,287 | INFO | generate_embeddings | [19/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stephanie_Link/test.csv
+2026-03-20 14:21:08,291 | INFO | generate_embeddings | [19/42] Encoding rows=460 batch=2
+2026-03-20 14:21:20,428 | INFO | generate_embeddings | [19/42] Done rows=460 dim=1024 elapsed=12.1s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stephanie_Link/test.pt
+2026-03-20 14:21:20,428 | INFO | generate_embeddings | [20/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stephanie_Link/train.csv
+2026-03-20 14:21:20,437 | INFO | generate_embeddings | [20/42] Encoding rows=1169 batch=2
+2026-03-20 14:21:51,874 | INFO | generate_embeddings | [20/42] Done rows=1169 dim=1024 elapsed=31.4s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stephanie_Link/train.pt
+2026-03-20 14:21:51,875 | INFO | generate_embeddings | [21/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stephanie_Link/val.csv
+2026-03-20 14:21:51,879 | INFO | generate_embeddings | [21/42] Encoding rows=421 batch=2
+2026-03-20 14:22:03,069 | INFO | generate_embeddings | [21/42] Done rows=421 dim=1024 elapsed=11.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stephanie_Link/val.pt
+2026-03-20 14:22:03,070 | INFO | generate_embeddings | [22/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stocktwits/test.csv
+2026-03-20 14:22:03,078 | INFO | generate_embeddings | [22/42] Encoding rows=1512 batch=2
+2026-03-20 14:22:43,032 | INFO | generate_embeddings | [22/42] Done rows=1512 dim=1024 elapsed=40.0s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stocktwits/test.pt
+2026-03-20 14:22:43,033 | INFO | generate_embeddings | [23/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stocktwits/train.csv
+2026-03-20 14:22:43,053 | INFO | generate_embeddings | [23/42] Encoding rows=4089 batch=2
+2026-03-20 14:24:31,982 | INFO | generate_embeddings | [23/42] Done rows=4089 dim=1024 elapsed=108.9s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stocktwits/train.pt
+2026-03-20 14:24:31,983 | INFO | generate_embeddings | [24/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Stocktwits/val.csv
+2026-03-20 14:24:31,990 | INFO | generate_embeddings | [24/42] Encoding rows=900 batch=2
+2026-03-20 14:24:55,967 | INFO | generate_embeddings | [24/42] Done rows=900 dim=1024 elapsed=24.0s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Stocktwits/val.pt
+2026-03-20 14:24:55,967 | INFO | generate_embeddings | [25/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Trader_Dante/test.csv
+2026-03-20 14:24:55,969 | INFO | generate_embeddings | [25/42] Encoding rows=46 batch=2
+2026-03-20 14:24:57,150 | INFO | generate_embeddings | [25/42] Done rows=46 dim=1024 elapsed=1.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Trader_Dante/test.pt
+2026-03-20 14:24:57,151 | INFO | generate_embeddings | [26/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Trader_Dante/train.csv
+2026-03-20 14:24:57,153 | INFO | generate_embeddings | [26/42] Encoding rows=120 batch=2
+2026-03-20 14:25:00,287 | INFO | generate_embeddings | [26/42] Done rows=120 dim=1024 elapsed=3.1s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Trader_Dante/train.pt
+2026-03-20 14:25:00,287 | INFO | generate_embeddings | [27/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/Trader_Dante/val.csv
+2026-03-20 14:25:00,289 | INFO | generate_embeddings | [27/42] Encoding rows=33 batch=2
+2026-03-20 14:25:01,236 | INFO | generate_embeddings | [27/42] Done rows=33 dim=1024 elapsed=0.9s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/Trader_Dante/val.pt
+2026-03-20 14:25:01,236 | INFO | generate_embeddings | [28/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/bespokeinvest/test.csv
+2026-03-20 14:25:01,244 | INFO | generate_embeddings | [28/42] Encoding rows=1555 batch=2
+2026-03-20 14:25:42,596 | INFO | generate_embeddings | [28/42] Done rows=1555 dim=1024 elapsed=41.4s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/bespokeinvest/test.pt
+2026-03-20 14:25:42,596 | INFO | generate_embeddings | [29/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/bespokeinvest/train.csv
+2026-03-20 14:25:42,613 | INFO | generate_embeddings | [29/42] Encoding rows=3451 batch=2
+2026-03-20 14:27:13,677 | INFO | generate_embeddings | [29/42] Done rows=3451 dim=1024 elapsed=91.1s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/bespokeinvest/train.pt
+2026-03-20 14:27:13,677 | INFO | generate_embeddings | [30/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/bespokeinvest/val.csv
+2026-03-20 14:27:13,686 | INFO | generate_embeddings | [30/42] Encoding rows=1515 batch=2
+2026-03-20 14:27:53,950 | INFO | generate_embeddings | [30/42] Done rows=1515 dim=1024 elapsed=40.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/bespokeinvest/val.pt
+2026-03-20 14:27:53,951 | INFO | generate_embeddings | [31/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/davidfaber/test.csv
+2026-03-20 14:27:53,953 | INFO | generate_embeddings | [31/42] Encoding rows=9 batch=2
+2026-03-20 14:27:54,240 | INFO | generate_embeddings | [31/42] Done rows=9 dim=1024 elapsed=0.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/davidfaber/test.pt
+2026-03-20 14:27:54,241 | INFO | generate_embeddings | [32/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/davidfaber/train.csv
+2026-03-20 14:27:54,243 | INFO | generate_embeddings | [32/42] Encoding rows=33 batch=2
+2026-03-20 14:27:55,149 | INFO | generate_embeddings | [32/42] Done rows=33 dim=1024 elapsed=0.9s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/davidfaber/train.pt
+2026-03-20 14:27:55,149 | INFO | generate_embeddings | [33/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/davidfaber/val.csv
+2026-03-20 14:27:55,151 | INFO | generate_embeddings | [33/42] Encoding rows=8 batch=2
+2026-03-20 14:27:55,389 | INFO | generate_embeddings | [33/42] Done rows=8 dim=1024 elapsed=0.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/davidfaber/val.pt
+2026-03-20 14:27:55,389 | INFO | generate_embeddings | [34/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/goldseek/test.csv
+2026-03-20 14:27:55,395 | INFO | generate_embeddings | [34/42] Encoding rows=611 batch=2
+2026-03-20 14:28:12,002 | INFO | generate_embeddings | [34/42] Done rows=611 dim=1024 elapsed=16.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/goldseek/test.pt
+2026-03-20 14:28:12,002 | INFO | generate_embeddings | [35/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/goldseek/train.csv
+2026-03-20 14:28:12,013 | INFO | generate_embeddings | [35/42] Encoding rows=1595 batch=2
+2026-03-20 14:28:54,585 | INFO | generate_embeddings | [35/42] Done rows=1595 dim=1024 elapsed=42.6s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/goldseek/train.pt
+2026-03-20 14:28:54,585 | INFO | generate_embeddings | [36/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/goldseek/val.csv
+2026-03-20 14:28:54,588 | INFO | generate_embeddings | [36/42] Encoding rows=459 batch=2
+2026-03-20 14:29:06,891 | INFO | generate_embeddings | [36/42] Done rows=459 dim=1024 elapsed=12.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/goldseek/val.pt
+2026-03-20 14:29:06,892 | INFO | generate_embeddings | [37/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/intocryptoverse/test.csv
+2026-03-20 14:29:06,895 | INFO | generate_embeddings | [37/42] Encoding rows=167 batch=2
+2026-03-20 14:29:11,310 | INFO | generate_embeddings | [37/42] Done rows=167 dim=1024 elapsed=4.4s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/intocryptoverse/test.pt
+2026-03-20 14:29:11,310 | INFO | generate_embeddings | [38/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/intocryptoverse/train.csv
+2026-03-20 14:29:11,316 | INFO | generate_embeddings | [38/42] Encoding rows=564 batch=2
+2026-03-20 14:29:26,636 | INFO | generate_embeddings | [38/42] Done rows=564 dim=1024 elapsed=15.3s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/intocryptoverse/train.pt
+2026-03-20 14:29:26,637 | INFO | generate_embeddings | [39/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/intocryptoverse/val.csv
+2026-03-20 14:29:26,641 | INFO | generate_embeddings | [39/42] Encoding rows=230 batch=2
+2026-03-20 14:29:32,855 | INFO | generate_embeddings | [39/42] Done rows=230 dim=1024 elapsed=6.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/intocryptoverse/val.pt
+2026-03-20 14:29:32,855 | INFO | generate_embeddings | [40/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/traderstewie/test.csv
+2026-03-20 14:29:32,858 | INFO | generate_embeddings | [40/42] Encoding rows=198 batch=2
+2026-03-20 14:29:38,095 | INFO | generate_embeddings | [40/42] Done rows=198 dim=1024 elapsed=5.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/traderstewie/test.pt
+2026-03-20 14:29:38,095 | INFO | generate_embeddings | [41/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/traderstewie/train.csv
+2026-03-20 14:29:38,101 | INFO | generate_embeddings | [41/42] Encoding rows=802 batch=2
+2026-03-20 14:29:59,261 | INFO | generate_embeddings | [41/42] Done rows=802 dim=1024 elapsed=21.2s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/traderstewie/train.pt
+2026-03-20 14:29:59,262 | INFO | generate_embeddings | [42/42] Start file: data/multisource_ready_22-25_xrefresh_20260320_144701/04_clean/x/traderstewie/val.csv
+2026-03-20 14:29:59,265 | INFO | generate_embeddings | [42/42] Encoding rows=174 batch=2
+2026-03-20 14:30:03,957 | INFO | generate_embeddings | [42/42] Done rows=174 dim=1024 elapsed=4.7s -> data/multisource_ready_22-25_xrefresh_20260320_144701/05_embeddings/x/traderstewie/val.pt
+2026-03-20 14:30:03,957 | INFO | generate_embeddings | Finished. success=42 skipped_or_failed=0 elapsed=1402.5s

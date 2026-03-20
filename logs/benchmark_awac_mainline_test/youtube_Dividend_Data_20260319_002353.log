@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.23250670089507985,
+  "sharpe": 6.433981570224951,
+  "max_drawdown": 0.021823836461883364,
+  "daily_metrics": {
+    "cumulative_return": 0.40040719381756706,
+    "sharpe": 2.908592416016569,
+    "max_drawdown": 0.053595827070888856
+  },
+  "betrayal_metrics": {
+    "num_samples": 4948,
+    "num_has_signal": 393,
+    "num_no_signal": 4555,
+    "reversal_rate": 0.22391857506361323,
+    "reversal_mean_abs_action": 0.024235693737864494,
+    "reversal_mean_abs_delta": 0.0752749964594841,
+    "entry_violation_rate": 0.09110867178924259,
+    "entry_violation_mean_abs_action": 0.08084787428379059,
+    "mean_abs_deviation": 0.011988296173512936,
+    "mean_normalized_deviation": 0.7529783248901367,
+    "sign_agreement_rate": 0.7760814249363868,
+    "baseline_policy_corr": 0.7570697069168091
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Dividend_Data_20260318_214910/daily/equity_daily.png

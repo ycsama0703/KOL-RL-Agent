@@ -1,0 +1,40 @@
+
+2 Failed downloads:
+['CVNA']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+['FXI']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.09693646424000524,
+  "sharpe": 1.730005277997816,
+  "max_drawdown": 0.03083876608263251,
+  "daily_metrics": {
+    "cumulative_return": 0.33703144169129606,
+    "sharpe": 0.9140526608332261,
+    "max_drawdown": 0.24961464200533656
+  },
+  "betrayal_metrics": {
+    "num_samples": 11121,
+    "num_has_signal": 780,
+    "num_no_signal": 10341,
+    "reversal_rate": 0.2128205128205128,
+    "reversal_mean_abs_action": 0.03745972737669945,
+    "reversal_mean_abs_delta": 0.08842097967863083,
+    "entry_violation_rate": 0.7055410501885697,
+    "entry_violation_mean_abs_action": 0.07814421504735947,
+    "mean_abs_deviation": 0.05752180516719818,
+    "mean_normalized_deviation": 0.7776077389717102,
+    "sign_agreement_rate": 0.7871794871794872,
+    "baseline_policy_corr": 0.7831695675849915
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Jake__Wujastyk_20260320_201755/daily/equity_daily.png

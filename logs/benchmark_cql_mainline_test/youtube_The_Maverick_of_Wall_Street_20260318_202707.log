@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.03290509361555416,
+  "sharpe": 2.8093311225100077,
+  "max_drawdown": 0.012966716703866598,
+  "daily_metrics": {
+    "cumulative_return": 0.0974308253491103,
+    "sharpe": 0.5510158503331251,
+    "max_drawdown": 0.17835629819091564
+  },
+  "betrayal_metrics": {
+    "num_samples": 12446,
+    "num_has_signal": 1104,
+    "num_no_signal": 11342,
+    "reversal_rate": 0.25905797101449274,
+    "reversal_mean_abs_action": 0.0512729175388813,
+    "reversal_mean_abs_delta": 0.09286928176879883,
+    "entry_violation_rate": 0.882119555633927,
+    "entry_violation_mean_abs_action": 0.20391716063022614,
+    "mean_abs_deviation": 0.17269624769687653,
+    "mean_normalized_deviation": 2.2276229858398438,
+    "sign_agreement_rate": 0.7409420289855072,
+    "baseline_policy_corr": 0.3438308537006378
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/The_Maverick_of_Wall_Street_20260318_185352/daily/equity_daily.png

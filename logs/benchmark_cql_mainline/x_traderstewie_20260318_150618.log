@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/ycliu0703/workspace/projects/KOL-RL-Agent/benchmarks/01_generic_rl/train_cql.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

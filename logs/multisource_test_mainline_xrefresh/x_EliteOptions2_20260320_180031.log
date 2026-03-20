@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.25560343854872825,
+  "sharpe": 0.8994760364233079,
+  "max_drawdown": 0.18432404516780346,
+  "daily_metrics": {
+    "cumulative_return": 0.2556034449033684,
+    "sharpe": 0.8994760485506361,
+    "max_drawdown": 0.18432404641381117
+  },
+  "betrayal_metrics": {
+    "num_samples": 6566,
+    "num_has_signal": 1084,
+    "num_no_signal": 5482,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.01301654800772667,
+    "mean_normalized_deviation": 0.5280479192733765,
+    "sign_agreement_rate": 0.9059040590405905,
+    "baseline_policy_corr": 0.6378003358840942
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_xrefresh/x/EliteOptions2_20260320_161843/daily/equity_daily.png

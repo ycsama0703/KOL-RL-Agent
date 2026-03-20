@@ -1,0 +1,30 @@
+{
+  "cumulative_return": -0.10757070596465035,
+  "sharpe": -1.7831308324494428,
+  "max_drawdown": 0.07226226836371673,
+  "daily_metrics": {
+    "cumulative_return": 0.03496066288478494,
+    "sharpe": 0.2938692524013056,
+    "max_drawdown": 0.20678888998035846
+  },
+  "betrayal_metrics": {
+    "num_samples": 11197,
+    "num_has_signal": 421,
+    "num_no_signal": 10776,
+    "reversal_rate": 0.26128266033254155,
+    "reversal_mean_abs_action": 0.04004145786166191,
+    "reversal_mean_abs_delta": 0.14310160279273987,
+    "entry_violation_rate": 0.09446919079435784,
+    "entry_violation_mean_abs_action": 0.09674248844385147,
+    "mean_abs_deviation": 0.014366730116307735,
+    "mean_normalized_deviation": 0.8542701005935669,
+    "sign_agreement_rate": 0.7387173396674585,
+    "baseline_policy_corr": 0.8533225059509277
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/iql_xrefresh_mainline_test/x/Stephanie_Link_20260320_181510/daily/equity_daily.png

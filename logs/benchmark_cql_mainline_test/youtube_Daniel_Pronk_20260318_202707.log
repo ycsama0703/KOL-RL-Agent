@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.05241307036575327,
+  "sharpe": 2.4531602748331616,
+  "max_drawdown": 0.027851199484082625,
+  "daily_metrics": {
+    "cumulative_return": -0.0962168685738275,
+    "sharpe": -0.7318474045589057,
+    "max_drawdown": 0.1803594149502818
+  },
+  "betrayal_metrics": {
+    "num_samples": 1076,
+    "num_has_signal": 211,
+    "num_no_signal": 865,
+    "reversal_rate": 0.3981042654028436,
+    "reversal_mean_abs_action": 0.6035664677619934,
+    "reversal_mean_abs_delta": 0.7475358247756958,
+    "entry_violation_rate": 0.9676300578034682,
+    "entry_violation_mean_abs_action": 0.30224108695983887,
+    "mean_abs_deviation": 0.30692997574806213,
+    "mean_normalized_deviation": 2.918018102645874,
+    "sign_agreement_rate": 0.6018957345971564,
+    "baseline_policy_corr": 0.13033950328826904
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Daniel_Pronk_20260318_150919/daily/equity_daily.png

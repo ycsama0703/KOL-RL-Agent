@@ -1,0 +1,39 @@
+
+206 Failed downloads:
+['HSDT', 'NEXT', 'MVIS', 'RUM', 'BTC', 'LASE', 'ADIL', 'BULL', 'TGL', 'APVO', 'BABA', 'TLRY', 'POET', 'ATON', 'NVAX', 'HTZ', 'ECDA', 'CAPR', 'BLNE', 'ETHZ', 'TIVC', 'GRRR', 'UEC', 'ABTC', 'INTC', 'MARA', 'HEPA', 'ICCT', 'WIT', 'META', 'SAVA', 'TSLA', 'ASPI', 'USAR', 'AMC', 'NITO', 'QTWO', 'VRME', 'SDGR', 'COIN', 'SQNS', 'RIME', 'GEO', 'INTS', 'LGHL', 'PMCB', 'MRNA', 'OCEA', 'PSQH', 'MRVL', 'NOK', 'AIRE', 'KALA', 'OSTX', 'NEON', 'CPOP', 'HOOD', 'BYND', 'REVB', 'PTIX', 'WIMI', 'LIDR', 'BTBT', 'QUBT', 'NDX', 'CMMB', 'OCG', 'GOOG', 'ZENA', 'OPEN', 'BBAI', 'SERV', 'LAC', 'TMQ', 'AMOD', 'IGC', 'XPEV', 'GNS', 'RKT', 'GLD', 'XYZ', 'OSCR', 'AMZN', 'ANNX', 'NIO', 'WRD', 'ALLR', 'DFSC', 'RPTX', 'NBY', 'QMMM', 'COSM', 'SPY', 'MNTS', 'OMER', 'XLF', 'MU', 'SRPT', 'CYN', 'SES', 'SNY', 'MBOT', 'BB', 'QQQ', 'NEGG', 'VXRT', 'HOTH', 'MYSZ', 'ALZN', 'IWM', 'SPCB', 'NFLX', 'WINT', 'FOXO', 'ETHA', 'FRGT', 'PTPI', 'UPXI', 'RR', 'DJT', 'GOVX', 'DMAC', 'LXEH', 'GM', 'AVGO', 'LGMK', 'MSFT', 'UROY', 'BSLK', 'IMPP', 'SMCI', 'OPTT', 'SPCE', 'WHLR', 'WBUY', 'WULF', 'GVH', 'CCJ', 'VVOS', 'PAVS', 'BTOG', 'STKH', 'EKSO', 'GEMI', 'PRZO', 'CLRB', 'ASTS', 'VSEE', 'IXHL', 'KITT', 'UGRO', 'XPON', 'PLRZ', 'DFLI', 'CDLX', 'IFRX', 'LTC', 'INSP', 'VKTX', 'IPW', 'HTOO', 'NVDA', 'TMC', 'ETH', 'HIMS', 'NKTR', 'BEAT', 'ALTS', 'CETX', 'NUWE', 'NBIS', 'ASST', 'ASAN', 'CISS', 'ATXG', 'WAFU', 'VRPX', 'MSTR', 'AEMD', 'PHIO', 'SEMR', 'NXTT', 'NIXX', 'TROX', 'USEG', 'LIXT', 'JD', 'AMIX', 'CGC', 'OMEX', 'VTAK', 'ADBE', 'AMD', 'PLRX', 'INDO', 'TVGN', 'PATH', 'SEGG', 'RIOT', 'BMR', 'UNH', 'JPM', 'HOLO', 'DBGI', 'LITM', 'SGML']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.29606815819532206,
+  "sharpe": -1.172467115610873,
+  "max_drawdown": 0.34536486703406644,
+  "daily_metrics": {
+    "cumulative_return": 0.04306993304243312,
+    "sharpe": 0.3526251960179476,
+    "max_drawdown": 0.19686534641626655
+  },
+  "betrayal_metrics": {
+    "num_samples": 33332,
+    "num_has_signal": 1926,
+    "num_no_signal": 31406,
+    "reversal_rate": 0.3276220145379024,
+    "reversal_mean_abs_action": 0.022784754633903503,
+    "reversal_mean_abs_delta": 0.08903041481971741,
+    "entry_violation_rate": 0.041807297968541046,
+    "entry_violation_mean_abs_action": 0.06694480776786804,
+    "mean_abs_deviation": 0.006807574536651373,
+    "mean_normalized_deviation": 0.8398465514183044,
+    "sign_agreement_rate": 0.6723779854620976,
+    "baseline_policy_corr": 0.7750140428543091
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/ACInvestorBlog_20260320_213518/daily/equity_daily.png

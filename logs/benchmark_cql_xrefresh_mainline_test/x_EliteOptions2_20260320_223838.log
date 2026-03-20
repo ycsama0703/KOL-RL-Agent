@@ -1,0 +1,35 @@
+
+1 Failed download:
+['CRWV']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.16235521934313213,
+  "sharpe": 0.8475930269331404,
+  "max_drawdown": 0.10568814377424833,
+  "daily_metrics": {
+    "cumulative_return": 0.280559682979012,
+    "sharpe": 1.0143862280106766,
+    "max_drawdown": 0.1963381959605486
+  },
+  "betrayal_metrics": {
+    "num_samples": 6566,
+    "num_has_signal": 1084,
+    "num_no_signal": 5482,
+    "reversal_rate": 0.08579335793357934,
+    "reversal_mean_abs_action": 0.02199401892721653,
+    "reversal_mean_abs_delta": 0.11710140109062195,
+    "entry_violation_rate": 0.13589930682232762,
+    "entry_violation_mean_abs_action": 0.10082532465457916,
+    "mean_abs_deviation": 0.02531859278678894,
+    "mean_normalized_deviation": 0.5408143401145935,
+    "sign_agreement_rate": 0.9142066420664207,
+    "baseline_policy_corr": 0.6474096179008484
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/EliteOptions2_20260320_201755/daily/equity_daily.png

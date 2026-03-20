@@ -1,0 +1,35 @@
+
+1 Failed download:
+['QQQ']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.056891046473178,
+  "sharpe": 0.7193781776615298,
+  "max_drawdown": 0.15763510988283383,
+  "daily_metrics": {
+    "cumulative_return": -0.2590842233172662,
+    "sharpe": -0.6386643419067014,
+    "max_drawdown": 0.3975764210164765
+  },
+  "betrayal_metrics": {
+    "num_samples": 616,
+    "num_has_signal": 138,
+    "num_no_signal": 478,
+    "reversal_rate": 0.028985507246376812,
+    "reversal_mean_abs_action": 0.05756697803735733,
+    "reversal_mean_abs_delta": 0.2952960431575775,
+    "entry_violation_rate": 0.8619246861924686,
+    "entry_violation_mean_abs_action": 0.18867693841457367,
+    "mean_abs_deviation": 0.15585437417030334,
+    "mean_normalized_deviation": 0.4307059347629547,
+    "sign_agreement_rate": 0.9710144927536232,
+    "baseline_policy_corr": 0.3541214168071747
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/td3bc_xrefresh_mainline_test/x/intocryptoverse_20260320_194041/daily/equity_daily.png

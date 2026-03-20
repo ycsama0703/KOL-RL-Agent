@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.04969159758243946,
+  "sharpe": 0.43433007964157394,
+  "max_drawdown": 0.3739943029942246,
+  "daily_metrics": {
+    "cumulative_return": 0.04992477351458624,
+    "sharpe": 0.375586077813377,
+    "max_drawdown": 0.3742145730131151
+  },
+  "betrayal_metrics": {
+    "num_samples": 3255,
+    "num_has_signal": 214,
+    "num_no_signal": 3041,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.0,
+    "entry_violation_mean_abs_action": 0.0,
+    "mean_abs_deviation": 0.005410917568951845,
+    "mean_normalized_deviation": 0.3097479045391083,
+    "sign_agreement_rate": 0.985981308411215,
+    "baseline_policy_corr": 0.9484025239944458
+  }
+}
+Saved metrics to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/event/metrics_test.json
+Saved positions log to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/event/positions_test.csv
+Saved equity curve figure to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/event/equity_test.png
+Saved daily metrics to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/daily/metrics_daily.json
+Saved daily equity CSV to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/daily/equity_daily.csv
+Saved daily equity plot to outputs/multisource_test_mainline_xrefresh/x/GoldTelegraph__20260320_161844/daily/equity_daily.png

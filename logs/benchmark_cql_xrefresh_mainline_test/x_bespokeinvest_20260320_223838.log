@@ -1,0 +1,35 @@
+
+139 Failed downloads:
+['NDSN', 'IBM', 'STT', 'JEF', 'BNS', 'GENI', '^NDX', 'AZN', 'WAL', 'EWG', 'TFC', 'BRK-A', 'XLC', 'WHR', 'CRCL', 'THS', 'MSFT', 'TTD', 'ANET', 'HAIN', 'OEF', 'IRDM', 'PLAY', 'KR', 'ITW', 'XYZ', 'UNP', 'SWBI', 'CG', 'VRT', 'CDNS', 'EXP', 'BK', 'SNAP', 'LULU', 'PALL', 'AI', 'WDAY', 'TTEK', 'DOCU', 'TTWO', 'SPY', 'JBL', 'IVV', 'DBA', 'ARGT', 'EXPE', 'AMKR', 'LEN', 'XRT', 'OXM', 'CCS', 'ACN', 'CMI', 'DCI', 'CSX', 'SNY', 'FE', 'VST', 'CMCSA', 'VG', 'LZB', 'BLD', 'NOW', 'SNA', 'PAYX', 'BOAT', 'WOOF', 'INTC', 'MPC', 'KFY', 'USB', 'BRBR', 'FERG', 'AXON', 'CXW', 'MCD', 'PG', 'FITB', 'GIS', 'MMM', 'PEP', 'XLE', 'INSM', 'LW', 'ABT', 'ATO', 'SMH', 'CSCO', 'DVAX', 'PLNT', 'MRK', 'ARCO', 'ORCL', 'QBTS', 'OLLI', 'FAST', 'AIR', 'PAYC', 'FIS', 'W', 'NVDA', 'UNF', 'CIEN', 'BAH', 'LYV', 'ADM', 'JETS', 'STZ', 'KO', 'PIPR', 'ALNY', 'AMAT', 'PHM', 'CWD', 'ASML', 'TSN', 'SCSC', 'STX', 'CBRL', 'DKS', 'IVW', 'CRWV', 'SAM', 'BMY', 'DEO', 'SFTBY', 'IWM', 'GOOG', 'EWW', 'NATH', 'LLY', 'AIG', 'XLB', 'SE', 'MQ', 'NKE', 'RIVN', 'IWR']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.010994646631807825,
+  "sharpe": 0.21619441990972357,
+  "max_drawdown": 0.03973924355006785,
+  "daily_metrics": {
+    "cumulative_return": -0.19711264210687218,
+    "sharpe": -1.596777548855088,
+    "max_drawdown": 0.24591337271702665
+  },
+  "betrayal_metrics": {
+    "num_samples": 61244,
+    "num_has_signal": 1012,
+    "num_no_signal": 60232,
+    "reversal_rate": 0.9258893280632411,
+    "reversal_mean_abs_action": 0.1482621431350708,
+    "reversal_mean_abs_delta": 0.2683113217353821,
+    "entry_violation_rate": 0.9980575109576305,
+    "entry_violation_mean_abs_action": 0.17119291424751282,
+    "mean_abs_deviation": 0.17236700654029846,
+    "mean_normalized_deviation": 2.934695243835449,
+    "sign_agreement_rate": 0.0741106719367589,
+    "baseline_policy_corr": 0.7498987913131714
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/bespokeinvest_20260320_201755/daily/equity_daily.png

@@ -1,0 +1,43 @@
+
+109 Failed downloads:
+['BRZE', 'KALV', 'PPI', 'ASTS', 'PSKY', 'CCL', 'NOW', 'NTLA', 'MARA', 'TROX', 'CRNX', 'LW', 'ABAT', 'BIRK', 'OSCR', 'TSM', 'SEDG', 'GRAB', 'TSLA', 'ARE', 'ONDS', 'LKNCY', 'ETOR', 'SPIR', 'FN', 'ZSPC', 'LTRX', 'IDXX', 'APVO', 'REGN', 'MU', 'FNMA', 'WVE', 'WDC', 'WHLR', 'THAR', 'MRNA', 'TURB', 'AMZN', 'CYBR', 'TDOC', 'RBRK', 'SEMR', 'ASST', 'CAPR', 'QBTS', 'NLST', 'ATGL', 'SBET', 'MRVL', 'POET', 'ARWR', 'TEM', 'CRDO', 'CVKD', 'KULR', 'PSTG', 'SMMT', 'BSX', 'SGML', 'TGL', 'RBLX', 'PSTV', 'DIA', 'TTWO', 'CME', 'TTC', 'AMCI', 'BYND', 'RDDT', 'SNOW', 'LULU', 'COHR', 'KLAC', 'AVGO', 'CRMD', 'ARM', 'HTZ', 'STX', 'DRI', 'ZCAR', 'NEON', 'ASTI', 'MDGL', 'IBO', 'SLGL', 'FDX', 'BRK-B', 'TWG', 'CORT', 'CRWD', 'ESTC', 'LUNR', 'SYM', 'CELC', 'FRMI', 'UBER', 'SOXX', 'NFLX', 'VRT', 'VERI', 'HEI', 'ADUR', 'KSS', 'CERO', 'VEON', 'TLRY']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+['AEO', 'FCEL']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+
+1 Failed download:
+['MSTR']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.09382958345681902,
+  "sharpe": -0.805657322624639,
+  "max_drawdown": 0.07930696312328372,
+  "daily_metrics": {
+    "cumulative_return": 0.8086944133660265,
+    "sharpe": 2.6491767631440286,
+    "max_drawdown": 0.15952608414000655
+  },
+  "betrayal_metrics": {
+    "num_samples": 36089,
+    "num_has_signal": 1333,
+    "num_no_signal": 34756,
+    "reversal_rate": 0.24306076519129782,
+    "reversal_mean_abs_action": 0.09800531715154648,
+    "reversal_mean_abs_delta": 0.19017061591148376,
+    "entry_violation_rate": 0.9613304177695937,
+    "entry_violation_mean_abs_action": 0.08343591541051865,
+    "mean_abs_deviation": 0.08047128468751907,
+    "mean_normalized_deviation": 0.9809519648551941,
+    "sign_agreement_rate": 0.7569392348087022,
+    "baseline_policy_corr": 0.5322445631027222
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_xrefresh_mainline_test/x/Stocktwits_20260320_201755/daily/equity_daily.png

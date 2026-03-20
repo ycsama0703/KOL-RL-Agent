@@ -1,0 +1,35 @@
+
+1 Failed download:
+['RL']: TypeError("'NoneType' object is not subscriptable")
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.05872713338616231,
+  "sharpe": 4.358221180243769,
+  "max_drawdown": 0.032798679782723265,
+  "daily_metrics": {
+    "cumulative_return": 0.1519331185894035,
+    "sharpe": 3.12531466040702,
+    "max_drawdown": 0.06735531464691862
+  },
+  "betrayal_metrics": {
+    "num_samples": 1183,
+    "num_has_signal": 142,
+    "num_no_signal": 1041,
+    "reversal_rate": 0.1056338028169014,
+    "reversal_mean_abs_action": 0.0953296571969986,
+    "reversal_mean_abs_delta": 0.17954173684120178,
+    "entry_violation_rate": 0.9154658981748319,
+    "entry_violation_mean_abs_action": 0.16257785260677338,
+    "mean_abs_deviation": 0.14864413440227509,
+    "mean_normalized_deviation": 1.6176249980926514,
+    "sign_agreement_rate": 0.8943661971830986,
+    "baseline_policy_corr": 0.4555862247943878
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Ticker_Take_20260318_185356/daily/equity_daily.png

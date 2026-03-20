@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.026872452817710224,
+  "sharpe": 1.3610717226709375,
+  "max_drawdown": 0.03894323759772619,
+  "daily_metrics": {
+    "cumulative_return": 0.07684923598027416,
+    "sharpe": 0.8130760035735641,
+    "max_drawdown": 0.07081788628511664
+  },
+  "betrayal_metrics": {
+    "num_samples": 2433,
+    "num_has_signal": 306,
+    "num_no_signal": 2127,
+    "reversal_rate": 0.6143790849673203,
+    "reversal_mean_abs_action": 0.08986534178256989,
+    "reversal_mean_abs_delta": 0.15999025106430054,
+    "entry_violation_rate": 0.8815232722143864,
+    "entry_violation_mean_abs_action": 0.2070995420217514,
+    "mean_abs_deviation": 0.17696821689605713,
+    "mean_normalized_deviation": 2.129885673522949,
+    "sign_agreement_rate": 0.38562091503267976,
+    "baseline_policy_corr": 0.4447556138038635
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/cql_mainline_test/youtube/Adam_Khoo_20260318_150920/daily/equity_daily.png

@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.19357642411594833,
+  "sharpe": 3.124531051871017,
+  "max_drawdown": 0.2201600190124895,
+  "daily_metrics": {
+    "cumulative_return": 0.4906569086999999,
+    "sharpe": 1.1534640293701945,
+    "max_drawdown": 0.3903476622084705
+  },
+  "betrayal_metrics": {
+    "num_samples": 137,
+    "num_has_signal": 24,
+    "num_no_signal": 113,
+    "reversal_rate": 0.0,
+    "reversal_mean_abs_action": 0.0,
+    "reversal_mean_abs_delta": 0.0,
+    "entry_violation_rate": 0.9292035398230089,
+    "entry_violation_mean_abs_action": 0.1422567069530487,
+    "mean_abs_deviation": 0.11916396021842957,
+    "mean_normalized_deviation": 0.2873936891555786,
+    "sign_agreement_rate": 1.0,
+    "baseline_policy_corr": 0.9386252760887146
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Humbled_Trader_20260318_214915/daily/equity_daily.png

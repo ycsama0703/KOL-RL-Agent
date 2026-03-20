@@ -1,0 +1,30 @@
+{
+  "cumulative_return": 0.08588179906690696,
+  "sharpe": 3.2146584316005913,
+  "max_drawdown": 0.02095637870082104,
+  "daily_metrics": {
+    "cumulative_return": 0.18705466767594436,
+    "sharpe": 1.073666768480248,
+    "max_drawdown": 0.1474393784105519
+  },
+  "betrayal_metrics": {
+    "num_samples": 1496,
+    "num_has_signal": 103,
+    "num_no_signal": 1393,
+    "reversal_rate": 0.1650485436893204,
+    "reversal_mean_abs_action": 0.031393829733133316,
+    "reversal_mean_abs_delta": 0.14504821598529816,
+    "entry_violation_rate": 0.28858578607322327,
+    "entry_violation_mean_abs_action": 0.09694138169288635,
+    "mean_abs_deviation": 0.034845419228076935,
+    "mean_normalized_deviation": 0.6526387333869934,
+    "sign_agreement_rate": 0.8349514563106796,
+    "baseline_policy_corr": 0.7792357802391052
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_mainline_test/youtube/Sven_Carlin_Ph.D._20260318_230624/daily/equity_daily.png

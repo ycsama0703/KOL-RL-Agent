@@ -1,0 +1,35 @@
+
+59 Failed downloads:
+['OKLO', 'BBIO', 'NBIS', 'SVRA', 'CVX', 'MDT', 'SNDX', 'GRAL', 'SMR', 'MRK', 'PLTR', 'ENVX', 'SEPN', 'HOOD', 'FTNT', 'IREN', 'HCA', 'VRDN', 'CRWV', 'CRWD', 'UEC', 'SOXL', 'QUBT', 'WGS', 'DOCS', 'WBD', 'COGT', 'NTRA', 'IONQ', 'CIEN', 'F', 'TXG', 'ADPT', 'UPS', 'QQQ', 'LIVN', 'MP', 'LTBR', 'MBX', 'RBLX', 'INSM', 'ARQT', 'COR', 'RVMD', 'RKLB', 'QBTS', 'NVDA', 'TSLA', 'ALAB', 'GBTC', 'TZA', 'BWXT', 'AEVA', 'ARWR', 'ANAB', 'RIGL', 'CLS', 'KOD', 'SMH']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": -0.004871929259244068,
+  "sharpe": 0.03909425660861,
+  "max_drawdown": 0.061314743508159186,
+  "daily_metrics": {
+    "cumulative_return": -0.14982284462534246,
+    "sharpe": -0.45644104972728405,
+    "max_drawdown": 0.30937568210973204
+  },
+  "betrayal_metrics": {
+    "num_samples": 4545,
+    "num_has_signal": 171,
+    "num_no_signal": 4374,
+    "reversal_rate": 0.2573099415204678,
+    "reversal_mean_abs_action": 0.03118508867919445,
+    "reversal_mean_abs_delta": 0.0691421627998352,
+    "entry_violation_rate": 0.1572930955647005,
+    "entry_violation_mean_abs_action": 0.09954241663217545,
+    "mean_abs_deviation": 0.020880186930298805,
+    "mean_normalized_deviation": 0.9729906916618347,
+    "sign_agreement_rate": 0.7426900584795322,
+    "baseline_policy_corr": 0.9215338230133057
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/traderstewie_20260320_213518/daily/equity_daily.png

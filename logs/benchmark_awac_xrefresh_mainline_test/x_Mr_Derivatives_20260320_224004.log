@@ -1,0 +1,39 @@
+
+186 Failed downloads:
+['NBIS', 'U', 'TSLA', 'AXP', 'BRK-B', 'CVS', 'NOW', 'QS', 'HTZ', 'GS', 'XLE', 'DASH', 'EOSE', 'NEGG', 'XBI', 'AXON', 'ARKK', 'IEP', 'SLV', 'QQQ', 'RKT', 'ACN', 'WDC', 'ORCL', 'RCL', 'KDP', 'GRAB', 'RDDT', 'ISRG', 'EA', 'BTC', 'NKE', 'XOM', 'OPEN', 'SNAP', 'JPM', 'RGTX', 'NTDOY', 'SO', 'CRCL', 'MARA', 'MTPLF', 'LLY', 'MP', 'KLAC', 'SBUX', 'IBM', 'BKNG', 'ZVRA', 'XLK', 'RIOT', 'VKTX', 'AMZN', 'COGT', 'SMCI', 'FIX', 'ANET', 'XLV', 'RGC', 'PM', 'OSCR', 'DNUT', 'GDX', 'ADBE', 'DUOL', 'TQQQ', 'ADBG', 'MAGS', 'AFRM', 'WFC', 'SPY', 'KWEB', 'KVUE', 'AVAV', 'ETH', 'RBLX', 'ROOT', 'ASTS', 'CELH', 'FISV', 'TTD', 'UPS', 'GOOG', 'FMCC', 'RSP', 'JEF', 'MRVL', 'ONDS', 'AZO', 'RGTI', 'LMND', 'GOOGL', 'UNH', 'GPRO', 'TKO', 'PCG', 'EL', 'NFLX', 'FSLR', 'BYND', 'MTCH', 'MU', 'ASAN', 'MO', 'META', 'CYBR', 'AEO', 'NVO', 'MENS', 'COST', 'SMH', 'FNMA', 'SOWG', 'GME', 'SHOP', 'DIA', 'QBTS', 'SMMT', 'DECK', 'WMT', 'IBKR', 'SCHW', 'SPCE', 'TTWO', 'CAVA', 'OKLO', 'SOFI', 'QCOM', 'CBRL', 'CLSK', 'BK', 'MSTR', 'UPST', 'DJT', 'NVTS', 'GM', 'MELI', 'BLK', 'IREN', 'IBB', 'EIS', 'EXAS', 'BJ', 'WULF', 'BULL', 'RKLB', 'AIG', 'UBER', 'NDX', 'BHVN', 'PANW', 'FDX', 'PLTR', 'GRNY', 'RGTU', 'CRM', 'BHC', 'IWM', 'ABNB', 'WBD', 'LULU', 'BABA', 'INTU', 'SPOT', 'USD', 'PYPL', 'MDLZ', 'CAT', 'GRND', 'ASML', 'SRRK', 'BMNR', 'TGT', 'CROX', 'POET', 'F', 'PMRTY', 'PEW', 'FUBO', 'RIVN', 'IBIT', 'BAC', 'VRTX', 'CRMG', 'MRNA', 'ULTA']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+/home/ycliu0703/workspace/projects/KOL-RL-Agent/scripts/evaluate_run.py:296: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns = prices.pct_change().fillna(0.0)
+{
+  "cumulative_return": 0.07143430579029908,
+  "sharpe": 0.620740185123391,
+  "max_drawdown": 0.11115896892771186,
+  "daily_metrics": {
+    "cumulative_return": 0.08778400380793627,
+    "sharpe": 1.0177043626789783,
+    "max_drawdown": 0.042343602255000286
+  },
+  "betrayal_metrics": {
+    "num_samples": 30410,
+    "num_has_signal": 1865,
+    "num_no_signal": 28545,
+    "reversal_rate": 0.346916890080429,
+    "reversal_mean_abs_action": 0.0238992627710104,
+    "reversal_mean_abs_delta": 0.08077341318130493,
+    "entry_violation_rate": 0.05426519530565773,
+    "entry_violation_mean_abs_action": 0.06777682900428772,
+    "mean_abs_deviation": 0.008113639429211617,
+    "mean_normalized_deviation": 0.9223886728286743,
+    "sign_agreement_rate": 0.6530831099195711,
+    "baseline_policy_corr": 0.7753151655197144
+  }
+}
+Saved metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/event/metrics_test.json
+Saved positions log to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/event/positions_test.csv
+Saved equity curve figure to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/event/equity_test.png
+Saved daily metrics to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/daily/metrics_daily.json
+Saved daily equity CSV to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/daily/equity_daily.csv
+Saved daily equity plot to outputs/benchmarks/generic_rl/awac_xrefresh_mainline_test/x/Mr_Derivatives_20260320_213518/daily/equity_daily.png
