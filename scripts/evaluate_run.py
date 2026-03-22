@@ -19,6 +19,30 @@ from src.evaluation.analyzer import load_actor, run_policy
 from src.training.data import load_buffer
 from train import TrainingConfig, compute_metrics
 
+POSITION_COLUMNS = [
+    "date",
+    "ticker",
+    "reward",
+    "raw_score",
+    "prev_weight",
+    "weight",
+    "weight_delta",
+    "allocation",
+    "allocation_delta",
+    "action",
+]
+
+
+def ensure_position_frame(df: pd.DataFrame | None) -> pd.DataFrame:
+    """Return a position frame with stable columns even when policy emits nothing."""
+    if df is None:
+        return pd.DataFrame(columns=POSITION_COLUMNS)
+    out = df.copy()
+    for col in POSITION_COLUMNS:
+        if col not in out.columns:
+            out[col] = pd.Series(dtype="float64" if col not in {"date", "ticker", "action"} else "object")
+    return out
+
 
 def compute_betrayal_metrics(
     baseline_action: torch.Tensor,
@@ -195,6 +219,7 @@ def main() -> None:
         action_threshold=args.action_threshold,
         cfg=eval_cfg,
     )
+    positions_df = ensure_position_frame(positions_df)
 
     baseline_tensor = buffer.get("baseline_actions")
     if baseline_tensor is None:
@@ -393,6 +418,7 @@ def main() -> None:
             action_threshold=args.action_threshold,
             cfg=eval_cfg,
         )
+        base_positions = ensure_position_frame(base_positions)
 
         def equity_series(positions: pd.DataFrame) -> pd.DataFrame:
             df = positions.copy()
@@ -446,6 +472,7 @@ def main() -> None:
                 action_threshold=args.action_threshold,
                 cfg=eval_cfg,
             )
+            base_positions = ensure_position_frame(base_positions)
 
         if args.daily_price_update:
             tickers = sorted(

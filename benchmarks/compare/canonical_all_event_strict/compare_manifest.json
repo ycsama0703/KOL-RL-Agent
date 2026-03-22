@@ -1,0 +1,40 @@
+{
+  "youtube_root": "benchmarks/compare/youtube_event_strict/youtube",
+  "x_root": "benchmarks/compare/xrefresh/x",
+  "output_root": "benchmarks/compare/canonical_all_event_strict",
+  "n_youtube_kols": 17,
+  "n_x_kols": 11,
+  "n_total_kols": 28,
+  "youtube_kols": [
+    "Adam_Khoo",
+    "Ale_s_World_of_Stocks",
+    "Cameron_Stewart_CFA",
+    "Daniel_Pronk",
+    "Dividend_Data",
+    "Financial_Education",
+    "Humbled_Trader",
+    "Invest_with_Henry",
+    "Investing_with_Tom",
+    "Joseph_Carlson",
+    "Learn_to_Invest",
+    "MarketBeat",
+    "Sven_Carlin_Ph.D.",
+    "The_Maverick_of_Wall_Street",
+    "Ticker_Take",
+    "Tom_Nash",
+    "Unrivaled_Investing"
+  ],
+  "x_kols": [
+    "ACInvestorBlog",
+    "EliteOptions2",
+    "GoldTelegraph_",
+    "Jake__Wujastyk",
+    "Mr_Derivatives",
+    "Stephanie_Link",
+    "Stocktwits",
+    "bespokeinvest",
+    "goldseek",
+    "intocryptoverse",
+    "traderstewie"
+  ]
+}

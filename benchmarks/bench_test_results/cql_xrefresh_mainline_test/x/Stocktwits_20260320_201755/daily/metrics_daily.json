@@ -1,0 +1,12 @@
+{
+  "trained": {
+    "cumulative_return": 0.7592891627159561,
+    "sharpe": 2.314239438794017,
+    "max_drawdown": 0.2538645239655157
+  },
+  "baseline": {
+    "cumulative_return": -0.15964430591491563,
+    "sharpe": -0.1446403164979655,
+    "max_drawdown": 0.4622708557664735
+  }
+}
