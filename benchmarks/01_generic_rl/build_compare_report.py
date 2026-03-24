@@ -20,6 +20,7 @@ from typing import Dict, List, Optional, Tuple
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.patheffects as pe
+import numpy as np
 import pandas as pd
 
 
@@ -262,6 +263,42 @@ def read_event_equity_from_positions(path: Optional[Path]) -> pd.DataFrame:
     return agg[["date", "equity"]]
 
 
+def compute_metrics_from_returns(returns: np.ndarray) -> Dict[str, float]:
+    if returns.size == 0:
+        return {"cumulative_return": float("nan"), "sharpe": float("nan"), "max_drawdown": float("nan")}
+    equity = np.cumprod(1.0 + returns)
+    cumulative_return = float(equity[-1] - 1.0)
+    std = float(np.std(returns))
+    sharpe = float(np.mean(returns) / std * np.sqrt(252.0)) if std > 1e-12 else 0.0
+    running_max = np.maximum.accumulate(equity)
+    drawdown = equity / running_max - 1.0
+    max_drawdown = float(abs(np.min(drawdown)))
+    return {
+        "cumulative_return": cumulative_return,
+        "sharpe": sharpe,
+        "max_drawdown": max_drawdown,
+    }
+
+
+def read_event_baseline_metrics_from_positions(path: Optional[Path]) -> Dict[str, float]:
+    """Best-effort baseline event metrics from positions_test.csv (legacy outputs)."""
+    if path is None or not path.exists():
+        return {}
+    df = pd.read_csv(path)
+    if not {"date", "reward", "baseline_action"}.issubset(df.columns):
+        return {}
+    df = df.copy()
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df.dropna(subset=["date"])
+    if df.empty:
+        return {}
+    df["weighted_return"] = pd.to_numeric(df["baseline_action"], errors="coerce").fillna(0.0) * pd.to_numeric(
+        df["reward"], errors="coerce"
+    ).fillna(0.0)
+    daily = df.groupby("date", as_index=False)["weighted_return"].sum().sort_values("date")
+    return compute_metrics_from_returns(daily["weighted_return"].to_numpy(dtype=float))
+
+
 def safe_col(name: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]+", "_", name).strip("_").lower()
 
@@ -425,11 +462,18 @@ def write_per_kol_outputs(
         event = read_json(info.event_metrics_path if info else None)
         daily = read_json(info.daily_metrics_path if info else None)
         betrayal = event.get("betrayal_metrics", {}) if event else {}
+        baseline_event = event.get("baseline_event_metrics", {}) if event else {}
+        if not baseline_event:
+            baseline_event = read_event_baseline_metrics_from_positions(
+                info.event_positions_path if info else None
+            )
 
         er = {"method": method, "run_name": info.run_name if info else ""}
         for k in EVENT_KEYS:
             er[k] = event.get(k)
+            er[f"baseline_{k}"] = baseline_event.get(k)
             summary_row[f"{safe_col(method)}_event_{k}"] = event.get(k)
+            summary_row[f"{safe_col(method)}_event_baseline_{k}"] = baseline_event.get(k)
         event_rows.append(er)
 
         br = {"method": method, "run_name": info.run_name if info else ""}
@@ -552,6 +596,8 @@ def summarize_by_method(summary_df: pd.DataFrame, method_order: List[str]) -> pd
         row = {"method": method, "n_kols": len(summary_df)}
         for k in EVENT_KEYS:
             row[f"event_mean_{k}"] = summary_df[f"{prefix}_event_{k}"].mean()
+            col = f"{prefix}_event_baseline_{k}"
+            row[f"event_baseline_mean_{k}"] = summary_df[col].mean() if col in summary_df.columns else float("nan")
         for k in BETRAYAL_KEYS:
             row[f"betrayal_mean_{k}"] = summary_df[f"{prefix}_betrayal_{k}"].mean()
         for k in EVENT_KEYS:
@@ -574,6 +620,8 @@ def summarize_by_method_by_source(
             row = {"source": source, "method": method, "n_kols": len(sdf)}
             for k in EVENT_KEYS:
                 row[f"event_mean_{k}"] = sdf[f"{prefix}_event_{k}"].mean()
+                col = f"{prefix}_event_baseline_{k}"
+                row[f"event_baseline_mean_{k}"] = sdf[col].mean() if col in sdf.columns else float("nan")
             for k in BETRAYAL_KEYS:
                 row[f"betrayal_mean_{k}"] = sdf[f"{prefix}_betrayal_{k}"].mean()
             for k in EVENT_KEYS:

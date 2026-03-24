@@ -245,6 +245,21 @@ def main() -> None:
         action_threshold=args.action_threshold,
     )
 
+    # Always evaluate baseline event metrics as a first-class output so downstream
+    # compare tables can stay in event scope (no fallback to daily-only baseline).
+    class ZeroActor(torch.nn.Module):
+        def forward(self, state: torch.Tensor) -> torch.Tensor:
+            return torch.zeros((state.size(0), 1), device=state.device)
+
+    baseline_event_metrics, base_positions = run_policy(
+        ZeroActor().to(device),
+        buffer,
+        device,
+        action_threshold=args.action_threshold,
+        cfg=eval_cfg,
+    )
+    base_positions = ensure_position_frame(base_positions)
+
     def normalize_to_naive_day(values) -> pd.Series:
         """Parse timestamps as UTC, then drop tz and normalize to day."""
         return pd.to_datetime(values, errors="coerce", utc=True).dt.tz_localize(None).dt.normalize()
@@ -374,7 +389,12 @@ def main() -> None:
         daily_train = daily_equity(positions_df)
         daily_returns = daily_train["weighted_return"].to_numpy()
     daily_metrics = compute_metrics(daily_returns) if len(daily_returns) else metrics
-    metrics_out = {**metrics, "daily_metrics": daily_metrics, "betrayal_metrics": betrayal_metrics}
+    metrics_out = {
+        **metrics,
+        "daily_metrics": daily_metrics,
+        "betrayal_metrics": betrayal_metrics,
+        "baseline_event_metrics": baseline_event_metrics,
+    }
 
     print(json.dumps(metrics_out, indent=2))
 
@@ -399,26 +419,12 @@ def main() -> None:
         positions_out.to_csv(positions_path, index=False)
         print(f"Saved positions log to {positions_path}")
 
-    base_positions = None
     if args.plot or args.plot_output or args.daily_output_dir:
         plot_path = Path(args.plot_output) if args.plot_output else None
         if plot_path is None:
             if not args.output_dir:
                 raise SystemExit("Plot requested but no --output-dir or --plot-output provided.")
             plot_path = Path(args.output_dir) / "equity_test.png"
-
-        class ZeroActor(torch.nn.Module):
-            def forward(self, state: torch.Tensor) -> torch.Tensor:
-                return torch.zeros((state.size(0), 1), device=state.device)
-
-        _, base_positions = run_policy(
-            ZeroActor().to(device),
-            buffer,
-            device,
-            action_threshold=args.action_threshold,
-            cfg=eval_cfg,
-        )
-        base_positions = ensure_position_frame(base_positions)
 
         def equity_series(positions: pd.DataFrame) -> pd.DataFrame:
             df = positions.copy()

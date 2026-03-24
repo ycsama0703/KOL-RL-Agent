@@ -1,0 +1,28 @@
+{
+  "full_name": "KICL",
+  "full_root": "benchmarks/bench_test_results/multisource_test_mainline_xrefresh",
+  "ablation_root": "ablation study/ab_test_results",
+  "variants": [
+    "w_no_hard",
+    "w_no_rl_completion",
+    "w_single_head_no_regime_split"
+  ],
+  "variant_label_map": {
+    "w_no_hard": "WO_HARD",
+    "w_no_rl_completion": "WO_RL_COMPLETION",
+    "w_single_head_no_regime_split": "WO_REGIME_SPLIT"
+  },
+  "mode": "intersection",
+  "source_filter": "all",
+  "event_curve_mode": "daily_mtm",
+  "include_baseline": true,
+  "highlight_method": "KICL",
+  "methods": {
+    "KICL": "benchmarks/bench_test_results/multisource_test_mainline_xrefresh",
+    "WO_HARD": "ablation study/ab_test_results/w_no_hard",
+    "WO_RL_COMPLETION": "ablation study/ab_test_results/w_no_rl_completion",
+    "WO_REGIME_SPLIT": "ablation study/ab_test_results/w_single_head_no_regime_split"
+  },
+  "n_kols_total": 20,
+  "output_dir": "ablation study/five_point_compare"
+}

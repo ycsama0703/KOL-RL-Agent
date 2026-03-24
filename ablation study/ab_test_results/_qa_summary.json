@@ -1,0 +1,365 @@
+{
+  "variants": [
+    "w_no_bc_anchor",
+    "w_no_entry_penalty",
+    "w_no_fidelity",
+    "w_no_hard",
+    "w_no_market_factors",
+    "w_no_reversal_penalty",
+    "w_no_rl_completion",
+    "w_no_soft",
+    "w_single_head_no_regime_split"
+  ],
+  "summary": {
+    "w_no_bc_anchor": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_entry_penalty": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_fidelity": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_hard": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_market_factors": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_reversal_penalty": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_rl_completion": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_no_soft": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    },
+    "w_single_head_no_regime_split": {
+      "x": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "EliteOptions2",
+          "GoldTelegraph_",
+          "Jake__Wujastyk",
+          "Mr_Derivatives",
+          "Stephanie_Link",
+          "Stocktwits",
+          "bespokeinvest",
+          "goldseek",
+          "intocryptoverse",
+          "traderstewie"
+        ],
+        "broken_runs": []
+      },
+      "youtube": {
+        "runs": 10,
+        "unique_kols": 10,
+        "kols": [
+          "Ale_s_World_of_Stocks",
+          "Daniel_Pronk",
+          "Dividend_Data",
+          "Financial_Education",
+          "Humbled_Trader",
+          "Invest_with_Henry",
+          "Investing_with_Tom",
+          "Sven_Carlin_Ph.D.",
+          "The_Maverick_of_Wall_Street",
+          "Unrivaled_Investing"
+        ],
+        "broken_runs": []
+      }
+    }
+  },
+  "all_kols": {
+    "x": [
+      "EliteOptions2",
+      "GoldTelegraph_",
+      "Jake__Wujastyk",
+      "Mr_Derivatives",
+      "Stephanie_Link",
+      "Stocktwits",
+      "bespokeinvest",
+      "goldseek",
+      "intocryptoverse",
+      "traderstewie"
+    ],
+    "youtube": [
+      "Ale_s_World_of_Stocks",
+      "Daniel_Pronk",
+      "Dividend_Data",
+      "Financial_Education",
+      "Humbled_Trader",
+      "Invest_with_Henry",
+      "Investing_with_Tom",
+      "Sven_Carlin_Ph.D.",
+      "The_Maverick_of_Wall_Street",
+      "Unrivaled_Investing"
+    ]
+  }
+}

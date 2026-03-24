@@ -164,10 +164,13 @@ def copy_run(src: Path, dst: Path, mode: str) -> None:
         dst.symlink_to(src.resolve())
 
 
-def source_root_for_variant(variant: str, selected20_root: Path, allkols_root: Path) -> Path:
+def candidate_variant_roots(
+    variant: str, selected20_root: Path, allkols_root: Path
+) -> List[Path]:
+    # For w_no_hard / w_no_soft, prefer all-kols root but fall back to selected20 root.
     if variant in {"w_no_hard", "w_no_soft"}:
-        return allkols_root
-    return selected20_root
+        return [allkols_root / variant, selected20_root / variant]
+    return [selected20_root / variant]
 
 
 def write_manifest(path: Path, rows: Sequence[Record]) -> None:
@@ -201,10 +204,19 @@ def main() -> None:
     rows: List[Record] = []
 
     for variant in variants:
-        src_root = source_root_for_variant(variant, args.selected20_root, args.allkols_root)
-        variant_root = src_root / variant
+        variant_roots = candidate_variant_roots(
+            variant, args.selected20_root, args.allkols_root
+        )
         for source, kol in targets:
-            run = latest_run_for_kol(variant_root, source, kol) if variant_root.exists() else None
+            run = None
+            hit_root = None
+            for vroot in variant_roots:
+                if not vroot.exists():
+                    continue
+                run = latest_run_for_kol(vroot, source, kol)
+                if run is not None:
+                    hit_root = vroot
+                    break
             if run is None:
                 rows.append(
                     Record(
@@ -214,7 +226,7 @@ def main() -> None:
                         status="missing_run",
                         source_run="",
                         target_run="",
-                        message=f"not found under {variant_root}",
+                        message=f"not found under any of: {', '.join(str(x) for x in variant_roots)}",
                     )
                 )
                 continue
@@ -229,7 +241,7 @@ def main() -> None:
                         status="invalid_run",
                         source_run=str(run),
                         target_run="",
-                        message=msg,
+                        message=f"{msg}; root={hit_root}",
                     )
                 )
                 continue

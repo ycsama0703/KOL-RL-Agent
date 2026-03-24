@@ -1,0 +1,20 @@
+{
+  "targets": 20,
+  "variants": [
+    "w_no_hard",
+    "w_no_soft",
+    "w_no_bc_anchor",
+    "w_no_rl_completion",
+    "w_no_fidelity",
+    "w_no_reversal_penalty",
+    "w_no_entry_penalty",
+    "w_no_market_factors",
+    "w_single_head_no_regime_split"
+  ],
+  "expected_total": 180,
+  "copied_total": 180,
+  "missing_run_total": 0,
+  "invalid_run_total": 0,
+  "output_root": "outputs/ablation/kicl_test_selected20_pack",
+  "manifest": "outputs/ablation/kicl_test_selected20_pack/manifest.csv"
+}
