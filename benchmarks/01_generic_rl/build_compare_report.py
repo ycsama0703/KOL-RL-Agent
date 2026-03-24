@@ -33,6 +33,7 @@ BETRAYAL_KEYS = [
     "sign_agreement_rate",
     "baseline_policy_corr",
 ]
+TRADING_KEYS = ["turnover", "rebalance_freq", "active_exposure_ratio"]
 
 
 @dataclass
@@ -263,6 +264,80 @@ def read_event_equity_from_positions(path: Optional[Path]) -> pd.DataFrame:
     return agg[["date", "equity"]]
 
 
+def compute_event_trading_behavior_from_positions(
+    path: Optional[Path],
+    *,
+    rebalance_eps: float = 1e-6,
+    active_eps: float = 1e-2,
+) -> Tuple[Dict[str, float], Dict[str, float]]:
+    """
+    Return (method_behavior, baseline_behavior) from positions_test.csv.
+    method_behavior uses `weight`; baseline_behavior uses `baseline_action`.
+    """
+    empty = {
+        "turnover": float("nan"),
+        "rebalance_freq": float("nan"),
+        "active_exposure_ratio": float("nan"),
+    }
+    if path is None or not path.exists():
+        return empty.copy(), empty.copy()
+
+    df = pd.read_csv(path)
+    required = {"date", "ticker", "weight", "baseline_action"}
+    if not required.issubset(df.columns):
+        return empty.copy(), empty.copy()
+
+    dedup_cols = [
+        "date",
+        "ticker",
+        "reward",
+        "raw_score",
+        "prev_weight",
+        "weight",
+        "weight_delta",
+        "allocation",
+        "allocation_delta",
+        "action",
+        "baseline_action",
+    ]
+    present = [c for c in dedup_cols if c in df.columns]
+    if present:
+        df = df[present].drop_duplicates()
+
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df.dropna(subset=["date"])
+    if df.empty:
+        return empty.copy(), empty.copy()
+
+    def _behavior(action_col: str) -> Dict[str, float]:
+        tmp = df[["date", "ticker", action_col]].copy()
+        tmp[action_col] = pd.to_numeric(tmp[action_col], errors="coerce").fillna(0.0)
+        w = (
+            tmp.pivot_table(index="date", columns="ticker", values=action_col, aggfunc="last")
+            .sort_index()
+            .fillna(0.0)
+        )
+        if w.empty:
+            return empty.copy()
+        gross = w.abs().sum(axis=1)
+        diff = w.diff().abs().sum(axis=1)
+        if len(diff) > 1:
+            trans = diff.iloc[1:]
+            turnover = float(trans.mean())
+            rebalance_freq = float((trans > rebalance_eps).mean())
+        else:
+            turnover = 0.0
+            rebalance_freq = 0.0
+        aer = float((gross > active_eps).mean())
+        return {
+            "turnover": turnover,
+            "rebalance_freq": rebalance_freq,
+            "active_exposure_ratio": aer,
+        }
+
+    return _behavior("weight"), _behavior("baseline_action")
+
+
 def compute_metrics_from_returns(returns: np.ndarray) -> Dict[str, float]:
     if returns.size == 0:
         return {"cumulative_return": float("nan"), "sharpe": float("nan"), "max_drawdown": float("nan")}
@@ -451,6 +526,7 @@ def write_per_kol_outputs(
     event_rows = []
     daily_rows = []
     betrayal_rows = []
+    trading_rows = []
     curves: List[pd.DataFrame] = []
     baseline_curve: Optional[pd.DataFrame] = None
     event_curves: List[pd.DataFrame] = []
@@ -519,9 +595,27 @@ def write_per_kol_outputs(
         if not ev_curve.empty:
             event_curves.append(ev_curve.rename(columns={"equity": method}))
 
+        method_trading, baseline_trading = compute_event_trading_behavior_from_positions(
+            info.event_positions_path if info else None
+        )
+        tr = {"method": method, "run_name": info.run_name if info else ""}
+        for k in TRADING_KEYS:
+            tr[k] = method_trading.get(k)
+            tr[f"baseline_{k}"] = baseline_trading.get(k)
+            tr[f"{k}_improve_vs_baseline"] = (
+                baseline_trading.get(k, float("nan")) - method_trading.get(k, float("nan"))
+            )
+            summary_row[f"{safe_col(method)}_trading_{k}"] = method_trading.get(k)
+            summary_row[f"{safe_col(method)}_trading_baseline_{k}"] = baseline_trading.get(k)
+            summary_row[f"{safe_col(method)}_trading_{k}_improve_vs_baseline"] = (
+                baseline_trading.get(k, float("nan")) - method_trading.get(k, float("nan"))
+            )
+        trading_rows.append(tr)
+
     pd.DataFrame(event_rows).to_csv(kol_dir / "event_metrics_compare.csv", index=False)
     pd.DataFrame(betrayal_rows).to_csv(kol_dir / "betrayal_metrics_compare.csv", index=False)
     pd.DataFrame(daily_rows).to_csv(kol_dir / "daily_metrics_compare.csv", index=False)
+    pd.DataFrame(trading_rows).to_csv(kol_dir / "trading_metrics_compare.csv", index=False)
 
     merged: Optional[pd.DataFrame] = None
     for c in curves:
@@ -603,6 +697,12 @@ def summarize_by_method(summary_df: pd.DataFrame, method_order: List[str]) -> pd
         for k in EVENT_KEYS:
             row[f"daily_trained_mean_{k}"] = summary_df[f"{prefix}_daily_trained_{k}"].mean()
             row[f"daily_baseline_mean_{k}"] = summary_df[f"{prefix}_daily_baseline_{k}"].mean()
+        for k in TRADING_KEYS:
+            row[f"trading_mean_{k}"] = summary_df[f"{prefix}_trading_{k}"].mean()
+            row[f"trading_baseline_mean_{k}"] = summary_df[f"{prefix}_trading_baseline_{k}"].mean()
+            row[f"trading_mean_{k}_improve_vs_baseline"] = summary_df[
+                f"{prefix}_trading_{k}_improve_vs_baseline"
+            ].mean()
         rows.append(row)
     return pd.DataFrame(rows)
 
@@ -627,6 +727,12 @@ def summarize_by_method_by_source(
             for k in EVENT_KEYS:
                 row[f"daily_trained_mean_{k}"] = sdf[f"{prefix}_daily_trained_{k}"].mean()
                 row[f"daily_baseline_mean_{k}"] = sdf[f"{prefix}_daily_baseline_{k}"].mean()
+            for k in TRADING_KEYS:
+                row[f"trading_mean_{k}"] = sdf[f"{prefix}_trading_{k}"].mean()
+                row[f"trading_baseline_mean_{k}"] = sdf[f"{prefix}_trading_baseline_{k}"].mean()
+                row[f"trading_mean_{k}_improve_vs_baseline"] = sdf[
+                    f"{prefix}_trading_{k}_improve_vs_baseline"
+                ].mean()
             rows.append(row)
     return pd.DataFrame(rows)
 

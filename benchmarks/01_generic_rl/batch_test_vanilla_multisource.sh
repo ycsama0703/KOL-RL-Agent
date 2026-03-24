@@ -9,6 +9,9 @@ DEVICE=${DEVICE:-cpu}
 ACTION_THRESHOLD=${ACTION_THRESHOLD:-0.02}
 DAILY_PRICE_UPDATE=${DAILY_PRICE_UPDATE:-1}
 HARD_INTENT_CONSTRAINTS=${HARD_INTENT_CONSTRAINTS:-0}
+REGIME_SPLIT=${REGIME_SPLIT:-1}
+ZERO_MARKET_FACTORS=${ZERO_MARKET_FACTORS:-0}
+MARKET_FACTOR_DIM=${MARKET_FACTOR_DIM:-6}
 RUN_TAG=${RUN_TAG:-$(date +%Y%m%d_%H%M%S)}
 LOG_ROOT=${LOG_ROOT:-logs/$(basename "$TEST_ROOT")}
 MAX_JOBS=${MAX_JOBS:-8}
@@ -101,6 +104,16 @@ for task in "${TASKS[@]}"; do
     cmd+=(--hard-intent-constraints)
   else
     cmd+=(--no-hard-intent-constraints)
+  fi
+  if [ "$REGIME_SPLIT" = "1" ]; then
+    cmd+=(--regime-split)
+  else
+    cmd+=(--no-regime-split)
+  fi
+  if [ "$ZERO_MARKET_FACTORS" = "1" ]; then
+    cmd+=(--zero-market-factors --market-factor-dim "$MARKET_FACTOR_DIM")
+  else
+    cmd+=(--no-zero-market-factors)
   fi
 
   safe_name="${source_name}_${kol}_${RUN_TAG}"
