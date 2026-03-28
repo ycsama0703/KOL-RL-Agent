@@ -1,0 +1,19 @@
+{
+  "mode": "intersection",
+  "event_curve_mode": "daily_mtm",
+  "include_baseline": false,
+  "highlight_method": "KICL",
+  "methods": {
+    "KICL": "benchmarks/bench_test_results/multisource_test_mainline_xrefresh",
+    "BC": "benchmarks/bench_test_results/bc_xrefresh_mainline_test",
+    "IQL": "benchmarks/bench_test_results/iql_xrefresh_mainline_test",
+    "CQL": "benchmarks/bench_test_results/cql_xrefresh_mainline_test",
+    "TD3BC": "benchmarks/bench_test_results/td3bc_xrefresh_mainline_test",
+    "AWAC": "benchmarks/bench_test_results/awac_xrefresh_mainline_test",
+    "RMB": "benchmarks/risk_managed_baseline_selected20_test",
+    "HAP": "benchmarks/heuristic_allocation_selected20_test",
+    "SUP_DELTA": "benchmarks/supervised_delta_selected20_test"
+  },
+  "n_kols_total": 20,
+  "output_dir": "benchmarks/compare/selected20_plus_new3"
+}

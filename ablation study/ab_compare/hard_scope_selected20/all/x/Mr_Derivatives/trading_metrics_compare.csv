@@ -1,0 +1,7 @@
+method,run_name,turnover,baseline_turnover,turnover_improve_vs_baseline,rebalance_freq,baseline_rebalance_freq,rebalance_freq_improve_vs_baseline,active_exposure_ratio,baseline_active_exposure_ratio,active_exposure_ratio_improve_vs_baseline
+HARD_BOTH,Mr_Derivatives_20260324_232707,1.5248115670180669,1.4069781456548223,-0.1178334213632446,1.0,1.0,0.0,1.0,1.0,0.0
+BC,,,,,,,,,,
+IQL,,,,,,,,,,
+TRAIN_ONLY,Mr_Derivatives_20260325_005745,0.24540101068983342,1.4069781456548223,1.1615771349649888,1.0,1.0,0.0,1.0,1.0,0.0
+INFER_ONLY,Mr_Derivatives_20260325_022818,1.5095888969556557,1.4069781456548223,-0.10261075130083341,1.0,1.0,0.0,1.0,1.0,0.0
+HARD_NONE,Mr_Derivatives_20260325_035533,1.1756902392031285,1.4069781456548223,0.23128790645169373,1.0,1.0,0.0,1.0,1.0,0.0

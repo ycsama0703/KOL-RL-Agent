@@ -1,0 +1,16 @@
+{
+  "mode": "anchor_ours",
+  "event_curve_mode": "daily_mtm",
+  "include_baseline": false,
+  "highlight_method": "HARD_BOTH",
+  "methods": {
+    "HARD_BOTH": "ablation study/hard_scope_test_selected20/hard_both",
+    "BC": "benchmarks/01_generic_rl/test results/bc_event_test",
+    "IQL": "benchmarks/01_generic_rl/test results/iql_event_test",
+    "TRAIN_ONLY": "ablation study/hard_scope_test_selected20/hard_train_only",
+    "INFER_ONLY": "ablation study/hard_scope_test_selected20/hard_infer_only",
+    "HARD_NONE": "ablation study/hard_scope_test_selected20/hard_none"
+  },
+  "n_kols_total": 20,
+  "output_dir": "ablation study/ab_compare/hard_scope_selected20/all"
+}

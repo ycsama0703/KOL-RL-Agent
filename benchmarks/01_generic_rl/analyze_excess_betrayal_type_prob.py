@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 
 
-METHOD_ORDER = ["KICL", "AWAC", "IQL", "BC", "CQL", "TD3BC"]
+METHOD_ORDER = ["KICL", "RMB", "SUP_DELTA", "HAP", "BC", "IQL", "AWAC", "CQL", "TD3BC"]
 METHOD_COLORS = {
     "KICL": "#F39C12",
     "AWAC": "#17BECF",
@@ -27,6 +27,9 @@ METHOD_COLORS = {
     "BC": "#8C564B",
     "CQL": "#D62728",
     "TD3BC": "#9467BD",
+}
+METHOD_DISPLAY_LABEL = {
+    "SUP_DELTA": "SDELTA",
 }
 
 
@@ -370,14 +373,15 @@ def main() -> None:
             if m == "KICL":
                 # KICL bars are often near zero; force label higher to avoid overlap.
                 method_y = max(method_y, 0.075)
+            disp = METHOD_DISPLAY_LABEL.get(m, m)
             ax.text(
                 xs[j],
                 method_y,
-                m,
+                disp,
                 ha="center",
                 va="bottom",
-                fontsize=args.font_size - 1.0,
-                fontweight="bold" if m == "KICL" else "normal",
+                fontsize=args.font_size + 1.0,
+                fontweight="bold",
             )
         # Numeric labels:
         # - KICL: above bars (below method label) for readability
@@ -438,6 +442,7 @@ def main() -> None:
         bbox_to_anchor=(0.01, 0.99),
         ncol=2,
         frameon=True,
+        prop={"size": args.font_size + 1.0, "weight": "bold"},
     )
 
     fig.tight_layout(rect=(0.02, 0.04, 1.0, 0.995))

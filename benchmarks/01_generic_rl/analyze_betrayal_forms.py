@@ -31,6 +31,9 @@ FORM_LABEL = {
     "BD": "Behavior Deviation (BD)",
     "CG": "Correlation Gap (CG)",
 }
+DISPLAY_METHOD_LABEL = {
+    "SUP_DELTA": "SDELTA",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -172,7 +175,8 @@ def _draw_heatmap(
         ax.set_xticks(np.arange(len(FORM_ORDER)))
         ax.set_xticklabels(FORM_ORDER, fontsize=8.0 * font_scale)
         ax.set_yticks(np.arange(len(idx)))
-        ax.set_yticklabels(idx, fontsize=8.0 * font_scale)
+        display_idx = [DISPLAY_METHOD_LABEL.get(m, m) for m in idx]
+        ax.set_yticklabels(display_idx, fontsize=8.0 * font_scale)
         if i > 0:
             ax.tick_params(axis="y", labelleft=False)
 
@@ -222,8 +226,8 @@ def _draw_heatmap(
                 )
             # bold y-label on first panel only (where labels are shown)
             if i == 0:
-                for tick in ax.get_yticklabels():
-                    if tick.get_text() == highlight_method:
+                for tick, method_name in zip(ax.get_yticklabels(), idx):
+                    if method_name == highlight_method:
                         tick.set_fontweight("bold")
                         tick.set_color(highlight_color)
 

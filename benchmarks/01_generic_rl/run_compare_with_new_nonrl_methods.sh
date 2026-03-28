@@ -24,7 +24,6 @@ MODE=${MODE:-intersection}
 EVENT_CURVE_MODE=${EVENT_CURVE_MODE:-daily_mtm}
 
 "$PYTHON" benchmarks/01_generic_rl/build_compare_report.py \
-  --buffer-root "$BUFFER_ROOT" \
   --ours-root "$OURS_ROOT" \
   --ours-name "$OURS_NAME" \
   --method BC="$BC_ROOT" \
@@ -38,4 +37,3 @@ EVENT_CURVE_MODE=${EVENT_CURVE_MODE:-daily_mtm}
   --output-dir "$OUTPUT_DIR" \
   --mode "$MODE" \
   --event-curve-mode "$EVENT_CURVE_MODE"
-
