@@ -122,6 +122,7 @@ def _draw_axis(
     ticker: str,
     statement_day: pd.Timestamp,
     show_xlabel: bool,
+    mode: str = "all_solid",
 ) -> None:
     style = {
         "line_color": "#2F6FAE",
@@ -129,6 +130,7 @@ def _draw_axis(
         "event_color": "#C44E52",
         "grid_color": "#DDE3EB",
         "spine_color": "#AAB2BD",
+        "deemph_color": "#9AA3AF",
     }
 
     mapped_day = series.index.asof(statement_day)
@@ -139,7 +141,51 @@ def _draw_axis(
 
     ax.set_facecolor("white")
 
-    ax.plot(y.index, y.values, color=style["line_color"], lw=style["line_width"], solid_capstyle="round", zorder=3)
+    # Segment styling:
+    # - all_solid: full line in primary color
+    # - future_dashed: post-signal segment is gray dashed (future)
+    # - history_dashed: pre-signal segment is gray dashed (history)
+    pre_mask = y.index <= mapped_day
+    post_mask = y.index >= mapped_day
+
+    if mode == "future_dashed":
+        ax.plot(
+            y.index[pre_mask],
+            y.values[pre_mask],
+            color=style["line_color"],
+            lw=style["line_width"],
+            solid_capstyle="round",
+            zorder=3,
+        )
+        ax.plot(
+            y.index[post_mask],
+            y.values[post_mask],
+            color=style["deemph_color"],
+            lw=style["line_width"] - 0.1,
+            ls=(0, (4, 2)),
+            alpha=0.95,
+            zorder=3,
+        )
+    elif mode == "history_dashed":
+        ax.plot(
+            y.index[pre_mask],
+            y.values[pre_mask],
+            color=style["deemph_color"],
+            lw=style["line_width"] - 0.1,
+            ls=(0, (4, 2)),
+            alpha=0.95,
+            zorder=3,
+        )
+        ax.plot(
+            y.index[post_mask],
+            y.values[post_mask],
+            color=style["line_color"],
+            lw=style["line_width"],
+            solid_capstyle="round",
+            zorder=3,
+        )
+    else:
+        ax.plot(y.index, y.values, color=style["line_color"], lw=style["line_width"], solid_capstyle="round", zorder=3)
     # Highlight signal day with both a thin band and a dashed line.
     ax.axvspan(
         mapped_day - pd.Timedelta(hours=12),
@@ -171,6 +217,7 @@ def _plot_stacked(
     out_png: Path,
     out_pdf: Path,
     dpi: int,
+    mode: str = "all_solid",
 ) -> None:
     # Square canvas so two flat panels stack into a compact figure.
     plt.style.use("seaborn-v0_8-whitegrid")
@@ -178,7 +225,14 @@ def _plot_stacked(
     fig.patch.set_facecolor("white")
 
     for i, (series, ticker, day) in enumerate(data):
-        _draw_axis(ax=axes[i], series=series, ticker=ticker, statement_day=day, show_xlabel=False)
+        _draw_axis(
+            ax=axes[i],
+            series=series,
+            ticker=ticker,
+            statement_day=day,
+            show_xlabel=False,
+            mode=mode,
+        )
 
     plt.subplots_adjust(hspace=0.16)
     fig.savefig(out_png, dpi=dpi, bbox_inches="tight")
@@ -206,6 +260,20 @@ def main() -> None:
     _plot_stacked(stacked_payload, stacked_png, stacked_pdf, args.dpi)
     print(f"Saved: {stacked_png}")
     print(f"Saved: {stacked_pdf}")
+
+    # Variant A: future segment (post-signal) is gray dashed.
+    future_png = args.output_dir / "fxi_tsla_node_windows_minimal_stacked_future_dashed.png"
+    future_pdf = args.output_dir / "fxi_tsla_node_windows_minimal_stacked_future_dashed.pdf"
+    _plot_stacked(stacked_payload, future_png, future_pdf, args.dpi, mode="future_dashed")
+    print(f"Saved: {future_png}")
+    print(f"Saved: {future_pdf}")
+
+    # Variant B: history segment (pre-signal) is gray dashed.
+    history_png = args.output_dir / "fxi_tsla_node_windows_minimal_stacked_history_dashed.png"
+    history_pdf = args.output_dir / "fxi_tsla_node_windows_minimal_stacked_history_dashed.pdf"
+    _plot_stacked(stacked_payload, history_png, history_pdf, args.dpi, mode="history_dashed")
+    print(f"Saved: {history_png}")
+    print(f"Saved: {history_pdf}")
 
 
 if __name__ == "__main__":
