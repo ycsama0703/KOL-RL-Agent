@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import yfinance as yf
+from matplotlib import dates as mdates
 from matplotlib.ticker import MaxNLocator
 
 
@@ -105,6 +106,23 @@ def _plot_one(
     out_pdf: Path,
     dpi: int,
 ) -> None:
+    plt.style.use("seaborn-v0_8-whitegrid")
+    # Landscape panel: better for paper layouts than a tall square.
+    fig, ax = plt.subplots(figsize=(6.8, 2.65))
+    _draw_axis(ax=ax, series=series, ticker=ticker, statement_day=statement_day, show_xlabel=False)
+    fig.patch.set_facecolor("white")
+    fig.savefig(out_png, dpi=dpi, bbox_inches="tight")
+    fig.savefig(out_pdf, bbox_inches="tight")
+    plt.close(fig)
+
+
+def _draw_axis(
+    ax: plt.Axes,
+    series: pd.Series,
+    ticker: str,
+    statement_day: pd.Timestamp,
+    show_xlabel: bool,
+) -> None:
     style = {
         "line_color": "#2F6FAE",
         "line_width": 2.1,
@@ -119,10 +137,6 @@ def _plot_one(
     event_price = float(series.loc[mapped_day])
     y = series / event_price
 
-    plt.style.use("seaborn-v0_8-whitegrid")
-    # Landscape panel: better for paper layouts than a tall square.
-    fig, ax = plt.subplots(figsize=(5.6, 3.5))
-    fig.patch.set_facecolor("white")
     ax.set_facecolor("white")
 
     ax.plot(y.index, y.values, color=style["line_color"], lw=style["line_width"], solid_capstyle="round", zorder=3)
@@ -136,25 +150,12 @@ def _plot_one(
     )
     ax.axvline(mapped_day, color=style["event_color"], lw=1.9, ls=(0, (4, 2)), alpha=0.85, zorder=2)
     ax.scatter([mapped_day], [1.0], s=34, color=style["event_color"], zorder=5)
-    ax.annotate(
-        "KOL signal day",
-        xy=(mapped_day, 1.0),
-        xycoords="data",
-        xytext=(14, 24),
-        textcoords="offset points",
-        color=style["event_color"],
-        fontsize=9.6,
-        fontweight="semibold",
-        bbox=dict(boxstyle="round,pad=0.18", facecolor="white", edgecolor=style["event_color"], alpha=0.92),
-        arrowprops=dict(arrowstyle="->", color=style["event_color"], lw=1.1, alpha=0.9),
-        zorder=6,
-    )
 
     ax.set_title(ticker, fontsize=16, pad=6, fontweight="semibold")
-    ax.set_xlabel("")
+    ax.set_xlabel("Date" if show_xlabel else "")
     ax.set_ylabel("")
     # Keep locators for visible helper grid, hide numeric labels.
-    ax.xaxis.set_major_locator(plt.matplotlib.dates.AutoDateLocator(minticks=4, maxticks=6))
+    ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=4, maxticks=6))
     ax.yaxis.set_major_locator(MaxNLocator(nbins=5))
     ax.tick_params(axis="both", which="both", labelbottom=False, labelleft=False, length=0)
 
@@ -164,6 +165,22 @@ def _plot_one(
         spine.set_linewidth(0.9)
     ax.margins(x=0.03, y=0.14)
 
+
+def _plot_stacked(
+    data: list[tuple[pd.Series, str, pd.Timestamp]],
+    out_png: Path,
+    out_pdf: Path,
+    dpi: int,
+) -> None:
+    # Square canvas so two flat panels stack into a compact figure.
+    plt.style.use("seaborn-v0_8-whitegrid")
+    fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(6.8, 4.75), sharex=False)
+    fig.patch.set_facecolor("white")
+
+    for i, (series, ticker, day) in enumerate(data):
+        _draw_axis(ax=axes[i], series=series, ticker=ticker, statement_day=day, show_xlabel=False)
+
+    plt.subplots_adjust(hspace=0.16)
     fig.savefig(out_png, dpi=dpi, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
@@ -172,6 +189,7 @@ def _plot_one(
 def main() -> None:
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    stacked_payload: list[tuple[pd.Series, str, pd.Timestamp]] = []
 
     for spec in DEFAULT_SPECS:
         statement_day = pd.Timestamp(spec.statement_day)
@@ -179,8 +197,15 @@ def main() -> None:
         png = args.output_dir / f"{spec.stem}.png"
         pdf = args.output_dir / f"{spec.stem}.pdf"
         _plot_one(series, spec.ticker, statement_day, png, pdf, args.dpi)
+        stacked_payload.append((series, spec.ticker, statement_day))
         print(f"Saved: {png}")
         print(f"Saved: {pdf}")
+
+    stacked_png = args.output_dir / "fxi_tsla_node_windows_minimal_stacked.png"
+    stacked_pdf = args.output_dir / "fxi_tsla_node_windows_minimal_stacked.pdf"
+    _plot_stacked(stacked_payload, stacked_png, stacked_pdf, args.dpi)
+    print(f"Saved: {stacked_png}")
+    print(f"Saved: {stacked_pdf}")
 
 
 if __name__ == "__main__":
