@@ -78,9 +78,15 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--dpi", type=int, default=320)
     p.add_argument("--fig-width", type=float, default=8.8)
     p.add_argument("--fig-height", type=float, default=3.5)
-    p.add_argument("--font-size", type=float, default=11.0)
+    p.add_argument("--font-size", type=float, default=14.5)
     p.add_argument("--x-color", default="#4C72B0", help="Bar color for X source.")
     p.add_argument("--youtube-color", default="#DD8452", help="Bar color for YouTube source.")
+    p.add_argument(
+        "--zero-eps",
+        type=float,
+        default=1e-12,
+        help="Methods with both X and YouTube hard-betrayal rates <= zero-eps are dropped from the plot.",
+    )
     return p.parse_args()
 
 
@@ -310,7 +316,7 @@ def main() -> None:
     )
 
     fig, ax = plt.subplots(1, 1, figsize=(args.fig_width, args.fig_height))
-    order = [m for m in methods if m in set(by_method_source["method"])]
+    order = [m for m in methods if m in set(by_method_source["method"]) and m != "KICL"]
     xs = np.arange(len(order))
     w = 0.36
 
@@ -327,6 +333,19 @@ def main() -> None:
 
     vals_x = np.array([src_x.get(m, np.nan) for m in order], dtype=float)
     vals_y = np.array([src_y.get(m, np.nan) for m in order], dtype=float)
+
+    # Drop methods that are exactly (or nearly) zero on both sources to reduce clutter.
+    keep = []
+    for m, vx, vy in zip(order, vals_x, vals_y):
+        vx_zero = (not np.isfinite(vx)) or (abs(float(vx)) <= args.zero_eps)
+        vy_zero = (not np.isfinite(vy)) or (abs(float(vy)) <= args.zero_eps)
+        keep.append(not (vx_zero and vy_zero))
+    if any(keep):
+        order = [m for m, k in zip(order, keep) if k]
+        vals_x = vals_x[np.array(keep, dtype=bool)]
+        vals_y = vals_y[np.array(keep, dtype=bool)]
+
+    xs = np.arange(len(order))
 
     bars_x = ax.bar(
         xs - w / 2,
@@ -357,22 +376,13 @@ def main() -> None:
     label_offset = max(0.008, 0.012 * y_upper)
 
     for j, m in enumerate(order):
-        if m == "KICL":
-            bars_x[j].set_edgecolor("#111111")
-            bars_x[j].set_linewidth(2.2)
-            bars_y[j].set_edgecolor("#111111")
-            bars_y[j].set_linewidth(2.2)
-
         ymax = np.nanmax([vals_x[j], vals_y[j]])
         method_y = None
         if np.isfinite(ymax):
             method_y = min(
-                ymax + label_offset + (0.02 if m == "KICL" else 0.0),
+                ymax + label_offset,
                 y_upper - 0.004,
             )
-            if m == "KICL":
-                # KICL bars are often near zero; force label higher to avoid overlap.
-                method_y = max(method_y, 0.075)
             disp = METHOD_DISPLAY_LABEL.get(m, m)
             ax.text(
                 xs[j],
@@ -380,48 +390,36 @@ def main() -> None:
                 disp,
                 ha="center",
                 va="bottom",
-                fontsize=args.font_size + 1.0,
+                fontsize=args.font_size + 1.8,
                 fontweight="bold",
             )
-        # Numeric labels:
-        # - KICL: above bars (below method label) for readability
-        # - others: inside bars to avoid crowding
+        # Numeric labels (inside bars where possible)
         vx = vals_x[j]
         vy = vals_y[j]
         if np.isfinite(vx):
-            if m == "KICL" and method_y is not None:
-                yx = min(vx + 0.018, method_y - 0.02)
-                va_x = "bottom"
-                color_x = "#1f2937"
-            else:
-                yx = max(0.01, (vx - 0.03) if vx >= 0.10 else (vx * 0.55))
-                va_x = "top" if vx >= 0.10 else "center"
-                color_x = "white" if vx >= 0.16 else "#1f2937"
+            yx = max(0.01, (vx - 0.03) if vx >= 0.10 else (vx * 0.55))
+            va_x = "top" if vx >= 0.10 else "center"
+            color_x = "white" if vx >= 0.16 else "#1f2937"
             ax.text(
                 xs[j] - w / 2,
                 yx,
                 f"{vx:.2f}",
                 ha="center",
                 va=va_x,
-                fontsize=args.font_size - 2.0,
+                fontsize=args.font_size - 0.8,
                 color=color_x,
             )
         if np.isfinite(vy):
-            if m == "KICL" and method_y is not None:
-                yy = min(vy + 0.018, method_y - 0.02)
-                va_y = "bottom"
-                color_y = "#1f2937"
-            else:
-                yy = max(0.01, (vy - 0.03) if vy >= 0.10 else (vy * 0.55))
-                va_y = "top" if vy >= 0.10 else "center"
-                color_y = "white" if vy >= 0.16 else "#1f2937"
+            yy = max(0.01, (vy - 0.03) if vy >= 0.10 else (vy * 0.55))
+            va_y = "top" if vy >= 0.10 else "center"
+            color_y = "white" if vy >= 0.16 else "#1f2937"
             ax.text(
                 xs[j] + w / 2,
                 yy,
                 f"{vy:.2f}",
                 ha="center",
                 va=va_y,
-                fontsize=args.font_size - 2.0,
+                fontsize=args.font_size - 0.8,
                 color=color_y,
             )
 
@@ -436,13 +434,13 @@ def main() -> None:
     ax.grid(axis="y", linestyle="--", linewidth=0.7, alpha=0.30, zorder=1)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.set_ylabel("Hard betrayal prob.")
+    ax.set_ylabel("Hard betrayal prob.", fontsize=args.font_size + 2.0, fontweight="semibold")
     ax.legend(
         loc="upper left",
         bbox_to_anchor=(0.01, 0.99),
         ncol=2,
         frameon=True,
-        prop={"size": args.font_size + 1.0, "weight": "bold"},
+        prop={"size": args.font_size + 2.0, "weight": "bold"},
     )
 
     fig.tight_layout(rect=(0.02, 0.04, 1.0, 0.995))

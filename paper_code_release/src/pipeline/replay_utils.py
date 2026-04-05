@@ -1,0 +1,193 @@
+"""Shared helpers for building replay buffers and analysis inputs."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Dict, List
+
+import numpy as np
+import pandas as pd
+
+from src.portfolio.layer import PortfolioLayer
+from src.state.ticker_embedding import TickerEmbedding
+
+MARKET_FEATURE_COLS = ["ret_1d", "ret_5d", "vol_5d", "vol_20d", "volu_z_20d", "dist_sma20"]
+
+
+def load_ticker_embedder(weights_path: Path, vocab_path: Path, embedding_dim: int = 32) -> TickerEmbedding:
+    """Load a TickerEmbedding with consistent default dimension."""
+
+    return TickerEmbedding.load(weights_path, vocab_path, embedding_dim=embedding_dim)
+
+
+def annotate_positions(df: pd.DataFrame, include_carry: bool = True) -> pd.DataFrame:
+    """Reconstruct baseline positions and optionally add carry rows for tickers not mentioned today.
+
+    Outputs last_position, baseline_weight, silence_days. When include_carry=True, for tickers
+    held yesterday but not mentioned today, we add a synthetic row with baseline_weight=0,
+    baseline_raw_score=0, sentiment/confidence=0, reward_1d=0, embeddings/text set to 0/"" so
+    that the decay branch has training/inference samples.
+    """
+
+    df = df.sort_values("published_at").reset_index(drop=True)
+    portfolio = PortfolioLayer()
+
+    embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
+    base_defaults = {}
+    if include_carry:
+        base_defaults = {col: 0 for col in df.columns}
+        if "text" in base_defaults:
+            base_defaults["text"] = ""
+        if "event_id" in base_defaults:
+            base_defaults["event_id"] = ""
+        if "video_id" in base_defaults:
+            base_defaults["video_id"] = ""
+        if "company" in base_defaults:
+            base_defaults["company"] = ""
+
+    prev_weights: Dict[str, float] = {}
+    last_dates: Dict[str, pd.Timestamp] = {}
+    rows: list[dict] = []
+
+    for date, group in df.groupby("published_at", sort=True):
+        raw_dict = {
+            row["ticker"]: float(row["baseline_raw_score"]) * float(np.sign(row.get("sentiment", 0.0)))
+            for _, row in group.iterrows()
+        }
+        weights = portfolio.allocate(raw_dict, prev_weights=prev_weights)
+
+        # real signal rows
+        for _, row in group.iterrows():
+            ticker = row["ticker"]
+            cur_date = row["published_at"]
+            prev_date = last_dates.get(ticker)
+            silence = float((cur_date - prev_date).days) if prev_date is not None else 0.0
+            last_dates[ticker] = cur_date
+            enriched = row.to_dict()
+            enriched["last_position"] = prev_weights.get(ticker, 0.0)
+            enriched["baseline_weight"] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+            enriched["silence_days"] = silence
+            enriched["has_signal"] = 1
+            rows.append(enriched)
+
+        if include_carry:
+            # carry rows for tickers held yesterday but not mentioned today
+            carry = [t for t in prev_weights.keys() if t not in raw_dict]
+            for ticker in carry:
+                cur_date = date
+                prev_date = last_dates.get(ticker, cur_date)
+                silence = float((cur_date - prev_date).days)
+                last_dates[ticker] = cur_date
+                enriched = base_defaults.copy()
+                enriched["ticker"] = ticker
+                enriched["published_at"] = cur_date
+                enriched["sentiment"] = 0.0
+                enriched["confidence"] = 0.0
+                enriched["baseline_raw_score"] = 0.0
+                enriched["reward_1d"] = 0.0
+                enriched["done"] = False
+                for col in embedding_cols:
+                    enriched[col] = 0.0
+                enriched["last_position"] = prev_weights.get(ticker, 0.0)
+                enriched["baseline_weight"] = 0.0
+                enriched["silence_days"] = silence
+                enriched["has_signal"] = 0
+                rows.append(enriched)
+
+        prev_weights = {t: info["weight"] for t, info in weights.items()}
+
+    return pd.DataFrame(rows)
+
+
+def compute_portfolio_rewards(df: pd.DataFrame, weight_col: str = "baseline_weight") -> pd.Series:
+    """Compute portfolio-level reward without turnover penalties.
+
+    Portfolio reward is defined as:
+        r_t = Σ_i weight_{t,i} * reward_1d_{t,i}
+
+    Weights may be positive or negative, so the reward naturally supports
+    long and short positions. The returned series has the same length as
+    ``df`` and assigns each row the portfolio reward of its trading date.
+    """
+
+    if weight_col not in df.columns:
+        raise ValueError(f"compute_portfolio_rewards expects '{weight_col}' column.")
+
+    df = df.sort_values("published_at").reset_index(drop=True)
+    group_indices = df.groupby("published_at", sort=True).indices
+    portfolio_rewards = np.zeros(len(df), dtype=np.float32)
+
+    for _, indices in group_indices.items():
+        idx_list = list(indices)
+        group = df.loc[idx_list]
+        w_today = group[weight_col].astype(float)
+        r_today = group["reward_1d"].astype(float)
+        r_port = float((w_today * r_today).sum())
+        portfolio_rewards[idx_list] = r_port
+
+    return pd.Series(portfolio_rewards, index=df.index, name="portfolio_reward")
+
+
+def build_behavior_weights(
+    df: pd.DataFrame,
+    alpha_entry: float = 0.3,
+    decay_exit: float = 0.2,
+    entry_threshold: float = 1e-3,
+    portfolio: PortfolioLayer | None = None,
+) -> pd.DataFrame:
+    """Build behavior weights via A+B: execution lag + slow exit.
+
+    behavior_raw = last_position + alpha * (baseline_weight - last_position)
+    alpha = alpha_entry when baseline has signal; else decay_exit.
+    """
+
+    required = {"baseline_weight", "last_position", "published_at", "ticker"}
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"build_behavior_weights missing columns: {missing}")
+
+    df = df.sort_values("published_at").reset_index(drop=True)
+    portfolio = portfolio or PortfolioLayer()
+
+    behavior_weights = np.zeros(len(df), dtype=np.float32)
+    group_indices = df.groupby("published_at", sort=True).indices
+    for date in sorted(group_indices.keys()):
+        idx_list = list(group_indices[date])
+        group = df.loc[idx_list]
+        baseline = group["baseline_weight"].astype(float).to_numpy()
+        last_pos = group["last_position"].astype(float).to_numpy()
+        has_signal = np.abs(baseline) >= entry_threshold
+        alpha = np.where(has_signal, alpha_entry, decay_exit)
+        raw = last_pos + alpha * (baseline - last_pos)
+
+        raw_dict = {str(t): float(r) for t, r in zip(group["ticker"], raw)}
+        weights = portfolio.allocate(raw_dict, prev_weights={})
+        for idx, ticker in zip(idx_list, group["ticker"]):
+            behavior_weights[idx] = float(weights.get(ticker, {"weight": 0.0})["weight"])
+
+    df = df.copy()
+    df["behavior_weight"] = behavior_weights
+    return df
+
+
+def build_states(df: pd.DataFrame, ticker_embedder: TickerEmbedding) -> np.ndarray:
+    """Construct state vectors consistent with training time definition.
+
+    state = [text embedding || ticker embedding || core scalar features || market factors]
+    """
+
+    embedding_cols = [col for col in df.columns if col.startswith("embedding_")]
+    text_emb = df[embedding_cols].values.astype(np.float32)
+    ticker_vectors = np.stack(
+        [ticker_embedder.encode_single(str(ticker)) for ticker in df["ticker"].astype(str)],
+        dtype=np.float32,
+    )
+    feature_cols = ["sentiment", "confidence", "last_position", "silence_days"]
+    missing = [c for c in feature_cols if c not in df.columns]
+    if missing:
+        raise ValueError(f"Missing required feature columns: {missing}")
+    active_market_cols = [c for c in MARKET_FEATURE_COLS if c in df.columns]
+    all_scalar_cols = feature_cols + active_market_cols
+    extra_features = df[all_scalar_cols].fillna(0.0).values.astype(np.float32)
+    states = np.concatenate([text_emb, ticker_vectors, extra_features], axis=1)
+    return states

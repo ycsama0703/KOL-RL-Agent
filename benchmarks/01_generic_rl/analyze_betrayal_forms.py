@@ -85,7 +85,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--font-scale",
         type=float,
-        default=1.0,
+        default=1.35,
         help="Global font scale multiplier for better readability in paper layout.",
     )
     p.add_argument(
@@ -188,7 +188,7 @@ def _draw_heatmap(
 
         highlight_row = idx.index(highlight_method) if highlight_method in idx else -1
 
-        # numeric annotation
+        # numeric annotation (larger values for paper readability)
         for r in range(arr.shape[0]):
             for c in range(arr.shape[1]):
                 val = arr[r, c]
@@ -199,7 +199,7 @@ def _draw_heatmap(
                     f"{val:.2f}",
                     ha="center",
                     va="center",
-                    fontsize=(8.2 if is_highlight_row else 6.7) * font_scale,
+                    fontsize=(11.8 if is_highlight_row else 10.2) * font_scale,
                     fontweight="bold" if is_highlight_row else "normal",
                     color="#1f2937" if val < annot_threshold else "white",
                 )

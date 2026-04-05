@@ -104,21 +104,66 @@ def _draw_grouped(
             alpha=0.95,
         )
         for idx, (b, yy) in enumerate(zip(bars, y)):
-            local_scale = max(1.0, float(np.nanmax(np.abs(y))))
-            yoff = 0.06 * local_scale
+            # Stagger labels by metric so they don't sit directly on top of bars.
+            # left/right bars get horizontal nudges; center gets extra vertical gap.
+            if i == 0:
+                x_nudge = -0.28 * width
+                yoff = 0.85
+            elif i == 1:
+                x_nudge = 0.0
+                yoff = 1.10
+            else:
+                x_nudge = 0.28 * width
+                yoff = 0.85
+
+            # Fine-tune specific WO-H labels requested by user:
+            # -10.9% (ΔReturn) move right; +3.1% (ΔBD) move left.
+            if methods[idx] == "WO_HARD":
+                if i == 0:
+                    x_nudge += 0.06
+                elif i == 2:
+                    x_nudge -= 0.06
+
+            # KICL positive labels: force an up-down-up stack to avoid overlap.
+            if methods[idx] == "KICL" and yy >= 0:
+                # User-requested layout: down-up-down for the three KICL bars
+                # (ΔReturn, ΔSharpe, ΔBD).
+                if i in (0, 2):
+                    y_text = -0.58
+                    va = "top"
+                else:
+                    # Move +1.7% a bit higher to avoid overlap.
+                    y_text = yy + 1.30
+                    va = "bottom"
+                ax.text(
+                    b.get_x() + b.get_width() / 2 + x_nudge,
+                    y_text,
+                    f"{yy:+.1f}%",
+                    ha="center",
+                    va=va,
+                    fontsize=24.0,
+                    color="#111827",
+                    fontweight="bold",
+                )
+                continue
+
+            # Keep large negative labels close to bars (especially WO-H).
+            if yy < 0:
+                yoff = min(1.20, max(0.45, 0.08 * abs(float(yy)) + 0.15))
+
             ax.text(
-                b.get_x() + b.get_width() / 2,
+                b.get_x() + b.get_width() / 2 + x_nudge,
                 yy + (yoff if yy >= 0 else -yoff),
                 f"{yy:+.1f}%",
                 ha="center",
                 va="bottom" if yy >= 0 else "top",
-                fontsize=14.0,
+                fontsize=24.0,
                 color="#111827",
                 fontweight="bold",
             )
     ax.axhline(0.0, color="#374151", linewidth=1.0)
     ax.set_xticks(x)
-    ax.set_xticklabels([LABELS[m] for m in methods], fontsize=16, fontweight="bold")
+    ax.set_xticklabels([LABELS[m] for m in methods], fontsize=21.0, fontweight="bold")
     ax.grid(axis="y", linestyle="--", linewidth=0.8, alpha=0.3)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -152,7 +197,7 @@ def main() -> None:
         for m in OUTLIER:
             right_vals[label].append(_to_percent(_collect_delta(df, m, metric)))
 
-    fig = plt.figure(figsize=(14.0, 6.6))
+    fig = plt.figure(figsize=(14.0, 6.8))
     gs = fig.add_gridspec(1, 2, width_ratios=[4.6, 1.9], wspace=0.18)
     ax_l = fig.add_subplot(gs[0, 0])
     ax_r = fig.add_subplot(gs[0, 1])
@@ -166,12 +211,12 @@ def main() -> None:
     ax_r.set_ylim(*_ylim(y_r))
     ax_r.set_xlim(-0.56, 0.56)
 
-    ax_l.set_ylabel("Delta vs baseline (%)", fontsize=18, fontweight="semibold")
-    ax_l.tick_params(axis="y", labelsize=14)
-    ax_r.tick_params(axis="y", labelsize=14)
+    ax_l.set_ylabel("Delta vs baseline (%)", fontsize=24, fontweight="semibold")
+    ax_l.tick_params(axis="y", labelsize=19.0)
+    ax_r.tick_params(axis="y", labelsize=19.0)
 
     bar_legend = [
-        Patch(facecolor="#e5e7eb", edgecolor=METRIC_EDGE[i], hatch=HATCHES[i], label=label, linewidth=1.15)
+        Patch(facecolor="#e5e7eb", edgecolor=METRIC_EDGE[i], hatch=HATCHES[i], label=label, linewidth=1.7)
         for i, (_, label) in enumerate(METRICS)
     ]
     fig.legend(
@@ -180,10 +225,15 @@ def main() -> None:
         ncol=3,
         frameon=True,
         framealpha=0.95,
-        bbox_to_anchor=(0.5, 0.885),
-        fontsize=14.0,
+        bbox_to_anchor=(0.5, 0.93),
+        prop={"size": 24.0, "weight": "bold"},
+        handlelength=2.6,
+        handleheight=1.2,
+        borderpad=0.55,
+        labelspacing=0.65,
+        columnspacing=1.8,
     )
-    fig.subplots_adjust(top=0.81, left=0.07, right=0.98, bottom=0.13, wspace=0.20)
+    fig.subplots_adjust(top=0.78, left=0.07, right=0.98, bottom=0.13, wspace=0.20)
 
     png = out_prefix.with_suffix(".png")
     pdf = out_prefix.with_suffix(".pdf")
